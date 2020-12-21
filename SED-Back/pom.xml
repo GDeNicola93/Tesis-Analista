@@ -13,7 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>SED-Back</name>
-	<description>Proyecto Back de Tesis Belén Alberto y Germán De Nicola</description>
+	<description>Sistema de Evaluación de Desempeño Alberto De nicola</description>
 
 	<properties>
 		<java.version>15</java.version>
