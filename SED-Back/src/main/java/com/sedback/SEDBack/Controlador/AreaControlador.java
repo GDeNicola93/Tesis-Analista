@@ -8,9 +8,11 @@ package com.sedback.SEDBack.Controlador;
 import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
 import com.sedback.SEDBack.Logica.AreaServicio;
 import com.sedback.SEDBack.Modelo.Area;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,5 +32,10 @@ public class AreaControlador {
     @PostMapping
     public ResponseEntity<HttpMensaje> guardar(@RequestBody Area area){
         return servicio.guardar(area);
+    }
+    
+    @GetMapping
+    public ResponseEntity<List<Area>> obtenerAreas(){
+        return servicio.obtenerAreas();
     }
 }

@@ -8,6 +8,7 @@ package com.sedback.SEDBack.Logica;
 import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
 import com.sedback.SEDBack.Modelo.Area;
 import com.sedback.SEDBack.Persistencia.AreaRepositorio;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,10 @@ public class AreaServicio {
         }catch(Exception e){
             return ResponseEntity.badRequest().body(new HttpMensaje("No fue posible registrar el área. Intente nuevamente."));
         }
+    }
+    
+    public ResponseEntity<List<Area>> obtenerAreas(){
+        return ResponseEntity.ok().body(repositorio.findAll());
     }
     
 }
