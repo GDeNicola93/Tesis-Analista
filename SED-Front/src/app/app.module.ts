@@ -10,6 +10,8 @@ import { AreasComponent } from './componentes/areas/areas/areas.component';
 import { NuevaComponent } from './componentes/areas/nueva/nueva.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NuevaSucursalComponent } from './componentes/sucursales/nueva-sucursal/nueva-sucursal.component';
+import { IndexSucursalComponent } from './componentes/sucursales/index-sucursal/index-sucursal.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     MenuComponent,
     AreasComponent,
-    NuevaComponent
+    NuevaComponent,
+    NuevaSucursalComponent,
+    IndexSucursalComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,84 @@
+<app-menu></app-menu>
+<div class="container" style="text-align: center;" *ngIf="cargando">
+    <img src="../../../../assets/animate/svg-loaders/grid.svg" alt="Cargando...">
+    <h6 style="color: blue;margin-top: 10px;">Cargando...</h6>
+</div>
+
+
+<div class="container" *ngIf="!cargando">
+    <div class="row">
+        <div class="col">
+            <h4>Nueva sucursal</h4>
+        </div>
+        <div class="col">
+            <button routerLink="/sucursales" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+        </div>
+
+    </div>
+
+    <div class="card shadow">
+        <h6 class="card-header font-weight-bold">Formulario de registro de nueva sucursal</h6>
+        <div class="card-body">
+            <form name="form" (ngSubmit)="guardar()">
+                <div class="form-group">
+                    <label for="nombre">Nombre: </label>
+                    <input type="text" class="form-control" name="nombre" [(ngModel)]="form.nombre"  required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción (opcional): </label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" [(ngModel)]="form.descripcion"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label for="descripcion">Seleccione las áreas que tiene la sucursal: </label>
+                            <table class="table table-hover">
+                                <tbody *ngFor="let a of selectAreas">
+                                  <tr>
+                                    <td>{{a.nombre}}</td>
+                                    <td><button type="button" (click)="seleccionarArea(a)"><i class="fas fa-check"></i></button></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label for="descripcion">Áreas ya seleccionadas: </label>
+                            <table class="table table-hover">
+                                <tbody *ngFor="let a of areasSeleccionadas">
+                                  <tr>
+                                    <td>{{a.nombre}}</td>
+                                    <td><button type="button" (click)="desSeleccionarArea(a)"><i class="fas fa-times"></i></button></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
+                        <strong><i class="fas fa-times"></i> ¡Error!</strong> {{mensaje}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="guardado">
+                        <strong><i class="fas fa-check"></i> ¡Perfecto!</strong> {{mensaje}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="float-right btn btn-sm btn-success"><i class="far fa-save"></i> Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

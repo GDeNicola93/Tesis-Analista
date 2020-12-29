@@ -26,6 +26,9 @@ public class Sucursal {
 	@NotNull
 	@Column(unique = true)
 	private String nombre;
+        
+        @SuppressWarnings("unused")
+	private String descripcion;
 	
 	@ManyToMany
 	private Set<Area> areas = new HashSet<>();

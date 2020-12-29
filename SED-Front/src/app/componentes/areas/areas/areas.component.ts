@@ -15,10 +15,10 @@ export class AreasComponent implements OnInit {
   constructor(private areaServicio : AreaService) { }
 
   ngOnInit(): void {
-    this.cargarProductos();
+    this.cargarAreas();
   }
 
-  cargarProductos() : void{
+  cargarAreas() : void{
     this.areaServicio.obtenerAreas().subscribe(data => {
       this.areas = data;
       this.cargando = false;
