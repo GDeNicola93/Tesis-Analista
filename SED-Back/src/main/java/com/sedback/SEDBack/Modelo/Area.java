@@ -9,6 +9,7 @@ import javax.persistence.Id;
 
 
 import com.sun.istack.NotNull;
+import java.io.Serializable;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data //Agrega las caracteristicas seters y geters, ToString,etc
 @NoArgsConstructor
-public class Area {
+public class Area implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

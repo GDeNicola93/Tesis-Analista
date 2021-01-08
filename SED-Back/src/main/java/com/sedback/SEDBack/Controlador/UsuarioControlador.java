@@ -6,14 +6,14 @@
 package com.sedback.SEDBack.Controlador;
 
 import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
-import com.sedback.SEDBack.Logica.SucursalServicio;
-import com.sedback.SEDBack.Modelo.Sucursal;
-import java.util.List;
+import com.sedback.SEDBack.HttpMensajes.JwtDTO;
+import com.sedback.SEDBack.HttpMensajes.LoginUsuario;
+import com.sedback.SEDBack.Logica.UsuarioServicio;
+import com.sedback.SEDBack.Modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,18 +25,20 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin(origins = "*") //Para poder acceder desde cualquier lado a mi backend
 @RestController
-@RequestMapping("/sucursal")
-public class SucursalControlador {
+@RequestMapping("/autenticacion")
+public class UsuarioControlador {
     @Autowired
-    private SucursalServicio servicio;
+    private UsuarioServicio servicio;
     
-    @PostMapping
-    public ResponseEntity<HttpMensaje> guardar(@RequestBody Sucursal sucursal){
-        return servicio.guardar(sucursal);
+    @PostMapping("/nuevo")
+    @PreAuthorize("hasAuthority('Administrador')")
+     public ResponseEntity<HttpMensaje> guardar(@RequestBody Usuario usuario){
+        return servicio.guardar(usuario);
+    }
+     
+    @PostMapping("/login")
+    public ResponseEntity<JwtDTO> login(@RequestBody LoginUsuario loginUsuario){
+        return servicio.login(loginUsuario);
     }
     
-    @GetMapping
-    public ResponseEntity<List<Sucursal>> obtenerSucursal(){
-        return servicio.obtenerSucursales();
-    }
 }

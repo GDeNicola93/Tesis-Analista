@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import com.sun.istack.NotNull;
+import java.io.Serializable;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Sucursal {
+public class Sucursal implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

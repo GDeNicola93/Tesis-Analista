@@ -11,6 +11,7 @@ import com.sedback.SEDBack.Modelo.Area;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,11 +31,13 @@ public class AreaControlador {
     private AreaServicio servicio;
     
     @PostMapping
+    @PreAuthorize("hasAuthority('Administrador')")
     public ResponseEntity<HttpMensaje> guardar(@RequestBody Area area){
         return servicio.guardar(area);
     }
     
     @GetMapping
+    @PreAuthorize("hasAuthority('Administrador')")
     public ResponseEntity<List<Area>> obtenerAreas(){
         return servicio.obtenerAreas();
     }

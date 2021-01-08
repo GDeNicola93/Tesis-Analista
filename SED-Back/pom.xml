@@ -56,6 +56,17 @@
                         <version>3.10</version>
                         <type>jar</type>
                 </dependency>
+	 <dependency>
+	  <groupId>org.springframework.boot</groupId>
+	  <artifactId>spring-boot-starter-security</artifactId>
+	  <version>2.4.1</version>
+	  <type>module</type>
+	 </dependency>
+	 <dependency>
+	  <groupId>io.jsonwebtoken</groupId>
+	  <artifactId>jjwt</artifactId>
+	  <version>0.9.0</version>
+	 </dependency>
 	</dependencies>
 
 	<build>
