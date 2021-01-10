@@ -1,0 +1,46 @@
+<app-menu></app-menu>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h4>Puestos de Trabajo</h4>
+        </div>
+        <div class="col">
+            <button routerLink="/puestos-trabajo/nuevo" class="float-right btn btn-sm btn-success shadow-sm"><i class="fas fa-plus"></i> Agregar</button>
+        </div>
+
+    </div>
+
+    <div class="card shadow">
+        <h6 class="card-header font-weight-bold">Listado de Puestos de Trabajo</h6>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                  <tr class="table-primary">
+                    <th scope="col">Cód</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Área</th>
+                    <th scope="col">Sucursal</th>
+                    <th scope="col">Opciones</th>
+                  </tr>
+                </thead>
+                <!-- <tbody *ngFor="let s of sucursales">
+                  <tr>
+                    <th scope="row">{{s.id}}</th>
+                    <td>{{s.nombre}}</td>
+                    <td>{{s.descripcion}}</td>
+                    <td>{{s.areas}}</td>
+                    <td>
+                      <div class="row">
+                        <div class="col">
+                          <button style="margin-right: 5px;" class="btn btn-sm btn-warning shadow-sm" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></button>
+                          <button class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody> -->
+              </table>
+        </div>
+    </div>
+</div>

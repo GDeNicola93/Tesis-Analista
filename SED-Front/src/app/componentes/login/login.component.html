@@ -1,1 +1,35 @@
-<p>login works!</p>
+<div class="container">
+    <div class="wrapper fadeInDown" style="margin-top: 80px;">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+      
+          <!-- Icon -->
+          <div class="fadeIn first">
+            <!-- <img src="https://www.b-cube.in/wp-content/uploads/2014/05/aditya-300x177.jpg" id="icon" alt="User Icon" /> -->
+            <img src="../../../assets/login-icono.svg" id="icon" alt="Login Icono">
+            <h1>ACCESO</h1>
+            <h5>Sistema de Evaluación de Desempeño</h5>
+          </div>
+      
+          <!-- Login Form -->
+          <form (ngSubmit)="login()">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Nombre de usuario" autocomplete="off" [(ngModel)]="form.nombreUsuario">
+            <input type="password" id="password" class="fadeIn third" name="login" placeholder="Contraseña" [(ngModel)]="form.password">
+            <input type="submit" class="fadeIn fourth" value="Ingresar">
+
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
+              <strong><i class="fas fa-times"></i> Error</strong> {{mensaje}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </form>
+      
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+            <a class="underlineHover" href="#">Olvide mi contraseña</a>
+          </div>
+      
+        </div>
+      </div>
+</div>

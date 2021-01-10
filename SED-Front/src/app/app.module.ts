@@ -9,9 +9,12 @@ import { MenuComponent } from './componentes/menu/menu.component';
 import { AreasComponent } from './componentes/areas/areas/areas.component';
 import { NuevaComponent } from './componentes/areas/nueva/nueva.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NuevaSucursalComponent } from './componentes/sucursales/nueva-sucursal/nueva-sucursal.component';
 import { IndexSucursalComponent } from './componentes/sucursales/index-sucursal/index-sucursal.component';
+import { AuthInterceptorService } from './servicios/auth-interceptor.service';
+import { NuevoPuestosTrabajoComponent } from './componentes/puestosTrabajo/nuevo-puestos-trabajo/nuevo-puestos-trabajo.component';
+import { IndexPuestosTrabajoComponent } from './componentes/puestosTrabajo/index-puestos-trabajo/index-puestos-trabajo.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { IndexSucursalComponent } from './componentes/sucursales/index-sucursal/
     AreasComponent,
     NuevaComponent,
     NuevaSucursalComponent,
-    IndexSucursalComponent
+    IndexSucursalComponent,
+    IndexPuestosTrabajoComponent,
+    NuevoPuestosTrabajoComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,13 @@ import { IndexSucursalComponent } from './componentes/sucursales/index-sucursal/
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
