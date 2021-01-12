@@ -14,7 +14,7 @@
     <div class="card shadow">
         <h6 class="card-header font-weight-bold">Listado de Puestos de Trabajo</h6>
         <div class="card-body">
-            <table class="table table-hover">
+            <table class="table table-sm table-hover">
                 <thead>
                   <tr class="table-primary">
                     <th scope="col">Cód</th>
@@ -24,22 +24,23 @@
                     <th scope="col">Opciones</th>
                   </tr>
                 </thead>
-                <!-- <tbody *ngFor="let s of sucursales">
+                <tbody *ngFor="let puesto of puestosTrabajo">
                   <tr>
-                    <th scope="row">{{s.id}}</th>
-                    <td>{{s.nombre}}</td>
-                    <td>{{s.descripcion}}</td>
-                    <td>{{s.areas}}</td>
+                    <th scope="row">{{puesto.id}}</th>
+                    <td>{{puesto.nombrePuesto}}</td>
+                    <td>{{puesto.area.nombre}}</td>
+                    <td>{{puesto.sucursal.nombre}}</td>
                     <td>
                       <div class="row">
                         <div class="col">
+                          <button style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver Objetivos"><i class="fas fa-bullseye"></i></button>
                           <button style="margin-right: 5px;" class="btn btn-sm btn-warning shadow-sm" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></button>
                           <button class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fas fa-trash-alt"></i></button>
                         </div>
                       </div>
                     </td>
                   </tr>
-                </tbody> -->
+                </tbody>
               </table>
         </div>
     </div>

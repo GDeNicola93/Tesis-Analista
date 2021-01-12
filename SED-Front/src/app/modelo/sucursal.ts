@@ -5,7 +5,7 @@ export class Sucursal {
     nombre : string = '';
     descripcion : string = '';
     areas : Area[] = [];
-
+    
     constructor(nombre:string,descripcion:string,areas:Area[]){
         this.nombre = nombre;
         this.descripcion = descripcion;

@@ -6,8 +6,8 @@
 package com.sedback.SEDBack.Controlador;
 
 import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
-import com.sedback.SEDBack.Logica.SucursalServicio;
-import com.sedback.SEDBack.Modelo.Sucursal;
+import com.sedback.SEDBack.Logica.PuestoTrabajoServicio;
+import com.sedback.SEDBack.Modelo.PuestoTrabajo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,20 +25,20 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin(origins = "*") //Para poder acceder desde cualquier lado a mi backend
 @RestController
-@RequestMapping("/sucursal")
-public class SucursalControlador {
+@RequestMapping("/puesto-trabajo")
+public class PuestoTrabajoControlador {
     @Autowired
-    private SucursalServicio servicio;
+    private PuestoTrabajoServicio servicio;
     
     @PostMapping
     @PreAuthorize("hasAuthority('Administrador')")
-    public ResponseEntity<HttpMensaje> guardar(@RequestBody Sucursal sucursal){
-        return servicio.guardar(sucursal);
+    public ResponseEntity<HttpMensaje> guardar(@RequestBody PuestoTrabajo puestoTrabajo){
+        return servicio.guardar(puestoTrabajo);
     }
     
     @GetMapping
     @PreAuthorize("hasAuthority('Administrador')")
-    public ResponseEntity<List<Sucursal>> obtenerSucursal(){
-        return servicio.obtenerSucursales();
+    public ResponseEntity<List<PuestoTrabajo>> obtenerPuestosTrabajo(){
+        return servicio.obtenerPuestosTrabajo();
     }
 }
