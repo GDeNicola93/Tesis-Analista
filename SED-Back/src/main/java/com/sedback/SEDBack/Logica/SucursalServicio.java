@@ -42,4 +42,8 @@ public class SucursalServicio {
     public ResponseEntity<List<Sucursal>> obtenerSucursales(){
         return ResponseEntity.ok().body(repositorio.findAll());
     }
+    
+    public ResponseEntity<Sucursal> obtenerSucursalPorId(Integer id){
+        return ResponseEntity.ok().body(repositorio.getOne(id));
+    }
 }

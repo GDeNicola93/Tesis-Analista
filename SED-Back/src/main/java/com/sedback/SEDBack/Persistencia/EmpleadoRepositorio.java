@@ -5,17 +5,13 @@
  */
 package com.sedback.SEDBack.Persistencia;
 
-import com.sedback.SEDBack.Modelo.PuestoTrabajo;
-import com.sedback.SEDBack.Modelo.Sucursal;
-import java.util.List;
+import com.sedback.SEDBack.Modelo.Empleado;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author ususario
  */
-public interface PuestoTrabajoRepositorio extends JpaRepository<PuestoTrabajo,Integer> {
-    List<PuestoTrabajo> findBySucursal(Sucursal sucursal);
+public interface EmpleadoRepositorio extends JpaRepository<Empleado,Integer>{
     
-    List<PuestoTrabajo> findBySucursalId(Integer id);
 }

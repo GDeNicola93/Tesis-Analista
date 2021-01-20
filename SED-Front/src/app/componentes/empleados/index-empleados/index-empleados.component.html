@@ -1,0 +1,47 @@
+<app-menu></app-menu>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h4>Empleados</h4>
+        </div>
+        <div class="col">
+            <button routerLink="/empleados/nuevo" class="float-right btn btn-sm btn-success shadow-sm"><i class="fas fa-plus"></i> Agregar</button>
+        </div>
+
+    </div>
+
+    <div class="card shadow">
+        <h6 class="card-header font-weight-bold">Listado de Empleados</h6>
+        <div class="card-body">
+            <table class="table table-sm table-hover">
+                <thead>
+                  <tr class="table-primary">
+                    <th scope="col">Leg</th>
+                    <th scope="col">Nombre y Apellido</th>
+                    <th scope="col">Puestos de Trabajo</th>
+                    <th scope="col">Opciones</th>
+                  </tr>
+                </thead>
+                <!-- <tbody *ngFor="let puesto of puestosTrabajo">
+                  <tr>
+                    <th scope="row">{{puesto.id}}</th>
+                    <td>{{puesto.nombrePuesto}}</td>
+                    <td>{{puesto.area.nombre}}</td>
+                    <td>{{puesto.sucursal.nombre}}</td>
+                    <td>
+                      <div class="row">
+                        <div class="col">
+                          <button style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver Objetivos"><i class="fas fa-bullseye"></i></button>
+                          <button style="margin-right: 5px;" class="btn btn-sm btn-warning shadow-sm" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></button>
+                          <button class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody> -->
+              </table>
+        </div>
+    </div>
+</div>
+

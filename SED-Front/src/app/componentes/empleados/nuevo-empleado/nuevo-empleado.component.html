@@ -1,0 +1,129 @@
+<app-menu></app-menu>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h4>Nuevo Empleado</h4>
+        </div>
+        <div class="col">
+            <button routerLink="/empleados" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+        </div>
+
+    </div>
+
+    <div class="card shadow">
+        <h6 class="card-header font-weight-bold">Formulario de registro de nuevo Empleado</h6>
+        <div class="card-body">
+            <form name="form" (ngSubmit)="guardar()">
+                <h6>Información del empleado:</h6>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="legajo">Legajo: </label>
+                            <input type="number" class="form-control" name="legajo" [(ngModel)]="form.legajo"  required autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="nombre">Nombre: </label>
+                            <input type="text" class="form-control" name="nombre" [(ngModel)]="form.nombre"  required autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="apellido">Apellido: </label>
+                            <input type="text" class="form-control" name="apellido" [(ngModel)]="form.apellido"  required autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="fechaDeNacimiento">Fecha Nacimiento: </label>
+                            <input type="date" class="form-control" name="fechaDeNacimiento" [(ngModel)]="form.fechaDeNacimiento"  required autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="dni">Num DNI: </label>
+                            <input type="number" class="form-control" name="dni" [(ngModel)]="form.dni"  required autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Email: </label>
+                    <input type="text" class="form-control" name="email" [(ngModel)]="form.email"  required autocomplete="off">
+                </div>
+                <h6>Asignación de Empleado a puestos de trabajo:</h6>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label>Sucursal al que pertenece el puesto: </label>
+                            <select class="form-control" [(ngModel)]="form.sucursal" name="sucursal" (change)="actualizarComboPuestosTrabajo()">
+                              <option *ngFor="let sucursal of comboSucursales" [ngValue]="sucursal">{{sucursal.id}}--{{sucursal.nombre}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label>Seleccione un puesto de trabajo: </label>
+                            <select class="form-control" [(ngModel)]="form.puestoTrabajo" name="puestoTrabajo">
+                              <option *ngFor="let puestoTrabajo of comboPuestosTrabajo" [ngValue]="puestoTrabajo">{{puestoTrabajo.id}}-{{puestoTrabajo.nombrePuesto}} (Area: {{puestoTrabajo.area.nombre}})</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button style="margin-top: 35px;" type="button" (click)="agregarPuestoAEmpleado()" class="btn btn-sm btn-block btn-outline-success"><i class="fas fa-plus"></i> Asignar puesto</button>   
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Puestos asignados al empleado:</label>
+                    <p *ngIf="emptyPuestosAsignados" style="text-align: center;"><i class="fas fa-exclamation-circle"></i> Aun no has asignado ningun puesto al empleado.</p>
+                    <table class="table table-hover">
+                        <tbody *ngFor="let pt of puestosAsignados">
+                          <tr>
+                            <td>{{pt.nombrePuesto}} (Area: {{pt.area.nombre}})</td>
+                            <td><button type="button" (click)="desSeleccionarPuesto(pt)"><i class="fas fa-times"></i></button></td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h6>Creación de usuario del sistema:</h6>
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="nombreUsuario">Nombre Usuario: </label>
+                            <input type="text" class="form-control" name="nombreUsuario" [(ngModel)]="form.nombreUsuario"  required autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="password">Password: </label>
+                            <input type="password" class="form-control" name="password" [(ngModel)]="form.password"  required autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="repeatPassword">Repita Password: </label>
+                            <input type="password" class="form-control" name="repeatPassword" [(ngModel)]="form.repeatPassword"  required autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Seleccione el perfil del usuario: </label>
+                    <select class="form-control" [(ngModel)]="form.rol" name="rol">
+                      <option *ngFor="let rol of comboRoles" [ngValue]="rol">{{rol.rolNombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="float-right btn btn-sm btn-success"><i class="far fa-save"></i> Guardar</button>
+                </div>
+            </form>
+
+        </div>
+    
+    </div>
+
+
+</div>
+

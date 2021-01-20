@@ -27,6 +27,9 @@ public class PuestoTrabajoServicio {
     @Autowired
     private ObjetivoServicio objetivoServicio;
     
+    @Autowired
+    private SucursalServicio sucursalServicio;
+    
     public ResponseEntity<HttpMensaje> guardar(PuestoTrabajo puestoTrabajo){
         try{
             if(StringUtils.isBlank(puestoTrabajo.getNombrePuesto())){
@@ -56,6 +59,10 @@ public class PuestoTrabajoServicio {
     
     public ResponseEntity<List<PuestoTrabajo>> obtenerPuestosTrabajo(){
         return ResponseEntity.ok().body(repositorio.findAll());
+    }
+    
+    public ResponseEntity<List<PuestoTrabajo>> obtenerPuestosTrabajoPorIdSucursal(Integer id){
+        return ResponseEntity.ok().body(repositorio.findBySucursalId(id));
     }
     
 }

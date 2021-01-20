@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AreasComponent } from './componentes/areas/areas/areas.component';
 import { NuevaComponent } from './componentes/areas/nueva/nueva.component';
+import { IndexEmpleadosComponent } from './componentes/empleados/index-empleados/index-empleados.component';
+import { NuevoEmpleadoComponent } from './componentes/empleados/nuevo-empleado/nuevo-empleado.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { IndexPuestosTrabajoComponent } from './componentes/puestosTrabajo/index-puestos-trabajo/index-puestos-trabajo.component';
@@ -26,6 +28,11 @@ const routes: Routes = [
   //Puestos de Trabajo
   {path: 'puestos-trabajo',component:IndexPuestosTrabajoComponent,canActivate:[GeneralGuard],data: { expectedRol: ["Administrador"]}},
   {path: 'puestos-trabajo/nuevo',component:NuevoPuestosTrabajoComponent,canActivate:[GeneralGuard],data: { expectedRol: ["Administrador"]}},
+
+  //Empleados
+  {path: 'empleados',component:IndexEmpleadosComponent,canActivate:[GeneralGuard],data: { expectedRol: ["Administrador"]}},
+  {path: 'empleados/nuevo',component:NuevoEmpleadoComponent,canActivate:[GeneralGuard],data: { expectedRol: ["Administrador"]}},
+
 
 ];
 

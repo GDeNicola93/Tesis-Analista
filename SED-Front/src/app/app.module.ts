@@ -15,6 +15,8 @@ import { IndexSucursalComponent } from './componentes/sucursales/index-sucursal/
 import { AuthInterceptorService } from './servicios/auth-interceptor.service';
 import { NuevoPuestosTrabajoComponent } from './componentes/puestosTrabajo/nuevo-puestos-trabajo/nuevo-puestos-trabajo.component';
 import { IndexPuestosTrabajoComponent } from './componentes/puestosTrabajo/index-puestos-trabajo/index-puestos-trabajo.component';
+import { IndexEmpleadosComponent } from './componentes/empleados/index-empleados/index-empleados.component';
+import { NuevoEmpleadoComponent } from './componentes/empleados/nuevo-empleado/nuevo-empleado.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { IndexPuestosTrabajoComponent } from './componentes/puestosTrabajo/index
     NuevaSucursalComponent,
     IndexSucursalComponent,
     IndexPuestosTrabajoComponent,
-    NuevoPuestosTrabajoComponent
+    NuevoPuestosTrabajoComponent,
+    IndexEmpleadosComponent,
+    NuevoEmpleadoComponent
   ],
   imports: [
     BrowserModule,

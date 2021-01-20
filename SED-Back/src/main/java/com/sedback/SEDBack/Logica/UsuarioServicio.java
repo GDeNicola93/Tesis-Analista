@@ -60,7 +60,7 @@ public class UsuarioServicio {
             repositorio.save(usuario);
             return ResponseEntity.ok().body(new HttpMensaje("El usuario se ha creado exitosamente."));
         }catch(Exception e){
-            return ResponseEntity.badRequest().body(new HttpMensaje("No fue posible registrar el nuevo usuario. Intente nuevamente."));
+            return ResponseEntity.badRequest().body(new HttpMensaje("Excepción no controlada.Desripción: "+e));
         }
     }
     

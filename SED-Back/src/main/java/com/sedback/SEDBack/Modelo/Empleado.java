@@ -7,6 +7,7 @@ package com.sedback.SEDBack.Modelo;
 
 import com.sun.istack.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,25 +27,35 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Usuario implements Serializable {
-    
+public class Empleado implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     
     @NotNull
     @Column(unique = true)
-    private String nombreUsuario;
+    private String legajo;
     
     @NotNull
-    private String password;
+    private String nombre;
     
     @NotNull
-    private boolean habilitado;
+    private String apellido;
     
+    @NotNull
+    private String dni;
+    
+    @NotNull
+    private String email;
+    
+    @NotNull
+    private LocalDate fechaDeNacimiento;
+    
+    @NotNull
+    @ManyToOne
+    private Estado estado;
+    
+    @NotNull
     @ManyToMany
-    private Set<Rol> roles = new HashSet<>();
-    
-    @OneToOne
-    private Empleado empleado;
+    private Set<PuestoTrabajo> puestosTrabajo = new HashSet<>();
 }

@@ -5,17 +5,12 @@
  */
 package com.sedback.SEDBack.Modelo;
 
-import com.sun.istack.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,25 +21,13 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Usuario implements Serializable {
-    
+public class Estado implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     
-    @NotNull
-    @Column(unique = true)
-    private String nombreUsuario;
+    private String nombre;
     
-    @NotNull
-    private String password;
-    
-    @NotNull
-    private boolean habilitado;
-    
-    @ManyToMany
-    private Set<Rol> roles = new HashSet<>();
-    
-    @OneToOne
-    private Empleado empleado;
+    @ManyToOne
+    private Ambito ambito;
 }

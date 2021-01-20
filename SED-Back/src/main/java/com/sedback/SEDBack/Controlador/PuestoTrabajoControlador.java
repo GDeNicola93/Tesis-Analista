@@ -41,4 +41,10 @@ public class PuestoTrabajoControlador {
     public ResponseEntity<List<PuestoTrabajo>> obtenerPuestosTrabajo(){
         return servicio.obtenerPuestosTrabajo();
     }
+    
+    @GetMapping(params = {"sucursal_id"})
+    @PreAuthorize("hasAuthority('Administrador')")
+    public ResponseEntity<List<PuestoTrabajo>> obtenerPuestosTrabajoPorIdSucursal(Integer sucursal_id){
+        return servicio.obtenerPuestosTrabajoPorIdSucursal(sucursal_id);
+    }
 }
