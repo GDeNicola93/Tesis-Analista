@@ -12,6 +12,7 @@ import com.sedback.SEDBack.Modelo.Usuario;
 import com.sedback.SEDBack.Persistencia.UsuarioRepositorio;
 import com.sedback.SEDBack.Seguridad.JWT.JwtProvider;
 import java.util.Optional;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,9 @@ public class UsuarioServicio {
     AuthenticationManager authenticationManager;
     
     @Autowired
+    private EmpleadoServicio empleadoServicio;
+    
+    @Autowired
     JwtProvider jwtProvider;
     
     public Optional<Usuario> getByNombreUsuario(String nu){
@@ -49,14 +53,22 @@ public class UsuarioServicio {
     
     public ResponseEntity<HttpMensaje> guardar(Usuario usuario){
         try{
+            ResponseEntity<HttpMensaje> respuesta = empleadoServicio.verificarCampos(usuario.getEmpleado());
+            if(respuesta.getStatusCode().isError()){
+                return respuesta;
+            }
             if(StringUtils.isBlank(usuario.getNombreUsuario())){
                 return ResponseEntity.badRequest().body(new HttpMensaje("El campo nombre de usuario no es valido."));
             }
             if(StringUtils.isBlank(usuario.getPassword())){
                 return ResponseEntity.badRequest().body(new HttpMensaje("El campo contraseña no es valido."));
             }
+            if(ObjectUtils.isEmpty(usuario.getRoles())){
+                return ResponseEntity.badRequest().body(new HttpMensaje("Debe seleccionar un perfil de usuario valida."));
+            }
             String passSinEncriptar = usuario.getPassword();
             usuario.setPassword(passwordEncoder.encode(passSinEncriptar));
+            empleadoServicio.guardar(usuario.getEmpleado());
             repositorio.save(usuario);
             return ResponseEntity.ok().body(new HttpMensaje("El usuario se ha creado exitosamente."));
         }catch(Exception e){

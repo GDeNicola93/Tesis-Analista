@@ -8,6 +8,8 @@ package com.sedback.SEDBack.Logica;
 import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Persistencia.EmpleadoRepositorio;
+import java.time.LocalDate;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class EmpleadoServicio {
     @Autowired
     private EmpleadoRepositorio repositorio;
     
-    public ResponseEntity<HttpMensaje> guardar(Empleado empleado){
+    public ResponseEntity<HttpMensaje> verificarCampos(Empleado empleado){
         try{
             //Primero verifico que sea correcta la información del empleado
             if(StringUtils.isBlank(empleado.getLegajo())){
@@ -38,7 +40,28 @@ public class EmpleadoServicio {
             if(empleado.getFechaDeNacimiento() == null){
                 return ResponseEntity.badRequest().body(new HttpMensaje("El campo fecha de nacimiento no es valido."));
             }
-            return ResponseEntity.ok().body(new HttpMensaje("Paso todas las pruebas"));
+            if(empleado.getFechaDeNacimiento().isAfter(LocalDate.now())){
+                return ResponseEntity.badRequest().body(new HttpMensaje("La fecha de nacimiento supera la fecha de hoy."));
+            }
+            if(StringUtils.isBlank(empleado.getDni())){
+                return ResponseEntity.badRequest().body(new HttpMensaje("El campo Num DNI no es valido."));
+            }
+            if(StringUtils.isBlank(empleado.getEmail())){
+                return ResponseEntity.badRequest().body(new HttpMensaje("El campo Email no es valido."));
+            }
+            if(ObjectUtils.isEmpty(empleado.getPuestosTrabajo())){
+                return ResponseEntity.badRequest().body(new HttpMensaje("Debe selecionar como minimo un puesto de trabajo"));
+            }
+            return ResponseEntity.ok().body(new HttpMensaje("Empleado Registrado Correctamente"));
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body(new HttpMensaje("Excepción no controlada.Desripción: "+e));
+        }
+    }
+    
+    public ResponseEntity<HttpMensaje> guardar(Empleado empleado){
+        try{
+            repositorio.save(empleado);
+            return ResponseEntity.ok().body(new HttpMensaje("Empleado Registrado Correctamente"));
         }catch(Exception e){
             return ResponseEntity.badRequest().body(new HttpMensaje("Excepción no controlada.Desripción: "+e));
         }
