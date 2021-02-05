@@ -10,6 +10,7 @@ import { IndexPuestosTrabajoComponent } from './componentes/puestosTrabajo/index
 import { NuevoPuestosTrabajoComponent } from './componentes/puestosTrabajo/nuevo-puestos-trabajo/nuevo-puestos-trabajo.component';
 import { IndexSucursalComponent } from './componentes/sucursales/index-sucursal/index-sucursal.component';
 import { NuevaSucursalComponent } from './componentes/sucursales/nueva-sucursal/nueva-sucursal.component';
+import { PerfilUsuarioComponent } from './componentes/usuario/perfil-usuario/perfil-usuario.component';
 import { GeneralGuard } from './guards/general.guard';
 import { LoginGuard } from './guards/login.guard';
 
@@ -32,6 +33,9 @@ const routes: Routes = [
   //Empleados
   {path: 'empleados',component:IndexEmpleadosComponent,canActivate:[GeneralGuard],data: { expectedRol: ["Administrador"]}},
   {path: 'empleados/nuevo',component:NuevoEmpleadoComponent,canActivate:[GeneralGuard],data: { expectedRol: ["Administrador"]}},
+
+  //Usuario
+  {path: 'mi-perfil',component:PerfilUsuarioComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador','Evaluador','Empleado']}},
 
 
 ];

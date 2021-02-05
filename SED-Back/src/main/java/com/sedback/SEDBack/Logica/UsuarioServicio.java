@@ -59,6 +59,11 @@ public class UsuarioServicio {
             }
             if(StringUtils.isBlank(usuario.getNombreUsuario())){
                 return ResponseEntity.badRequest().body(new HttpMensaje("El campo nombre de usuario no es valido."));
+            }else{
+                Optional<Usuario> existeUsuario = repositorio.findByNombreUsuario(usuario.getNombreUsuario());
+                if (!existeUsuario.isEmpty()){
+                    return ResponseEntity.badRequest().body(new HttpMensaje("El nombre de usuario ingresado ya existe en la base de datos. Por favor escoja otro."));
+                }
             }
             if(StringUtils.isBlank(usuario.getPassword())){
                 return ResponseEntity.badRequest().body(new HttpMensaje("El campo contraseña no es valido."));

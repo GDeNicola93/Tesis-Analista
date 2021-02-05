@@ -17,6 +17,7 @@ import { NuevoPuestosTrabajoComponent } from './componentes/puestosTrabajo/nuevo
 import { IndexPuestosTrabajoComponent } from './componentes/puestosTrabajo/index-puestos-trabajo/index-puestos-trabajo.component';
 import { IndexEmpleadosComponent } from './componentes/empleados/index-empleados/index-empleados.component';
 import { NuevoEmpleadoComponent } from './componentes/empleados/nuevo-empleado/nuevo-empleado.component';
+import { PerfilUsuarioComponent } from './componentes/usuario/perfil-usuario/perfil-usuario.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NuevoEmpleadoComponent } from './componentes/empleados/nuevo-empleado/n
     IndexPuestosTrabajoComponent,
     NuevoPuestosTrabajoComponent,
     IndexEmpleadosComponent,
-    NuevoEmpleadoComponent
+    NuevoEmpleadoComponent,
+    PerfilUsuarioComponent
   ],
   imports: [
     BrowserModule,

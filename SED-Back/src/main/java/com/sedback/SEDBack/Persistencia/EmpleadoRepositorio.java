@@ -6,6 +6,7 @@
 package com.sedback.SEDBack.Persistencia;
 
 import com.sedback.SEDBack.Modelo.Empleado;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,5 +14,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author ususario
  */
 public interface EmpleadoRepositorio extends JpaRepository<Empleado,Integer>{
-    
+    Optional<Empleado> findByDni(String dni);
 }

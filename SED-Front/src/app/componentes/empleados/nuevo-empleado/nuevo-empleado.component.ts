@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { PuestoTrabajo } from 'src/app/modelo/puesto-trabajo';
 import { Rol } from 'src/app/modelo/rol';
 import { Sucursal } from 'src/app/modelo/sucursal';
@@ -74,8 +74,25 @@ export class NuevoEmpleadoComponent implements OnInit {
   }
 
   agregarPuestoAEmpleado() : void{
-    this.puestosAsignados.push(this.empleado.puestoTrabajo);
-    this.emptyPuestosAsignados = false;
+    var sePuedeAgregar = true;
+    if(this.empleado.puestoTrabajo != null){
+      if (this.puestosAsignados.length > 0){
+        for (let puesto of this.puestosAsignados){
+          if(puesto.id === this.empleado.puestoTrabajo.id){
+            sePuedeAgregar = false;
+          }
+        }
+        if(sePuedeAgregar === true){
+          this.puestosAsignados.push(this.empleado.puestoTrabajo);
+          this.emptyPuestosAsignados = false;
+        }else{
+          alert("El puesto seleccionado ya se encuentra asignado al usuario.");
+        }
+      }else{
+        this.puestosAsignados.push(this.empleado.puestoTrabajo);
+        this.emptyPuestosAsignados = false;
+      }
+    }
   }
 
   desSeleccionarPuesto(puestoTrabajo : PuestoTrabajo) : void {
@@ -89,8 +106,15 @@ export class NuevoEmpleadoComponent implements OnInit {
   }
 
   agregarPerfilAUsuario() : void{
-    this.rolesAsignados.push(this.usuario.roles);
-    this.emptyRolesAsignados = false;
+    if(this.usuario.roles != null){
+      var i = this.rolesAsignados.indexOf(this.usuario.roles);
+      if(i == -1){
+        this.rolesAsignados.push(this.usuario.roles);
+        this.emptyRolesAsignados = false;
+      }else{
+        alert("El perfil seleccionado ya se encuentra asignado al usuario.");
+      }
+    }
   }
 
   desSeleccionarPerfilUsuario(rol:Rol) : void{

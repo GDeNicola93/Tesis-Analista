@@ -9,6 +9,7 @@ import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Persistencia.EmpleadoRepositorio;
 import java.time.LocalDate;
+import java.util.Optional;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -45,6 +46,11 @@ public class EmpleadoServicio {
             }
             if(StringUtils.isBlank(empleado.getDni())){
                 return ResponseEntity.badRequest().body(new HttpMensaje("El campo Num DNI no es valido."));
+            }else{
+                Optional<Empleado> existeDni = repositorio.findByDni(empleado.getDni());
+                if (!existeDni.isEmpty()){
+                    return ResponseEntity.badRequest().body(new HttpMensaje("El numero de dni ingresado ya existe en la base de datos."));
+                }
             }
             if(StringUtils.isBlank(empleado.getEmail())){
                 return ResponseEntity.badRequest().body(new HttpMensaje("El campo Email no es valido."));
