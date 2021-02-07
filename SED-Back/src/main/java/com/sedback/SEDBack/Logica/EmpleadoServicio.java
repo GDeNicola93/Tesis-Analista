@@ -9,6 +9,7 @@ import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Persistencia.EmpleadoRepositorio;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -71,5 +72,9 @@ public class EmpleadoServicio {
         }catch(Exception e){
             return ResponseEntity.badRequest().body(new HttpMensaje("Excepción no controlada.Desripción: "+e));
         }
+    }
+    
+    public ResponseEntity<List<Empleado>> obtenerEmpleados(){
+        return ResponseEntity.ok().body(repositorio.findAll());
     }
 }
