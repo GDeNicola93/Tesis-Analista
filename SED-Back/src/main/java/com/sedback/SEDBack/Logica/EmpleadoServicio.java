@@ -77,4 +77,13 @@ public class EmpleadoServicio {
     public ResponseEntity<List<Empleado>> obtenerEmpleados(){
         return ResponseEntity.ok().body(repositorio.findAll());
     }
+    
+    public ResponseEntity<List<Empleado>> buscarPorNombreYApellido(String nombreApellido){
+        return ResponseEntity.ok().body(repositorio.findByNombreContaining(nombreApellido));
+    }
+    
+    public ResponseEntity<List<Empleado>> buscarPorLegajo(String legajo){
+        return ResponseEntity.ok().body(repositorio.findByLegajo(legajo));
+    }
+    
 }

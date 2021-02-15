@@ -37,5 +37,17 @@ public class EmpleadoControlador {
         return servicio.obtenerEmpleados();
     }
     
+    @GetMapping(params = {"nombreApellido"})
+    @PreAuthorize("hasAuthority('Administrador')")
+    public ResponseEntity<List<Empleado>> buscarPorNombreYApellido(String nombreApellido){
+        return servicio.buscarPorNombreYApellido(nombreApellido);
+    }
+    
+    @GetMapping(params = {"legajo"})
+    @PreAuthorize("hasAuthority('Administrador')")
+    public ResponseEntity<List<Empleado>> buscarPorLegajo(String legajo){
+        return servicio.buscarPorLegajo(legajo);
+    }
+    
     
 }

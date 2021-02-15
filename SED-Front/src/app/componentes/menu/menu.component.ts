@@ -12,10 +12,12 @@ export class MenuComponent implements OnInit {
 
   nombreUsuario : string = "";
   isAdministrador : boolean = false;
+  isEmpleado : boolean = false;
 
   ngOnInit(): void {
     this.getNombreUsuario();
     this.getIsAdministrador();
+    this.getIsEmpleado();
   }
 
   cerrarSesion() : void {
@@ -28,6 +30,10 @@ export class MenuComponent implements OnInit {
 
   getIsAdministrador() : void {
     this.isAdministrador=this.tokenServicio.isAdmin();
+  }
+
+  getIsEmpleado() : void {
+    this.isEmpleado = this.tokenServicio.isEmpleado();
   }
 
 }
