@@ -23,5 +23,9 @@ export class UsuarioService {
     return this.httpClient.post<any>(this.urlBaseService.obtenerURLBase() + 'autenticacion/nuevo',usuario,cabecera);
   }
 
+  public obtenerDatosUsuarioLogeado() : Observable<any>{
+    return this.httpClient.get<Usuario>(this.urlBaseService.obtenerURLBase() + 'autenticacion/obtener_datos',cabecera);
+  }
+
 
 }

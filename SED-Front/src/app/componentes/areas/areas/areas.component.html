@@ -31,7 +31,8 @@
                   <tr>
                     <th scope="row">{{a.id}}</th>
                     <td>{{a.nombre}}</td>
-                    <td>{{a.descripcion}}</td>
+                    <td *ngIf="!(a.descripcion == null)">{{a.descripcion}}</td>
+                    <td *ngIf="(a.descripcion == null)">Sin especificar</td>
                     <td>
                       <div class="row">
                         <div class="col">

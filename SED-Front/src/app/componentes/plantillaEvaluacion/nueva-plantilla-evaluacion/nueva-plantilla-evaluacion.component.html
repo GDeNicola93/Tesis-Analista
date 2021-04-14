@@ -1,0 +1,171 @@
+<app-menu></app-menu>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h4>Nueva Plantilla de Evaluación</h4>
+        </div>
+        <div class="col">
+            <button routerLink="/plantilla-evaluacion" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+        </div>
+
+    </div>
+
+    <div class="card shadow">
+        <h6 class="card-header font-weight-bold">Formulario de registro de nueva plantilla de evaluación</h6>
+        <div class="card-body">
+            <div *ngIf="pasoActivo == 1">
+                <h4 style="text-align: center;">Paso 1 de 2</h4>
+                <form name="paso1">
+                    <div class="form-group">
+                        <label>Puesto de Trabajo: </label>
+                        <select class="form-control" [(ngModel)]="form.puestoTrabajo" name="puestoTrabajo">
+                          <option *ngFor="let puestoTrabajo of comboPuestosTrabajo" [ngValue]="puestoTrabajo">{{puestoTrabajo.nombrePuesto}}  ({{puestoTrabajo.sucursal.nombre}}) ({{puestoTrabajo.area.nombre}})</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción (opcional): </label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" [(ngModel)]="form.descripcion"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button (click)="siguientePaso()" class="float-right btn btn-sm btn-success">Siguiente Paso</button>
+                    </div>
+                </form>
+            </div>
+            <div *ngIf="pasoActivo == 2">
+                <h4 style="text-align: center;">Paso 2 de 2</h4>
+                <button (click)="agregarCompetencia(content)" class="float-right btn btn-sm btn-primary mb-3">Nueva Competencia</button>
+                <form name="paso2">
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                  <tr class="table-primary">
+                                    <th scope="col">Competencia</th>
+                                    <th scope="col">% Min Aprobación</th>
+                                    <th scope="col">Opciones</th>
+                                  </tr>
+                                </thead>
+                                <tbody *ngFor="let detalleP of detallePlantilla">
+                                  <tr>
+                                    <th scope="row">{{detalleP.competencia.nombre}}</th>
+                                    <td>{{detalleP.competencia.porcentajeMinAprobacionDeComp}}</td>
+                                    <td>
+                                      <div class="row">
+                                        <div class="col">
+                                          <button style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver y editar competencia"><i class="far fa-eye"></i></button>
+                                          <button class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Quitar"><i class="fas fa-trash-alt"></i></button>
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <div class="form-group">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
+                                    <strong><i class="fas fa-times"></i> ¡Error!</strong> {{mensaje}}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="guardado">
+                                    <strong><i class="fas fa-check"></i> ¡Perfecto!</strong> {{mensaje}}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                    <div class="form-group">
+                        <button (click)="anteriorPaso()" class="float-left btn btn-sm btn-primary">Paso Anterior</button>
+                    </div>
+                    <div class="form-group">
+                        <button (click)="guardarPlantillaEvaluacion()" class="float-right btn btn-sm btn-success">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para agregar nueva competencia -->
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title">Nueva Competencia</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+            <div class="col-5">
+              <h5>Creación de la competencia</h5>
+              <hr>
+              <form>
+                <div class="form-group">
+                  <label for="competencia_nombre">Nombre Competencia: </label>
+                  <input type="text" class="form-control" name="nuevaCompetencia.nombre" [(ngModel)]="nuevaCompetencia.nombre"  required autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <label for="competencia_descripcion">Descripción competencia: </label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="nuevaCompetencia.descripcion" [(ngModel)]="nuevaCompetencia.descripcion"></textarea>
+                </div>
+                <div class="form-group form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Esta relacionada a un objetivo</label>
+                </div>
+                <div class="form-group">
+                  <label for="porcentajeMinAprobacionDeComp">% Min de Aprobación: </label>
+                  <input type="number" class="form-control" name="porcentajeMinAprobacionDeComp" [(ngModel)]="nuevaCompetencia.porcentajeMinAprobacionDeComp"  required autocomplete="off">
+                </div>
+              </form>
+            </div>
+            <div class="col">
+              <div class="row">
+                <div class="col-10">
+                  <h5>Comportamiento de competencia</h5>
+                  <hr>
+                </div>
+                <div class="col-2">
+                  <button (click)="agregarComportamiento()" type="button" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Nuevo Comportamiento">+</button>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-2">
+                  <p>Grado</p>
+                </div>
+                <div class="col">
+                  <p>Descripción Comportamiento</p>
+                </div>
+                <div class="col-2">
+                  <p>Val Num</p>
+                </div>
+              </div>
+              
+              <div *ngFor="let compo of nuevoComportamiento">
+                <div class="row" style="display: flex;align-items: center;">
+                  <div class="col-2">
+                    <div class="form-group">
+                      <input type="text" class="form-control" name="compo.grado" [(ngModel)]="compo.grado"  required autocomplete="off">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="compo.descComportamiento" [(ngModel)]="compo.descComportamiento"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group">
+                      <input type="number" class="form-control" name="compo.valoracionNumerica" [(ngModel)]="compo.valoracionNumerica"  required autocomplete="off">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Close click')"><i class="bi bi-x-circle"></i> Cerrar</button>
+        <button (click)="guardarCompetencia()" type="button" class="btn btn-outline-success"><i class="far fa-save"></i> Guardar</button>
+      </div>  
+  </ng-template>
+
+</div>
+
+

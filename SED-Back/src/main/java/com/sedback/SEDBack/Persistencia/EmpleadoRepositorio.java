@@ -9,6 +9,7 @@ import com.sedback.SEDBack.Modelo.Empleado;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
@@ -17,7 +18,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface EmpleadoRepositorio extends JpaRepository<Empleado,Integer>{
     Optional<Empleado> findByDni(String dni);
     
-    List<Empleado> findByNombreContaining(String nombreApellido);
-    
-    List<Empleado> findByLegajo(String legajo);
+    @Query(value="select * from empleado where CONCAT(nombre,' ',apellido) LIKE %?1% OR dni LIKE %?1% OR "
+            + "legajo LIKE %?1%",nativeQuery = true)
+    List<Empleado> buscarEmpleado(String dato);
 }

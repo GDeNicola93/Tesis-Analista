@@ -43,6 +43,7 @@ public class JwtProvider { //esta clase es el corazón de JWT, donde se crea el 
         return Jwts.builder()
             .setSubject(usuarioPrincipal.getUsername())
             .claim("perfiles",perfiles)
+            .claim("id_user", usuarioPrincipal.getId())
             .setIssuedAt(new Date())
             .setExpiration(new Date(new Date().getTime() + expiration))
             .signWith(SignatureAlgorithm.HS512, secret.getBytes())
@@ -51,6 +52,10 @@ public class JwtProvider { //esta clase es el corazón de JWT, donde se crea el 
     
     public String getNombreUsuarioFromToken(String token){
         return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody().getSubject();
+    }
+    
+    public Long getIdUserFromToken(String token){
+        return Long.parseLong(Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody().get("id_user").toString());
     }
     
     public boolean validateToken(String token) {

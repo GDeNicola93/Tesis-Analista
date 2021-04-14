@@ -14,55 +14,16 @@
     <div class="card shadow">
         <h6 class="card-header font-weight-bold">Listado de Empleados</h6>
         <div class="card-body">
-          <div class="row">
-            <div class="col-md">
-              <div class="row">
-                <div class="col-10">
-                  <div class="form-group">
-                    <label for="legajo">Buscar por Nombre-Apellido: </label>
-                    <input (keydown.enter)="buscarPorNombreYApellido()" type="text" class="form-control" [(ngModel)]="form.buscadorNombreApellido" name="buscadorNombreApellido" required autocomplete="off">
-                  </div>
-                </div>
-                <div class="col-2">
-                  <button (click)="buscarPorNombreYApellido()" style="margin-top: 35px;"><i class="fas fa-search"></i></button>
-                </div>
-              </div>
+          <form class="form-inline mb-3 float-right">
+            <div class="input-group">
+              <input (keydown.enter)="buscarEmpleado()" type="text" class="form-control" name="search" placeholder="Buscar..." [(ngModel)]="form.buscadorNombreApellido" name="buscadorNombreApellido">
+              <span class="input-group-append">
+                  <button class="btn btn-secondary" type="button" (click)="buscarEmpleado()">
+                      <i class="fas fa-search fa-sm"></i>
+                  </button>
+              </span>
             </div>
-            <div class="col-md">
-              <div class="row">
-                <div class="col-10">
-                  <div class="form-group">
-                    <label for="legajo">Buscar por Legajo: </label>
-                    <input (keydown.enter)="buscarPorLegajo()" type="text" class="form-control" [(ngModel)]="form.buscadorLegajo" name="buscadorLegajo" required autocomplete="off">
-                  </div>
-                </div>
-                <div class="col-2">
-                  <button (click)="buscarPorLegajo()" style="margin-top: 35px;"><i class="fas fa-search"></i></button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-5">
-              <div class="form-group">
-                <label>Sucursal: </label>
-                <select class="form-control" [(ngModel)]="form.sucursal" name="sucursal" (change)="actualizarComboAreas()">
-                  <option *ngFor="let sucursal of comboSucursales" [ngValue]="sucursal">{{sucursal.id}}--{{sucursal.nombre}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-5">
-              <div class="form-group">
-                <label>Area: </label>
-                <select class="form-control" [(ngModel)]="form.area" name="area">
-                  <option *ngFor="let area of comboAreas" [ngValue]="area">{{area.id}}-{{area.nombre}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-2">
-              <button style="margin-top: 35px;"><i class="fas fa-search"></i></button>
-            </div>
-          </div>
+          </form>
             <table class="table table-sm table-hover">
                 <thead>
                   <tr class="table-primary">
@@ -78,7 +39,7 @@
                     <td>{{emp.nombre}} {{emp.apellido}}</td>
                     <td>
                       <div *ngFor="let lugar of emp.puestosTrabajo">
-                        <tr>- {{lugar.sucursal.nombre}}</tr>
+                        <tr>{{lugar.sucursal.nombre}}</tr>
                       </div>
                     </td>
                     <td>

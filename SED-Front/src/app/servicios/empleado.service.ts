@@ -17,11 +17,7 @@ export class EmpleadoService {
     return this.httpClient.get<Empleado[]>(this.urlBaseService.obtenerURLBase() + 'empleados',cabecera);
   }
 
-  buscarPorNombreYApellido(nombreApellido : string) : Observable<any>{
-    return this.httpClient.get<Empleado[]>(this.urlBaseService.obtenerURLBase() + 'empleados?nombreApellido='+nombreApellido,cabecera);
-  }
-
-  buscarPorLegajo(legajo : string) : Observable<any>{
-    return this.httpClient.get<Empleado[]>(this.urlBaseService.obtenerURLBase() + 'empleados?legajo='+legajo,cabecera);
+  buscarEmpleado(dato : string) : Observable<any>{
+    return this.httpClient.get<Empleado[]>(this.urlBaseService.obtenerURLBase() + 'empleados?dato='+dato,cabecera);
   }
 }

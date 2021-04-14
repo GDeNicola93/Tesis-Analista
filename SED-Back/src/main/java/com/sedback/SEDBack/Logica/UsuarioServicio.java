@@ -11,6 +11,7 @@ import com.sedback.SEDBack.HttpMensajes.LoginUsuario;
 import com.sedback.SEDBack.Modelo.Usuario;
 import com.sedback.SEDBack.Persistencia.UsuarioRepositorio;
 import com.sedback.SEDBack.Seguridad.JWT.JwtProvider;
+import com.sedback.SEDBack.Seguridad.JWT.JwtTokenFilter;
 import java.util.Optional;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -98,4 +99,10 @@ public class UsuarioServicio {
             return new ResponseEntity(new HttpMensaje("No fue posible ingresar ahora. Intente nuevamente mas tarde."), HttpStatus.BAD_REQUEST);
         }
     }
+    
+    public ResponseEntity<Usuario> getDatosUsuarioLogeadoToken(String token){
+        return ResponseEntity.ok().body(repositorio.findById(jwtProvider.getIdUserFromToken(token)).get());
+    }
+    
+    
 }

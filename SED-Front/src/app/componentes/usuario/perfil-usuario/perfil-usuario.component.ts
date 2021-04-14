@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/modelo/usuario';
+import { TokenService } from 'src/app/servicios/token.service';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -6,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./perfil-usuario.component.css']
 })
 export class PerfilUsuarioComponent implements OnInit {
+  usuario!: Usuario;
 
-  constructor() { }
+  constructor(private tokenServicio : TokenService,private usuarioServicio : UsuarioService) { }
 
   ngOnInit(): void {
+    this.obtenerUsuarioLogeado();
+  }
+
+
+  obtenerUsuarioLogeado() : void{
+    this.usuarioServicio.obtenerDatosUsuarioLogeado().subscribe(data => {
+      this.usuario = data;
+    });
   }
 
 }

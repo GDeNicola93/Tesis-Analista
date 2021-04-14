@@ -18,6 +18,9 @@ import { IndexPuestosTrabajoComponent } from './componentes/puestosTrabajo/index
 import { IndexEmpleadosComponent } from './componentes/empleados/index-empleados/index-empleados.component';
 import { NuevoEmpleadoComponent } from './componentes/empleados/nuevo-empleado/nuevo-empleado.component';
 import { PerfilUsuarioComponent } from './componentes/usuario/perfil-usuario/perfil-usuario.component';
+import { NuevaPlantillaEvaluacionComponent } from './componentes/plantillaEvaluacion/nueva-plantilla-evaluacion/nueva-plantilla-evaluacion.component';
+import { IndexPlantillaEvaluacionComponent } from './componentes/plantillaEvaluacion/index-plantilla-evaluacion/index-plantilla-evaluacion.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -33,13 +36,16 @@ import { PerfilUsuarioComponent } from './componentes/usuario/perfil-usuario/per
     NuevoPuestosTrabajoComponent,
     IndexEmpleadosComponent,
     NuevoEmpleadoComponent,
-    PerfilUsuarioComponent
+    PerfilUsuarioComponent,
+    NuevaPlantillaEvaluacionComponent,
+    IndexPlantillaEvaluacionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [
     {

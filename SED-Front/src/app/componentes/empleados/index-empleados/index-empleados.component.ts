@@ -40,17 +40,10 @@ export class IndexEmpleadosComponent implements OnInit {
     this.comboAreas = this.form.sucursal.areas;
   }
 
-  buscarPorNombreYApellido() : void{
-    this.empleadoServicio.buscarPorNombreYApellido(this.form.buscadorNombreApellido).subscribe(data => {
+  buscarEmpleado() : void{
+    this.empleadoServicio.buscarEmpleado(this.form.buscadorNombreApellido).subscribe(data => {
       this.empleados = data;
       this.form.buscadorNombreApellido = null;
-    });
-  }
-
-  buscarPorLegajo() : void{
-    this.empleadoServicio.buscarPorLegajo(this.form.buscadorLegajo).subscribe(data => {
-      this.empleados = data;
-      this.form.buscadorLegajo = null;
     });
   }
 

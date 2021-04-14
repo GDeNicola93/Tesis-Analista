@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PuestoTrabajo } from 'src/app/modelo/puesto-trabajo';
 import { PuestoTrabajoService } from 'src/app/servicios/puesto-trabajo.service';
 
@@ -10,8 +11,10 @@ import { PuestoTrabajoService } from 'src/app/servicios/puesto-trabajo.service';
 export class IndexPuestosTrabajoComponent implements OnInit {
 
   puestosTrabajo : PuestoTrabajo[] = [];
+  puestoSeleccionadoParaVerOjetivos!: PuestoTrabajo;
+  cargando = true;
 
-  constructor(private puestosTeabajoServicio : PuestoTrabajoService) { }
+  constructor(private puestosTeabajoServicio : PuestoTrabajoService,private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.cargarPuestosDeTrabajo();
@@ -20,7 +23,13 @@ export class IndexPuestosTrabajoComponent implements OnInit {
   cargarPuestosDeTrabajo() : void{
     this.puestosTeabajoServicio.obtenerPuestoTrabajo().subscribe(data => {
       this.puestosTrabajo = data;
+      this.cargando = false;
     })
+  }
+
+  verObjetivosPuesto(content : any, puestoSeleccionado : PuestoTrabajo) : void{
+    this.puestoSeleccionadoParaVerOjetivos = puestoSeleccionado;
+    this.modalService.open(content,{ size: 'lg' });
   }
 
 }

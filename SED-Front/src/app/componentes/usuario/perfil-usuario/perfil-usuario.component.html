@@ -1,19 +1,61 @@
 <app-menu></app-menu>
-<div class="container">
+<div class="container" style="margin-top: 100px;">
     <div class="row">
-        <div class="col">
-            <h4>Mi Perfil</h4>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md">
-            
-            <img src="../../../../assets/foto-perfil.png" class="mx-auto d-block" alt="Foto Perfil Usuario" style="height: 40%;">
-            
+        <div class="col-md-4" style="margin-bottom: 60px;">
+            <img src="../../../../assets/foto-perfil.png" class="mx-auto d-block" alt="Foto Perfil Usuario" style="height: 200px;">
         </div>
         <div class="col-md">
-            <p>Nombre: </p>
+            <h4 style="text-align: center;">Mi perfil de usuario</h4>
+            <hr>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col">
+                    <p><strong><u>Legajo:</u></strong> {{usuario.empleado.legajo}}</p>
+                </div>
+                <div class="col">
+                    <p><strong><u>Nombre:</u></strong> {{usuario.empleado.nombre}} {{usuario.empleado.apellido}}</p>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col">
+                    <p><strong><u>Num DNI:</u></strong> {{usuario.empleado.dni}}</p>
+                </div>
+                <div class="col">
+                    <p><strong><u>Fecha Nacimiento:</u></strong> {{ usuario.empleado.fechaDeNacimiento | date: 'dd/MM/yyyy'}}</p>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col">
+                    <p><strong><u>Nombre usuario:</u></strong> {{usuario.nombreUsuario}}</p>
+                </div>
+                <div class="col">
+                    <p><strong><u>Email:</u></strong> {{usuario.empleado.email}}</p>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col">
+                    <p><strong><u>Puestos de trabajo:</u></strong></p>
+                </div>
+                <div class="col" *ngFor="let puesto of usuario.empleado.puestosTrabajo">
+                    <li>{{puesto.nombrePuesto}} ({{puesto.sucursal.nombre}})</li>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col">
+                    <p><strong><u>Roles de usuario:</u></strong></p>
+                </div>
+                <div class="col" *ngFor="let rol of usuario.roles">
+                    <li>{{rol.rolNombre}}</li>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-outline-primary btn-block"><i class="bi bi-upload"></i> Subir imagen perfil</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-outline-warning btn-block"><i class="bi bi-arrow-clockwise"></i> Cambiar mi contraseña</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
