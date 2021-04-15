@@ -30,7 +30,11 @@ export class IndexPlantillaEvaluacionComponent implements OnInit {
   verPlantillaDeEvaluacion(content : any,plantilla : PlantillaEvaluacion) : void{
     this.plantillaParaVisualizar = plantilla;
 
-    
+    //ordeno los comportamientos
+    for(let dp of this.plantillaParaVisualizar.detallePlantilla){
+      dp.comportamiento.sort((a,b)=> a.valoracionNumerica < b.valoracionNumerica ? 1:-1);
+    }
+
     this.modalService.open(content, { size: 'xl',scrollable: true });
   }
 
