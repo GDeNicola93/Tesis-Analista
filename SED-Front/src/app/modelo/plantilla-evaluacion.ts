@@ -5,13 +5,13 @@ export class PlantillaEvaluacion {
     id?: number;
     descripcion : string;
     puestoTrabajo : PuestoTrabajo;
-    competencia : DetallePlantilla[] = [];
+    detallePlantilla : DetallePlantilla[] = [];
     estaEnCurso !: boolean;
     fechaCreaccion !: any;
 
-    constructor(descripcion:string,puestoTrabajo:PuestoTrabajo,competencia:DetallePlantilla[]){
+    constructor(descripcion:string,puestoTrabajo:PuestoTrabajo,detallePlantilla:DetallePlantilla[]){
         this.descripcion = descripcion;
         this.puestoTrabajo = puestoTrabajo;
-        this.competencia = competencia;
+        this.detallePlantilla = detallePlantilla;
     }
 }

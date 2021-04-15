@@ -63,7 +63,7 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
   }
 
   guardarPlantillaEvaluacion() : void{
-    this.form.competencia = this.detallePlantilla;
+    this.form.detallePlantilla = this.detallePlantilla;
     this.plantillaEvaluacionService.guardar(this.form).subscribe(data => {
       this.mensaje = data.mensaje;
       this.guardado = true;

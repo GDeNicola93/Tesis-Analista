@@ -74,10 +74,10 @@
     </div>
    
     <p style="text-align: center;"><ins><strong>Descripción de la plantilla:</strong></ins> {{plantillaParaVisualizar.descripcion}}</p>
-    <p style="text-align: center;"><ins><strong>Cantidad de competencias a evaluar:</strong></ins> {{plantillaParaVisualizar.competencia.length}}</p>
+    <p style="text-align: center;"><ins><strong>Cantidad de competencias a evaluar:</strong></ins> {{plantillaParaVisualizar.detallePlantilla.length}}</p>
     <hr>
     <h5 style="text-align: center;">Evaluación</h5>
-    <div *ngFor="let dp of plantillaParaVisualizar.competencia">
+    <div *ngFor="let dp of plantillaParaVisualizar.detallePlantilla">
       <h6>{{dp.competencia.nombre}} ({{dp.competencia.porcentajeMinAprobacionDeComp}} puntos)</h6>
       <div class="row" *ngFor="let cp of dp.comportamiento" style="text-align: center;">
         <div class="col">
