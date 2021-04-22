@@ -45,9 +45,10 @@
                     <td>
                       <div class="row">
                         <div class="col">
-                          <button style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Mas Información"><i class="far fa-eye"></i></button>
+                          <button routerLink="/empleados/ver/{{emp.id}}" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Mas Información"><i class="far fa-eye"></i></button>
                           <button style="margin-right: 5px;" class="btn btn-sm btn-warning shadow-sm" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></button>
-                          <button class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fas fa-trash-alt"></i></button>
+                          <button *ngIf="emp.usuario.habilitado" class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Deshabilitar acceso al sistema"><i class="fas fa-user-slash"></i></button>
+                          <button *ngIf="!emp.usuario.habilitado" class="btn btn-sm btn-success shadow-sm" data-toggle="tooltip" data-placement="top" title="Habilitar acceso al sistema"><i class="fas fa-user-check"></i></button>
                         </div>
                       </div>
                     </td>

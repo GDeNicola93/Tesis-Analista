@@ -9,6 +9,7 @@ import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
 import com.sedback.SEDBack.Logica.EmpleadoServicio;
 import com.sedback.SEDBack.Modelo.Empleado;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -33,14 +34,20 @@ public class EmpleadoControlador {
     
     @GetMapping
     @PreAuthorize("hasAuthority('Administrador')")
-    public ResponseEntity<List<Empleado>> obtenerEmpleados(){
-        return servicio.obtenerEmpleados();
+    public ResponseEntity<List<Empleado>> getEmpleados(){
+        return servicio.getEmpleados();
     }
     
-    @GetMapping(params = {"dato"})
+    @GetMapping(params = {"search"})
     @PreAuthorize("hasAuthority('Administrador')")
-    public ResponseEntity<List<Empleado>> buscarEmpleado(String dato){
-        return servicio.buscarPorNombreYApellido(dato);
+    public ResponseEntity<List<Empleado>> searchEmpleado(String search){
+        return servicio.searchEmpleado(search);
+    }
+    
+    @GetMapping(params = {"id"})
+    @PreAuthorize("hasAuthority('Administrador')")
+    public ResponseEntity<Optional<Empleado>> getEmpleadoById(Integer id){
+        return servicio.getEmpleadoById(id);
     }
 
 }

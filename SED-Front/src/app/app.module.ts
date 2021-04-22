@@ -21,6 +21,7 @@ import { PerfilUsuarioComponent } from './componentes/usuario/perfil-usuario/per
 import { NuevaPlantillaEvaluacionComponent } from './componentes/plantillaEvaluacion/nueva-plantilla-evaluacion/nueva-plantilla-evaluacion.component';
 import { IndexPlantillaEvaluacionComponent } from './componentes/plantillaEvaluacion/index-plantilla-evaluacion/index-plantilla-evaluacion.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { VerEmpleadoComponent } from './componentes/empleados/ver-empleado/ver-empleado.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NuevoEmpleadoComponent,
     PerfilUsuarioComponent,
     NuevaPlantillaEvaluacionComponent,
-    IndexPlantillaEvaluacionComponent
+    IndexPlantillaEvaluacionComponent,
+    VerEmpleadoComponent
   ],
   imports: [
     BrowserModule,

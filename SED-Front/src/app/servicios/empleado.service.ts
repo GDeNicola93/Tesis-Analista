@@ -13,11 +13,15 @@ export class EmpleadoService {
 
   constructor(private httpClient: HttpClient,private urlBaseService : UrlBaseService) { }
 
-  obtenerEmpleados() : Observable<any>{
+  getEmpleados() : Observable<any>{
     return this.httpClient.get<Empleado[]>(this.urlBaseService.obtenerURLBase() + 'empleados',cabecera);
   }
 
-  buscarEmpleado(dato : string) : Observable<any>{
-    return this.httpClient.get<Empleado[]>(this.urlBaseService.obtenerURLBase() + 'empleados?dato='+dato,cabecera);
+  searchEmpleado(dato : string) : Observable<any>{
+    return this.httpClient.get<Empleado[]>(this.urlBaseService.obtenerURLBase() + 'empleados?search='+dato,cabecera);
+  }
+
+  getById(id : number) : Observable<Empleado>{
+    return this.httpClient.get<Empleado>(this.urlBaseService.obtenerURLBase() + 'empleados?id='+id,cabecera);
   }
 }

@@ -1,0 +1,43 @@
+<app-menu></app-menu>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h4>Más información de empleado</h4>
+        </div>
+        <div class="col">
+            <button routerLink="/empleados" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+        </div>
+    </div>
+    <div *ngIf="empleadoAVisualizar == null"><h6 style="text-align: center;"><i class="fas fa-exclamation-circle"></i> ¡El empleado que intenta visualizar no existe!</h6></div>
+    <div *ngIf="empleadoAVisualizar != null" class="card shadow">
+        
+        
+        <h6 class="card-header font-weight-bold">Información de empleado Legajo {{empleadoAVisualizar.legajo}}</h6>
+        <div class="card-body">
+            <img src="../../../../assets/foto-perfil.png" class="mx-auto d-block rounded-circle" alt="Foto Perfil Usuario" style="height: 200px;width: 200px;">
+            <div class="row mt-4 justify-content-center">
+                <div class="col-md-4">
+                    <p><strong><u>Legajo:</u></strong> {{empleadoAVisualizar.legajo}}</p>
+                    <p><strong><u>Nombre:</u></strong> {{empleadoAVisualizar.nombre}} {{empleadoAVisualizar.apellido}}</p>
+                    <p><strong><u>Num DNI:</u></strong> {{empleadoAVisualizar.dni}}</p>
+                    <p><strong><u>Fecha Nacimiento:</u></strong> {{ empleadoAVisualizar.fechaDeNacimiento | date: 'dd/MM/yyyy'}}</p>
+                    <p><strong><u>Nombre usuario:</u></strong> {{empleadoAVisualizar.usuario.nombreUsuario}}</p>
+                    <p><strong><u>Email:</u></strong> {{empleadoAVisualizar.email}}</p>
+                </div>
+                <div class="col-md-5">
+                    <p><strong><u>Puestos de trabajo:</u></strong></p>
+                    <div *ngFor="let puesto of empleadoAVisualizar.puestosTrabajo">
+                        <li>{{puesto.nombrePuesto}} ({{puesto.sucursal.nombre}})</li>
+                    </div>
+                    <p><strong><u>Roles de usuario:</u></strong></p>
+                    <div *ngFor="let rol of empleadoAVisualizar.usuario.roles">
+                        <li>{{rol.rolNombre}}</li>
+                    </div>
+                    <p *ngIf="empleadoAVisualizar.usuario.habilitado"><strong><u>Usuario habilitado para acceder al sistema: </u></strong><span class="badge badge-success"> Si</span></p>
+                    <p *ngIf="!empleadoAVisualizar.usuario.habilitado"><strong><u>Usuario habilitado para acceder al sistema: </u></strong><span class="badge badge-danger"> No</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

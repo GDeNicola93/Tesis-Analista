@@ -25,7 +25,7 @@ export class IndexEmpleadosComponent implements OnInit {
   }
 
   obtenerEmpleados() : void {
-    this.empleadoServicio.obtenerEmpleados().subscribe(data => {
+    this.empleadoServicio.getEmpleados().subscribe(data => {
       this.empleados = data;
     });
   }
@@ -41,7 +41,7 @@ export class IndexEmpleadosComponent implements OnInit {
   }
 
   buscarEmpleado() : void{
-    this.empleadoServicio.buscarEmpleado(this.form.buscadorNombreApellido).subscribe(data => {
+    this.empleadoServicio.searchEmpleado(this.form.buscadorNombreApellido).subscribe(data => {
       this.empleados = data;
       this.form.buscadorNombreApellido = null;
     });

@@ -4,6 +4,7 @@ import { AreasComponent } from './componentes/areas/areas/areas.component';
 import { NuevaComponent } from './componentes/areas/nueva/nueva.component';
 import { IndexEmpleadosComponent } from './componentes/empleados/index-empleados/index-empleados.component';
 import { NuevoEmpleadoComponent } from './componentes/empleados/nuevo-empleado/nuevo-empleado.component';
+import { VerEmpleadoComponent } from './componentes/empleados/ver-empleado/ver-empleado.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { IndexPlantillaEvaluacionComponent } from './componentes/plantillaEvaluacion/index-plantilla-evaluacion/index-plantilla-evaluacion.component';
@@ -35,6 +36,7 @@ const routes: Routes = [
   //Empleados
   {path: 'empleados',component:IndexEmpleadosComponent,canActivate:[GeneralGuard],data: { expectedRol: ["Administrador"]}},
   {path: 'empleados/nuevo',component:NuevoEmpleadoComponent,canActivate:[GeneralGuard],data: { expectedRol: ["Administrador"]}},
+  {path: 'empleados/ver/:id',component:VerEmpleadoComponent,canActivate:[GeneralGuard],data: { expectedRol: ["Administrador"]}},
 
   //Usuario
   {path: 'mi-perfil',component:PerfilUsuarioComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador','Evaluador','Empleado']}},

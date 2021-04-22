@@ -74,11 +74,15 @@ public class EmpleadoServicio {
         }
     }
     
-    public ResponseEntity<List<Empleado>> obtenerEmpleados(){
+    public ResponseEntity<List<Empleado>> getEmpleados(){
         return ResponseEntity.ok().body(repositorio.findAll());
     }
     
-    public ResponseEntity<List<Empleado>> buscarPorNombreYApellido(String dato){
-        return ResponseEntity.ok().body(repositorio.buscarEmpleado(dato));
+    public ResponseEntity<Optional<Empleado>> getEmpleadoById(Integer id){
+        return ResponseEntity.ok().body(repositorio.findById(id));
+    }
+    
+    public ResponseEntity<List<Empleado>> searchEmpleado(String search){
+        return ResponseEntity.ok().body(repositorio.searchEmpleado(search));
     }    
 }

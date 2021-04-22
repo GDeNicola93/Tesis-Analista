@@ -32,7 +32,7 @@ public class PuestoTrabajo implements Serializable {
     private Integer id;
     
     @NotNull
-    @Column(unique = true)
+    @Column(unique = false)
     private String nombrePuesto;
     
     @NotNull
