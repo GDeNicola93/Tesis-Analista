@@ -13,6 +13,9 @@ export class SubirFotoPerfilComponent implements OnInit {
   croppedresult : string;
   procesando = false;
   imageBlob : Blob;
+  uploadError = false;
+  subida = false;
+  mensaje = "";
   
   constructor(private uploadImagenPerfilServicio : UploadImagenPerfilService) { }
 
@@ -32,7 +35,6 @@ export class SubirFotoPerfilComponent implements OnInit {
   }
 
   getCroppedImage(){
-    //this.croppedresult = this.angularCropper.cropper.getCroppedCanvas().toDataURL();
     this.procesando = true;
     this.croppedresult = null;
     this.angularCropper.cropper.getCroppedCanvas().toBlob((blob) => {
@@ -47,16 +49,27 @@ export class SubirFotoPerfilComponent implements OnInit {
   }
 
   subirImagen() : void{
+    this.uploadError = false;
+    this.subida = false;
     const body = new FormData;
     body.append('file',this.imageBlob,'sdfsdsd.png');
     let nombreArchivo : string;
 
     this.uploadImagenPerfilServicio.subirImagenPerfil(body).subscribe(data =>{
-      nombreArchivo = data.mensaje;
-      alert(nombreArchivo);
+      this.mensaje = data.mensaje;
+      this.subida = true;
+      this.uploadError = false;
+      this.imageURL = null;
+      this.croppedresult = null;
+      this.imageBlob = null;
     },
       (err : any)=>{
-        alert(err.error.mensaje);
+        this.mensaje = err.error.mensaje;
+        this.uploadError = true;
+        this.subida = false;
+        this.imageURL = null;
+        this.croppedresult = null;
+        this.imageBlob = null;
       }
     );
 

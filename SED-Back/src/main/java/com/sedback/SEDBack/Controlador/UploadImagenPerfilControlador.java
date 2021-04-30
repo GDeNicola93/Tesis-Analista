@@ -46,7 +46,7 @@ public class UploadImagenPerfilControlador {
                 return ResponseEntity.badRequest().body(new HttpMensaje("No fue posible subir la imagen. Intente nuevamente!"));
             }
             
-            return ResponseEntity.ok().body(new HttpMensaje(filename));
+            return ResponseEntity.ok().body(new HttpMensaje("La imagen de perfil ha sido subida exitosamente!"));
         }catch(Exception e){
             return ResponseEntity.badRequest().body(new HttpMensaje("No fue posible subir la imagen. Intente nuevamente!"));
         }

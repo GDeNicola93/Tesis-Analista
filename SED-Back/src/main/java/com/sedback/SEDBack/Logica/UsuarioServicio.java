@@ -12,10 +12,13 @@ import com.sedback.SEDBack.Modelo.Usuario;
 import com.sedback.SEDBack.Persistencia.UsuarioRepositorio;
 import com.sedback.SEDBack.Seguridad.JWT.JwtProvider;
 import com.sedback.SEDBack.Seguridad.JWT.JwtTokenFilter;
+import java.io.File;
+import java.nio.file.Files;
 import java.util.Optional;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -48,12 +51,19 @@ public class UsuarioServicio {
     @Autowired
     JwtProvider jwtProvider;
     
+    @Value("${UPLOAD_DIR}")
+    String UPLOAD_DIR;
+    
     public Optional<Usuario> getByNombreUsuario(String nu){
         return repositorio.findByNombreUsuario(nu);
     }
     
     public ResponseEntity<HttpMensaje> setImagenPerfil(Usuario user,String file_name){
         try{
+            if(user.getNombreFotoPerfil() != null){
+                File imagenVieja = new File(this.UPLOAD_DIR+user.getNombreFotoPerfil()+".png");
+                imagenVieja.delete();
+            }
             user.setNombreFotoPerfil(file_name);
             repositorio.save(user);
             return ResponseEntity.ok().body(new HttpMensaje("Imagen de perfil seteada correctamente!"));
