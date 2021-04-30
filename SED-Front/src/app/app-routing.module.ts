@@ -14,6 +14,7 @@ import { NuevoPuestosTrabajoComponent } from './componentes/puestosTrabajo/nuevo
 import { IndexSucursalComponent } from './componentes/sucursales/index-sucursal/index-sucursal.component';
 import { NuevaSucursalComponent } from './componentes/sucursales/nueva-sucursal/nueva-sucursal.component';
 import { PerfilUsuarioComponent } from './componentes/usuario/perfil-usuario/perfil-usuario.component';
+import { SubirFotoPerfilComponent } from './componentes/usuario/subir-foto-perfil/subir-foto-perfil.component';
 import { GeneralGuard } from './guards/general.guard';
 import { LoginGuard } from './guards/login.guard';
 
@@ -39,7 +40,8 @@ const routes: Routes = [
   {path: 'empleados/ver/:id',component:VerEmpleadoComponent,canActivate:[GeneralGuard],data: { expectedRol: ["Administrador"]}},
 
   //Usuario
-  {path: 'mi-perfil',component:PerfilUsuarioComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador','Evaluador','Empleado']}},
+  {path: 'usuario/mi-perfil',component:PerfilUsuarioComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador','Evaluador','Empleado']}},
+  {path: 'usuario/subir-foto-perfil',component:SubirFotoPerfilComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador','Evaluador','Empleado']}},
 
   //Plantillas de Evaluación
   {path: 'plantilla-evaluacion',component:IndexPlantillaEvaluacionComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},

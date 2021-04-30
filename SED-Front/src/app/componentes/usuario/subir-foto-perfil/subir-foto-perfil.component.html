@@ -1,0 +1,55 @@
+<app-menu></app-menu>
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col">
+            <h4>Foto de perfil</h4>
+        </div>
+        <div class="col">
+            <button routerLink="/usuario/mi-perfil" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+        </div>
+    </div>
+    
+    <div class="card shadow">
+        <h6 class="card-header font-weight-bold"><i class="bi bi-person-bounding-box"></i> Subir foto de perfil</h6>
+        <div class="card-body">
+            <form>
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group">   
+                            <label>Seleccione una imagen de su ordenador:</label>
+                            <input type="file" class="form-control" style="border: 0px;" accept=".jpg,.png,.jpeg" (change)="onSelectFile($event)">
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group" *ngIf="imageURL">
+                            <label>Seleccione su cara en la imagen:</label>
+                            <angular-cropper [imageUrl]="imageURL" #angularCropper></angular-cropper>
+                            <div class="mt-2">
+                                <button (click)="getCroppedImage()" class="btn btn-primary btn-sm float-right"><i class="bi bi-scissors"></i> Recortar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label *ngIf="croppedresult">Asi se vera su foto de perfil</label>
+                            <div *ngIf="procesando" class="d-flex justify-content-center mt-3">
+                                <div class="spinner-border text-primary mr-2" role="status">
+                                  <span class="sr-only">Procesando imagen...</span>
+                                </div>
+                                <p> Procesando imagen...</p>
+                            </div>
+                            <section *ngIf="croppedresult" class="d-flex justify-content-center">
+                                <img [src]="croppedresult" alt="..." style="height: 200px;width: 200px;" class="rounded-circle">
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <button (click)="subirImagen()" *ngIf="croppedresult" class="btn btn-success btn-sm float-right"><i class="bi bi-upload"></i> Subir imagen</button>
+            </form>
+        </div>
+    </div>
+</div>
+

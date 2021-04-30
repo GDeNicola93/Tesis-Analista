@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Usuario } from 'src/app/modelo/usuario';
 import { TokenService } from 'src/app/servicios/token.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
@@ -8,10 +9,11 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
   templateUrl: './perfil-usuario.component.html',
   styleUrls: ['./perfil-usuario.component.css']
 })
-export class PerfilUsuarioComponent implements OnInit {
-  usuario!: Usuario;
+export class PerfilUsuarioComponent implements OnInit   {
+  usuario !: Usuario;
 
-  constructor(private tokenServicio : TokenService,private usuarioServicio : UsuarioService) { }
+
+  constructor(private tokenServicio : TokenService,private usuarioServicio : UsuarioService) {}
 
   ngOnInit(): void {
     this.obtenerUsuarioLogeado();
@@ -23,5 +25,4 @@ export class PerfilUsuarioComponent implements OnInit {
       this.usuario = data;
     });
   }
-
 }

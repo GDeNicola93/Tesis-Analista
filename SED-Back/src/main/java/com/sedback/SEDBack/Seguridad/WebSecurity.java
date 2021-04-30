@@ -66,7 +66,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {//En la clase Web
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/autenticacion/login").permitAll()
+                .antMatchers("/usuario/login").permitAll()
+                .antMatchers("/imagen_perfil/ver/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)

@@ -22,6 +22,8 @@ import { NuevaPlantillaEvaluacionComponent } from './componentes/plantillaEvalua
 import { IndexPlantillaEvaluacionComponent } from './componentes/plantillaEvaluacion/index-plantilla-evaluacion/index-plantilla-evaluacion.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { VerEmpleadoComponent } from './componentes/empleados/ver-empleado/ver-empleado.component';
+import { AngularCropperjsModule } from 'angular-cropperjs';
+import { SubirFotoPerfilComponent } from './componentes/usuario/subir-foto-perfil/subir-foto-perfil.component';
 
 @NgModule({
   declarations: [
@@ -40,14 +42,16 @@ import { VerEmpleadoComponent } from './componentes/empleados/ver-empleado/ver-e
     PerfilUsuarioComponent,
     NuevaPlantillaEvaluacionComponent,
     IndexPlantillaEvaluacionComponent,
-    VerEmpleadoComponent
+    VerEmpleadoComponent,
+    SubirFotoPerfilComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    AngularCropperjsModule
   ],
   providers: [
     {

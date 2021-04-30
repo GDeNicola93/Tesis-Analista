@@ -47,4 +47,6 @@ public class Usuario implements Serializable {
     
     @OneToOne
     private Empleado empleado;
+    
+    private String nombreFotoPerfil;
 }

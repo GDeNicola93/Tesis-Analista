@@ -19,7 +19,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin(origins = "*") //Para poder acceder desde cualquier lado a mi backend
 @RestController
-@RequestMapping("/autenticacion")
+@RequestMapping("/usuario")
 public class UsuarioControlador {
     @Autowired
     private UsuarioServicio servicio;
@@ -45,13 +47,11 @@ public class UsuarioControlador {
     @GetMapping("/obtener_datos")
     public ResponseEntity<Usuario> obtenerDatos(@RequestHeader("authorization") String language){
         String token = language.replace("Bearer ", "");
-        return servicio.getDatosUsuarioLogeadoToken(token);
-        
+        return servicio.getDatosUsuarioLogeadoToken(token);  
     }
      
     @PostMapping("/login")
     public ResponseEntity<JwtDTO> login(@RequestBody LoginUsuario loginUsuario){
         return servicio.login(loginUsuario);
     }
-    
 }

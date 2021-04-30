@@ -8,6 +8,7 @@ export class Usuario {
     habilitado : boolean = false;
     roles : Rol[] = [];
     empleado : Empleado;
+    nombreFotoPerfil : string = "";
 
     constructor(nombreUsuario : string,password : string,roles : Rol[],empleado : Empleado){
         this.nombreUsuario = nombreUsuario;

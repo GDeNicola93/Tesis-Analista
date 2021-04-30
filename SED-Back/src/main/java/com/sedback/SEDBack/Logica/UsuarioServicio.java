@@ -52,6 +52,16 @@ public class UsuarioServicio {
         return repositorio.findByNombreUsuario(nu);
     }
     
+    public ResponseEntity<HttpMensaje> setImagenPerfil(Usuario user,String file_name){
+        try{
+            user.setNombreFotoPerfil(file_name);
+            repositorio.save(user);
+            return ResponseEntity.ok().body(new HttpMensaje("Imagen de perfil seteada correctamente!"));
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body(new HttpMensaje("Excepción no controlada.Desripción: "+e));
+        }
+    }
+    
     public ResponseEntity<HttpMensaje> guardar(Usuario usuario){
         try{
             ResponseEntity<HttpMensaje> respuesta = empleadoServicio.verificarCampos(usuario.getEmpleado());
