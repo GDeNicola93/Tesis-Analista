@@ -5,23 +5,18 @@
  */
 package com.sedback.SEDBack.Controlador;
 
+import com.sedback.SEDBack.HttpMensajes.CambioPassword;
 import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
 import com.sedback.SEDBack.HttpMensajes.JwtDTO;
 import com.sedback.SEDBack.HttpMensajes.LoginUsuario;
 import com.sedback.SEDBack.Logica.UsuarioServicio;
 import com.sedback.SEDBack.Modelo.Usuario;
-import com.sedback.SEDBack.Seguridad.JWT.JwtProvider;
-import io.jsonwebtoken.Jwts;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,5 +48,11 @@ public class UsuarioControlador {
     @PostMapping("/login")
     public ResponseEntity<JwtDTO> login(@RequestBody LoginUsuario loginUsuario){
         return servicio.login(loginUsuario);
+    }
+    
+    @PostMapping("/update_password")
+    public ResponseEntity<HttpMensaje> actualizarPassword(@RequestBody CambioPassword cambioPassword,@RequestHeader("authorization") String language){
+        String token = language.replace("Bearer ", "");
+        return servicio.actualizarPassword(cambioPassword,servicio.getDatosUsuarioLogeadoToken(token).getBody());
     }
 }

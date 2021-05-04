@@ -5,6 +5,7 @@
  */
 package com.sedback.SEDBack.Logica;
 
+import com.sedback.SEDBack.HttpMensajes.CambioPassword;
 import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
 import com.sedback.SEDBack.HttpMensajes.JwtDTO;
 import com.sedback.SEDBack.HttpMensajes.LoginUsuario;
@@ -67,6 +68,36 @@ public class UsuarioServicio {
             user.setNombreFotoPerfil(file_name);
             repositorio.save(user);
             return ResponseEntity.ok().body(new HttpMensaje("Imagen de perfil seteada correctamente!"));
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body(new HttpMensaje("Excepción no controlada.Desripción: "+e));
+        }
+    }
+    
+    public ResponseEntity<HttpMensaje> actualizarPassword(CambioPassword cambioPassword,Usuario user){
+        try{
+            if(StringUtils.isBlank(cambioPassword.getPasswordActual())){
+                return ResponseEntity.badRequest().body(new HttpMensaje("El campo contraseña actual no es valido."));
+            }
+            if(StringUtils.equals(cambioPassword.getPasswordNew1(), cambioPassword.getPasswordNew2())){
+                if(StringUtils.isBlank(cambioPassword.getPasswordNew1())){
+                    return ResponseEntity.badRequest().body(new HttpMensaje("El campo nueva contraseña no es valido."));
+                }
+                if(StringUtils.isBlank(cambioPassword.getPasswordNew2())){
+                    return ResponseEntity.badRequest().body(new HttpMensaje("El campo repetición de nueva contraseña no es valido."));
+                }
+                if(passwordEncoder.matches(cambioPassword.getPasswordActual(),user.getPassword())){
+                    if(StringUtils.equals(cambioPassword.getPasswordNew1(),cambioPassword.getPasswordActual())){
+                        return ResponseEntity.badRequest().body(new HttpMensaje("La contraseña actual y la nueva no deben ser iguales."));
+                    }
+                    user.setPassword(passwordEncoder.encode(cambioPassword.getPasswordNew1()));
+                    repositorio.save(user);
+                    return ResponseEntity.ok().body(new HttpMensaje("La contraseña se ha actualizado correctamente."));
+                }else{
+                    return ResponseEntity.badRequest().body(new HttpMensaje("La contraseña actual no es correcta."));
+                }
+            }else{
+                return ResponseEntity.badRequest().body(new HttpMensaje("La nueva contraseña y la repetición de la nueva contraseña no coinciden."));
+            }
         }catch(Exception e){
             return ResponseEntity.badRequest().body(new HttpMensaje("Excepción no controlada.Desripción: "+e));
         }

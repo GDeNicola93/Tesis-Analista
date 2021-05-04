@@ -24,6 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { VerEmpleadoComponent } from './componentes/empleados/ver-empleado/ver-empleado.component';
 import { AngularCropperjsModule } from 'angular-cropperjs';
 import { SubirFotoPerfilComponent } from './componentes/usuario/subir-foto-perfil/subir-foto-perfil.component';
+import { UpdatePasswordComponent } from './componentes/usuario/update-password/update-password.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SubirFotoPerfilComponent } from './componentes/usuario/subir-foto-perfi
     NuevaPlantillaEvaluacionComponent,
     IndexPlantillaEvaluacionComponent,
     VerEmpleadoComponent,
-    SubirFotoPerfilComponent
+    SubirFotoPerfilComponent,
+    UpdatePasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   form : any = {};
   error : boolean = false;
   mensaje : string = "";
+  cargando = false;
 
   constructor(private usuarioServicio : UsuarioService,private tokenServicio : TokenService,private router : Router) { }
 
@@ -21,12 +22,15 @@ export class LoginComponent implements OnInit {
 
   login() : void {
     this.error = false;
+    this.cargando = true;
     this.usuarioServicio.login(this.form).subscribe(
       data => {
         this.tokenServicio.setToken(data.token);
+        this.cargando = false;
         this.router.navigate(['/home']);
       },
       err => {
+        this.cargando = false;
         this.error = true;
         this.mensaje = "Usuario y/o contraseña invalidos!";
       }
