@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmpleadoIndexDto } from 'src/app/HttpMensajes/empleado-index-dto';
 import { Area } from 'src/app/modelo/area';
 import { Empleado } from 'src/app/modelo/empleado';
 import { Sucursal } from 'src/app/modelo/sucursal';
@@ -12,7 +13,7 @@ import { SucursalService } from 'src/app/servicios/sucursal.service';
 })
 export class IndexEmpleadosComponent implements OnInit {
 
-  empleados : Empleado[] = [];
+  empleados : EmpleadoIndexDto[] = [];
   comboSucursales : Sucursal[] = [];
   comboAreas : Area[] = [];
   form: any = {}; 

@@ -5,16 +5,24 @@
  */
 package com.sedback.SEDBack.Logica;
 
+import com.sedback.SEDBack.HttpMensajes.EmpleadoIndexDto;
+import com.sedback.SEDBack.HttpMensajes.EmpleadoVerDto;
 import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
+import com.sedback.SEDBack.Mappers.EmpleadoMapper;
 import com.sedback.SEDBack.Modelo.Empleado;
+import com.sedback.SEDBack.Modelo.Usuario;
 import com.sedback.SEDBack.Persistencia.EmpleadoRepositorio;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javax.persistence.Converter;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +34,9 @@ import org.springframework.stereotype.Service;
 public class EmpleadoServicio {
     @Autowired
     private EmpleadoRepositorio repositorio;
+    
+    @Autowired
+    private EmpleadoMapper empleadoMapper;
     
     public ResponseEntity<HttpMensaje> verificarCampos(Empleado empleado){
         try{
@@ -74,12 +85,18 @@ public class EmpleadoServicio {
         }
     }
     
-    public ResponseEntity<List<Empleado>> getEmpleados(){
-        return ResponseEntity.ok().body(repositorio.findAll());
+    public ResponseEntity<List<EmpleadoIndexDto>> getEmpleados(){
+        List<Usuario> usuarios = repositorio.getEmpleadosIndex();
+        List<EmpleadoIndexDto> empleadosIndexDto = new ArrayList();
+        for (int i=0;i<usuarios.size();i++){
+            empleadosIndexDto.add(empleadoMapper.toDtoIndex(usuarios.get(i)));
+        }
+        return ResponseEntity.ok().body(empleadosIndexDto);
     }
     
-    public ResponseEntity<Optional<Empleado>> getEmpleadoById(Integer id){
-        return ResponseEntity.ok().body(repositorio.findById(id));
+    public ResponseEntity<EmpleadoVerDto> getEmpleadoById(Integer id){
+        Usuario usuario = repositorio.getEmpleadoById(id);
+        return ResponseEntity.ok().body(empleadoMapper.toDtoVer(usuario));
     }
     
     public ResponseEntity<List<Empleado>> searchEmpleado(String search){

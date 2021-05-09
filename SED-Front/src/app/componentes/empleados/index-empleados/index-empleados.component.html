@@ -36,10 +36,10 @@
                 <tbody *ngFor="let emp of empleados">
                   <tr>
                     <th scope="row">{{emp.legajo}}</th>
-                    <td>{{emp.nombre}} {{emp.apellido}}</td>
+                    <td>{{emp.nombreApellido}}</td>
                     <td>
-                      <div *ngFor="let lugar of emp.puestosTrabajo">
-                        <tr>{{lugar.sucursal.nombre}}</tr>
+                      <div *ngFor="let lugar of emp.lugaresTrabajo">
+                        <tr>{{lugar}}</tr>
                       </div>
                     </td>
                     <td>
@@ -47,8 +47,8 @@
                         <div class="col">
                           <button routerLink="/empleados/ver/{{emp.id}}" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Mas Información"><i class="far fa-eye"></i></button>
                           <button style="margin-right: 5px;" class="btn btn-sm btn-warning shadow-sm" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></button>
-                          <button *ngIf="emp.usuario.habilitado" class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Deshabilitar acceso al sistema"><i class="fas fa-user-slash"></i></button>
-                          <button *ngIf="!emp.usuario.habilitado" class="btn btn-sm btn-success shadow-sm" data-toggle="tooltip" data-placement="top" title="Habilitar acceso al sistema"><i class="fas fa-user-check"></i></button>
+                          <button *ngIf="emp.habilitado" class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Deshabilitar acceso al sistema"><i class="fas fa-user-slash"></i></button>
+                          <button *ngIf="!emp.habilitado" class="btn btn-sm btn-success shadow-sm" data-toggle="tooltip" data-placement="top" title="Habilitar acceso al sistema"><i class="fas fa-user-check"></i></button>
                         </div>
                       </div>
                     </td>

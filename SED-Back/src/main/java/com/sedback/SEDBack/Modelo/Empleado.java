@@ -5,9 +5,6 @@
  */
 package com.sedback.SEDBack.Modelo;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.sun.istack.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -20,8 +17,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -32,7 +27,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Empleado implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,7 +58,4 @@ public class Empleado implements Serializable {
     @NotNull
     @ManyToMany
     private Set<PuestoTrabajo> puestosTrabajo = new HashSet<>();
-    
-    @OneToOne(mappedBy = "empleado")
-    private Usuario usuario;
 }

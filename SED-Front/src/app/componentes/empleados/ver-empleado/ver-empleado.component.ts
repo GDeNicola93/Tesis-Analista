@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { EmpleadoVerDto } from 'src/app/HttpMensajes/empleado-ver-dto';
 import { Empleado } from 'src/app/modelo/empleado';
 import { EmpleadoService } from 'src/app/servicios/empleado.service';
 
@@ -10,7 +11,7 @@ import { EmpleadoService } from 'src/app/servicios/empleado.service';
 })
 export class VerEmpleadoComponent implements OnInit {
 
-  empleadoAVisualizar!: Empleado;
+  empleadoAVisualizar : EmpleadoVerDto;
 
   constructor(private empleadoServicio : EmpleadoService,private rutaActiva: ActivatedRoute) { }
 

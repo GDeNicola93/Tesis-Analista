@@ -5,12 +5,17 @@
  */
 package com.sedback.SEDBack.Controlador;
 
+import com.sedback.SEDBack.HttpMensajes.EmpleadoIndexDto;
+import com.sedback.SEDBack.HttpMensajes.EmpleadoVerDto;
 import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
 import com.sedback.SEDBack.Logica.EmpleadoServicio;
 import com.sedback.SEDBack.Modelo.Empleado;
+import com.sedback.SEDBack.Modelo.Usuario;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,7 +39,7 @@ public class EmpleadoControlador {
     
     @GetMapping
     @PreAuthorize("hasAuthority('Administrador')")
-    public ResponseEntity<List<Empleado>> getEmpleados(){
+    public ResponseEntity<List<EmpleadoIndexDto>> getEmpleados(){
         return servicio.getEmpleados();
     }
     
@@ -46,7 +51,7 @@ public class EmpleadoControlador {
     
     @GetMapping(params = {"id"})
     @PreAuthorize("hasAuthority('Administrador')")
-    public ResponseEntity<Optional<Empleado>> getEmpleadoById(Integer id){
+    public ResponseEntity<EmpleadoVerDto> getEmpleadoById(Integer id){
         return servicio.getEmpleadoById(id);
     }
 
