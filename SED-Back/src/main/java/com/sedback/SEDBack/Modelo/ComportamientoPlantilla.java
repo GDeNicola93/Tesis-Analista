@@ -19,4 +19,5 @@ public class ComportamientoPlantilla implements Serializable {
     private String descComportamiento;
     private String grado;
     private int valoracionNumerica;
+    private boolean esAprobada;
 }

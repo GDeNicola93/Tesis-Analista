@@ -17,7 +17,7 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
   comboPuestosTrabajo : PuestoTrabajo[] = [];
   pasoActivo : number = 1;
   detallePlantilla : DetallePlantilla[] = [];
-
+  esPreguntaObjetivo : boolean = false;
 
   nuevaCompetencia : any = {};
   nuevoComportamiento : ComportamientoPlantilla[] = [];
@@ -31,6 +31,15 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerPuestosTrabajo();
+  }
+
+  cambiarCheck() {
+    if(this.esPreguntaObjetivo == false){
+      this.esPreguntaObjetivo = true;
+    }else{
+      this.esPreguntaObjetivo = false;
+      this.form.objetivo = null;
+    }
   }
 
   obtenerPuestosTrabajo() : void{
@@ -58,7 +67,9 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
   }
 
   guardarCompetencia() : void{
-    this.detallePlantilla.push(new DetallePlantilla(this.nuevaCompetencia,false,null,this.nuevoComportamiento));
+    this.detallePlantilla.push(new DetallePlantilla(this.nuevaCompetencia,this.esPreguntaObjetivo,this.form.objetivo,this.nuevoComportamiento));
+    this.esPreguntaObjetivo = false;
+    this.form.objetivo = null;
     this.modalService.dismissAll();
   }
 

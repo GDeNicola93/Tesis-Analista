@@ -106,8 +106,14 @@
                   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="nuevaCompetencia.descripcion" [(ngModel)]="nuevaCompetencia.descripcion"></textarea>
                 </div>
                 <div class="form-group form-check">
-                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1" [checked]="esPreguntaObjetivo" (change)="cambiarCheck()">
                   <label class="form-check-label" for="exampleCheck1">Esta relacionada a un objetivo</label>
+                </div>
+                <div class="form-group" *ngIf="esPreguntaObjetivo">
+                  <label>Seleccione un objetivo: </label>
+                  <select class="form-control" [(ngModel)]="form.objetivo" name="objetivo">
+                    <option *ngFor="let objetivo of form.puestoTrabajo.objetivosPuesto" [ngValue]="objetivo">{{objetivo.descripcion}}</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label for="porcentajeMinAprobacionDeComp">% Min de Aprobación: </label>
