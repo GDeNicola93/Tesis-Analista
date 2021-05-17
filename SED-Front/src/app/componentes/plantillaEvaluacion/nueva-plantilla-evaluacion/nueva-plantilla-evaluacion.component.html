@@ -142,6 +142,9 @@
                 <div class="col-2">
                   <p>Val Num</p>
                 </div>
+                <div class="col-1">
+                  <p>Es aprobada</p>
+                </div>
               </div>
               
               <div *ngFor="let compo of nuevoComportamiento">
@@ -159,6 +162,11 @@
                   <div class="col-2">
                     <div class="form-group">
                       <input type="number" class="form-control" name="compo.valoracionNumerica" [(ngModel)]="compo.valoracionNumerica"  required autocomplete="off">
+                    </div>
+                  </div>
+                  <div class="col-1">
+                    <div class="form-group">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1" [checked]="compo.esAprobada" [(ngModel)]="compo.esAprobada">
                     </div>
                   </div>
                 </div>

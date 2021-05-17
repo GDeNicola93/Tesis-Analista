@@ -101,5 +101,5 @@ public class EmpleadoServicio {
     
     public ResponseEntity<List<Empleado>> searchEmpleado(String search){
         return ResponseEntity.ok().body(repositorio.searchEmpleado(search));
-    }    
+    } 
 }

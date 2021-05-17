@@ -36,7 +36,7 @@
                     <td>
                       <div class="row">
                         <div class="col">
-                            <button (click)="verPlantillaDeEvaluacion(content,pe)" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver plantilla"><i class="far fa-eye"></i></button>
+                          <button (click)="verPlantillaDeEvaluacion(content,pe)" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver plantilla"><i class="far fa-eye"></i></button>
                           <button *ngIf="pe.estaEnCurso == true" class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Sacar de curso"><i class="fas fa-toggle-off"></i></button>
                           <button *ngIf="pe.estaEnCurso == false" class="btn btn-sm btn-success shadow-sm" data-toggle="tooltip" data-placement="top" title="Poner en curso"><i class="fas fa-toggle-on"></i></button>
                         </div>
@@ -83,13 +83,22 @@
       <p *ngIf="dp.esPreguntaObjetivo">Es pregunta objetivo: Si - Objetivo: {{dp.obj.descripcion}}</p>
       <p *ngIf="!dp.esPreguntaObjetivo">Es pregunta objetivo: No</p>
       <div class="row" *ngFor="let cp of dp.comportamiento" style="text-align: center;">
-        <div class="col">
+        <div class="col text-success text-right" *ngIf="cp.esAprobada">
           <p>{{cp.grado}}</p>
         </div>
-        <div class="col">
+        <div class="col text-danger text-right" *ngIf="!cp.esAprobada">
+          <p>{{cp.grado}}</p>
+        </div>
+        <div class="col text-success" *ngIf="cp.esAprobada">
           <p>{{cp.descComportamiento}}</p>
         </div>
-        <div class="col">
+        <div class="col text-danger" *ngIf="!cp.esAprobada">
+          <p>{{cp.descComportamiento}}</p>
+        </div>
+        <div class="col text-success text-left" *ngIf="cp.esAprobada">
+          <p>{{cp.valoracionNumerica}}</p>
+        </div>
+        <div class="col text-danger text-left" *ngIf="!cp.esAprobada">
           <p>{{cp.valoracionNumerica}}</p>
         </div>
       </div>

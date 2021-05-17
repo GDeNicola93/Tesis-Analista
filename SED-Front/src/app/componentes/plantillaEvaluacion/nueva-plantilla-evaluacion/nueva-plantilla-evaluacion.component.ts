@@ -63,7 +63,7 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
   }
 
   agregarComportamiento() : void{
-    this.nuevoComportamiento.push(new ComportamientoPlantilla("","",0));
+    this.nuevoComportamiento.push(new ComportamientoPlantilla("","",0,false));
   }
 
   guardarCompetencia() : void{
