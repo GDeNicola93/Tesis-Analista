@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/servicios/token.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
@@ -14,8 +15,9 @@ export class LoginComponent implements OnInit {
   error : boolean = false;
   mensaje : string = "";
   cargando = false;
+  LoginForm : FormGroup;
 
-  constructor(private usuarioServicio : UsuarioService,private tokenServicio : TokenService,private router : Router) { }
+  constructor(private usuarioServicio : UsuarioService,private tokenServicio : TokenService,private router : Router,private fb : FormBuilder) { }
 
   ngOnInit(): void {
   }
@@ -36,5 +38,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
 }

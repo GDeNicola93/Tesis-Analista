@@ -8,7 +8,7 @@ import { HomeComponent } from './componentes/home/home.component';
 import { MenuComponent } from './componentes/menu/menu.component';
 import { AreasComponent } from './componentes/areas/areas/areas.component';
 import { NuevaComponent } from './componentes/areas/nueva/nueva.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NuevaSucursalComponent } from './componentes/sucursales/nueva-sucursal/nueva-sucursal.component';
 import { IndexSucursalComponent } from './componentes/sucursales/index-sucursal/index-sucursal.component';
@@ -25,6 +25,7 @@ import { VerEmpleadoComponent } from './componentes/empleados/ver-empleado/ver-e
 import { AngularCropperjsModule } from 'angular-cropperjs';
 import { SubirFotoPerfilComponent } from './componentes/usuario/subir-foto-perfil/subir-foto-perfil.component';
 import { UpdatePasswordComponent } from './componentes/usuario/update-password/update-password.component';
+import { UnAuthorizedInterceptor } from './servicios/no-authorized-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -53,12 +54,17 @@ import { UpdatePasswordComponent } from './componentes/usuario/update-password/u
     HttpClientModule,
     FormsModule,
     NgbModule,
-    AngularCropperjsModule
+    AngularCropperjsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
+      multi: true
+    },
+    { provide: HTTP_INTERCEPTORS, 
+      useClass: UnAuthorizedInterceptor, 
       multi: true
     }
   ],

@@ -13,14 +13,21 @@
     <div class="card shadow">
         <h6 class="card-header font-weight-bold">Formulario de registro de nueva área</h6>
         <div class="card-body">
-            <form name="form" (ngSubmit)="guardar()">
+            <form name="form" [formGroup]="AreaForm" (submit)="guardar()">
                 <div class="form-group">
                     <label for="nombre">Nombre: </label>
-                    <input type="text" class="form-control" name="nombre" [(ngModel)]="form.nombre"  required autocomplete="off">
+                    <input type="text" class="form-control" name="nombre" autocomplete="off" formControlName="nombre" [ngClass]="(AreaForm.get('nombre').touched || AreaForm.get('nombre').dirty) && AreaForm.get('nombre').hasError('required') ? 'is-invalid':''">
+                    <div class="invalid-feedback">
+                        {{
+                            AreaForm.get('nombre').hasError('required') 
+                            ? "¡Campo requerido!" 
+                            : ""
+                        }}
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="descripcion">Descripción (opcional): </label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" [(ngModel)]="form.descripcion"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" formControlName="descripcion"></textarea>
                 </div>
                 <div class="form-group">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
@@ -37,7 +44,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="float-right btn btn-sm btn-success"><i class="far fa-save"></i> Guardar</button>
+                    <button [disabled]="AreaForm.invalid" type="submit" class="float-right btn btn-sm btn-success"><i class="far fa-save"></i> Guardar</button>
                 </div>
             </form>
         </div>

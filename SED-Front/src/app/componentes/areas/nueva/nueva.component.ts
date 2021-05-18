@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AreaService } from 'src/app/servicios/area.service';
 
 @Component({
@@ -7,20 +8,22 @@ import { AreaService } from 'src/app/servicios/area.service';
   styleUrls: ['./nueva.component.css']
 })
 export class NuevaComponent implements OnInit {
-  form: any = {};
+  //form: any = {};
   mensaje = '';
   guardado = false;
   error = false;
+  AreaForm : FormGroup;
 
-  constructor(private areaServicio:AreaService) { }
+  constructor(private areaServicio:AreaService,private fb : FormBuilder) { }
 
   ngOnInit(): void {
+    this.validaciones();
   }
 
   guardar():void {
     this.guardado = false;
     this.error = false;
-    this.areaServicio.guardar(this.form).subscribe(data => {
+    this.areaServicio.guardar(this.AreaForm.value).subscribe(data => {
       this.mensaje = data.mensaje;
       this.guardado = true;
       this.error = false;
@@ -31,6 +34,13 @@ export class NuevaComponent implements OnInit {
         this.error = true;
       }
     );
+  }
+
+  validaciones() : void{
+    this.AreaForm = this.fb.group({
+      nombre : ['',Validators.required],
+      descripcion :[],
+    });
   }
 
 
