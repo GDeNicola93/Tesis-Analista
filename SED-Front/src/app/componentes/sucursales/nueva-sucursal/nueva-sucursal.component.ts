@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Area } from 'src/app/modelo/area';
 import { Sucursal } from 'src/app/modelo/sucursal';
 import { AreaService } from 'src/app/servicios/area.service';
@@ -11,25 +12,34 @@ import { SucursalService } from 'src/app/servicios/sucursal.service';
 })
 export class NuevaSucursalComponent implements OnInit {
 
-  form: any = {};
+  //form: any = {};
   mensaje = '';
   guardado = false;
   error = false;
   selectAreas : Area[] = []; 
   areasSeleccionadas : Area[] = [];
   cargando = true;
+  sucursalForm : FormGroup;
 
-  constructor(private sucursalServicio:SucursalService,private areaServicio : AreaService) { }
+  constructor(private sucursalServicio:SucursalService,private areaServicio : AreaService,private fb : FormBuilder) { }
 
   ngOnInit(): void {
     this.construirSelectAreas();
+    this.validaciones();
+  }
+
+  validaciones() : void{
+    this.sucursalForm = this.fb.group({
+      nombre : ['',Validators.required],
+      descripcion :[],
+    });
   }
 
   guardar():void {
     this.guardado = false;
     this.error = false;
     
-    let sucursal = new Sucursal(this.form.nombre,this.form.descripcion,this.areasSeleccionadas);
+    let sucursal = new Sucursal(this.sucursalForm.get('nombre').value,this.sucursalForm.get('descripcion').value,this.areasSeleccionadas);
     
     this.sucursalServicio.guardar(sucursal).subscribe(data => {
       this.mensaje = data.mensaje;
