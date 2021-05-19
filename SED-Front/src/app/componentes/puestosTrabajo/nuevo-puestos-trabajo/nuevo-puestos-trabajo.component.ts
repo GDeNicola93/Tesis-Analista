@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Area } from 'src/app/modelo/area';
 import { Objetivo } from 'src/app/modelo/objetivo';
 import { PuestoTrabajo } from 'src/app/modelo/puesto-trabajo';
@@ -21,28 +22,40 @@ export class NuevoPuestosTrabajoComponent implements OnInit {
   mensaje = '';
   guardado = false;
   error = false;
+  puestoTrabajoForm : FormGroup;
 
-  constructor(private sucursalServicio : SucursalService,private puestoTrabajoServicio : PuestoTrabajoService) { }
+  constructor(private sucursalServicio : SucursalService,private puestoTrabajoServicio : PuestoTrabajoService,private fb : FormBuilder) { }
 
   ngOnInit(): void {
     this.obtenerSucursales();
+    this.validaciones();
+
+  }
+
+  validaciones() : void{
+    this.puestoTrabajoForm = this.fb.group({
+      nombrePuesto : ['',Validators.required],
+      sucursal : ['',Validators.required],
+      area : ['',Validators.required],
+      objetivo : [],
+    });
   }
 
   guardar() : void {
     this.guardado = false;
     this.error = false;
     
-    let nuevoPuesto = new PuestoTrabajo(this.form.nombrePuesto,this.form.sucursal,this.form.area,this.objetivosAgregados);
+    let nuevoPuesto = new PuestoTrabajo(this.puestoTrabajoForm.get('nombrePuesto').value,this.puestoTrabajoForm.get('sucursal').value,this.puestoTrabajoForm.get('area').value,this.objetivosAgregados);
     
     this.puestoTrabajoServicio.guardar(nuevoPuesto).subscribe(data => {
       this.mensaje = data.mensaje;
       this.guardado = true;
       this.error = false;
     },
-      (err: any) => {
-        this.mensaje = err.error.mensaje;
-        this.guardado = false;
-        this.error = true;
+    (err: any) => {
+      this.mensaje = err.error.mensaje;
+       this.guardado = false;
+      this.error = true;
       }
     );
   }
@@ -54,14 +67,16 @@ export class NuevoPuestosTrabajoComponent implements OnInit {
   }
 
   actualizarComboAreas() : void {
-    this.comboAreas = this.form.sucursal.areas;
+    this.comboAreas = (this.puestoTrabajoForm.get('sucursal').value).areas;
   }
 
   agregarObjetivo() : void{
-    let nuevoObjetivo : Objetivo = new Objetivo(this.form.objetivo);
-    this.objetivosAgregados.push(nuevoObjetivo);
-    this.form.objetivo = null;
-    this.emptyObjetivos = false;
+    if(this.puestoTrabajoForm.get('objetivo').value != null){
+      let nuevoObjetivo : Objetivo = new Objetivo(this.puestoTrabajoForm.get('objetivo').value);
+      this.objetivosAgregados.push(nuevoObjetivo);
+      this.puestoTrabajoForm.get('objetivo').setValue(null);
+      this.emptyObjetivos = false;
+    }
   }
 
   eliminarObjetivo(obj : Objetivo) : void{
