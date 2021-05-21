@@ -22,6 +22,10 @@ import org.springframework.data.jpa.repository.Query;
 public interface EmpleadoRepositorio extends JpaRepository<Empleado,Integer>{
     Optional<Empleado> findByDni(String dni);
     
+    Optional<Empleado> findByLegajo(String legajo);
+    
+    Optional<Empleado> findByEmail(String email);
+    
     @Query(value="select * from empleado where CONCAT(nombre,' ',apellido) LIKE %?1% OR dni LIKE %?1% OR "
             + "legajo LIKE %?1%",nativeQuery = true)
     List<Empleado> searchEmpleado(String search);

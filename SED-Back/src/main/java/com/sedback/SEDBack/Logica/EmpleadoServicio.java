@@ -43,6 +43,11 @@ public class EmpleadoServicio {
             //Primero verifico que sea correcta la información del empleado
             if(StringUtils.isBlank(empleado.getLegajo())){
                 return ResponseEntity.badRequest().body(new HttpMensaje("El campo legajo no es valido."));
+            }else{
+                Optional<Empleado> existeLegajo = repositorio.findByLegajo(empleado.getLegajo());
+                if(!existeLegajo.isEmpty()){
+                    return ResponseEntity.badRequest().body(new HttpMensaje("El legajo ingresado ya se encuentra asignado a otro empleado"));
+                }
             }
             if(StringUtils.isBlank(empleado.getNombre())){
                 return ResponseEntity.badRequest().body(new HttpMensaje("El campo nombre no es valido."));
@@ -66,6 +71,11 @@ public class EmpleadoServicio {
             }
             if(StringUtils.isBlank(empleado.getEmail())){
                 return ResponseEntity.badRequest().body(new HttpMensaje("El campo Email no es valido."));
+            }else{
+                Optional<Empleado> existeEmail = repositorio.findByEmail(empleado.getEmail());
+                if (!existeEmail.isEmpty()){
+                    return ResponseEntity.badRequest().body(new HttpMensaje("El email ingresado ya esta asignado a otro empleado."));
+                }
             }
             if(ObjectUtils.isEmpty(empleado.getPuestosTrabajo())){
                 return ResponseEntity.badRequest().body(new HttpMensaje("Debe selecionar como minimo un puesto de trabajo"));
