@@ -14,25 +14,56 @@
     <div class="card shadow">
         <h6 class="card-header font-weight-bold">Formulario de registro de nuevo Empleado</h6>
         <div class="card-body">
-            <form name="form" (ngSubmit)="guardar()">
+            <form name="form" [formGroup]="empleadoForm" (submit)="guardar()">
                 <h6>Información del empleado:</h6>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="legajo">Legajo: </label>
-                            <input type="number" class="form-control" name="legajo" [(ngModel)]="empleado.legajo"  required autocomplete="off">
+                            <input type="number" class="form-control" name="legajo" autocomplete="off" formControlName="legajo" [ngClass]="(empleadoForm.get('legajo').touched || empleadoForm.get('legajo').dirty) && empleadoForm.get('legajo').hasError('required') ? 'is-invalid':''">
+                            <div class="invalid-feedback">
+                                {{
+                                    empleadoForm.get('legajo').hasError('required') 
+                                    ? "Campo requerido" 
+                                    : ""
+                                }}
+                            </div>
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-group">
                             <label for="nombre">Nombre: </label>
-                            <input type="text" class="form-control" name="nombre" [(ngModel)]="empleado.nombre"  required autocomplete="off">
+                            <input type="text" class="form-control" name="nombre" autocomplete="off" formControlName="nombre" [ngClass]="(empleadoForm.get('nombre').touched || empleadoForm.get('nombre').dirty) && empleadoForm.get('nombre').hasError('required') ? 'is-invalid':'' || empleadoForm.get('nombre').hasError('minlength') ? 'is-invalid':''">
+                            <div class="invalid-feedback">
+                                {{
+                                    empleadoForm.get('nombre').hasError('required') 
+                                    ? "Campo requerido" 
+                                    : ""
+                                }}
+                                {{
+                                    empleadoForm.get('nombre').hasError('minlength') 
+                                    ? "Debe tener como minimo tres caracteres" 
+                                    : ""
+                                }}
+                            </div>
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-group">
                             <label for="apellido">Apellido: </label>
-                            <input type="text" class="form-control" name="apellido" [(ngModel)]="empleado.apellido"  required autocomplete="off">
+                            <input type="text" class="form-control" name="apellido" autocomplete="off" formControlName="apellido" [ngClass]="(empleadoForm.get('apellido').touched || empleadoForm.get('apellido').dirty) && empleadoForm.get('apellido').hasError('required') ? 'is-invalid':'' || empleadoForm.get('apellido').hasError('minlength') ? 'is-invalid':''">
+                            <div class="invalid-feedback">
+                                {{
+                                    empleadoForm.get('apellido').hasError('required') 
+                                    ? "Campo requerido" 
+                                    : ""
+                                }}
+                                {{
+                                    empleadoForm.get('apellido').hasError('minlength') 
+                                    ? "Debe tener como minimo tres caracteres" 
+                                    : ""
+                                }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -40,26 +71,62 @@
                     <div class="col-md">
                         <div class="form-group">
                             <label for="fechaDeNacimiento">Fecha Nacimiento: </label>
-                            <input type="date" class="form-control" name="fechaDeNacimiento" [(ngModel)]="empleado.fechaDeNacimiento"  required autocomplete="off">
+                            <input type="date" class="form-control" name="fechaDeNacimiento" autocomplete="off" formControlName="fechaDeNacimiento" [ngClass]="(empleadoForm.get('fechaDeNacimiento').touched || empleadoForm.get('fechaDeNacimiento').dirty) && empleadoForm.get('fechaDeNacimiento').hasError('required') ? 'is-invalid':''">
+                            <div class="invalid-feedback">
+                                {{
+                                    empleadoForm.get('fechaDeNacimiento').hasError('required') 
+                                    ? "Campo requerido" 
+                                    : ""
+                                }}
+                            </div>
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-group">
                             <label for="dni">Num DNI: </label>
-                            <input type="number" class="form-control" name="dni" [(ngModel)]="empleado.dni"  required autocomplete="off">
+                            <input type="number" class="form-control" name="dni" autocomplete="off" formControlName="dni" [ngClass]="(empleadoForm.get('dni').touched || empleadoForm.get('dni').dirty) && empleadoForm.get('dni').hasError('required') ? 'is-invalid':'' || empleadoForm.get('dni').hasError('min') ? 'is-invalid':'' || empleadoForm.get('dni').hasError('max') ? 'is-invalid':''">
+                            <div class="invalid-feedback">
+                                {{
+                                    empleadoForm.get('dni').hasError('required') 
+                                    ? "Campo requerido" 
+                                    : ""
+                                }}
+                                {{
+                                    empleadoForm.get('dni').hasError('min') 
+                                    ? "El DNI debe tener 8 digitos" 
+                                    : ""
+                                }}
+                                {{
+                                    empleadoForm.get('dni').hasError('max') 
+                                    ? "El DNI debe tener 8 digitos" 
+                                    : ""
+                                }}
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="nombre">Email: </label>
-                    <input type="text" class="form-control" name="email" [(ngModel)]="empleado.email"  required autocomplete="off">
+                    <input type="text" class="form-control" name="email" autocomplete="off" formControlName="email" [ngClass]="(empleadoForm.get('email').touched || empleadoForm.get('email').dirty) && empleadoForm.get('email').hasError('required') ? 'is-invalid':'' || empleadoForm.get('email').hasError('email') ? 'is-invalid':''">
+                    <div class="invalid-feedback">
+                        {{
+                            empleadoForm.get('email').hasError('required') 
+                            ? "Campo requerido" 
+                            : ""
+                        }}
+                        {{
+                            empleadoForm.get('email').hasError('email') 
+                            ? "El formato de email no es correcto" 
+                            : ""
+                        }}
+                    </div>
                 </div>
                 <h6>Asignación de Empleado a puestos de trabajo:</h6>
                 <div class="row">
                     <div class="col-md-5">
                         <div class="form-group">
                             <label>Sucursal al que pertenece el puesto: </label>
-                            <select class="form-control" [(ngModel)]="empleado.sucursal" name="sucursal" (change)="actualizarComboPuestosTrabajo()">
+                            <select class="form-control" name="sucursal" formControlName="sucursal" (change)="actualizarComboPuestosTrabajo()">
                               <option *ngFor="let sucursal of comboSucursales" [ngValue]="sucursal">{{sucursal.id}}--{{sucursal.nombre}}</option>
                             </select>
                         </div>
@@ -67,7 +134,7 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             <label>Seleccione un puesto de trabajo: </label>
-                            <select class="form-control" [(ngModel)]="empleado.puestoTrabajo" name="puestoTrabajo">
+                            <select class="form-control" name="puestoTrabajo" formControlName="puestosTrabajo">
                               <option *ngFor="let puestoTrabajo of comboPuestosTrabajo" [ngValue]="puestoTrabajo">{{puestoTrabajo.id}}-{{puestoTrabajo.nombrePuesto}} (Area: {{puestoTrabajo.area.nombre}})</option>
                             </select>
                         </div>
@@ -88,52 +155,80 @@
                         </tbody>
                     </table>
                 </div>
-                <h6>Creación de usuario del sistema:</h6>
-                <div class="row">
-                    <div class="col-md">
-                        <div class="form-group">
-                            <label for="nombreUsuario">Nombre Usuario: </label>
-                            <input type="text" class="form-control" name="nombreUsuario" [(ngModel)]="usuario.nombreUsuario"  required autocomplete="off">
+                <form name="form2" [formGroup]="usuarioForm"> 
+                    <h6>Creación de usuario del sistema:</h6>
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="nombreUsuario">Nombre Usuario: </label>
+                                <input type="text" class="form-control" name="nombreUsuario" autocomplete="off" formControlName="nombreUsuario" [ngClass]="(usuarioForm.get('nombreUsuario').touched || usuarioForm.get('nombreUsuario').dirty) && usuarioForm.get('nombreUsuario').hasError('required') ? 'is-invalid':''">
+                                <div class="invalid-feedback">
+                                    {{
+                                        usuarioForm.get('nombreUsuario').hasError('required') 
+                                        ? "Campo requerido" 
+                                        : ""
+                                    }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="password">Password: </label>
+                                <input type="password" class="form-control" name="password" autocomplete="off" formControlName="password" [ngClass]="(usuarioForm.get('password').touched || usuarioForm.get('password').dirty) && usuarioForm.get('password').hasError('required') ? 'is-invalid':''">
+                                <div class="invalid-feedback">
+                                    {{
+                                        usuarioForm.get('password').hasError('required') 
+                                        ? "Campo requerido" 
+                                        : ""
+                                    }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="repeatPassword">Repita Password: </label>
+                                <input type="password" class="form-control" name="repeatPassword" autocomplete="off" formControlName="repeatPassword" [ngClass]="(usuarioForm.get('repeatPassword').touched || usuarioForm.get('repeatPassword').dirty) && usuarioForm.get('repeatPassword').hasError('required') ? 'is-invalid':'' || usuarioForm.get('repeatPassword').hasError('validarPasswords') ? 'is-invalid':''">
+                                <div class="invalid-feedback">
+                                    {{
+                                        usuarioForm.get('repeatPassword').hasError('required') 
+                                        ? "Campo requerido" 
+                                        : ""
+                                    }}
+                                    {{
+                                        usuarioForm.get('repeatPassword').hasError('validarPasswords') 
+                                        ? "¡Las contraseñas no coinciden!" 
+                                        : ""
+                                    }}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md">
-                        <div class="form-group">
-                            <label for="password">Password: </label>
-                            <input type="password" class="form-control" name="password" [(ngModel)]="usuario.password"  required autocomplete="off">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label>Seleccione el perfil del usuario: </label>
+                                <select class="form-control" formControlName="roles" name="rol">
+                                <option *ngFor="let rol of comboRoles" [ngValue]="rol">{{rol.rolNombre}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button style="margin-top: 35px;" type="button" (click)="agregarPerfilAUsuario()" class="btn btn-sm btn-block btn-outline-success"><i class="fas fa-plus"></i> Asignar perfil</button>   
                         </div>
                     </div>
-                    <div class="col-md">
-                        <div class="form-group">
-                            <label for="repeatPassword">Repita Password: </label>
-                            <input type="password" class="form-control" name="repeatPassword" [(ngModel)]="usuario.repeatPassword"  required autocomplete="off">
-                        </div>
+                    <div class="form-group">
+                        <label>Perfiles asignados al usuario:</label>
+                        <p *ngIf="emptyRolesAsignados" style="text-align: center;"><i class="fas fa-exclamation-circle"></i> Aun no has asignado ningun perfil al usuario.</p>
+                        <table class="table table-hover">
+                            <tbody *ngFor="let r of rolesAsignados">
+                            <tr>
+                                <td>{{r.rolNombre}}</td>
+                                <td><button type="button" (click)="desSeleccionarPerfilUsuario(r)"><i class="fas fa-times"></i></button></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-10">
-                        <div class="form-group">
-                            <label>Seleccione el perfil del usuario: </label>
-                            <select class="form-control" [(ngModel)]="usuario.roles" name="rol">
-                              <option *ngFor="let rol of comboRoles" [ngValue]="rol">{{rol.rolNombre}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button style="margin-top: 35px;" type="button" (click)="agregarPerfilAUsuario()" class="btn btn-sm btn-block btn-outline-success"><i class="fas fa-plus"></i> Asignar perfil</button>   
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Perfiles asignados al usuario:</label>
-                    <p *ngIf="emptyRolesAsignados" style="text-align: center;"><i class="fas fa-exclamation-circle"></i> Aun no has asignado ningun perfil al usuario.</p>
-                    <table class="table table-hover">
-                        <tbody *ngFor="let r of rolesAsignados">
-                          <tr>
-                            <td>{{r.rolNombre}}</td>
-                            <td><button type="button" (click)="desSeleccionarPerfilUsuario(r)"><i class="fas fa-times"></i></button></td>
-                          </tr>
-                        </tbody>
-                    </table>
-                </div>
+                </form>
                 <div class="form-group">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
                         <strong><i class="fas fa-times"></i> ¡Error!</strong> {{mensaje}}
@@ -149,7 +244,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="float-right btn btn-sm btn-success"><i class="far fa-save"></i> Guardar</button>
+                    <button [disabled]="empleadoForm.invalid || usuarioForm.invalid" type="submit" class="float-right btn btn-sm btn-success"><i class="far fa-save"></i> Guardar</button>
                 </div>
             </form>
 

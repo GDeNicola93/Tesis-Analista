@@ -16,6 +16,7 @@ export class Usuario {
         this.habilitado = true;
         this.roles = roles;
         this.empleado = empleado;
+        this.nombreFotoPerfil = null;
     }
     
 }

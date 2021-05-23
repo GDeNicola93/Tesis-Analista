@@ -9,7 +9,6 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
   styleUrls: ['./update-password.component.css']
 })
 export class UpdatePasswordComponent implements OnInit {
-  //cambioPassword : any = {};
   mensaje = '';
   guardado = false;
   error = false;
