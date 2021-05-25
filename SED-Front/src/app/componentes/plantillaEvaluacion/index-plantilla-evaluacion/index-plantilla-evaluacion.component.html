@@ -79,7 +79,7 @@
     <hr>
     <h5 style="text-align: center;">Evaluación</h5>
     <div *ngFor="let dp of plantillaParaVisualizar.detallePlantilla">
-      <h6>{{dp.competencia.nombre}} ({{dp.competencia.porcentajeMinAprobacionDeComp}} puntos)</h6>
+      <h6>{{dp.competencia.nombre}} ({{dp.puntajeMinAprobacion}} puntos)</h6>
       <p *ngIf="dp.esPreguntaObjetivo">Es pregunta objetivo: Si - Objetivo: {{dp.obj.descripcion}}</p>
       <p *ngIf="!dp.esPreguntaObjetivo">Es pregunta objetivo: No</p>
       <div class="row" *ngFor="let cp of dp.comportamiento" style="text-align: center;">

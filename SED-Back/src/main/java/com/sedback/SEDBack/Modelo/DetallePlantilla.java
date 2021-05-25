@@ -34,6 +34,8 @@ public class DetallePlantilla implements Serializable{
     @OneToOne
     private Objetivo obj;
     
+    private int puntajeMinAprobacion;
+    
     @OneToMany
     private Set<ComportamientoPlantilla> comportamiento = new HashSet<>();
     

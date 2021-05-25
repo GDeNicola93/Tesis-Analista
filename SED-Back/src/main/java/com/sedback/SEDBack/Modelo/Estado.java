@@ -28,6 +28,5 @@ public class Estado implements Serializable {
     
     private String nombre;
     
-    @ManyToOne
-    private Ambito ambito;
+    private String ambito;
 }

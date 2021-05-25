@@ -46,7 +46,7 @@
                                 <tbody *ngFor="let detalleP of detallePlantilla">
                                   <tr>
                                     <th scope="row">{{detalleP.competencia.nombre}}</th>
-                                    <td>{{detalleP.competencia.porcentajeMinAprobacionDeComp}}</td>
+                                    <td>{{detalleP.puntajeMinAprobacion}}</td>
                                     <td>
                                       <div class="row">
                                         <div class="col">
@@ -116,8 +116,8 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="porcentajeMinAprobacionDeComp">% Min de Aprobación: </label>
-                  <input type="number" class="form-control" name="porcentajeMinAprobacionDeComp" [(ngModel)]="nuevaCompetencia.porcentajeMinAprobacionDeComp"  required autocomplete="off">
+                  <label for="puntajeMinAprobación">% Min de Aprobación: </label>
+                  <input type="number" class="form-control" name="puntajeMinAprobación" [(ngModel)]="nuevaCompetencia.puntajeMinAprobacion"  required autocomplete="off">
                 </div>
               </form>
             </div>

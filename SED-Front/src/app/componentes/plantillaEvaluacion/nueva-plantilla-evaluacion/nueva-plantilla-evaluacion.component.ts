@@ -67,7 +67,7 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
   }
 
   guardarCompetencia() : void{
-    this.detallePlantilla.push(new DetallePlantilla(this.nuevaCompetencia,this.esPreguntaObjetivo,this.form.objetivo,this.nuevoComportamiento));
+    this.detallePlantilla.push(new DetallePlantilla(this.nuevaCompetencia,this.esPreguntaObjetivo,this.form.objetivo,this.nuevaCompetencia.puntajeMinAprobacion,this.nuevoComportamiento));
     this.esPreguntaObjetivo = false;
     this.form.objetivo = null;
     this.modalService.dismissAll();

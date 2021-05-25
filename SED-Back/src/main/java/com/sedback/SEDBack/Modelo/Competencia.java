@@ -18,5 +18,4 @@ public class Competencia implements Serializable {
     
     private String descripcion;
     private String nombre;
-    private int porcentajeMinAprobacionDeComp;
 }
