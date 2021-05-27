@@ -26,6 +26,8 @@ import { AngularCropperjsModule } from 'angular-cropperjs';
 import { SubirFotoPerfilComponent } from './componentes/usuario/subir-foto-perfil/subir-foto-perfil.component';
 import { UpdatePasswordComponent } from './componentes/usuario/update-password/update-password.component';
 import { UnAuthorizedInterceptor } from './servicios/no-authorized-interceptor.service';
+import { IndexCompetenciaComponent } from './componentes/competencias/index-competencia/index-competencia.component';
+import { NuevaCompetenciaComponent } from './componentes/competencias/nueva-competencia/nueva-competencia.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { UnAuthorizedInterceptor } from './servicios/no-authorized-interceptor.s
     IndexPlantillaEvaluacionComponent,
     VerEmpleadoComponent,
     SubirFotoPerfilComponent,
-    UpdatePasswordComponent
+    UpdatePasswordComponent,
+    IndexCompetenciaComponent,
+    NuevaCompetenciaComponent
   ],
   imports: [
     BrowserModule,

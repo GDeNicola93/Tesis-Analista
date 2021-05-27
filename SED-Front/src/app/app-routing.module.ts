@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AreasComponent } from './componentes/areas/areas/areas.component';
 import { NuevaComponent } from './componentes/areas/nueva/nueva.component';
+import { IndexCompetenciaComponent } from './componentes/competencias/index-competencia/index-competencia.component';
+import { NuevaCompetenciaComponent } from './componentes/competencias/nueva-competencia/nueva-competencia.component';
 import { IndexEmpleadosComponent } from './componentes/empleados/index-empleados/index-empleados.component';
 import { NuevoEmpleadoComponent } from './componentes/empleados/nuevo-empleado/nuevo-empleado.component';
 import { VerEmpleadoComponent } from './componentes/empleados/ver-empleado/ver-empleado.component';
@@ -48,6 +50,10 @@ const routes: Routes = [
   //Plantillas de Evaluación
   {path: 'plantilla-evaluacion',component:IndexPlantillaEvaluacionComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},
   {path: 'plantilla-evaluacion/nueva',component:NuevaPlantillaEvaluacionComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},
+
+  //Competencias
+  {path: 'competencia',component:IndexCompetenciaComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},
+  {path: 'competencia/nueva',component:NuevaCompetenciaComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},
 
 
 ];
