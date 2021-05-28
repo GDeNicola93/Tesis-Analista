@@ -5,9 +5,9 @@
  */
 package com.sedback.SEDBack.Controlador;
 
-import com.sedback.SEDBack.HttpMensajes.EmpleadoIndexDto;
-import com.sedback.SEDBack.HttpMensajes.EmpleadoVerDto;
-import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
+import com.sedback.SEDBack.Dtos.EmpleadoIndexDto;
+import com.sedback.SEDBack.Dtos.EmpleadoVerDto;
+import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Logica.EmpleadoServicio;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Modelo.Usuario;

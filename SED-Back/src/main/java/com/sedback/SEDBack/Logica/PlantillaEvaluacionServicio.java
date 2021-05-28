@@ -1,6 +1,6 @@
 package com.sedback.SEDBack.Logica;
 
-import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
+import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Modelo.PlantillaEvaluacion;
 import com.sedback.SEDBack.Persistencia.PlantillaEvaluacionRepositorio;
 import java.util.Calendar;

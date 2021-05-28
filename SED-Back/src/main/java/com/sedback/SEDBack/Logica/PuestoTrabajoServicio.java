@@ -5,7 +5,7 @@
  */
 package com.sedback.SEDBack.Logica;
 
-import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
+import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Modelo.PuestoTrabajo;
 import com.sedback.SEDBack.Persistencia.PuestoTrabajoRepositorio;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.sedback.SEDBack.Controlador;
 
-import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
+import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Logica.UsuarioServicio;
 import java.io.File;
 import java.io.IOException;

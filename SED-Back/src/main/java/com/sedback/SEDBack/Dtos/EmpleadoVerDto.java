@@ -1,4 +1,4 @@
-package com.sedback.SEDBack.HttpMensajes;
+package com.sedback.SEDBack.Dtos;
 
 import com.sedback.SEDBack.Modelo.Rol;
 import java.time.LocalDate;

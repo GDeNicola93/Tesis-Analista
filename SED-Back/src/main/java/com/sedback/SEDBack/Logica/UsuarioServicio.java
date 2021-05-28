@@ -5,10 +5,10 @@
  */
 package com.sedback.SEDBack.Logica;
 
-import com.sedback.SEDBack.HttpMensajes.CambioPassword;
-import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
-import com.sedback.SEDBack.HttpMensajes.JwtDTO;
-import com.sedback.SEDBack.HttpMensajes.LoginUsuario;
+import com.sedback.SEDBack.Dtos.CambioPassword;
+import com.sedback.SEDBack.Dtos.HttpMensaje;
+import com.sedback.SEDBack.Dtos.JwtDTO;
+import com.sedback.SEDBack.Dtos.LoginUsuario;
 import com.sedback.SEDBack.Modelo.Usuario;
 import com.sedback.SEDBack.Persistencia.UsuarioRepositorio;
 import com.sedback.SEDBack.Seguridad.JWT.JwtProvider;

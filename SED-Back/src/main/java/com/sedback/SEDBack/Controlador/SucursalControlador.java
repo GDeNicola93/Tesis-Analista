@@ -5,7 +5,7 @@
  */
 package com.sedback.SEDBack.Controlador;
 
-import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
+import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Logica.SucursalServicio;
 import com.sedback.SEDBack.Modelo.Sucursal;
 import java.util.List;

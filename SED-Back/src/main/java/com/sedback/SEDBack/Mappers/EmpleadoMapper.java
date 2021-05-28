@@ -1,7 +1,7 @@
 package com.sedback.SEDBack.Mappers;
 
-import com.sedback.SEDBack.HttpMensajes.EmpleadoIndexDto;
-import com.sedback.SEDBack.HttpMensajes.EmpleadoVerDto;
+import com.sedback.SEDBack.Dtos.EmpleadoIndexDto;
+import com.sedback.SEDBack.Dtos.EmpleadoVerDto;
 import com.sedback.SEDBack.Modelo.PuestoTrabajo;
 import com.sedback.SEDBack.Modelo.Usuario;
 import java.util.HashSet;

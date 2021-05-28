@@ -5,7 +5,7 @@
  */
 package com.sedback.SEDBack.Persistencia;
 
-import com.sedback.SEDBack.HttpMensajes.EmpleadoIndexDto;
+import com.sedback.SEDBack.Dtos.EmpleadoIndexDto;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Modelo.Usuario;
 import java.util.List;

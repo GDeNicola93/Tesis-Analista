@@ -5,7 +5,7 @@
  */
 package com.sedback.SEDBack.Logica;
 
-import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
+import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Modelo.Area;
 import com.sedback.SEDBack.Persistencia.AreaRepositorio;
 import java.util.List;

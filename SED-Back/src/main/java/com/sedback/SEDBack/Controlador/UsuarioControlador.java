@@ -5,10 +5,10 @@
  */
 package com.sedback.SEDBack.Controlador;
 
-import com.sedback.SEDBack.HttpMensajes.CambioPassword;
-import com.sedback.SEDBack.HttpMensajes.HttpMensaje;
-import com.sedback.SEDBack.HttpMensajes.JwtDTO;
-import com.sedback.SEDBack.HttpMensajes.LoginUsuario;
+import com.sedback.SEDBack.Dtos.CambioPassword;
+import com.sedback.SEDBack.Dtos.HttpMensaje;
+import com.sedback.SEDBack.Dtos.JwtDTO;
+import com.sedback.SEDBack.Dtos.LoginUsuario;
 import com.sedback.SEDBack.Logica.UsuarioServicio;
 import com.sedback.SEDBack.Modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
