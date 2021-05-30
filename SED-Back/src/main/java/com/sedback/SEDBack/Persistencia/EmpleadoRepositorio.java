@@ -26,15 +26,19 @@ public interface EmpleadoRepositorio extends JpaRepository<Empleado,Integer>{
     
     Optional<Empleado> findByEmail(String email);
     
-    @Query(value="select * from empleado where CONCAT(nombre,' ',apellido) LIKE %?1% OR dni LIKE %?1% OR "
-            + "legajo LIKE %?1%",nativeQuery = true)
-    List<Empleado> searchEmpleado(String search);
+//    @Query(value="select * from empleado where CONCAT(nombre,' ',apellido) LIKE %?1% OR dni LIKE %?1% OR "
+//            + "legajo LIKE %?1%",nativeQuery = true)
+//    List<Empleado> searchEmpleado(String search);
     
 //    @Query(value="select new com.sedback.SEDBack.HttpMensajes.EmpleadoIndexDto(emp.id,emp.legajo,emp.nombre,emp.apellido,user.habilitado,sucursal) "
 //            +"from Usuario user JOIN user.empleado emp JOIN emp.puestosTrabajo puestos JOIN puestos.sucursal sucursal")
-    @Query(value="select user from Usuario user")
-    List<Usuario> getEmpleadosIndex();
+//    @Query(value="select user from Usuario user")
+//    List<Usuario> getEmpleadosIndex();
     
     @Query(value="select user from Usuario user join user.empleado emp where emp.id = ?1")
     Usuario getEmpleadoById(Integer id);
+    
+    //@Query(value = "SELECT u FROM User u where CONCAT(u.empleado.nombre,' ',u.empleado.apellido) LIKE %?1%")
+    @Query(value="SELECT user from Usuario user join user.empleado emp WHERE CONCAT(emp.nombre,' ',emp.apellido) LIKE %?1% OR emp.legajo LIKE %?1% OR emp.dni LIKE %?1%")
+    Page<Usuario> getEmpleados(String search,Pageable page);
 }

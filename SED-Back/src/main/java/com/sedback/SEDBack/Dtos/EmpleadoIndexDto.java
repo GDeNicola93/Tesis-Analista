@@ -1,16 +1,14 @@
 package com.sedback.SEDBack.Dtos;
 
-import com.sedback.SEDBack.Modelo.PuestoTrabajo;
-import com.sedback.SEDBack.Modelo.Sucursal;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class EmpleadoIndexDto implements Serializable {
-    private Integer id;
+@NoArgsConstructor
+public class EmpleadoIndexDto {
+    private Integer idEmpleado;
     
     private String legajo;
     
@@ -18,6 +16,6 @@ public class EmpleadoIndexDto implements Serializable {
     
     private boolean habilitado;
     
-    private Set<String> lugaresTrabajo = new HashSet<>();
+    private Set<String> sucursalesTrabajo = new HashSet<>();
 
 }

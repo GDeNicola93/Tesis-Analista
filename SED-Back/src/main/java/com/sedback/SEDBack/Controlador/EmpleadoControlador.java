@@ -36,23 +36,17 @@ public class EmpleadoControlador {
     
     @Autowired
     private EmpleadoServicio servicio;
+      
+//    @GetMapping(params = {"id"})
+//    @PreAuthorize("hasAuthority('Administrador')")
+//    public ResponseEntity<EmpleadoVerDto> getEmpleadoById(Integer id){
+//        return servicio.getEmpleadoById(id);
+//    }
     
-    @GetMapping
+    @GetMapping(params = {"filtro"})
     @PreAuthorize("hasAuthority('Administrador')")
-    public ResponseEntity<List<EmpleadoIndexDto>> getEmpleados(){
-        return servicio.getEmpleados();
-    }
-    
-    @GetMapping(params = {"search"})
-    @PreAuthorize("hasAuthority('Administrador')")
-    public ResponseEntity<List<Empleado>> searchEmpleado(String search){
-        return servicio.searchEmpleado(search);
-    }
-    
-    @GetMapping(params = {"id"})
-    @PreAuthorize("hasAuthority('Administrador')")
-    public ResponseEntity<EmpleadoVerDto> getEmpleadoById(Integer id){
-        return servicio.getEmpleadoById(id);
+    public ResponseEntity<Page<EmpleadoIndexDto>> getEmpleados(String filtro,Pageable page){
+        return servicio.getEmpleados(filtro,page);
     }
 
 }

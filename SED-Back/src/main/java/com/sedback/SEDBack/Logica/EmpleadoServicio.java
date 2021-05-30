@@ -8,7 +8,7 @@ package com.sedback.SEDBack.Logica;
 import com.sedback.SEDBack.Dtos.EmpleadoIndexDto;
 import com.sedback.SEDBack.Dtos.EmpleadoVerDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
-import com.sedback.SEDBack.Mappers.EmpleadoMapper;
+import com.sedback.SEDBack.Mappers.EmpleadoIndexDtoMapper;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Modelo.Usuario;
 import com.sedback.SEDBack.Persistencia.EmpleadoRepositorio;
@@ -34,9 +34,6 @@ import org.springframework.stereotype.Service;
 public class EmpleadoServicio {
     @Autowired
     private EmpleadoRepositorio repositorio;
-    
-    @Autowired
-    private EmpleadoMapper empleadoMapper;
     
     public ResponseEntity<HttpMensaje> verificarCampos(Empleado empleado){
         try{
@@ -95,21 +92,21 @@ public class EmpleadoServicio {
         }
     }
     
-    public ResponseEntity<List<EmpleadoIndexDto>> getEmpleados(){
-        List<Usuario> usuarios = repositorio.getEmpleadosIndex();
-        List<EmpleadoIndexDto> empleadosIndexDto = new ArrayList();
-        for (int i=0;i<usuarios.size();i++){
-            empleadosIndexDto.add(empleadoMapper.toDtoIndex(usuarios.get(i)));
-        }
-        return ResponseEntity.ok().body(empleadosIndexDto);
-    }
+//    public ResponseEntity<List<EmpleadoIndexDto>> getEmpleados(){
+//        List<Usuario> usuarios = repositorio.getEmpleadosIndex();
+//        List<EmpleadoIndexDto> empleadosIndexDto = new ArrayList();
+//        for (int i=0;i<usuarios.size();i++){
+//            empleadosIndexDto.add(empleadoMapper.toDtoIndex(usuarios.get(i)));
+//        }
+//        return ResponseEntity.ok().body(empleadosIndexDto);
+//    }
+//    
+//    public ResponseEntity<EmpleadoVerDto> getEmpleadoById(Integer id){
+//        Usuario usuario = repositorio.getEmpleadoById(id);
+//        return ResponseEntity.ok().body(empleadoMapper.toDtoVer(usuario));
+//    }
     
-    public ResponseEntity<EmpleadoVerDto> getEmpleadoById(Integer id){
-        Usuario usuario = repositorio.getEmpleadoById(id);
-        return ResponseEntity.ok().body(empleadoMapper.toDtoVer(usuario));
+    public ResponseEntity<Page<EmpleadoIndexDto>> getEmpleados(String filtro,Pageable page){
+        return ResponseEntity.ok().body(EmpleadoIndexDtoMapper.INSTANCE.toEmpleadoIndexDtoPage(repositorio.getEmpleados(filtro, page)));
     }
-    
-    public ResponseEntity<List<Empleado>> searchEmpleado(String search){
-        return ResponseEntity.ok().body(repositorio.searchEmpleado(search));
-    } 
 }
