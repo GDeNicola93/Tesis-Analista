@@ -15,12 +15,8 @@ export class EmpleadoService {
 
   constructor(private httpClient: HttpClient,private urlBaseService : UrlBaseService) { }
 
-  getEmpleados() : Observable<any>{
-    return this.httpClient.get<EmpleadoIndexDto[]>(this.urlBaseService.obtenerURLBase() + 'empleados',cabecera);
-  }
-
-  searchEmpleado(dato : string) : Observable<any>{
-    return this.httpClient.get<Empleado[]>(this.urlBaseService.obtenerURLBase() + 'empleados?search='+dato,cabecera);
+  getEmpleados(page:number,size:number,sort:string,order:string,filtro:string) : Observable<any>{
+    return this.httpClient.get<EmpleadoIndexDto[]>(this.urlBaseService.obtenerURLBase() + `empleados?filtro=${filtro}&sort=${sort},${order}&size=${size}&page=${page}`,cabecera);
   }
 
   getById(id : number) : Observable<EmpleadoVerDto>{

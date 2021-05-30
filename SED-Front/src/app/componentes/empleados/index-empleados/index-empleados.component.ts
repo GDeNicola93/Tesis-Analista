@@ -14,38 +14,33 @@ import { SucursalService } from 'src/app/servicios/sucursal.service';
 export class IndexEmpleadosComponent implements OnInit {
 
   empleados : EmpleadoIndexDto[] = [];
-  comboSucursales : Sucursal[] = [];
-  comboAreas : Area[] = [];
-  form: any = {}; 
+  page : number = 0;
+  size : number = 10;
+  sort : string = 'emp.nombre'
+  order : string = 'asc';
+  esUltima : boolean = false;
+  esPrimera : boolean = false;
+  totalPages : Array<number>;
+  filtro : string = "";
 
   constructor(private empleadoServicio : EmpleadoService,private sucursalServicio : SucursalService) { }
 
   ngOnInit(): void {
-    this.obtenerEmpleados();
-    this.obtenerSucursales();
+    this.cargarEmpleados();
   }
 
-  obtenerEmpleados() : void {
-    this.empleadoServicio.getEmpleados().subscribe(data => {
-      this.empleados = data;
+  cargarEmpleados() : void{
+    this.empleadoServicio.getEmpleados(this.page,this.size,this.sort,this.order,this.filtro).subscribe(data => {
+      this.empleados = data.content;
+      this.esPrimera = data.first;
+      this.esUltima = data.last;
+      this.totalPages = new Array(data['totalPages']);
     });
-  }
-
-  obtenerSucursales() : void {
-    this.sucursalServicio.obtenerSucursales().subscribe(data => {
-      this.comboSucursales = data;
-    });
-  }
-
-  actualizarComboAreas() : void {
-    this.comboAreas = this.form.sucursal.areas;
   }
 
   buscarEmpleado() : void{
-    this.empleadoServicio.searchEmpleado(this.form.buscadorNombreApellido).subscribe(data => {
-      this.empleados = data;
-      this.form.buscadorNombreApellido = null;
-    });
+    this.page = 0;
+    this.cargarEmpleados();
   }
 
   esEmptyEmpleados() : boolean {
@@ -55,5 +50,40 @@ export class IndexEmpleadosComponent implements OnInit {
       return false;
     }
   }
+
+  anterior() : void{
+    if(!this.esPrimera){
+      this.page--;
+      this.cargarEmpleados();
+    }
+  }
+
+  siguiente() : void{
+    if(!this.esUltima){
+      this.page++;
+      this.cargarEmpleados();
+    }
+  }
+
+  setPagina(pag : number) : void{
+    this.page = pag;
+    this.cargarEmpleados();
+  }
+
+  setOrder() : void{
+    if(this.order === 'asc'){
+      this.order = 'desc';
+    }else{
+      this.order = 'asc';
+    }
+    this.cargarEmpleados();
+  }
+
+  setSort(sort : string){
+    this.sort = sort;
+    this.cargarEmpleados();
+  }
+
+  
 
 }

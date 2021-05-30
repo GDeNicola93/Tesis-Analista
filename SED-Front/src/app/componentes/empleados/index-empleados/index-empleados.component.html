@@ -16,7 +16,7 @@
         <div class="card-body">
           <form class="form-inline mb-3 float-right">
             <div class="input-group">
-              <input (keydown.enter)="buscarEmpleado()" type="text" class="form-control" name="search" placeholder="Buscar..." [(ngModel)]="form.buscadorNombreApellido" name="buscadorNombreApellido">
+              <input (keydown.enter)="buscarEmpleado()" type="text" class="form-control" name="search" placeholder="Buscar..." [(ngModel)]="filtro" name="filtro">
               <span class="input-group-append">
                   <button class="btn btn-secondary" type="button" (click)="buscarEmpleado()">
                       <i class="fas fa-search fa-sm"></i>
@@ -27,25 +27,27 @@
             <table class="table table-sm table-hover">
                 <thead>
                   <tr class="table-primary">
-                    <th scope="col">Legajo</th>
-                    <th scope="col">Nombre y Apellido</th>
+                    <th role="button" (click)="setOrder()" scope="col"><i [ngClass]="order === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'"></i></th>
+                    <th role="button" (click)="setSort('emp.legajo')" scope="col">Legajo</th>
+                    <th role="button" (click)="setSort('emp.nombre')" scope="col">Nombre y Apellido</th>
                     <th scope="col">Lugar Trabajo</th>
                     <th scope="col">Opciones</th>
                   </tr>
                 </thead>
                 <tbody *ngFor="let emp of empleados">
                   <tr>
+                    <th></th>
                     <th scope="row">{{emp.legajo}}</th>
                     <td>{{emp.nombreApellido}}</td>
                     <td>
-                      <div *ngFor="let lugar of emp.lugaresTrabajo">
+                      <div *ngFor="let lugar of emp.sucursalesTrabajo">
                         <tr>{{lugar}}</tr>
                       </div>
                     </td>
                     <td>
                       <div class="row">
                         <div class="col">
-                          <button routerLink="/empleados/ver/{{emp.id}}" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Mas Información"><i class="far fa-eye"></i></button>
+                          <button routerLink="/empleados/ver/{{emp.idEmpleado}}" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Mas Información"><i class="far fa-eye"></i></button>
                           <button style="margin-right: 5px;" class="btn btn-sm btn-warning shadow-sm" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></button>
                           <button *ngIf="emp.habilitado" class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Deshabilitar acceso al sistema"><i class="fas fa-user-slash"></i></button>
                           <button *ngIf="!emp.habilitado" class="btn btn-sm btn-success shadow-sm" data-toggle="tooltip" data-placement="top" title="Habilitar acceso al sistema"><i class="fas fa-user-check"></i></button>
@@ -55,7 +57,22 @@
                   </tr>
                 </tbody>
               </table>
-              <p *ngIf="esEmptyEmpleados()" style="text-align: center;"><i class="fas fa-exclamation-circle"></i> Sin resultados para el filtro aplicado.</p>
+              <p *ngIf="esEmptyEmpleados()" style="text-align: center;"><i class="fas fa-exclamation-circle"></i> No se encontraron resultados.</p>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item" [ngClass]="{'disabled': esPrimera === true}">
+                    <a role="button" class="page-link" (click)="anterior()" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li *ngFor="let p of totalPages;let i=index" [ngClass]="{'active' : i == page}" class="page-item"><a role="button" class="page-link" (click)="setPagina(i)">{{i+1}}</a></li>
+                  <li class="page-item" [ngClass]="{'disabled': esUltima === true}">
+                    <a role="button" class="page-link" (click)="siguiente()" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
         </div>
     </div>
 </div>

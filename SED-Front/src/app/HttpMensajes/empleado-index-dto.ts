@@ -1,7 +1,7 @@
 export class EmpleadoIndexDto{
-    id: number;
+    idEmpleado: number;
     legajo : string;
     nombreApellido : string;
     habilitado : boolean;
-    lugaresTrabajo : String[] = [];
+    sucursalesTrabajo : String[] = [];
 }
