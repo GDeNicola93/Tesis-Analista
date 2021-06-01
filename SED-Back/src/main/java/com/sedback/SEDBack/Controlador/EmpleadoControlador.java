@@ -37,11 +37,11 @@ public class EmpleadoControlador {
     @Autowired
     private EmpleadoServicio servicio;
       
-//    @GetMapping(params = {"id"})
-//    @PreAuthorize("hasAuthority('Administrador')")
-//    public ResponseEntity<EmpleadoVerDto> getEmpleadoById(Integer id){
-//        return servicio.getEmpleadoById(id);
-//    }
+    @GetMapping(params = {"id"})
+    @PreAuthorize("hasAuthority('Administrador')")
+    public ResponseEntity<EmpleadoVerDto> getEmpleadoById(Integer id){
+        return servicio.getEmpleadoById(id);
+    }
     
     @GetMapping(params = {"filtro"})
     @PreAuthorize("hasAuthority('Administrador')")

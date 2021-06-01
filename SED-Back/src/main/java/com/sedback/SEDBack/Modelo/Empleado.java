@@ -8,6 +8,7 @@ package com.sedback.SEDBack.Modelo;
 import com.sun.istack.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -58,4 +59,13 @@ public class Empleado implements Serializable {
     @NotNull
     @ManyToMany
     private Set<PuestoTrabajo> puestosTrabajo = new HashSet<>();
+    
+    public String getFechaDeNacimientoFormateada(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return this.getFechaDeNacimiento().format(formatter);
+    }
+    
+    public String getNombreCompleto(){
+        return this.getNombre() + " " + this.getApellido();
+    }
 }

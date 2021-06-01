@@ -3,7 +3,7 @@ export class EmpleadoVerDto{
     legajo : string;
     nombreApellido : string;
     dni : string;
-    fechaDeNacimiento : any;
+    fechaDeNacimiento : string;
     nombreUsuario : string;
     nombreFotoPerfil : string;
     email : string;

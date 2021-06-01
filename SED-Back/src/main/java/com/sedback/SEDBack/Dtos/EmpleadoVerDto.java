@@ -14,7 +14,7 @@ public class EmpleadoVerDto {
     
     private String dni;
     
-    private LocalDate fechaDeNacimiento;
+    private String fechaDeNacimiento;
     
     private String nombreUsuario;
     
