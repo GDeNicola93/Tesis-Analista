@@ -4,6 +4,7 @@ import { Competencia } from 'src/app/modelo/competencia';
 import { ComportamientoPlantilla } from 'src/app/modelo/comportamiento-plantilla';
 import { DetallePlantilla } from 'src/app/modelo/detalle-plantilla';
 import { PuestoTrabajo } from 'src/app/modelo/puesto-trabajo';
+import { CompetenciaService } from 'src/app/servicios/competencia.service';
 import { PlantillaEvaluacionService } from 'src/app/servicios/plantilla-evaluacion.service';
 import { PuestoTrabajoService } from 'src/app/servicios/puesto-trabajo.service';
 
@@ -18,8 +19,8 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
   pasoActivo : number = 1;
   detallePlantilla : DetallePlantilla[] = [];
   esPreguntaObjetivo : boolean = false;
+  comboCompetencias : Competencia[] = [];
 
-  nuevaCompetencia : any = {};
   nuevoComportamiento : ComportamientoPlantilla[] = [];
 
 
@@ -27,7 +28,7 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
   guardado = false;
   error = false;
 
-  constructor(private puestoTrabajoService : PuestoTrabajoService,private modalService: NgbModal,private plantillaEvaluacionService:PlantillaEvaluacionService) { }
+  constructor(private puestoTrabajoService : PuestoTrabajoService,private modalService: NgbModal,private plantillaEvaluacionService:PlantillaEvaluacionService,private competenciaService : CompetenciaService) { }
 
   ngOnInit(): void {
     this.obtenerPuestosTrabajo();
@@ -48,6 +49,12 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
     });
   }
 
+  obtenerCompetencias() : void{
+    this.competenciaService.obtenerCompetenciasParaSelect().subscribe(data => {
+      this.comboCompetencias = data;
+    });
+  }
+
   siguientePaso(): void{
     this.pasoActivo = 2;
   }
@@ -58,7 +65,7 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
 
   agregarCompetencia(content : any) : void{
     this.nuevoComportamiento = [];
-    this.nuevaCompetencia = {};
+    this.obtenerCompetencias();
     this.modalService.open(content,{ size: 'xl' });
   }
 
@@ -67,7 +74,7 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
   }
 
   guardarCompetencia() : void{
-    this.detallePlantilla.push(new DetallePlantilla(this.nuevaCompetencia,this.esPreguntaObjetivo,this.form.objetivo,this.nuevaCompetencia.puntajeMinAprobacion,this.nuevoComportamiento));
+    this.detallePlantilla.push(new DetallePlantilla(this.form.competencia,this.esPreguntaObjetivo,this.form.objetivo,this.form.puntajeMinAprobacion,this.nuevoComportamiento));
     this.esPreguntaObjetivo = false;
     this.form.objetivo = null;
     this.modalService.dismissAll();
@@ -86,9 +93,8 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
         this.error = true;
       }
     );
-
-
-
   }
+
+
 
 }

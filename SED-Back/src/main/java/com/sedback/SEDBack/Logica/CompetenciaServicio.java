@@ -4,6 +4,7 @@ import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Modelo.Competencia;
 import com.sedback.SEDBack.Modelo.DetallePlantilla;
 import com.sedback.SEDBack.Persistencia.CompetenciaRepositorio;
+import java.util.List;
 import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,11 @@ public class CompetenciaServicio {
     private CompetenciaRepositorio repositorio;
     
     
-    public void guardarCompetencias(Set<DetallePlantilla> dp){
-        for(DetallePlantilla x : dp){
-            repositorio.save(x.getCompetencia());
-        }
-    }
+//    public void guardarCompetencias(Set<DetallePlantilla> dp){
+//        for(DetallePlantilla x : dp){
+//            repositorio.save(x.getCompetencia());
+//        }
+//    }
     
     public ResponseEntity<HttpMensaje> guardar(Competencia competencia){
        try{
@@ -39,5 +40,9 @@ public class CompetenciaServicio {
     
     public ResponseEntity<Page<Competencia>> obtenerCompetencias(Pageable page){
         return ResponseEntity.ok().body(repositorio.findAll(page));
+    }
+    
+    public ResponseEntity<List<Competencia>> obtenerCompetenciasParaSelect(){
+        return ResponseEntity.ok().body(repositorio.findByOrderByNombreAsc());
     }
 }

@@ -18,6 +18,10 @@ export class CompetenciaService {
   }
 
   public obtenerCompetencias(page:number,size:number,sort:string,order:string) : Observable<any>{
-    return this.httpClient.get<Competencia[]>(this.urlBaseService.obtenerURLBase() + `competencia?sort=${sort},${order}&size=${size}&page=${page}`);
+    return this.httpClient.get<Competencia[]>(this.urlBaseService.obtenerURLBase() + `competencia/index?sort=${sort},${order}&size=${size}&page=${page}`);
+  }
+
+  public obtenerCompetenciasParaSelect() : Observable<any>{
+    return this.httpClient.get<Competencia[]>(this.urlBaseService.obtenerURLBase() + "competencia/for-select");
   }
 }

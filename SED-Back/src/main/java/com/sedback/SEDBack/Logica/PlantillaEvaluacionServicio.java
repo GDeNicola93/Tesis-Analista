@@ -33,8 +33,8 @@ public class PlantillaEvaluacionServicio {
             if(pe.getDetallePlantilla().isEmpty()){
                 return ResponseEntity.badRequest().body(new HttpMensaje("Debe agregar como minimo una competencia."));
             }
-            //Guardo las competencias que tiene la plantilla de evaluación antes de guardar la plantilla de evaluación
-            this.competenciaServicio.guardarCompetencias(pe.getDetallePlantilla());
+//            Guardo las competencias que tiene la plantilla de evaluación antes de guardar la plantilla de evaluación
+//            this.competenciaServicio.guardarCompetencias(pe.getDetallePlantilla());
             
             //Ahora se deben guardar los Comportamientos de plantilla
             this.comportamientoPlantillaServicio.guardarComportamientoPlantilla(pe.getDetallePlantilla());

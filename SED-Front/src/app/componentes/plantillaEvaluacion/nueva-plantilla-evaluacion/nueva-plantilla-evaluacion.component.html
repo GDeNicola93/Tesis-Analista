@@ -98,12 +98,10 @@
               <hr>
               <form>
                 <div class="form-group">
-                  <label for="competencia_nombre">Nombre Competencia: </label>
-                  <input type="text" class="form-control" name="nuevaCompetencia.nombre" [(ngModel)]="nuevaCompetencia.nombre"  required autocomplete="off">
-                </div>
-                <div class="form-group">
-                  <label for="competencia_descripcion">Descripción competencia: </label>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="nuevaCompetencia.descripcion" [(ngModel)]="nuevaCompetencia.descripcion"></textarea>
+                  <label>Seleccione una competencia: </label>
+                  <select class="form-control" [(ngModel)]="form.competencia" name="competencia">
+                    <option *ngFor="let compe of comboCompetencias" [ngValue]="compe">{{compe.nombre}}</option>
+                  </select>
                 </div>
                 <div class="form-group form-check">
                   <input type="checkbox" class="form-check-input" id="exampleCheck1" [checked]="esPreguntaObjetivo" (change)="cambiarCheck()">
@@ -116,8 +114,8 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="puntajeMinAprobación">% Min de Aprobación: </label>
-                  <input type="number" class="form-control" name="puntajeMinAprobación" [(ngModel)]="nuevaCompetencia.puntajeMinAprobacion"  required autocomplete="off">
+                  <label>% Min de Aprobación: </label>
+                  <input type="number" class="form-control" name="puntajeMinAprobación" [(ngModel)]="form.puntajeMinAprobacion" autocomplete="off">
                 </div>
               </form>
             </div>
