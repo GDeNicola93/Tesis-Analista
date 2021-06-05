@@ -1,25 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sedback.SEDBack.Logica;
 
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Modelo.Sucursal;
 import com.sedback.SEDBack.Persistencia.SucursalRepositorio;
 import java.util.List;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author ususario
- */
+
 @Service
+@Transactional
 public class SucursalServicio {
     @Autowired
     private SucursalRepositorio repositorio;
@@ -39,8 +34,8 @@ public class SucursalServicio {
         }
     }
     
-    public ResponseEntity<List<Sucursal>> obtenerSucursales(){
-        return ResponseEntity.ok().body(repositorio.findAll());
+    public ResponseEntity<Page<Sucursal>> getSucursales(Pageable page){
+        return ResponseEntity.ok().body(repositorio.findAll(page));
     }
     
     public ResponseEntity<Sucursal> obtenerSucursalPorId(Integer id){

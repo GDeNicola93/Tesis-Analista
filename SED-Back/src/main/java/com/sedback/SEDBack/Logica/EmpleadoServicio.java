@@ -82,19 +82,6 @@ public class EmpleadoServicio {
         }
     }
     
-//    public ResponseEntity<List<EmpleadoIndexDto>> getEmpleados(){
-//        List<Usuario> usuarios = repositorio.getEmpleadosIndex();
-//        List<EmpleadoIndexDto> empleadosIndexDto = new ArrayList();
-//        for (int i=0;i<usuarios.size();i++){
-//            empleadosIndexDto.add(empleadoMapper.toDtoIndex(usuarios.get(i)));
-//        }
-//        return ResponseEntity.ok().body(empleadosIndexDto);
-//    }
-//    
-//    public ResponseEntity<EmpleadoVerDto> getEmpleadoById(Integer id){
-//        Usuario usuario = repositorio.getEmpleadoById(id);
-//        return ResponseEntity.ok().body(empleadoMapper.toDtoVer(usuario));
-//    }
     public ResponseEntity<EmpleadoVerDto> getEmpleadoById(Integer id){
         return ResponseEntity.ok().body(EmpleadoVerDtoMapper.INSTANCE.empleadotoEmpleadoVerDto(repositorio.getEmpleadoById(id)));
     }

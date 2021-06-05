@@ -7,7 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SucursalRepositorio extends JpaRepository<Sucursal,Integer> {
-    
-    @Override
-    List<Sucursal> findAll();
+
 }

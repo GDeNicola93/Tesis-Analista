@@ -13,8 +13,8 @@ export class SucursalService {
 
   constructor(private httpClient: HttpClient,private urlBaseService : UrlBaseService) { }
 
-  public obtenerSucursales() : Observable<any>{
-    return this.httpClient.get<Sucursal[]>(this.urlBaseService.obtenerURLBase() + 'sucursal',cabecera);
+  public getSucursales(page:number,size:number,sort:string,order:string) : Observable<any>{
+    return this.httpClient.get<Sucursal[]>(this.urlBaseService.obtenerURLBase() + `sucursal?sort=${sort},${order}&size=${size}&page=${page}`,cabecera);
   }
 
   public guardar(sucursal:Sucursal) : Observable<any>{
