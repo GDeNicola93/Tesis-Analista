@@ -24,7 +24,6 @@
                     <th scope="col">Cód</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Área</th>
-                    <th scope="col">Sucursal</th>
                     <th scope="col">Opciones</th>
                   </tr>
                 </thead>
@@ -33,11 +32,10 @@
                     <th scope="row">{{puesto.id}}</th>
                     <td>{{puesto.nombrePuesto}}</td>
                     <td>{{puesto.area.nombre}}</td>
-                    <td>{{puesto.sucursal.nombre}}</td>
                     <td>
                       <div class="row">
                         <div class="col">
-                          <button (click)="verObjetivosPuesto(content,puesto)" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver Objetivos"><i class="fas fa-bullseye"></i></button>
+                          <!-- <button (click)="verObjetivosPuesto(content,puesto)" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver Objetivos"><i class="fas fa-bullseye"></i></button> -->
                           <button style="margin-right: 5px;" class="btn btn-sm btn-warning shadow-sm" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></button>
                           <button class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fas fa-trash-alt"></i></button>
                         </div>

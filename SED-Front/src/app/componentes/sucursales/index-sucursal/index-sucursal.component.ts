@@ -13,7 +13,7 @@ export class IndexSucursalComponent implements OnInit {
   cargando = true;
 
   page : number = 0;
-  size : number = 1;
+  size : number = 10;
   sort : string = 'id'
   order : string = 'asc';
   esUltima : boolean = false;

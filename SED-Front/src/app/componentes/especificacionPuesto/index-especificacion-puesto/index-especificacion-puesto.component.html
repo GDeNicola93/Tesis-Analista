@@ -1,0 +1,69 @@
+<app-menu></app-menu>
+<div class="container" style="text-align: center;" *ngIf="cargando">
+    <img src="../../../../assets/animate/svg-loaders/grid.svg" alt="Cargando...">
+    <h6 style="color: blue;margin-top: 10px;">Cargando...</h6>
+  </div>
+  
+  <div class="container" *ngIf="!cargando">
+      <div class="row">
+          <div class="col">
+              <h4>Especificación de Puestos de Trabajo</h4>
+          </div>
+          <div class="col">
+              <button routerLink="/especificacion-puestos-trabajo/nueva" class="float-right btn btn-sm btn-success shadow-sm"><i class="fas fa-plus"></i> Agregar</button>
+          </div>
+  
+      </div>
+  
+      <div class="card shadow">
+          <h6 class="card-header font-weight-bold">Listado de especificaciones de Puestos de Trabajo</h6>
+          <div class="card-body">
+              <table class="table table-sm table-hover">
+                  <thead>
+                    <tr class="table-primary">
+                      <th scope="col">Cód</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Área</th>
+                      <th scope="col">Opciones</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let puesto of puestosTrabajo">
+                    <tr>
+                      <th scope="row">{{puesto.id}}</th>
+                      <td>{{puesto.nombrePuesto}}</td>
+                      <td>{{puesto.area.nombre}}</td>
+                      <td>
+                        <div class="row">
+                          <div class="col">
+                            <!-- <button (click)="verObjetivosPuesto(content,puesto)" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver Objetivos"><i class="fas fa-bullseye"></i></button> -->
+                            <button style="margin-right: 5px;" class="btn btn-sm btn-warning shadow-sm" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></button>
+                            <button class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fas fa-trash-alt"></i></button>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+          </div>
+      </div>
+  
+      <!-- Modal para ver los objetivos de un puesto -->
+      <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title">Listado de Objetivos de Puesto de Trabajo</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p><strong><u>Objetivos del Puesto:</u></strong> {{puestoSeleccionadoParaVerOjetivos.nombrePuesto}} (<strong>Área:</strong> {{puestoSeleccionadoParaVerOjetivos.area.nombre}}) (<strong>Sucursal:</strong> {{puestoSeleccionadoParaVerOjetivos.sucursal.nombre}})</p>
+            <div *ngFor="let obj of puestoSeleccionadoParaVerOjetivos.objetivosPuesto" style="text-align: center;">
+              <li>{{obj.descripcion}}</li>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Cerrar</button>
+          </div>  
+      </ng-template>
+  </div>
+  

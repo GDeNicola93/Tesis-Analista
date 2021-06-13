@@ -7,6 +7,8 @@ import { NuevaCompetenciaComponent } from './componentes/competencias/nueva-comp
 import { IndexEmpleadosComponent } from './componentes/empleados/index-empleados/index-empleados.component';
 import { NuevoEmpleadoComponent } from './componentes/empleados/nuevo-empleado/nuevo-empleado.component';
 import { VerEmpleadoComponent } from './componentes/empleados/ver-empleado/ver-empleado.component';
+import { IndexEspecificacionPuestoComponent } from './componentes/especificacionPuesto/index-especificacion-puesto/index-especificacion-puesto.component';
+import { NuevaEspecificacionPuestoComponent } from './componentes/especificacionPuesto/nueva-especificacion-puesto/nueva-especificacion-puesto.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { IndexPlantillaEvaluacionComponent } from './componentes/plantillaEvaluacion/index-plantilla-evaluacion/index-plantilla-evaluacion.component';
@@ -36,6 +38,10 @@ const routes: Routes = [
   //Puestos de Trabajo
   {path: 'puestos-trabajo',component:IndexPuestosTrabajoComponent,canActivate:[GeneralGuard],data: { expectedRol: ["Administrador"]}},
   {path: 'puestos-trabajo/nuevo',component:NuevoPuestosTrabajoComponent,canActivate:[GeneralGuard],data: { expectedRol: ["Administrador"]}},
+
+  //Especificacion de Puestos de Trabajo
+  {path: 'especificacion-puestos-trabajo',component:IndexEspecificacionPuestoComponent,canActivate:[GeneralGuard],data: { expectedRol: ["Administrador"]}},
+  {path: 'especificacion-puestos-trabajo/nueva',component:NuevaEspecificacionPuestoComponent,canActivate:[GeneralGuard],data: { expectedRol: ["Administrador"]}},
 
   //Empleados
   {path: 'empleados',component:IndexEmpleadosComponent,canActivate:[GeneralGuard],data: { expectedRol: ["Administrador"]}},

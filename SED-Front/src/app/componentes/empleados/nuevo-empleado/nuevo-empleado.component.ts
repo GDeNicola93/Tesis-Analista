@@ -106,7 +106,7 @@ export class NuevoEmpleadoComponent implements OnInit {
   }
 
   obtenerSucursales() : void {
-    this.sucursalServicio.obtenerSucursales().subscribe(data => {
+    this.sucursalServicio.getSucursalesSelect().subscribe(data => {
       this.comboSucursales = data;
     });
   }

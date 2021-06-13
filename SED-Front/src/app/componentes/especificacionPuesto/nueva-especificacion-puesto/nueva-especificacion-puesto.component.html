@@ -1,0 +1,101 @@
+<app-menu></app-menu>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h4>Nueva Especificación de Puesto de Trabajo</h4>
+        </div>
+        <div class="col">
+            <button routerLink="/especificacion-puestos-trabajo" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+        </div>
+
+    </div>
+
+    <div class="card shadow">
+        <h6 class="card-header font-weight-bold">Formulario de registro de nueva Especificación de Puesto de Trabajo</h6>
+        <div class="card-body">
+            <form [formGroup]="especificacionPuestoForm" (submit)="guardar()">
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label>Seleccione un puesto de Trabajo: </label>
+                            <select class="form-control" name="puestoTrabajo" formControlName="puestoTrabajo" (change)="cargarComboSucursales()" [ngClass]="(especificacionPuestoForm.get('puestoTrabajo').touched || especificacionPuestoForm.get('puestoTrabajo').dirty) && especificacionPuestoForm.get('puestoTrabajo').hasError('required') ? 'is-invalid':''">
+                              <option *ngFor="let pt of comboPuestosTrabajo" [ngValue]="pt">{{pt.nombrePuesto}}</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                {{
+                                    especificacionPuestoForm.get('puestoTrabajo').hasError('required') 
+                                    ? "Seleccione un puesto de trabajo" 
+                                    : ""
+                                }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label>Seleccione la sucursal a la que pertenece: </label>
+                            <select class="form-control" name="sucursal" formControlName="sucursal" [ngClass]="(especificacionPuestoForm.get('sucursal').touched || especificacionPuestoForm.get('sucursal').dirty) && especificacionPuestoForm.get('sucursal').hasError('required') ? 'is-invalid':''">
+                              <option *ngFor="let sucursal of comboSucursales" [ngValue]="sucursal">{{sucursal.nombre}}</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                {{
+                                    especificacionPuestoForm.get('sucursal').hasError('required') 
+                                    ? "Seleccione una sucursal" 
+                                    : ""
+                                }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción (opcional): </label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" formControlName="descripcion"></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label for="nombre">Objetivo del puesto: </label>
+                            <input type="text" class="form-control" name="objetivo" autocomplete="off" formControlName="objetivo">
+                        </div>
+                        <div class="col-3"> 
+                            <button style="margin-top: 35px;" type="button" (click)="agregarObjetivo()" class="btn btn-sm btn-outline-success"><i class="fas fa-plus"></i> Agregar objetivo</button>   
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Objetivos ya agregados: </label>
+                    <p *ngIf="emptyObjetivos" style="text-align: center;"><i class="fas fa-exclamation-circle"></i> Aun no has agregado objetivos al puesto.</p>
+                    <table class="table table-hover" *ngIf="!emptyObjetivos">
+                        <tbody *ngFor="let obj of objetivosAgregados">
+                            <tr>
+                            <td>{{obj.descripcion}}</td>
+                            <td><button type="button" (click)="eliminarObjetivo(obj)"><i class="fas fa-times"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
+                        <strong><i class="fas fa-times"></i> ¡Error!</strong> {{mensaje}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="guardado">
+                        <strong><i class="fas fa-check"></i> ¡Perfecto!</strong> {{mensaje}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button [disabled]="especificacionPuestoForm.invalid" type="submit" class="float-right btn btn-sm btn-success"><i class="far fa-save"></i> Guardar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+</div>
+

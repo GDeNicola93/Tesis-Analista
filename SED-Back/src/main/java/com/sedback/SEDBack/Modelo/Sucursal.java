@@ -33,4 +33,8 @@ public class Sucursal implements Serializable {
 	
 	@ManyToMany
 	private Set<Area> areas = new HashSet<>();
+        
+        public boolean tieneArea(Area area){
+            return this.getAreas().stream().anyMatch(a -> (a.equals(area)));
+        }
 }

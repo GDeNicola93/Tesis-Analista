@@ -2,6 +2,7 @@
 package com.sedback.SEDBack.Mappers;
 
 import com.sedback.SEDBack.Dtos.EmpleadoIndexDto;
+import com.sedback.SEDBack.Modelo.EspecificacionDePuesto;
 import com.sedback.SEDBack.Modelo.PuestoTrabajo;
 import com.sedback.SEDBack.Modelo.Usuario;
 import java.util.HashSet;
@@ -22,9 +23,9 @@ public interface EmpleadoIndexDtoMapper {
     @Mapping(expression = "java(setpuestoTrabajoToString(usuario.getEmpleado().getPuestosTrabajo()))", target = "sucursalesTrabajo")  
     EmpleadoIndexDto empleadotoEmpleadoIndexDto(Usuario usuario);
       
-    default Set<String> setpuestoTrabajoToString(Set<PuestoTrabajo> puestos){
+    default Set<String> setpuestoTrabajoToString(Set<EspecificacionDePuesto> puestos){
         Set<String> nombreSucursalesTrabajo = new HashSet<>();
-        for (PuestoTrabajo p : puestos) {
+        for (EspecificacionDePuesto p : puestos) {
             nombreSucursalesTrabajo.add(p.getSucursal().getNombre());
         }
         return nombreSucursalesTrabajo;

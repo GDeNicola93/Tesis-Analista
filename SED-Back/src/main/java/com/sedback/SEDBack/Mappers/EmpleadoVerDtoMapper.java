@@ -1,6 +1,7 @@
 package com.sedback.SEDBack.Mappers;
 
 import com.sedback.SEDBack.Dtos.EmpleadoVerDto;
+import com.sedback.SEDBack.Modelo.EspecificacionDePuesto;
 import com.sedback.SEDBack.Modelo.PuestoTrabajo;
 import com.sedback.SEDBack.Modelo.Usuario;
 import java.time.LocalDate;
@@ -24,10 +25,10 @@ public interface EmpleadoVerDtoMapper {
     @Mapping(expression = "java(setpuestoTrabajoToString(usuario.getEmpleado().getPuestosTrabajo()))", target = "puestos")          
     EmpleadoVerDto empleadotoEmpleadoVerDto(Usuario usuario);
     
-    default Set<String> setpuestoTrabajoToString(Set<PuestoTrabajo> puestos){ //Devuelve un Set con el nombre del puesto y el nombre de la sucursal del puesto
+    default Set<String> setpuestoTrabajoToString(Set<EspecificacionDePuesto> puestos){ //Devuelve un Set con el nombre del puesto y el nombre de la sucursal del puesto
         Set<String> puestosTrabajoToString = new HashSet<>();
-        for (PuestoTrabajo p : puestos) {
-            puestosTrabajoToString.add(p.getNombrePuesto() + "(" + p.getSucursal().getNombre() + ")");
+        for (EspecificacionDePuesto p : puestos) {
+            puestosTrabajoToString.add(p.getPuesto().getNombrePuesto() + "(" + p.getSucursal().getNombre() + ")");
         }
         return puestosTrabajoToString;
     }

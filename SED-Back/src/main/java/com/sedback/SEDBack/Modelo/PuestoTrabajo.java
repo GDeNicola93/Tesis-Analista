@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sedback.SEDBack.Modelo;
 
 import com.sun.istack.NotNull;
@@ -19,10 +14,6 @@ import javax.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- *
- * @author ususario
- */
 @Entity
 @Data
 @NoArgsConstructor
@@ -37,12 +28,5 @@ public class PuestoTrabajo implements Serializable {
     
     @NotNull
     @ManyToOne
-    private Sucursal sucursal;
-    
-    @NotNull
-    @ManyToOne
     private Area area;
-    
-    @OneToMany
-    private Set<Objetivo> objetivosPuesto = new HashSet<>();
 }

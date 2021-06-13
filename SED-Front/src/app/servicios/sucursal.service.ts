@@ -14,7 +14,15 @@ export class SucursalService {
   constructor(private httpClient: HttpClient,private urlBaseService : UrlBaseService) { }
 
   public getSucursales(page:number,size:number,sort:string,order:string) : Observable<any>{
-    return this.httpClient.get<Sucursal[]>(this.urlBaseService.obtenerURLBase() + `sucursal?sort=${sort},${order}&size=${size}&page=${page}`,cabecera);
+    return this.httpClient.get<Sucursal[]>(this.urlBaseService.obtenerURLBase() + `sucursal/index?sort=${sort},${order}&size=${size}&page=${page}`,cabecera);
+  }
+
+  public getSucursalesSelect() : Observable<any>{
+    return this.httpClient.get<Sucursal[]>(this.urlBaseService.obtenerURLBase() + 'sucursal/select',cabecera);
+  }
+
+  public getSucursalesSegunAreaSelect(id:number) : Observable<any>{
+    return this.httpClient.get<Sucursal[]>(this.urlBaseService.obtenerURLBase() + `sucursal/select/area/${id}`,cabecera);
   }
 
   public guardar(sucursal:Sucursal) : Observable<any>{

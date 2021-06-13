@@ -21,7 +21,7 @@ export class IndexPuestosTrabajoComponent implements OnInit {
   }
 
   cargarPuestosDeTrabajo() : void{
-    this.puestosTeabajoServicio.obtenerPuestoTrabajo().subscribe(data => {
+    this.puestosTeabajoServicio.getPuestosTrabajosSelect().subscribe(data => {
       this.puestosTrabajo = data;
       this.cargando = false;
     })

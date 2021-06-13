@@ -28,6 +28,8 @@ import { UpdatePasswordComponent } from './componentes/usuario/update-password/u
 import { UnAuthorizedInterceptor } from './servicios/no-authorized-interceptor.service';
 import { IndexCompetenciaComponent } from './componentes/competencias/index-competencia/index-competencia.component';
 import { NuevaCompetenciaComponent } from './componentes/competencias/nueva-competencia/nueva-competencia.component';
+import { IndexEspecificacionPuestoComponent } from './componentes/especificacionPuesto/index-especificacion-puesto/index-especificacion-puesto.component';
+import { NuevaEspecificacionPuestoComponent } from './componentes/especificacionPuesto/nueva-especificacion-puesto/nueva-especificacion-puesto.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { NuevaCompetenciaComponent } from './componentes/competencias/nueva-comp
     SubirFotoPerfilComponent,
     UpdatePasswordComponent,
     IndexCompetenciaComponent,
-    NuevaCompetenciaComponent
+    NuevaCompetenciaComponent,
+    IndexEspecificacionPuestoComponent,
+    NuevaEspecificacionPuestoComponent
   ],
   imports: [
     BrowserModule,

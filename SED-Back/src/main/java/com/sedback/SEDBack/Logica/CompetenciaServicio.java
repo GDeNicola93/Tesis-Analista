@@ -19,13 +19,6 @@ public class CompetenciaServicio {
     @Autowired
     private CompetenciaRepositorio repositorio;
     
-    
-//    public void guardarCompetencias(Set<DetallePlantilla> dp){
-//        for(DetallePlantilla x : dp){
-//            repositorio.save(x.getCompetencia());
-//        }
-//    }
-    
     public ResponseEntity<HttpMensaje> guardar(Competencia competencia){
        try{
           if(StringUtils.isBlank(competencia.getNombre())){

@@ -17,7 +17,7 @@ export class PuestoTrabajoService {
     return this.httpClient.post<any>(this.urlBaseService.obtenerURLBase() + 'puesto-trabajo', puesto, cabecera);
   }
 
-  obtenerPuestoTrabajo() : Observable<any>{
+  getPuestosTrabajosSelect() : Observable<any>{
     return this.httpClient.get<PuestoTrabajo[]>(this.urlBaseService.obtenerURLBase() + 'puesto-trabajo',cabecera);
   }
 

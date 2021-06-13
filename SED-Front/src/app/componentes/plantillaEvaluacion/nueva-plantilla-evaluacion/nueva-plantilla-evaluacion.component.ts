@@ -44,7 +44,7 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
   }
 
   obtenerPuestosTrabajo() : void{
-    this.puestoTrabajoService.obtenerPuestoTrabajo().subscribe(data => {
+    this.puestoTrabajoService.getPuestosTrabajosSelect().subscribe(data => {
       this.comboPuestosTrabajo = data;
     });
   }
