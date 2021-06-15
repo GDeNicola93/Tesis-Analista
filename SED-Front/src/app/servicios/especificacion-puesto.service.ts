@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { EspecificacionDePuestoIndexDto } from '../HttpMensajes/especificacion-puesto-index-dto';
 import { HttpMensaje } from '../HttpMensajes/http-mensaje';
 import { EspecificacionDePuesto } from '../modelo/especificacion-puesto';
 import { UrlBaseService } from './url-base.service';
@@ -16,5 +17,9 @@ export class EspecificacionPuestoService {
 
   public guardar(edp:EspecificacionDePuesto) : Observable<HttpMensaje>{
     return this.httpClient.post<HttpMensaje>(this.urlBaseService.obtenerURLBase() + 'especificacion-puesto', edp, cabecera);
+  }
+
+  getEspecificacionesDePuestos(page:number,size:number,sort:string,order:string) : Observable<any>{
+    return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `especificacion-puesto?sort=${sort},${order}&size=${size}&page=${page}`,cabecera);
   }
 }

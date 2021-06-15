@@ -3,7 +3,6 @@ package com.sedback.SEDBack.Mappers;
 
 import com.sedback.SEDBack.Dtos.EmpleadoIndexDto;
 import com.sedback.SEDBack.Modelo.EspecificacionDePuesto;
-import com.sedback.SEDBack.Modelo.PuestoTrabajo;
 import com.sedback.SEDBack.Modelo.Usuario;
 import java.util.HashSet;
 import java.util.Set;

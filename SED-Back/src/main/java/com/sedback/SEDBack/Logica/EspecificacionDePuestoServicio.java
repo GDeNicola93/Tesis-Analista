@@ -1,10 +1,14 @@
 package com.sedback.SEDBack.Logica;
 
+import com.sedback.SEDBack.Dtos.EspecificacionDePuestoIndexDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
+import com.sedback.SEDBack.Mappers.EspecificacionDePuestoDtosMapper;
 import com.sedback.SEDBack.Modelo.EspecificacionDePuesto;
 import com.sedback.SEDBack.Persistencia.EspecificacionDePuestoRepositorio;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -35,5 +39,9 @@ public class EspecificacionDePuestoServicio {
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new HttpMensaje("Excepción no controlada.Desripción: "+e));
         }
+    }
+    
+    public ResponseEntity<Page<EspecificacionDePuestoIndexDto>> obtenerEspecificacionesDePuestosIndex(Pageable page){
+        return ResponseEntity.ok().body(EspecificacionDePuestoDtosMapper.INSTANCE.toEspecificacionDePuestoIndexDtoPage(repositorio.findAll(page)));
     }
 }

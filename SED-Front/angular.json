@@ -22,7 +22,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": true,
+            "aot": false, //Se pone en false para que cuando se corre ng serve te deje ejecutar igual el proyecto si es que este tiene errores
             "assets": [
               "src/favicon.ico",
               "src/assets"
