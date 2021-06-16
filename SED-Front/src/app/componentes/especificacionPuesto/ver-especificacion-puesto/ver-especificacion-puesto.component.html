@@ -1,0 +1,40 @@
+<app-menu></app-menu>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h5>Más información de Especificación de Puesto de trabajo</h5>
+        </div>
+        <div class="col">
+            <button routerLink="/especificacion-puestos-trabajo" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+        </div>
+    </div>
+    <div *ngIf="edp == null"><h6 style="text-align: center;"><i class="fas fa-exclamation-circle mt-5"></i> ¡La especificación de puesto de trabajo que intenta visualizar no existe!</h6></div>
+    <div *ngIf="edp != null" class="card shadow mt-2">
+        <h6 class="card-header font-weight-bold">Información de Especificación de Puesto de Trabajo</h6>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-5">
+                    <p><strong>Nombre del puesto:</strong> {{edp.nombrePuesto}}</p>
+                </div>
+                <div class="col-md">
+                    <p><strong>Sucursal:</strong> {{edp.sucursalNombre}}</p>
+                </div>
+                <div class="col-md">
+                    <p><strong>Area:</strong> {{edp.areaNombre}}</p>
+                </div>
+            </div>
+            <p *ngIf="edp.descripcion != null"><strong>Descripción:</strong> {{edp.descripcion}}</p>
+            <p *ngIf="edp.descripcion == null"><strong>Descripción:</strong> Sin especificar</p>
+            
+            <p><strong>Objetivos de la especificación de Puesto:</strong></p>
+            <div *ngIf="edp.objetivos.length != 0">
+                <div *ngFor="let obj of edp.objetivos" class="text-center">
+                    <li>{{obj.descripcion}}</li>
+                </div>
+            </div>
+            <p *ngIf="edp.objetivos.length == 0" class="text-center"><i class="fas fa-exclamation-circle"></i> No hay objetivos cargados</p>
+        </div>
+    </div>
+
+</div>

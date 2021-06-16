@@ -30,6 +30,8 @@ import { IndexCompetenciaComponent } from './componentes/competencias/index-comp
 import { NuevaCompetenciaComponent } from './componentes/competencias/nueva-competencia/nueva-competencia.component';
 import { IndexEspecificacionPuestoComponent } from './componentes/especificacionPuesto/index-especificacion-puesto/index-especificacion-puesto.component';
 import { NuevaEspecificacionPuestoComponent } from './componentes/especificacionPuesto/nueva-especificacion-puesto/nueva-especificacion-puesto.component';
+import { VerEspecificacionPuestoComponent } from './componentes/especificacionPuesto/ver-especificacion-puesto/ver-especificacion-puesto.component';
+
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { NuevaEspecificacionPuestoComponent } from './componentes/especificacion
     IndexCompetenciaComponent,
     NuevaCompetenciaComponent,
     IndexEspecificacionPuestoComponent,
-    NuevaEspecificacionPuestoComponent
+    NuevaEspecificacionPuestoComponent,
+    VerEspecificacionPuestoComponent
   ],
   imports: [
     BrowserModule,

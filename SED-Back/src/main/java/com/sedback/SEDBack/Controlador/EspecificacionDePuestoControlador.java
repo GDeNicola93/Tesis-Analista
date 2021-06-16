@@ -1,6 +1,7 @@
 package com.sedback.SEDBack.Controlador;
 
 import com.sedback.SEDBack.Dtos.EspecificacionDePuestoIndexDto;
+import com.sedback.SEDBack.Dtos.EspecificacionDePuestoVerDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Logica.EspecificacionDePuestoServicio;
 import com.sedback.SEDBack.Modelo.EspecificacionDePuesto;
@@ -33,5 +34,11 @@ public class EspecificacionDePuestoControlador {
     @PreAuthorize("hasAuthority('Administrador')")
     public ResponseEntity<Page<EspecificacionDePuestoIndexDto>> getEspecificacionesDePuestos(Pageable page){
         return servicio.obtenerEspecificacionesDePuestosIndex(page);
+    }
+    
+    @GetMapping(params = {"id"})
+    @PreAuthorize("hasAuthority('Administrador')")
+    public ResponseEntity<EspecificacionDePuestoVerDto> getEspecificacionesDePuestosById(Integer id){
+        return servicio.getEspecificacionesDePuestosById(id);
     }
 }

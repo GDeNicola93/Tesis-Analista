@@ -1,6 +1,7 @@
 package com.sedback.SEDBack.Mappers;
 
 import com.sedback.SEDBack.Dtos.EspecificacionDePuestoIndexDto;
+import com.sedback.SEDBack.Dtos.EspecificacionDePuestoVerDto;
 import com.sedback.SEDBack.Modelo.EspecificacionDePuesto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,4 +22,11 @@ public interface EspecificacionDePuestoDtosMapper {
         Page<EspecificacionDePuestoIndexDto> especificacionDePuestosIndexDtoPage = edpPage.map(this::toEspecificacionDePuestoIndexDto);
         return especificacionDePuestosIndexDtoPage;
     }
+    
+    @Mapping(expression = "java(edp.getId())", target = "idEspecificacionDePuesto")
+    @Mapping(expression = "java(edp.getPuesto().getNombrePuesto())", target = "nombrePuesto")
+    @Mapping(expression = "java(edp.getSucursal().getNombre())", target = "sucursalNombre")
+    @Mapping(expression = "java(edp.getPuesto().getArea().getNombre())", target = "areaNombre") 
+    @Mapping(expression = "java(edp.getObjetivosEnCurso())", target = "objetivos")        
+    EspecificacionDePuestoVerDto toEspecificacionDePuestoVerDto(EspecificacionDePuesto edp);
 }

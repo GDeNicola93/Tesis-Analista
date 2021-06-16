@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EspecificacionDePuestoIndexDto } from '../HttpMensajes/especificacion-puesto-index-dto';
+import { EspecificacionDePuestoVerDto } from '../HttpMensajes/especificacion-puesto-ver-dto';
 import { HttpMensaje } from '../HttpMensajes/http-mensaje';
 import { EspecificacionDePuesto } from '../modelo/especificacion-puesto';
 import { UrlBaseService } from './url-base.service';
@@ -21,5 +21,9 @@ export class EspecificacionPuestoService {
 
   getEspecificacionesDePuestos(page:number,size:number,sort:string,order:string) : Observable<any>{
     return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `especificacion-puesto?sort=${sort},${order}&size=${size}&page=${page}`,cabecera);
+  }
+
+  getEspecificacionesDePuestosById(id : number) : Observable<EspecificacionDePuestoVerDto>{
+    return this.httpClient.get<EspecificacionDePuestoVerDto>(this.urlBaseService.obtenerURLBase() + `especificacion-puesto?id=${id}`,cabecera);
   }
 }
