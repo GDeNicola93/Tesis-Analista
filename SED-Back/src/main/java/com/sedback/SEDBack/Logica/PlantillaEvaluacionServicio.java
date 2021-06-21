@@ -27,7 +27,7 @@ public class PlantillaEvaluacionServicio {
     
     public ResponseEntity<HttpMensaje> guardar(PlantillaEvaluacion pe){
         try{
-            if(pe.getPuestoTrabajo() == null){
+            if(pe.getEspecificacionDePuesto() == null){
                 return ResponseEntity.badRequest().body(new HttpMensaje("Debe seleccionar un puesto de trabajo valido."));
             }
             if(pe.getDetallePlantilla().isEmpty()){

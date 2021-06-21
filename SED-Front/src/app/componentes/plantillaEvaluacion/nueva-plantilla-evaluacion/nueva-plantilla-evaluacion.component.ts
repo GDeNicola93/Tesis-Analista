@@ -3,8 +3,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Competencia } from 'src/app/modelo/competencia';
 import { ComportamientoPlantilla } from 'src/app/modelo/comportamiento-plantilla';
 import { DetallePlantilla } from 'src/app/modelo/detalle-plantilla';
-import { PuestoTrabajo } from 'src/app/modelo/puesto-trabajo';
+import { EspecificacionDePuesto } from 'src/app/modelo/especificacion-puesto';
 import { CompetenciaService } from 'src/app/servicios/competencia.service';
+import { EspecificacionPuestoService } from 'src/app/servicios/especificacion-puesto.service';
 import { PlantillaEvaluacionService } from 'src/app/servicios/plantilla-evaluacion.service';
 import { PuestoTrabajoService } from 'src/app/servicios/puesto-trabajo.service';
 
@@ -15,7 +16,7 @@ import { PuestoTrabajoService } from 'src/app/servicios/puesto-trabajo.service';
 })
 export class NuevaPlantillaEvaluacionComponent implements OnInit {
   form: any = {}; 
-  comboPuestosTrabajo : PuestoTrabajo[] = [];
+  comboEspecificacionesPuestosTrabajo : EspecificacionDePuesto[] = [];
   pasoActivo : number = 1;
   detallePlantilla : DetallePlantilla[] = [];
   esPreguntaObjetivo : boolean = false;
@@ -28,7 +29,7 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
   guardado = false;
   error = false;
 
-  constructor(private puestoTrabajoService : PuestoTrabajoService,private modalService: NgbModal,private plantillaEvaluacionService:PlantillaEvaluacionService,private competenciaService : CompetenciaService) { }
+  constructor(private especificacionDePuestosTrabajoService : EspecificacionPuestoService,private modalService: NgbModal,private plantillaEvaluacionService:PlantillaEvaluacionService,private competenciaService : CompetenciaService) { }
 
   ngOnInit(): void {
     this.obtenerPuestosTrabajo();
@@ -44,8 +45,8 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
   }
 
   obtenerPuestosTrabajo() : void{
-    this.puestoTrabajoService.getPuestosTrabajosSelect().subscribe(data => {
-      this.comboPuestosTrabajo = data;
+    this.especificacionDePuestosTrabajoService.getEspecificacionesDePuestosParaSelect().subscribe(data => {
+      this.comboEspecificacionesPuestosTrabajo = data;
     });
   }
 

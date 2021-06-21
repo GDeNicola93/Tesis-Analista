@@ -20,7 +20,11 @@ export class EspecificacionPuestoService {
   }
 
   getEspecificacionesDePuestos(page:number,size:number,sort:string,order:string) : Observable<any>{
-    return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `especificacion-puesto?sort=${sort},${order}&size=${size}&page=${page}`,cabecera);
+    return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `especificacion-puesto/index?sort=${sort},${order}&size=${size}&page=${page}`,cabecera);
+  }
+
+  getEspecificacionesDePuestosParaSelect() : Observable<any>{
+    return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + 'especificacion-puesto/for-select',cabecera);
   }
 
   getEspecificacionesDePuestosById(id : number) : Observable<EspecificacionDePuestoVerDto>{

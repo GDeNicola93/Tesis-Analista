@@ -5,6 +5,7 @@ import com.sedback.SEDBack.Dtos.EspecificacionDePuestoVerDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Logica.EspecificacionDePuestoServicio;
 import com.sedback.SEDBack.Modelo.EspecificacionDePuesto;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,10 +31,16 @@ public class EspecificacionDePuestoControlador {
         return servicio.guardar(edp);
     }
     
-    @GetMapping
+    @GetMapping("/index")
     @PreAuthorize("hasAuthority('Administrador')")
     public ResponseEntity<Page<EspecificacionDePuestoIndexDto>> getEspecificacionesDePuestos(Pageable page){
         return servicio.obtenerEspecificacionesDePuestosIndex(page);
+    }
+    
+    @GetMapping("/for-select")
+    @PreAuthorize("hasAuthority('Administrador')")
+    public ResponseEntity<List<EspecificacionDePuesto>> getEspecificacionesDePuestosParaSelect(){
+        return servicio.getEspecificacionesDePuestosParaSelect();
     }
     
     @GetMapping(params = {"id"})

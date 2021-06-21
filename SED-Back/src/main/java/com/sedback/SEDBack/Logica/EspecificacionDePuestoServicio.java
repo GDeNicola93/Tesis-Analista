@@ -6,6 +6,7 @@ import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Mappers.EspecificacionDePuestoDtosMapper;
 import com.sedback.SEDBack.Modelo.EspecificacionDePuesto;
 import com.sedback.SEDBack.Persistencia.EspecificacionDePuestoRepositorio;
+import java.util.List;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,6 +45,10 @@ public class EspecificacionDePuestoServicio {
     
     public ResponseEntity<Page<EspecificacionDePuestoIndexDto>> obtenerEspecificacionesDePuestosIndex(Pageable page){
         return ResponseEntity.ok().body(EspecificacionDePuestoDtosMapper.INSTANCE.toEspecificacionDePuestoIndexDtoPage(repositorio.findAll(page)));
+    }
+    
+    public ResponseEntity<List<EspecificacionDePuesto>> getEspecificacionesDePuestosParaSelect(){
+        return ResponseEntity.ok().body(repositorio.findAll());
     }
     
     public ResponseEntity<EspecificacionDePuestoVerDto> getEspecificacionesDePuestosById(Integer id){

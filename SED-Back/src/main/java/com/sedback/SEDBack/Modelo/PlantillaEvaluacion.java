@@ -23,8 +23,9 @@ public class PlantillaEvaluacion implements Serializable{
     private Integer id;
     
     private String descripcion;
+    
     @ManyToOne
-    private PuestoTrabajo puestoTrabajo;
+    private EspecificacionDePuesto especificacionDePuesto;
     
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Calendar fechaCreaccion;
