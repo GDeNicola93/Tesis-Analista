@@ -1,16 +1,14 @@
 package com.sedback.SEDBack.Modelo;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,11 +20,9 @@ public class Evaluacion implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Calendar fechaInicioEvaluacion;
+    private LocalDate fechaInicioEvaluacion;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Calendar fechaFinEvaluacion;
+    private LocalDate fechaFinEvaluacion;
     
     @ManyToOne
     private Estado estado;
@@ -40,5 +36,17 @@ public class Evaluacion implements Serializable {
     private Integer puntajeMinAprobacion;
     
     @OneToMany
-    private Set<DetalleEvaluacion> detalleEvaluacion = new HashSet<>();
+    private List<DetalleEvaluacion> detalleEvaluacion;
+    
+    public void enCurso(LocalDate fechaActual,Estado enCurso){ //Este metodo recibe el estado EnCurso y la fecha Actual
+        if(fechaActual.equals(this.getFechaInicioEvaluacion())){
+            this.setEstado(enCurso);
+        }
+    }
+    
+    public void finalizar(LocalDate fechaActual,Estado finalizar){ //Este metodo recibe el estado EnCurso y la fecha Actual
+        if(fechaActual.equals(this.getFechaFinEvaluacion())){
+            this.setEstado(finalizar);
+        }
+    }
 }

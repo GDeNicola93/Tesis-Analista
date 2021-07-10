@@ -1,8 +1,7 @@
 package com.sedback.SEDBack.Dtos;
 
 import com.sedback.SEDBack.Modelo.Objetivo;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,5 +18,5 @@ public class EspecificacionDePuestoVerDto {
     
     private String areaNombre;
     
-    private Set<Objetivo> objetivos = new HashSet<>();
+    private List<Objetivo> objetivos;
 }

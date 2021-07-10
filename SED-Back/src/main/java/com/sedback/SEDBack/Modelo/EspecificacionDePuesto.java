@@ -1,8 +1,7 @@
 package com.sedback.SEDBack.Modelo;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +20,7 @@ public class EspecificacionDePuesto implements Serializable{
     private Integer id;
     
     @OneToMany
-    private Set<Objetivo> objetivos = new HashSet<>();
+    private List<Objetivo> objetivos;
     
     private String descripcion;
     
@@ -31,11 +30,15 @@ public class EspecificacionDePuesto implements Serializable{
     @ManyToOne
     private Sucursal sucursal;
     
-    public Set<Objetivo> getObjetivosEnCurso(){
-        Set<Objetivo> objetivosEnCurso = new HashSet<>();
+    public List<Objetivo> getObjetivosEnCurso(){
+        List<Objetivo> objetivosEnCurso = null;
         this.getObjetivos().stream().filter(obj -> (obj.isEnCurso())).forEachOrdered(obj -> {
             objetivosEnCurso.add(obj);
         });
         return objetivosEnCurso;
+    }
+    
+    public boolean esDeSucursal(Sucursal s){
+        return this.getSucursal().equals(s);
     }
 }
