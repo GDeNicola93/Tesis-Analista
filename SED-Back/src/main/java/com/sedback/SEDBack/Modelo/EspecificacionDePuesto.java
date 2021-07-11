@@ -1,6 +1,7 @@
 package com.sedback.SEDBack.Modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class EspecificacionDePuesto implements Serializable{
     private Sucursal sucursal;
     
     public List<Objetivo> getObjetivosEnCurso(){
-        List<Objetivo> objetivosEnCurso = null;
+        List<Objetivo> objetivosEnCurso = new ArrayList<Objetivo>();;
         this.getObjetivos().stream().filter(obj -> (obj.isEnCurso())).forEachOrdered(obj -> {
             objetivosEnCurso.add(obj);
         });

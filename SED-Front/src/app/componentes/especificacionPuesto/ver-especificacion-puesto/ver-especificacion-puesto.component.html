@@ -30,7 +30,7 @@
             <p><strong>Objetivos de la especificación de Puesto:</strong></p>
             <div *ngIf="edp.objetivos.length != 0">
                 <div *ngFor="let obj of edp.objetivos" class="text-center">
-                    <li>{{obj.descripcion}}</li>
+                    <li>{{obj.descripcion}} <button type="button" class="btn btn-light btn-sm" data-toggle="tooltip" data-placement="right" title="Eliminar este objetivo"><i class="fas fa-trash"></i></button></li>
                 </div>
             </div>
             <p *ngIf="edp.objetivos.length == 0" class="text-center"><i class="fas fa-exclamation-circle"></i> No hay objetivos cargados</p>

@@ -10,6 +10,8 @@ import { VerEmpleadoComponent } from './componentes/empleados/ver-empleado/ver-e
 import { IndexEspecificacionPuestoComponent } from './componentes/especificacionPuesto/index-especificacion-puesto/index-especificacion-puesto.component';
 import { NuevaEspecificacionPuestoComponent } from './componentes/especificacionPuesto/nueva-especificacion-puesto/nueva-especificacion-puesto.component';
 import { VerEspecificacionPuestoComponent } from './componentes/especificacionPuesto/ver-especificacion-puesto/ver-especificacion-puesto.component';
+import { IndexEvaluacionComponent } from './componentes/evaluaciones/index-evaluacion/index-evaluacion.component';
+import { NuevaEvaluacionComponent } from './componentes/evaluaciones/nueva-evaluacion/nueva-evaluacion.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { IndexPlantillaEvaluacionComponent } from './componentes/plantillaEvaluacion/index-plantilla-evaluacion/index-plantilla-evaluacion.component';
@@ -58,6 +60,10 @@ const routes: Routes = [
   //Plantillas de Evaluación
   {path: 'plantilla-evaluacion',component:IndexPlantillaEvaluacionComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},
   {path: 'plantilla-evaluacion/nueva',component:NuevaPlantillaEvaluacionComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},
+
+  //Evaluaciones
+  {path: 'evaluacion',component:IndexEvaluacionComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},
+  {path: 'evaluacion/nueva',component:NuevaEvaluacionComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},
 
   //Competencias
   {path: 'competencia',component:IndexCompetenciaComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},
