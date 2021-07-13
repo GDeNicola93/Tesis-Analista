@@ -15,7 +15,7 @@
         <div class="card-body">
             <form [formGroup]="evaluacionForm" (submit)="guardar()">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md">
                         <div class="form-group">
                             <label for="nombre">Fecha inicio evaluación: </label>
                             <input type="date" class="form-control" name="fechaInicioEvaluacion" autocomplete="off" formControlName="fechaInicioEvaluacion" [ngClass]="(evaluacionForm.get('fechaInicioEvaluacion').touched || evaluacionForm.get('fechaInicioEvaluacion').dirty) && evaluacionForm.get('fechaInicioEvaluacion').hasError('required') ? 'is-invalid':''">
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                         <div class="form-group">
                             <label for="nombre">Fecha fin evaluación: </label>
                             <input type="date" class="form-control" name="fechaFinEvaluacion" autocomplete="off" formControlName="fechaFinEvaluacion" [ngClass]="(evaluacionForm.get('fechaFinEvaluacion').touched || evaluacionForm.get('fechaFinEvaluacion').dirty) && evaluacionForm.get('fechaFinEvaluacion').hasError('required') ? 'is-invalid':''">
@@ -39,6 +39,38 @@
                                     : ""
                                 }}
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="nombre">Sucursal: </label>
+                            <select class="form-control" name="sucursal" formControlName="sucursal" (change)="cargarComboEspecificacionesPuestos()" [ngClass]="(evaluacionForm.get('sucursal').touched || evaluacionForm.get('sucursal').dirty) && evaluacionForm.get('sucursal').hasError('required') ? 'is-invalid':''">
+                                <option *ngFor="let sucursal of comboSucursales" [ngValue]="sucursal">{{sucursal.nombre}}</option>
+                              </select>
+                              <div class="invalid-feedback">
+                                  {{
+                                    evaluacionForm.get('sucursal').hasError('required') 
+                                      ? "Seleccione una sucursal" 
+                                      : ""
+                                  }}
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="nombre">Puesto Trabajo: </label>
+                            <select class="form-control" name="especificacionPuesto" formControlName="especificacionPuesto" [ngClass]="(evaluacionForm.get('especificacionPuesto').touched || evaluacionForm.get('especificacionPuesto').dirty) && evaluacionForm.get('especificacionPuesto').hasError('required') ? 'is-invalid':''">
+                                <option *ngFor="let edp of comboEspecificacionesPuesto" [ngValue]="edp">{{edp.puesto.nombrePuesto}}</option>
+                              </select>
+                              <div class="invalid-feedback">
+                                  {{
+                                    evaluacionForm.get('especificacionPuesto').hasError('required') 
+                                      ? "Seleccione una puesto de trabajo" 
+                                      : ""
+                                  }}
+                              </div>
                         </div>
                     </div>
                 </div>

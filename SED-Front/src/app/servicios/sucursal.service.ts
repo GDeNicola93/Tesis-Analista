@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { EspecificacionDePuesto } from '../modelo/especificacion-puesto';
 import { Sucursal } from '../modelo/sucursal';
 import { UrlBaseService } from './url-base.service';
 
@@ -27,5 +28,9 @@ export class SucursalService {
 
   public guardar(sucursal:Sucursal) : Observable<any>{
     return this.httpClient.post<any>(this.urlBaseService.obtenerURLBase() + 'sucursal', sucursal, cabecera);
+  }
+
+  public obtenerEspecificacionesDePuestoSucursal(id_sucursal : number) : Observable<EspecificacionDePuesto[]>{
+    return this.httpClient.get<EspecificacionDePuesto[]>(this.urlBaseService.obtenerURLBase() + `sucursal/especificaciones_puestos/${id_sucursal}`,cabecera);
   }
 }

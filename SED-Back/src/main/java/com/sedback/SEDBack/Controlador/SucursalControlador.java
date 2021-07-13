@@ -1,8 +1,11 @@
 package com.sedback.SEDBack.Controlador;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Logica.SucursalServicio;
+import com.sedback.SEDBack.Modelo.EspecificacionDePuesto;
 import com.sedback.SEDBack.Modelo.Sucursal;
+import com.sedback.SEDBack.Views.Views;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,6 +41,7 @@ public class SucursalControlador {
     }
     
     @GetMapping("/select")
+    @JsonView(Views.Resumida.class)
     @PreAuthorize("hasAuthority('Administrador')")
     public ResponseEntity<List<Sucursal>> getSucursalesSelect(){
         return servicio.getSucursalesSelect();
@@ -47,5 +51,12 @@ public class SucursalControlador {
     @PreAuthorize("hasAuthority('Administrador')")
     public ResponseEntity<List<Sucursal>> getSucursalesSegunAreaSelect(@PathVariable(value="id") Integer id){
         return servicio.getSucursalesSegunAreaSelect(id);
+    }
+    
+    @GetMapping("/especificaciones_puestos/{id_sucursal}")
+    @PreAuthorize("hasAuthority('Administrador')")
+    @JsonView(Views.Resumida.class)
+    public ResponseEntity<List<EspecificacionDePuesto>> obtenerEspecificacionesDePuestoSucursal(@PathVariable(value="id_sucursal") Integer id_sucursal){
+        return servicio.obtenerEspecificacionesDePuestoSucursal(id_sucursal);
     }
 }

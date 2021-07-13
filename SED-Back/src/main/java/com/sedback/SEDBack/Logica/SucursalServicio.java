@@ -2,6 +2,7 @@ package com.sedback.SEDBack.Logica;
 
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Modelo.Area;
+import com.sedback.SEDBack.Modelo.EspecificacionDePuesto;
 import com.sedback.SEDBack.Modelo.Sucursal;
 import com.sedback.SEDBack.Persistencia.AreaRepositorio;
 import com.sedback.SEDBack.Persistencia.SucursalRepositorio;
@@ -65,5 +66,9 @@ public class SucursalServicio {
     
     public ResponseEntity<Sucursal> obtenerSucursalPorId(Integer id){
         return ResponseEntity.ok().body(repositorio.getOne(id));
+    }
+    
+    public ResponseEntity<List<EspecificacionDePuesto>> obtenerEspecificacionesDePuestoSucursal(Integer id_sucursal){
+        return ResponseEntity.ok().body(repositorio.findById(id_sucursal).get().getEspecificacionesPuestos());
     }
 }
