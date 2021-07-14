@@ -2,6 +2,8 @@ package com.sedback.SEDBack.Modelo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +26,8 @@ public class Evaluacion implements Serializable {
     
     private LocalDate fechaFinEvaluacion;
     
+    private LocalDateTime fechaHoraCreacion;
+    
     @ManyToOne
     private Estado estado;
     
@@ -36,7 +40,7 @@ public class Evaluacion implements Serializable {
     private Integer puntajeMinAprobacion;
     
     @OneToMany
-    private List<DetalleEvaluacion> detalleEvaluacion;
+    private List<DetalleEvaluacion> detalleEvaluacion = new ArrayList<DetalleEvaluacion>();
     
     public void enCurso(LocalDate fechaActual,Estado enCurso){ //Este metodo recibe el estado EnCurso y la fecha Actual
         if(fechaActual.equals(this.getFechaInicioEvaluacion())){
@@ -48,5 +52,18 @@ public class Evaluacion implements Serializable {
         if(fechaActual.equals(this.getFechaFinEvaluacion())){
             this.setEstado(finalizar);
         }
+    }
+    
+    private void agregarDetalleEvaluacion(DetalleEvaluacion detalle){
+        this.detalleEvaluacion.add(detalle);
+    }
+    
+    public List<DetalleEvaluacion> crearDetallesEvaluacion(List<Empleado> empleadosAEvaluar){
+        for(Empleado emp : empleadosAEvaluar){
+            DetalleEvaluacion nuevoDetalle = new DetalleEvaluacion();
+            nuevoDetalle.setEvaluado(emp);
+            this.agregarDetalleEvaluacion(nuevoDetalle);
+        }
+        return this.getDetalleEvaluacion();
     }
 }

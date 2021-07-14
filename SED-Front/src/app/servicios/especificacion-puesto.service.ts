@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { EspecificacionDePuestoVerDto } from '../HttpMensajes/especificacion-puesto-ver-dto';
 import { HttpMensaje } from '../HttpMensajes/http-mensaje';
 import { EspecificacionDePuesto } from '../modelo/especificacion-puesto';
+import { PlantillaEvaluacion } from '../modelo/plantilla-evaluacion';
 import { UrlBaseService } from './url-base.service';
 
 const cabecera = {headers: new HttpHeaders({'Content-TYpe': 'application/json'})};
@@ -29,5 +30,9 @@ export class EspecificacionPuestoService {
 
   getEspecificacionesDePuestosById(id : number) : Observable<EspecificacionDePuestoVerDto>{
     return this.httpClient.get<EspecificacionDePuestoVerDto>(this.urlBaseService.obtenerURLBase() + `especificacion-puesto?id=${id}`,cabecera);
+  }
+
+  getPlantillasEvaluacionDeEspecificacionPuesto(idEspecificacionPuesto : number) : Observable<PlantillaEvaluacion[]>{
+    return this.httpClient.get<PlantillaEvaluacion[]>(this.urlBaseService.obtenerURLBase() + `especificacion-puesto/plantillas/${idEspecificacionPuesto}`,cabecera);
   }
 }

@@ -8,6 +8,7 @@ import com.sedback.SEDBack.Mappers.EmpleadoVerDtoMapper;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Persistencia.EmpleadoRepositorio;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -88,5 +89,9 @@ public class EmpleadoServicio {
     
     public ResponseEntity<Page<EmpleadoIndexDto>> getEmpleados(String filtro,Pageable page){
         return ResponseEntity.ok().body(EmpleadoIndexDtoMapper.INSTANCE.toEmpleadoIndexDtoPage(repositorio.getEmpleados(filtro, page)));
+    }
+    
+    public ResponseEntity<List<Empleado>> getEmpleadosEvaluadores(){
+        return ResponseEntity.ok().body(repositorio.getEmpleadosEvaluadores());
     }
 }

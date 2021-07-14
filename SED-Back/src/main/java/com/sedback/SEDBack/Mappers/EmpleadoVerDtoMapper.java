@@ -7,6 +7,7 @@ import com.sedback.SEDBack.Modelo.Usuario;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -25,7 +26,7 @@ public interface EmpleadoVerDtoMapper {
     @Mapping(expression = "java(setpuestoTrabajoToString(usuario.getEmpleado().getPuestosTrabajo()))", target = "puestos")          
     EmpleadoVerDto empleadotoEmpleadoVerDto(Usuario usuario);
     
-    default Set<String> setpuestoTrabajoToString(Set<EspecificacionDePuesto> puestos){ //Devuelve un Set con el nombre del puesto y el nombre de la sucursal del puesto
+    default Set<String> setpuestoTrabajoToString(List<EspecificacionDePuesto> puestos){ //Devuelve un Set con el nombre del puesto y el nombre de la sucursal del puesto
         Set<String> puestosTrabajoToString = new HashSet<>();
         for (EspecificacionDePuesto p : puestos) {
             puestosTrabajoToString.add(p.getPuesto().getNombrePuesto() + "(" + p.getSucursal().getNombre() + ")");

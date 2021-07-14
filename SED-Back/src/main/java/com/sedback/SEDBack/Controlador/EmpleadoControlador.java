@@ -5,12 +5,14 @@
  */
 package com.sedback.SEDBack.Controlador;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.sedback.SEDBack.Dtos.EmpleadoIndexDto;
 import com.sedback.SEDBack.Dtos.EmpleadoVerDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Logica.EmpleadoServicio;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Modelo.Usuario;
+import com.sedback.SEDBack.Views.Views;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,13 @@ public class EmpleadoControlador {
     @PreAuthorize("hasAuthority('Administrador')")
     public ResponseEntity<Page<EmpleadoIndexDto>> getEmpleados(String filtro,Pageable page){
         return servicio.getEmpleados(filtro,page);
+    }
+    
+    @GetMapping("/evaluadores")
+    @PreAuthorize("hasAuthority('Administrador')")
+    @JsonView(Views.Resumida.class)
+    public ResponseEntity<List<Empleado>> getEmpleadosEvaluadores(){
+        return servicio.getEmpleadosEvaluadores();
     }
 
 }

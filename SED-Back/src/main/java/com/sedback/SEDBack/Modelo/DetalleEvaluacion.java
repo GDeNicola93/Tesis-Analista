@@ -1,6 +1,7 @@
 package com.sedback.SEDBack.Modelo;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,8 +26,7 @@ public class DetalleEvaluacion implements Serializable{
     @ManyToOne
     private Empleado evaluado;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Calendar fechaRealizacion;
+    private LocalDate fechaRealizacion;
     
     @OneToMany
     private Set<Resultado> resultados = new HashSet<>();

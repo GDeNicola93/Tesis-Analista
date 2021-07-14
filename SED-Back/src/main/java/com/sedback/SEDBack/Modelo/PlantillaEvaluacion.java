@@ -1,5 +1,7 @@
 package com.sedback.SEDBack.Modelo;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.sedback.SEDBack.Views.Views;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -20,8 +22,10 @@ import lombok.NoArgsConstructor;
 public class PlantillaEvaluacion implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(Views.Resumida.class)
     private Integer id;
     
+    @JsonView(Views.Resumida.class)
     private String descripcion;
     
     @ManyToOne

@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.Data;
@@ -36,6 +37,14 @@ public class EspecificacionDePuesto implements Serializable{
     @ManyToOne
     private Sucursal sucursal;
     
+    @OneToMany(mappedBy = "especificacionDePuesto")
+    @JsonIgnore
+    private List<PlantillaEvaluacion> plantillasEvaluacion;
+    
+    @ManyToMany(mappedBy = "puestosTrabajo")
+    @JsonIgnore
+    private List<Empleado> empleados;
+    
     @JsonIgnore
     public List<Objetivo> getObjetivosEnCurso(){
         List<Objetivo> objetivosEnCurso = new ArrayList<Objetivo>();;
@@ -44,8 +53,4 @@ public class EspecificacionDePuesto implements Serializable{
         });
         return objetivosEnCurso;
     }
-    
-//    public boolean esDeSucursal(Sucursal s){
-//        return this.getSucursal().equals(s);
-//    }
 }

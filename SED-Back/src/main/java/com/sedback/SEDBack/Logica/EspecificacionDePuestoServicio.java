@@ -5,6 +5,7 @@ import com.sedback.SEDBack.Dtos.EspecificacionDePuestoVerDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Mappers.EspecificacionDePuestoDtosMapper;
 import com.sedback.SEDBack.Modelo.EspecificacionDePuesto;
+import com.sedback.SEDBack.Modelo.PlantillaEvaluacion;
 import com.sedback.SEDBack.Persistencia.EspecificacionDePuestoRepositorio;
 import java.util.List;
 import org.apache.commons.lang3.ObjectUtils;
@@ -53,5 +54,9 @@ public class EspecificacionDePuestoServicio {
     
     public ResponseEntity<EspecificacionDePuestoVerDto> getEspecificacionesDePuestosById(Integer id){
         return ResponseEntity.ok().body(EspecificacionDePuestoDtosMapper.INSTANCE.toEspecificacionDePuestoVerDto(repositorio.getEspecificacionDePuestById(id)));
+    }
+    
+    public ResponseEntity<List<PlantillaEvaluacion>> getPlantillasEvaluacionDeEspecificacionPuesto(Integer idEspecificacionDePuesto){
+        return ResponseEntity.ok().body(repositorio.findById(idEspecificacionDePuesto).get().getPlantillasEvaluacion());
     }
 }

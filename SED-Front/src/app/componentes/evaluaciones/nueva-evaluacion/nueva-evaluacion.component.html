@@ -52,7 +52,7 @@
                               <div class="invalid-feedback">
                                   {{
                                     evaluacionForm.get('sucursal').hasError('required') 
-                                      ? "Seleccione una sucursal" 
+                                      ? "Seleccione una sucursal." 
                                       : ""
                                   }}
                               </div>
@@ -61,17 +61,74 @@
                     <div class="col-md">
                         <div class="form-group">
                             <label for="nombre">Puesto Trabajo: </label>
-                            <select class="form-control" name="especificacionPuesto" formControlName="especificacionPuesto" [ngClass]="(evaluacionForm.get('especificacionPuesto').touched || evaluacionForm.get('especificacionPuesto').dirty) && evaluacionForm.get('especificacionPuesto').hasError('required') ? 'is-invalid':''">
+                            <select class="form-control" name="especificacionPuesto" formControlName="especificacionPuesto" (change)="cargarComboPlantillasEvaluacion()" [ngClass]="(evaluacionForm.get('especificacionPuesto').touched || evaluacionForm.get('especificacionPuesto').dirty) && evaluacionForm.get('especificacionPuesto').hasError('required') ? 'is-invalid':''">
                                 <option *ngFor="let edp of comboEspecificacionesPuesto" [ngValue]="edp">{{edp.puesto.nombrePuesto}}</option>
                               </select>
                               <div class="invalid-feedback">
                                   {{
                                     evaluacionForm.get('especificacionPuesto').hasError('required') 
-                                      ? "Seleccione una puesto de trabajo" 
+                                      ? "Seleccione una puesto de trabajo." 
                                       : ""
                                   }}
                               </div>
                         </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Plantilla de evaluación a utilizar: </label>
+                    <select class="form-control" name="plantillaEvaluacion" formControlName="plantillaEvaluacion" [ngClass]="(evaluacionForm.get('plantillaEvaluacion').touched || evaluacionForm.get('plantillaEvaluacion').dirty) && evaluacionForm.get('plantillaEvaluacion').hasError('required') ? 'is-invalid':''">
+                        <option *ngFor="let pe of comboPlantillaEvaluacion" [ngValue]="pe">{{pe.descripcion}}</option>
+                      </select>
+                      <div class="invalid-feedback">
+                          {{
+                            evaluacionForm.get('plantillaEvaluacion').hasError('required') 
+                              ? "Seleccione una plantilla de evaluación valida." 
+                              : ""
+                          }}
+                      </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="nombre">Evaluador: </label>
+                            <select class="form-control" name="empleadoEvaluador" formControlName="empleadoEvaluador" [ngClass]="(evaluacionForm.get('empleadoEvaluador').touched || evaluacionForm.get('empleadoEvaluador').dirty) && evaluacionForm.get('empleadoEvaluador').hasError('required') ? 'is-invalid':''">
+                                <option *ngFor="let emp of comboEmpleadosEvaluadores" [ngValue]="emp">{{emp.nombreCompleto}}</option>
+                              </select>
+                              <div class="invalid-feedback">
+                                  {{
+                                    evaluacionForm.get('empleadoEvaluador').hasError('required') 
+                                      ? "Seleccione un evaluador." 
+                                      : ""
+                                  }}
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="puntajeMinAprobacion">Puntaje Minimo de Aprobación: </label>
+                            <input class="form-control" min="10" type="number" name="puntajeMinAprobacion" formControlName="puntajeMinAprobacion" [ngClass]="(evaluacionForm.get('puntajeMinAprobacion').touched || evaluacionForm.get('puntajeMinAprobacion').dirty) && evaluacionForm.get('puntajeMinAprobacion').hasError('required') ? 'is-invalid':''">
+                            <div class="invalid-feedback">
+                                {{
+                                  evaluacionForm.get('puntajeMinAprobacion').hasError('required') 
+                                    ? "Ingrese un puntaje minimo de aprobación valido." 
+                                    : ""
+                                }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
+                        <strong><i class="fas fa-times"></i> ¡Error!</strong> {{mensaje}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="guardado">
+                        <strong><i class="fas fa-check"></i> ¡Perfecto!</strong> {{mensaje}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 </div>
                 <div class="form-group">

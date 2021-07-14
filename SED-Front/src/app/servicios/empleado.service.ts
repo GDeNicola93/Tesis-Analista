@@ -22,4 +22,8 @@ export class EmpleadoService {
   getById(id : number) : Observable<EmpleadoVerDto>{
     return this.httpClient.get<EmpleadoVerDto>(this.urlBaseService.obtenerURLBase() + 'empleados?id='+id,cabecera);
   }
+
+  getEmpleadosEvaluadores() : Observable<Empleado[]>{
+    return this.httpClient.get<Empleado[]>(this.urlBaseService.obtenerURLBase() + 'empleados/evaluadores',cabecera);
+  }
 }
