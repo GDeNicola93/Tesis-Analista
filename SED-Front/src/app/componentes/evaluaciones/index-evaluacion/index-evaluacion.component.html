@@ -12,5 +12,54 @@
 
     <div class="card shadow">
         <h6 class="card-header font-weight-bold">Listado de evaluaciones</h6>
+        <div class="card-body">
+            <table class="table table-sm table-hover">
+                <thead>
+                    <tr class="table-primary">
+                        <th role="button" (click)="setOrder()" scope="col"><i [ngClass]="order === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'"></i></th>
+                        <th scope="col">Cód</th>
+                        <th scope="col">Fecha Inicio</th>
+                        <th scope="col">Fecha Fin</th>
+                        <th scope="col">Evaluador</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let ev of evaluaciones">
+                    <tr>
+                        <th></th>
+                        <th scope="row">{{ev.id}}</th>
+                        <td>{{ev.fechaInicioEvaluacion}}</td>
+                        <td>{{ev.fechaFinEvaluacion}}</td>
+                        <td>{{ev.evaluador}}</td>
+                        <td>{{ev.estado.nombre}}</td>
+                        <td>
+                            <div class="row">
+                                <div class="col">
+                                    <button routerLink="/evaluacion/ver/{{ev.id}}" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver detalles evaluación"><i class="far fa-eye"></i></button>
+                                  <button style="margin-right: 5px;" class="btn btn-sm btn-warning shadow-sm" data-toggle="tooltip" data-placement="top" title="Editar evaluación"><i class="fas fa-pencil-alt"></i></button>
+                                  <button class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Cancelar Evaluación"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination pagination-sm justify-content-center">
+                  <li class="page-item" [ngClass]="{'disabled': esPrimera === true}">
+                    <a role="button" class="page-link" (click)="anterior()" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li *ngFor="let p of totalPages;let i=index" [ngClass]="{'active' : i == page}" class="page-item"><a role="button" class="page-link" (click)="setPagina(i)">{{i+1}}</a></li>
+                  <li class="page-item" [ngClass]="{'disabled': esUltima === true}">
+                    <a role="button" class="page-link" (click)="siguiente()" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </div>

@@ -17,4 +17,8 @@ export class EvaluacionService {
   guardar(evaluacion:FormGroup) : Observable<HttpMensaje>{
     return this.httpClient.post<HttpMensaje>(this.urlBaseService.obtenerURLBase() + 'evaluacion',evaluacion,cabecera);
   }
+
+  getEvaluaciones(page:number,size:number,sort:string,order:string) : Observable<any>{
+    return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion?sort=${sort},${order}&size=${size}&page=${page}`,cabecera);
+  }
 }

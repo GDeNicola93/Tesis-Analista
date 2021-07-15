@@ -1,5 +1,6 @@
 package com.sedback.SEDBack.Modelo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,8 +23,10 @@ public class Evaluacion implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate fechaInicioEvaluacion;
     
+    @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate fechaFinEvaluacion;
     
     private LocalDateTime fechaHoraCreacion;
