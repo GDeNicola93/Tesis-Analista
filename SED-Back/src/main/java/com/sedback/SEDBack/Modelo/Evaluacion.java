@@ -29,6 +29,7 @@ public class Evaluacion implements Serializable {
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate fechaFinEvaluacion;
     
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm")
     private LocalDateTime fechaHoraCreacion;
     
     @ManyToOne
@@ -68,5 +69,23 @@ public class Evaluacion implements Serializable {
             this.agregarDetalleEvaluacion(nuevoDetalle);
         }
         return this.getDetalleEvaluacion();
+    }
+    
+    public Integer getCantidadEmpleadosAEvaluar(){
+        return this.getDetalleEvaluacion().size();
+    }
+    
+    public Integer getCantidadEmpleadosEvaluados(){
+        Integer cantidadEmpleadosEvaluados = 0;
+        for(DetalleEvaluacion de : this.getDetalleEvaluacion()){
+            if(de.getFueEvaluado()){
+                cantidadEmpleadosEvaluados = cantidadEmpleadosEvaluados + 1;
+            }
+        }
+        return cantidadEmpleadosEvaluados;
+    }
+    
+    public Integer getRestantesAEvaluar(){
+        return this.getCantidadEmpleadosAEvaluar() - this.getCantidadEmpleadosEvaluados();
     }
 }

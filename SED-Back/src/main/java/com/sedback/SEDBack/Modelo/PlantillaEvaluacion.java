@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.sedback.SEDBack.Views.Views;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,5 +36,5 @@ public class PlantillaEvaluacion implements Serializable{
     private boolean estaEnCurso;
     
     @OneToMany
-    private Set<DetallePlantilla> detallePlantilla = new HashSet<>();
+    private List<DetallePlantilla> detallePlantilla;
 }

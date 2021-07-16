@@ -30,4 +30,11 @@ public class DetalleEvaluacion implements Serializable{
     
     @OneToMany
     private Set<Resultado> resultados = new HashSet<>();
+    
+    public boolean getFueEvaluado(){
+        if(this.getFechaRealizacion() == null){
+            return false;
+        }
+        return true;
+    }
 }

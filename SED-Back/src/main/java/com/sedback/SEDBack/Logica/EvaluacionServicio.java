@@ -1,9 +1,11 @@
 package com.sedback.SEDBack.Logica;
 
 import com.sedback.SEDBack.Dtos.EvaluacionIndexDto;
+import com.sedback.SEDBack.Dtos.EvaluacionVerDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Dtos.NuevaEvaluacionDto;
 import com.sedback.SEDBack.Mappers.EvaluacionIndexDtoMapper;
+import com.sedback.SEDBack.Mappers.EvaluacionVerDtoMapper;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Modelo.Estado;
 import com.sedback.SEDBack.Modelo.Evaluacion;
@@ -50,5 +52,9 @@ public class EvaluacionServicio {
     
     public ResponseEntity<Page<EvaluacionIndexDto>> getEvaluaciones(Pageable page){
         return ResponseEntity.ok().body(EvaluacionIndexDtoMapper.INSTANCE.toEmpleadoIndexDtoPage(evaluacionRepositorio.findAll(page)));
+    }
+    
+    public ResponseEntity<EvaluacionVerDto> getEvaluacionById(Long id){
+        return ResponseEntity.ok().body(EvaluacionVerDtoMapper.INSTANCE.evaluacionToEvaluacionVerDto(evaluacionRepositorio.findById(id).get()));
     }
 }

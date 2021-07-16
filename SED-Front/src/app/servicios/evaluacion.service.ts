@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { EvaluacionVerDto } from '../HttpMensajes/evaluacion-ver-dto';
 import { HttpMensaje } from '../HttpMensajes/http-mensaje';
 import { UrlBaseService } from './url-base.service';
 
@@ -20,5 +21,9 @@ export class EvaluacionService {
 
   getEvaluaciones(page:number,size:number,sort:string,order:string) : Observable<any>{
     return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion?sort=${sort},${order}&size=${size}&page=${page}`,cabecera);
+  }
+
+  getEvaluacionById(id_evaluacion : number) : Observable<EvaluacionVerDto>{
+    return this.httpClient.get<EvaluacionVerDto>(this.urlBaseService.obtenerURLBase() + `evaluacion?id=${id_evaluacion}`,cabecera);
   }
 }

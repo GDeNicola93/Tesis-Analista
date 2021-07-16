@@ -1,6 +1,8 @@
 package com.sedback.SEDBack.Modelo;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.sedback.SEDBack.Views.Views;
 import com.sun.istack.NotNull;
 import java.io.Serializable;

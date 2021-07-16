@@ -9,4 +9,45 @@
             <button routerLink="/evaluacion" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
         </div>
     </div>
+    <div class="card shadow">
+        <h6 class="card-header font-weight-bold">Información de evaluación {{evaluacion.id}}</h6>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md">
+                    <p><strong>Fecha Creación:</strong> {{evaluacion.fechaHoraCreacion}}</p>
+                </div>
+                <div class="col-md">
+                    <p><strong>Fecha Inicio:</strong> {{evaluacion.fechaInicioEvaluacion}}</p>
+                </div>
+                <div class="col-md">
+                    <p><strong>Fecha Fin:</strong> {{evaluacion.fechaFinEvaluacion}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <p><strong>Estado:</strong> {{evaluacion.estado.nombre}}</p>
+                </div>
+                <div class="col-md-3">
+                    <p><strong>Evaluador:</strong><a routerLink="/empleados/ver/{{evaluacion.idEvaluador}}" target="_blank"> {{evaluacion.nombreEvaluador}}</a></p>
+                </div>
+            </div>
+            <p><strong>Puntaje Minimo de aprobación:</strong> {{evaluacion.puntajeMinAprobacion}} ptos</p>
+            <p><strong>Especificación de puesto a evaluar:</strong> {{evaluacion.especificacionPuesto}} (Sucursal: {{evaluacion.sucursal}})</p>
+            <div class="row">
+                <div class="col-md">
+                    <p><strong>Cantidad de empleados a evaluar:</strong> {{evaluacion.cantidadEmpleadosAEvaluar}}</p>
+                </div>
+                <div class="col-md">
+                    <p><strong>Cantidad de empleados evaluados:</strong> {{evaluacion.cantidadEmpleadosEvaluados}}</p>
+                </div>
+                <div class="col-md">
+                    <p><strong>Faltan Evaluar:</strong> {{evaluacion.restantesAEvaluar}}</p>
+                </div>
+            </div>
+            <p><strong>Empleados a evaluar:</strong></p>
+            <div *ngFor="let emp of evaluacion.empleadosAEvaluar" style="text-align: center;">
+                <p>- {{emp}}</p>
+            </div>
+        </div>
+    </div>
 </div>

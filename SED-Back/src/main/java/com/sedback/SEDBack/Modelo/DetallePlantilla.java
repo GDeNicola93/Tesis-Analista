@@ -1,13 +1,8 @@
 package com.sedback.SEDBack.Modelo;
 
-import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,6 +32,6 @@ public class DetallePlantilla implements Serializable{
     private int puntajeMinAprobacion;
     
     @OneToMany
-    private Set<ComportamientoPlantilla> comportamiento = new HashSet<>();
+    private List<ComportamientoPlantilla> comportamiento;
     
 }
