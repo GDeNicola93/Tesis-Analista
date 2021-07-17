@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EvaluacionIndexDto } from 'src/app/HttpMensajes/evaluacion-index-dto';
 import { EvaluacionService } from 'src/app/servicios/evaluacion.service';
 
@@ -16,9 +17,10 @@ export class IndexEvaluacionComponent implements OnInit {
   esUltima : boolean = false;
   esPrimera : boolean = false;
   totalPages : Array<number>;
+  idEvaluacionACancelar : number;
 
 
-  constructor(private evaluacionServicio : EvaluacionService) { }
+  constructor(private evaluacionServicio : EvaluacionService,private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.cargarEvaluaciones();
@@ -64,6 +66,18 @@ export class IndexEvaluacionComponent implements OnInit {
       this.order = 'asc';
     }
     this.cargarEvaluaciones();
+  }
+
+  cancelarEvaluacionConfirmacion(content : any,idEvaluacionACancelar : number){
+    this.idEvaluacionACancelar = idEvaluacionACancelar;
+    this.modalService.open(content, { size: 'lg' });
+  }
+
+  cancelar() : void{
+    this.evaluacionServicio.cancelarEvaluacion(this.idEvaluacionACancelar).subscribe(data =>{
+      this.modalService.dismissAll();
+      window.location.reload();
+    });
   }
 
 }

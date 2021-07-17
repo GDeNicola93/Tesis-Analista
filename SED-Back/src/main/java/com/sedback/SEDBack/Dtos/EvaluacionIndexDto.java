@@ -18,4 +18,6 @@ public class EvaluacionIndexDto {
     private String evaluador;
     
     private Estado estado;
+    
+    private boolean esCancelable;
 }

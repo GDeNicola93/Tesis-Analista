@@ -57,4 +57,15 @@ public class EvaluacionServicio {
     public ResponseEntity<EvaluacionVerDto> getEvaluacionById(Long id){
         return ResponseEntity.ok().body(EvaluacionVerDtoMapper.INSTANCE.evaluacionToEvaluacionVerDto(evaluacionRepositorio.findById(id).get()));
     }
+    
+    public ResponseEntity<HttpMensaje> cancelarEvaluacion(Long id_evaluacion){
+        Estado estadoCancelado = estadoRepositorio.findById(3).get(); //3 --> Cancelada
+        Evaluacion evaluacion = evaluacionRepositorio.findById(id_evaluacion).get();
+        if(evaluacion.cancelar(estadoCancelado)){
+            evaluacionRepositorio.save(evaluacion);
+            return ResponseEntity.ok().body(new HttpMensaje("La evaluación fue cancelada."));
+        }else{
+            return ResponseEntity.badRequest().body(new HttpMensaje("La evaluación seleccionada no se puede cancelar."));
+        }
+    }
 }

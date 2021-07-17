@@ -36,9 +36,9 @@
                         <td>
                             <div class="row">
                                 <div class="col">
-                                    <button routerLink="/evaluacion/ver/{{ev.id}}" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver detalles evaluación"><i class="far fa-eye"></i></button>
+                                  <button routerLink="/evaluacion/ver/{{ev.id}}" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver detalles evaluación"><i class="far fa-eye"></i></button>
                                   <button style="margin-right: 5px;" class="btn btn-sm btn-warning shadow-sm" data-toggle="tooltip" data-placement="top" title="Editar evaluación"><i class="fas fa-pencil-alt"></i></button>
-                                  <button class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Cancelar Evaluación"><i class="fas fa-times"></i></button>
+                                  <button *ngIf="ev.esCancelable" (click)="cancelarEvaluacionConfirmacion(content,ev.id)" class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Cancelar Evaluación"><i class="fas fa-times"></i></button>
                                 </div>
                             </div>
                         </td>
@@ -63,3 +63,19 @@
         </div>
     </div>
 </div>
+
+<!-- Modal para solicitar confirmacion de cancelación de evaluación -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h6><img src="../../../../assets/advertencia.png" alt="Icon Adv" style="height: 35px;width: 35px;"> ¿Esta seguro que desea cancelar la evaluación seleccionada?</h6>
+    </div>
+    <div class="modal-footer">
+      <button (click)="modal.close('Close click')" type="button" class="btn btn-danger"><i class="fas fa-times"></i> No</button>
+      <button (click)="cancelar()" type="button" class="btn btn-warning"><i class="fas fa-check"></i> Si</button>
+    </div>
+</ng-template>

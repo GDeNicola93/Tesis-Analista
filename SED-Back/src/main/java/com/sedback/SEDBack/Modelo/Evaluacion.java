@@ -88,4 +88,20 @@ public class Evaluacion implements Serializable {
     public Integer getRestantesAEvaluar(){
         return this.getCantidadEmpleadosAEvaluar() - this.getCantidadEmpleadosEvaluados();
     }
+    
+    public boolean cancelar(Estado cancelado){
+        if(this.getEstado().getId() == 1){
+            this.setEstado(cancelado);
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean getEsCancelable(){
+        if(this.getEstado().getId() == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

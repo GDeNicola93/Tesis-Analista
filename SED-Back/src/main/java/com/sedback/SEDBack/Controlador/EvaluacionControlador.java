@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,5 +44,11 @@ public class EvaluacionControlador {
     @PreAuthorize("hasAuthority('Administrador')")
     public ResponseEntity<EvaluacionVerDto> getEvaluacionById(Long id){
         return servicio.getEvaluacionById(id);
+    }
+    
+    @GetMapping("/cancelar/{id_evaluacion}")
+    @PreAuthorize("hasAuthority('Administrador')")
+    public ResponseEntity<HttpMensaje> cancelarEvaluacion(@PathVariable(value="id_evaluacion") Long id_evaluacion){
+        return servicio.cancelarEvaluacion(id_evaluacion);
     }
 }

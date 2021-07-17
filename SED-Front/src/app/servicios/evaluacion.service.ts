@@ -26,4 +26,8 @@ export class EvaluacionService {
   getEvaluacionById(id_evaluacion : number) : Observable<EvaluacionVerDto>{
     return this.httpClient.get<EvaluacionVerDto>(this.urlBaseService.obtenerURLBase() + `evaluacion?id=${id_evaluacion}`,cabecera);
   }
+
+  cancelarEvaluacion(id_evaluacion : number) : Observable<HttpMensaje>{
+    return this.httpClient.get<HttpMensaje>(this.urlBaseService.obtenerURLBase() + `evaluacion/cancelar/${id_evaluacion}`,cabecera);
+  }
 }
