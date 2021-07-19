@@ -12,8 +12,8 @@ export class IndexEvaluacionComponent implements OnInit {
   evaluaciones : EvaluacionIndexDto[];
   page : number = 0;
   size : number = 10;
-  sort : string = 'id'
-  order : string = 'asc';
+  sort : string = 'fechaInicioEvaluacion'
+  order : string = 'desc';
   esUltima : boolean = false;
   esPrimera : boolean = false;
   totalPages : Array<number>;

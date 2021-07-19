@@ -46,16 +46,20 @@ public class Evaluacion implements Serializable {
     @OneToMany
     private List<DetalleEvaluacion> detalleEvaluacion = new ArrayList<DetalleEvaluacion>();
     
-    public void enCurso(LocalDate fechaActual,Estado enCurso){ //Este metodo recibe el estado EnCurso y la fecha Actual
+    public boolean enCurso(LocalDate fechaActual,Estado enCurso){ //Este metodo recibe el estado EnCurso y la fecha Actual
         if(fechaActual.equals(this.getFechaInicioEvaluacion())){
             this.setEstado(enCurso);
+            return true;
         }
+        return false;
     }
     
-    public void finalizar(LocalDate fechaActual,Estado finalizar){ //Este metodo recibe el estado EnCurso y la fecha Actual
+    public boolean finalizar(LocalDate fechaActual,Estado finalizar){ //Este metodo recibe el estado EnCurso y la fecha Actual
         if(fechaActual.equals(this.getFechaFinEvaluacion())){
             this.setEstado(finalizar);
+            return true;
         }
+        return false;
     }
     
     private void agregarDetalleEvaluacion(DetalleEvaluacion detalle){

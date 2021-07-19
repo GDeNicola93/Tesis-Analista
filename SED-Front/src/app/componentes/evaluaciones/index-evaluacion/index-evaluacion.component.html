@@ -17,11 +17,11 @@
                 <thead>
                     <tr class="table-primary">
                         <th role="button" (click)="setOrder()" scope="col"><i [ngClass]="order === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'"></i></th>
-                        <th scope="col">Cód</th>
-                        <th scope="col">Fecha Inicio</th>
-                        <th scope="col">Fecha Fin</th>
+                        <th role="button" (click)="setSort('id')" scope="col">Cód</th>
+                        <th role="button" (click)="setSort('fechaInicioEvaluacion')" scope="col">Fecha Inicio</th>
+                        <th role="button" (click)="setSort('fechaFinEvaluacion')" scope="col">Fecha Fin</th>
                         <th scope="col">Evaluador</th>
-                        <th scope="col">Estado</th>
+                        <th role="button" (click)="setSort('estado.nombre')" scope="col">Estado</th>
                         <th scope="col">Opciones</th>
                     </tr>
                 </thead>
