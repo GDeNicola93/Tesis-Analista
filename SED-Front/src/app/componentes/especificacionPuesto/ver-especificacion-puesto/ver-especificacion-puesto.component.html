@@ -28,12 +28,12 @@
             <p *ngIf="edp.descripcion == null"><strong>Descripción:</strong> Sin especificar</p>
             
             <p><strong>Objetivos de la especificación de Puesto:</strong></p>
-            <div *ngIf="edp.objetivos.length != 0">
-                <div *ngFor="let obj of edp.objetivos" class="text-center">
+            <div *ngIf="edp.objetivosActivos.length != 0">
+                <div *ngFor="let obj of edp.objetivosActivos" class="text-center">
                     <li>{{obj.descripcion}} <button type="button" class="btn btn-light btn-sm" data-toggle="tooltip" data-placement="right" title="Eliminar este objetivo"><i class="fas fa-trash"></i></button></li>
                 </div>
             </div>
-            <p *ngIf="edp.objetivos.length == 0" class="text-center"><i class="fas fa-exclamation-circle"></i> No hay objetivos cargados</p>
+            <p *ngIf="edp.objetivosActivos.length == 0" class="text-center"><i class="fas fa-exclamation-circle"></i> No hay objetivos cargados</p>
         </div>
     </div>
 

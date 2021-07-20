@@ -18,5 +18,5 @@ public class EspecificacionDePuestoVerDto {
     
     private String areaNombre;
     
-    private List<Objetivo> objetivos;
+    private List<Objetivo> objetivosActivos;
 }

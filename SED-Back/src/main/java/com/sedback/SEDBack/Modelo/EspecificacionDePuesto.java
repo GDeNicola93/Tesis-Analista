@@ -26,6 +26,7 @@ public class EspecificacionDePuesto implements Serializable{
     private Integer id;
     
     @OneToMany
+    @JsonIgnore
     private List<Objetivo> objetivos;
     
     private String descripcion;
@@ -45,8 +46,7 @@ public class EspecificacionDePuesto implements Serializable{
     @JsonIgnore
     private List<Empleado> empleados;
     
-    @JsonIgnore
-    public List<Objetivo> getObjetivosEnCurso(){
+    public List<Objetivo> getObjetivosActivos(){
         List<Objetivo> objetivosEnCurso = new ArrayList<Objetivo>();;
         this.getObjetivos().stream().filter(obj -> (obj.isEnCurso())).forEachOrdered(obj -> {
             objetivosEnCurso.add(obj);

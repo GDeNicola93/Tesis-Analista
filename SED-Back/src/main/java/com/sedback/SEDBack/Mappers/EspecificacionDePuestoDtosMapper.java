@@ -26,7 +26,6 @@ public interface EspecificacionDePuestoDtosMapper {
     @Mapping(expression = "java(edp.getId())", target = "idEspecificacionDePuesto")
     @Mapping(expression = "java(edp.getPuesto().getNombrePuesto())", target = "nombrePuesto")
     @Mapping(expression = "java(edp.getSucursal().getNombre())", target = "sucursalNombre")
-    @Mapping(expression = "java(edp.getPuesto().getArea().getNombre())", target = "areaNombre") 
-    @Mapping(expression = "java(edp.getObjetivosEnCurso())", target = "objetivos")        
+    @Mapping(expression = "java(edp.getPuesto().getArea().getNombre())", target = "areaNombre")    
     EspecificacionDePuestoVerDto toEspecificacionDePuestoVerDto(EspecificacionDePuesto edp);
 }

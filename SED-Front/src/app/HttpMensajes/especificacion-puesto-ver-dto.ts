@@ -6,5 +6,5 @@ export class EspecificacionDePuestoVerDto{
     descripcion : string;
     sucursalNombre : string
     areaNombre : string;
-    objetivos : Objetivo[];
+    objetivosActivos : Objetivo[];
 }
