@@ -27,27 +27,19 @@ public class Empleado implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(Views.Resumida.class)
     private Integer id;
-    
-    @NotNull
-    @Column(unique = true)
+   
     private String legajo;
     
-    @NotNull
     private String nombre;
     
-    @NotNull
     private String apellido;
     
-    @NotNull
     private String dni;
     
-    @NotNull
     private String email;
     
-    @NotNull
     private LocalDate fechaDeNacimiento;
     
-    @NotNull
     @ManyToMany
     private List<EspecificacionDePuesto> puestosTrabajo;
     

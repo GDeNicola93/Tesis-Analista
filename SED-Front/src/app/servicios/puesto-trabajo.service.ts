@@ -21,8 +21,4 @@ export class PuestoTrabajoService {
     return this.httpClient.get<PuestoTrabajo[]>(this.urlBaseService.obtenerURLBase() + 'puesto-trabajo',cabecera);
   }
 
-  obtenerPuestosXSucursal(id_sucursal : number) : Observable<any>{
-    return this.httpClient.get<PuestoTrabajo[]>(this.urlBaseService.obtenerURLBase() + 'puesto-trabajo?sucursal_id='+id_sucursal,cabecera);
-  } 
-
 }

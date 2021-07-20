@@ -47,9 +47,6 @@ public class UsuarioServicio {
     AuthenticationManager authenticationManager;
     
     @Autowired
-    private EmpleadoServicio empleadoServicio;
-    
-    @Autowired
     JwtProvider jwtProvider;
     
     @Value("${UPLOAD_DIR}")
@@ -98,36 +95,6 @@ public class UsuarioServicio {
             }else{
                 return ResponseEntity.badRequest().body(new HttpMensaje("La nueva contraseña y la repetición de la nueva contraseña no coinciden."));
             }
-        }catch(Exception e){
-            return ResponseEntity.badRequest().body(new HttpMensaje("Excepción no controlada.Desripción: "+e));
-        }
-    }
-    
-    public ResponseEntity<HttpMensaje> guardar(Usuario usuario){
-        try{
-            ResponseEntity<HttpMensaje> respuesta = empleadoServicio.verificarCampos(usuario.getEmpleado());
-            if(respuesta.getStatusCode().isError()){
-                return respuesta;
-            }
-            if(StringUtils.isBlank(usuario.getNombreUsuario())){
-                return ResponseEntity.badRequest().body(new HttpMensaje("El campo nombre de usuario no es valido."));
-            }else{
-                Optional<Usuario> existeUsuario = repositorio.findByNombreUsuario(usuario.getNombreUsuario());
-                if (!existeUsuario.isEmpty()){
-                    return ResponseEntity.badRequest().body(new HttpMensaje("El nombre de usuario ingresado ya existe en la base de datos. Por favor escoja otro."));
-                }
-            }
-            if(StringUtils.isBlank(usuario.getPassword())){
-                return ResponseEntity.badRequest().body(new HttpMensaje("El campo contraseña no es valido."));
-            }
-            if(ObjectUtils.isEmpty(usuario.getRoles())){
-                return ResponseEntity.badRequest().body(new HttpMensaje("Debe seleccionar un perfil de usuario valida."));
-            }
-            String passSinEncriptar = usuario.getPassword();
-            usuario.setPassword(passwordEncoder.encode(passSinEncriptar));
-            empleadoServicio.guardar(usuario.getEmpleado());
-            repositorio.save(usuario);
-            return ResponseEntity.ok().body(new HttpMensaje("El usuario se ha creado exitosamente."));
         }catch(Exception e){
             return ResponseEntity.badRequest().body(new HttpMensaje("Excepción no controlada.Desripción: "+e));
         }

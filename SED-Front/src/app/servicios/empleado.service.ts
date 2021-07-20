@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { EmpleadoIndexDto } from '../HttpMensajes/empleado-index-dto';
 import { EmpleadoVerDto } from '../HttpMensajes/empleado-ver-dto';
+import { HttpMensaje } from '../HttpMensajes/http-mensaje';
 import { Empleado } from '../modelo/empleado';
 import { UrlBaseService } from './url-base.service';
 
@@ -25,5 +27,9 @@ export class EmpleadoService {
 
   getEmpleadosEvaluadores() : Observable<Empleado[]>{
     return this.httpClient.get<Empleado[]>(this.urlBaseService.obtenerURLBase() + 'empleados/evaluadores',cabecera);
+  }
+
+  guardar(nuevoEmpleado:FormGroup) : Observable<HttpMensaje>{
+    return this.httpClient.post<HttpMensaje>(this.urlBaseService.obtenerURLBase() + 'empleados',nuevoEmpleado,cabecera);
   }
 }

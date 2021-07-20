@@ -21,9 +21,9 @@ export class UsuarioService {
     return this.httpClient.post<Jwt>(this.urlBaseService.obtenerURLBase() + 'usuario/login',loginUsuario);
   }
 
-  public guardar(usuario : Usuario) : Observable<any>{
-    return this.httpClient.post<any>(this.urlBaseService.obtenerURLBase() + 'usuario/nuevo',usuario,cabecera);
-  }
+  // public guardar(usuario : Usuario) : Observable<any>{
+  //   return this.httpClient.post<any>(this.urlBaseService.obtenerURLBase() + 'usuario/nuevo',usuario,cabecera);
+  // }
 
   public obtenerDatosUsuarioLogeado() : Observable<any>{
     return this.httpClient.get<Usuario>(this.urlBaseService.obtenerURLBase() + 'usuario/obtener_datos',cabecera);
