@@ -48,9 +48,11 @@ public class EspecificacionDePuesto implements Serializable{
     
     public List<Objetivo> getObjetivosActivos(){
         List<Objetivo> objetivosEnCurso = new ArrayList<Objetivo>();;
-        this.getObjetivos().stream().filter(obj -> (obj.isEnCurso())).forEachOrdered(obj -> {
-            objetivosEnCurso.add(obj);
-        });
+        if(this.getObjetivos() != null){
+            this.getObjetivos().stream().filter(obj -> (obj.isEnCurso())).forEachOrdered(obj -> {
+                objetivosEnCurso.add(obj);
+            });
+        }
         return objetivosEnCurso;
     }
 }
