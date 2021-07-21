@@ -30,11 +30,26 @@
             <p><strong>Objetivos de la especificación de Puesto:</strong></p>
             <div *ngIf="edp.objetivosActivos.length != 0">
                 <div *ngFor="let obj of edp.objetivosActivos" class="text-center">
-                    <li>{{obj.descripcion}} <button type="button" class="btn btn-light btn-sm" data-toggle="tooltip" data-placement="right" title="Eliminar este objetivo"><i class="fas fa-trash"></i></button></li>
+                    <li>{{obj.descripcion}} <button type="button" (click)="eliminarObjetivoConfirmacion(content,obj.id)" class="btn btn-light btn-sm" data-toggle="tooltip" data-placement="right" title="Eliminar este objetivo"><i class="fas fa-trash"></i></button></li>
                 </div>
             </div>
             <p *ngIf="edp.objetivosActivos.length == 0" class="text-center"><i class="fas fa-exclamation-circle"></i> No hay objetivos cargados</p>
         </div>
     </div>
-
 </div>
+
+<!-- Modal para solicitar confirmacion de eliminación de objetivo -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h6><img src="../../../../assets/advertencia.png" alt="Icon Adv" style="height: 35px;width: 35px;"> ¿Esta seguro que desea eliminar el objetivo seleccionado?</h6>
+    </div>
+    <div class="modal-footer">
+      <button (click)="modal.close('Close click')" type="button" class="btn btn-danger"><i class="fas fa-times"></i> No</button>
+      <button (click)="eliminar()" type="button" class="btn btn-warning"><i class="fas fa-check"></i> Si</button>
+    </div>
+</ng-template>

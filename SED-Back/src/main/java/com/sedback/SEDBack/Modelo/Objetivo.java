@@ -24,4 +24,8 @@ public class Objetivo {
 	
 	@NotNull
 	private boolean enCurso;
+        
+        public void sacarDeCurso(){
+            this.setEnCurso(false);
+        }
 }
