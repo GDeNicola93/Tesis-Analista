@@ -1,6 +1,7 @@
 package com.sedback.SEDBack.Controlador;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.sedback.SEDBack.Dtos.EvaluacionEvaluadorIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionVerDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -50,5 +52,12 @@ public class EvaluacionControlador {
     @PreAuthorize("hasAuthority('Administrador')")
     public ResponseEntity<HttpMensaje> cancelarEvaluacion(@PathVariable(value="id_evaluacion") Long id_evaluacion){
         return servicio.cancelarEvaluacion(id_evaluacion);
+    }
+    
+    @GetMapping("/evaluador/logeado")
+    @PreAuthorize("hasAuthority('Evaluador')")
+    public ResponseEntity<Page<EvaluacionEvaluadorIndexDto>> getEvaluacionesEvaluadorLogeado(@RequestHeader("authorization") String bearer,Pageable page){
+        String token = bearer.replace("Bearer ", "");
+        return servicio.getEvaluacionesEvaluadorLogeado(token, page);
     }
 }

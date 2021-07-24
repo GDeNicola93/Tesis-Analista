@@ -1,17 +1,22 @@
 package com.sedback.SEDBack.Logica;
 
+import com.sedback.SEDBack.Dtos.EvaluacionEvaluadorIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionVerDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Dtos.NuevaEvaluacionDto;
+import com.sedback.SEDBack.Mappers.EvaluacionEvaluadorIndexDtoMapper;
 import com.sedback.SEDBack.Mappers.EvaluacionIndexDtoMapper;
 import com.sedback.SEDBack.Mappers.EvaluacionVerDtoMapper;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Modelo.Estado;
 import com.sedback.SEDBack.Modelo.Evaluacion;
+import com.sedback.SEDBack.Modelo.Usuario;
 import com.sedback.SEDBack.Persistencia.EspecificacionDePuestoRepositorio;
 import com.sedback.SEDBack.Persistencia.EstadoRepositorio;
 import com.sedback.SEDBack.Persistencia.EvaluacionRepositorio;
+import com.sedback.SEDBack.Persistencia.UsuarioRepositorio;
+import com.sedback.SEDBack.Seguridad.JWT.JwtProvider;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +38,12 @@ public class EvaluacionServicio {
     
     @Autowired
     private DetalleEvaluacionServicio detalleEvaluacionServicio;
+    
+    @Autowired
+    private UsuarioRepositorio usuarioRepositorio;
+    
+    @Autowired
+    JwtProvider jwtProvider;
     
     public ResponseEntity<HttpMensaje> guardar(NuevaEvaluacionDto nuevaEvaluacion){
         List<Empleado> empleadosAEvaluar = especificacionPuestoRepositorio.findById(nuevaEvaluacion.getEspecificacionPuesto().getId()).get().getEmpleados();
@@ -67,5 +78,10 @@ public class EvaluacionServicio {
         }else{
             return ResponseEntity.badRequest().body(new HttpMensaje("La evaluación seleccionada no se puede cancelar."));
         }
+    }
+    
+    public ResponseEntity<Page<EvaluacionEvaluadorIndexDto>> getEvaluacionesEvaluadorLogeado(String token,Pageable page){
+        Usuario userLogeado = usuarioRepositorio.findById(jwtProvider.getIdUserFromToken(token)).get();
+        return ResponseEntity.ok().body(EvaluacionEvaluadorIndexDtoMapper.INSTANCE.toEvaluacionEvaluadorIndexDtoPage(evaluacionRepositorio.getEvaluacionesEvaluador(userLogeado.getEmpleado().getId(),page)));
     }
 }

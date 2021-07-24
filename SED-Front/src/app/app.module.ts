@@ -34,6 +34,7 @@ import { VerEspecificacionPuestoComponent } from './componentes/especificacionPu
 import { IndexEvaluacionComponent } from './componentes/evaluaciones/index-evaluacion/index-evaluacion.component';
 import { NuevaEvaluacionComponent } from './componentes/evaluaciones/nueva-evaluacion/nueva-evaluacion.component';
 import { VerEvaluacionComponent } from './componentes/evaluaciones/ver-evaluacion/ver-evaluacion.component';
+import { EvaluacionesAsignadasComponent } from './componentes/evaluaciones-evaluador/evaluaciones-asignadas/evaluaciones-asignadas.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { VerEvaluacionComponent } from './componentes/evaluaciones/ver-evaluacio
     VerEspecificacionPuestoComponent,
     IndexEvaluacionComponent,
     NuevaEvaluacionComponent,
-    VerEvaluacionComponent
+    VerEvaluacionComponent,
+    EvaluacionesAsignadasComponent
   ],
   imports: [
     BrowserModule,

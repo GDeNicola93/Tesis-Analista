@@ -27,6 +27,10 @@ export class EvaluacionService {
     return this.httpClient.get<EvaluacionVerDto>(this.urlBaseService.obtenerURLBase() + `evaluacion?id=${id_evaluacion}`,cabecera);
   }
 
+  getEvaluacionesEvaluadorLogeado(page:number,size:number,sort:string,order:string) : Observable<any>{
+    return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion/evaluador/logeado?sort=${sort},${order}&size=${size}&page=${page}`,cabecera);
+  }
+
   cancelarEvaluacion(id_evaluacion : number) : Observable<HttpMensaje>{
     return this.httpClient.get<HttpMensaje>(this.urlBaseService.obtenerURLBase() + `evaluacion/cancelar/${id_evaluacion}`,cabecera);
   }
