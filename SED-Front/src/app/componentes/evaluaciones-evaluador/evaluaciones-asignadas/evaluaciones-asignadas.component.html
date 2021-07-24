@@ -32,7 +32,8 @@
                         <td>
                             <div class="row">
                                 <div class="col">
-                                  <button routerLink="/evaluacion/ver/{{ev.id}}" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver detalles evaluación"><i class="far fa-eye"></i></button>
+                                  <button routerLink="/evaluador/evaluaciones_asiganadas/ver/{{ev.id}}" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver detalles evaluación"><i class="far fa-eye"></i></button>
+                                  <button *ngIf="ev.estaParaEvaluar" routerLink="/evaluacion/ver/{{ev.id}}" style="margin-right: 5px;" class="btn btn-sm btn-success shadow-sm" data-toggle="tooltip" data-placement="top" title="Evaluar"><i class="fas fa-chalkboard-teacher"></i></button>
                                 </div>
                             </div>
                         </td>

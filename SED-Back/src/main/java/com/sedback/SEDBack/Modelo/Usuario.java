@@ -1,5 +1,6 @@
 package com.sedback.SEDBack.Modelo;
 
+import com.sedback.SEDBack.Enums.RolNombre;
 import com.sun.istack.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -41,4 +42,13 @@ public class Usuario implements Serializable {
     private Empleado empleado;
     
     private String nombreFotoPerfil;
+    
+    public boolean esAdministrador(){
+        for(Rol r : this.getRoles()){
+            if(r.getRolNombre() == RolNombre.Administrador){
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -43,9 +43,10 @@ public class EvaluacionControlador {
     }
     
     @GetMapping(params = {"id"})
-    @PreAuthorize("hasAuthority('Administrador')")
-    public ResponseEntity<EvaluacionVerDto> getEvaluacionById(Long id){
-        return servicio.getEvaluacionById(id);
+    @PreAuthorize("hasAuthority('Administrador')" + "|| hasAuthority('Evaluador')")
+    public ResponseEntity<EvaluacionVerDto> getEvaluacionById(Long id,@RequestHeader("authorization") String bearer){
+        String token = bearer.replace("Bearer ", "");
+        return servicio.getEvaluacionById(id,token);
     }
     
     @GetMapping("/cancelar/{id_evaluacion}")
@@ -53,6 +54,8 @@ public class EvaluacionControlador {
     public ResponseEntity<HttpMensaje> cancelarEvaluacion(@PathVariable(value="id_evaluacion") Long id_evaluacion){
         return servicio.cancelarEvaluacion(id_evaluacion);
     }
+    
+    //Endpoints Evaluador
     
     @GetMapping("/evaluador/logeado")
     @PreAuthorize("hasAuthority('Evaluador')")

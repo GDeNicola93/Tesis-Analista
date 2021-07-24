@@ -108,4 +108,19 @@ public class Evaluacion implements Serializable {
             return false;
         }
     }
+    
+    public boolean getEstaParaEvaluar(){
+        if(this.getEstado().getId() == 2){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public boolean esDeEvaluador(Empleado emp){
+        if(this.getEvaluador().equals(emp)){
+            return true;
+        }
+        return false;
+    }
 }

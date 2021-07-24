@@ -20,4 +20,6 @@ public class EvaluacionEvaluadorIndexDto {
     private LocalDateTime fechaHoraCreacion;
     
     private Estado estado;
+    
+    private boolean estaParaEvaluar;
 }

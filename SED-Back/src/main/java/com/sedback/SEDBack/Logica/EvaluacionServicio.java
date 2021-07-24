@@ -65,8 +65,17 @@ public class EvaluacionServicio {
         return ResponseEntity.ok().body(EvaluacionIndexDtoMapper.INSTANCE.toEmpleadoIndexDtoPage(evaluacionRepositorio.findAll(page)));
     }
     
-    public ResponseEntity<EvaluacionVerDto> getEvaluacionById(Long id){
-        return ResponseEntity.ok().body(EvaluacionVerDtoMapper.INSTANCE.evaluacionToEvaluacionVerDto(evaluacionRepositorio.findById(id).get()));
+    public ResponseEntity<EvaluacionVerDto> getEvaluacionById(Long id,String token){
+        Evaluacion evaluacionAMostrar = evaluacionRepositorio.findById(id).get();
+        Usuario usuarioLogeado = usuarioRepositorio.findById(jwtProvider.getIdUserFromToken(token)).get();
+        if(usuarioLogeado.esAdministrador()){
+           return ResponseEntity.ok().body(EvaluacionVerDtoMapper.INSTANCE.evaluacionToEvaluacionVerDto(evaluacionAMostrar)); 
+        }
+        if(evaluacionAMostrar.esDeEvaluador(usuarioLogeado.getEmpleado())){
+            return ResponseEntity.ok().body(EvaluacionVerDtoMapper.INSTANCE.evaluacionToEvaluacionVerDto(evaluacionRepositorio.findById(id).get()));
+        }else{
+            return ResponseEntity.badRequest().body(null);
+        }
     }
     
     public ResponseEntity<HttpMensaje> cancelarEvaluacion(Long id_evaluacion){
