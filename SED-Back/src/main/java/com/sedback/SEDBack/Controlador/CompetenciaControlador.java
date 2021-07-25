@@ -32,11 +32,11 @@ public class CompetenciaControlador {
     
     @PostMapping
     @PreAuthorize("hasAuthority('Administrador')")
-    public ResponseEntity<String> guardar(@Valid @RequestBody Competencia competencia,BindingResult result){
+    public ResponseEntity<HttpMensaje> guardar(@Valid @RequestBody Competencia competencia,BindingResult result){
         if (result.hasErrors()) {
             throw new InvalidDataException(result);
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(servicio.guardar(competencia));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new HttpMensaje(servicio.guardar(competencia)));
     }
     
     @GetMapping("/index")

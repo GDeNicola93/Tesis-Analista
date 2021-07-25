@@ -31,9 +31,10 @@ export class NuevaCompetenciaComponent implements OnInit {
     this.guardado = false;
     this.error = false;
     this.competenciaServicio.guardar(this.competenciaForm.value).subscribe(data => {
-      this.mensaje = data;
+      this.mensaje = data.mensaje;
       this.guardado = true;
       this.error = false;
+      this.competenciaForm.reset();
     },
       (err: any) => {
         this.mensaje = err.error.message;
