@@ -9,6 +9,7 @@ import { CompetenciaService } from 'src/app/servicios/competencia.service';
 })
 export class NuevaCompetenciaComponent implements OnInit {
   mensaje = '';
+  errors : string[];
   guardado = false;
   error = false;
   
@@ -30,12 +31,13 @@ export class NuevaCompetenciaComponent implements OnInit {
     this.guardado = false;
     this.error = false;
     this.competenciaServicio.guardar(this.competenciaForm.value).subscribe(data => {
-      this.mensaje = data.mensaje;
+      this.mensaje = data;
       this.guardado = true;
       this.error = false;
     },
       (err: any) => {
-        this.mensaje = err.error.mensaje;
+        this.mensaje = err.error.message;
+        this.errors = err.error.errors;
         this.guardado = false;
         this.error = true;
       }
