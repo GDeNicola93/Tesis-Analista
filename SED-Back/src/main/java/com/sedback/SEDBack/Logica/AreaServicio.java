@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sedback.SEDBack.Logica;
 
 import com.sedback.SEDBack.Dtos.HttpMensaje;
@@ -14,29 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author ususario
- */
+
 @Service
 public class AreaServicio {
     @Autowired
     private AreaRepositorio repositorio;
     
-    public ResponseEntity<HttpMensaje> guardar(Area area){
-        try{
-            if(StringUtils.isBlank(area.getNombre())){
-                return ResponseEntity.badRequest().body(new HttpMensaje("El campo nombre de área no es valido."));
-            }
-            repositorio.save(area);
-            return ResponseEntity.ok().body(new HttpMensaje("El área se ha registrado exitosamente."));
-        }catch(Exception e){
-            return ResponseEntity.badRequest().body(new HttpMensaje("No fue posible registrar el área. Intente nuevamente."));
-        }
+    public String guardar(Area area){
+        repositorio.save(area);
+        return "El área se ha registrado exitosamente.";
     }
     
     public ResponseEntity<List<Area>> obtenerAreas(){
         return ResponseEntity.ok().body(repositorio.findAll());
     }
     
+    public boolean existeArea(String nombreArea){
+        return repositorio.existeNombreArea(nombreArea).isEmpty();
+    }
 }

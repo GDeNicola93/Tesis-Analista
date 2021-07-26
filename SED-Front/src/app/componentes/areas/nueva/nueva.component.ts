@@ -8,8 +8,8 @@ import { AreaService } from 'src/app/servicios/area.service';
   styleUrls: ['./nueva.component.css']
 })
 export class NuevaComponent implements OnInit {
-  //form: any = {};
   mensaje = '';
+  errors : string[];
   guardado = false;
   error = false;
   AreaForm : FormGroup;
@@ -20,22 +20,6 @@ export class NuevaComponent implements OnInit {
     this.validaciones();
   }
 
-  guardar():void {
-    this.guardado = false;
-    this.error = false;
-    this.areaServicio.guardar(this.AreaForm.value).subscribe(data => {
-      this.mensaje = data.mensaje;
-      this.guardado = true;
-      this.error = false;
-    },
-      (err: any) => {
-        this.mensaje = err.error.mensaje;
-        this.guardado = false;
-        this.error = true;
-      }
-    );
-  }
-
   validaciones() : void{
     this.AreaForm = this.fb.group({
       nombre : ['',Validators.required],
@@ -43,6 +27,21 @@ export class NuevaComponent implements OnInit {
     });
   }
 
-
-
+  guardar():void {
+    this.guardado = false;
+    this.error = false;
+    this.areaServicio.guardar(this.AreaForm.value).subscribe(data => {
+      this.mensaje = data.mensaje;
+      this.guardado = true;
+      this.error = false;
+      this.AreaForm.reset();
+    },
+      (err: any) => {
+        this.mensaje = err.error.message;
+        this.errors = err.error.errors;
+        this.guardado = false;
+        this.error = true;
+      }
+    );
+  }
 }

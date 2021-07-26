@@ -1,6 +1,7 @@
 package com.sedback.SEDBack.Modelo;
 
 
+import com.sedback.SEDBack.Validators.AreaUnique;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 
 import com.sun.istack.NotNull;
 import java.io.Serializable;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,15 +20,13 @@ import lombok.NoArgsConstructor;
 @Data //Agrega las caracteristicas seters y geters, ToString,etc
 @NoArgsConstructor
 public class Area implements Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    
+    @NotBlank(message = "El nombre del área es requerido.")
+    @AreaUnique
+    private String nombre;
 	
-	@NotNull
-	@Column(unique = true)
-	private String nombre;
-	
-	@SuppressWarnings("unused")
-	private String descripcion; 
-	 
+    private String descripcion; 	 
 }
