@@ -17,6 +17,7 @@ export class NuevoPuestosTrabajoComponent implements OnInit {
 
   comboAreas : Area[] = [];
   mensaje = '';
+  errors : string[];
   guardado = false;
   error = false;
   puestoTrabajoForm : FormGroup;
@@ -31,7 +32,7 @@ export class NuevoPuestosTrabajoComponent implements OnInit {
   validaciones() : void{
     this.puestoTrabajoForm = this.fb.group({
       nombrePuesto : ['',Validators.required],
-      area : ['',Validators.required],
+      area : [null,Validators.required],
     });
   }
 
@@ -46,8 +47,9 @@ export class NuevoPuestosTrabajoComponent implements OnInit {
       this.puestoTrabajoForm.reset();
     },
     (err: any) => {
-      this.mensaje = err.error.mensaje;
-       this.guardado = false;
+      this.mensaje = err.error.message;
+      this.errors = err.error.errors;
+      this.guardado = false;
       this.error = true;
       }
     );

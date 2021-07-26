@@ -14,92 +14,6 @@
     <div class="card shadow">
         <h6 class="card-header font-weight-bold">Formulario de registro de nuevo Puesto de Trabajo</h6>
         <div class="card-body">
-            <!-- <form name="form" [formGroup]="puestoTrabajoForm" (submit)="guardar()">
-                <div class="form-group">
-                    <label for="nombre">Nombre del puesto: </label>
-                    <input type="text" class="form-control" name="nombre" autocomplete="off" formControlName="nombrePuesto" [ngClass]="(puestoTrabajoForm.get('nombrePuesto').touched || puestoTrabajoForm.get('nombrePuesto').dirty) && puestoTrabajoForm.get('nombrePuesto').hasError('required') ? 'is-invalid':''">
-                    <div class="invalid-feedback">
-                        {{
-                            puestoTrabajoForm.get('nombrePuesto').hasError('required') 
-                            ? "Campo requerido" 
-                            : ""
-                        }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md">
-                        <div class="form-group">
-                            <label>Sucursal al que pertenece: </label>
-                            <select class="form-control" name="sucursal" (change)="actualizarComboAreas()" formControlName="sucursal" [ngClass]="(puestoTrabajoForm.get('sucursal').touched || puestoTrabajoForm.get('sucursal').dirty) && puestoTrabajoForm.get('sucursal').hasError('required') ? 'is-invalid':''">
-                              <option *ngFor="let sucursal of comboSucursales" [ngValue]="sucursal">{{sucursal.id}}-{{sucursal.nombre}}</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                {{
-                                    puestoTrabajoForm.get('sucursal').hasError('required') 
-                                    ? "Seleccione una sucursal" 
-                                    : ""
-                                }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="form-group">
-                            <label>Área al que pertenece: </label>
-                            <select class="form-control" name="area" formControlName="area" [ngClass]="(puestoTrabajoForm.get('area').touched || puestoTrabajoForm.get('area').dirty) && puestoTrabajoForm.get('area').hasError('required') ? 'is-invalid':''">
-                              <option *ngFor="let area of comboAreas" [ngValue]="area">{{area.id}}-{{area.nombre}}</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                {{
-                                    puestoTrabajoForm.get('area').hasError('required') 
-                                    ? "Seleccione un área" 
-                                    : ""
-                                }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col">
-                            <label for="nombre">Objetivo del puesto: </label>
-                            <input type="text" class="form-control" name="objetivo" autocomplete="off" formControlName="objetivo">
-                        </div>
-                        <div class="col-3"> 
-                            <button style="margin-top: 35px;" type="button" (click)="agregarObjetivo()" class="btn btn-sm btn-outline-success"><i class="fas fa-plus"></i> Agregar objetivo</button>   
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Objetivos ya agregados: </label>
-                    <p *ngIf="emptyObjetivos" style="text-align: center;"><i class="fas fa-exclamation-circle"></i> Aun no has agregado objetivos al puesto.</p>
-                    <table class="table table-hover" *ngIf="!emptyObjetivos">
-                        <tbody *ngFor="let obj of objetivosAgregados">
-                            <tr>
-                            <td>{{obj.descripcion}}</td>
-                            <td><button type="button" (click)="eliminarObjetivo(obj)"><i class="fas fa-times"></i></button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="form-group">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
-                        <strong><i class="fas fa-times"></i> ¡Error!</strong> {{mensaje}}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="guardado">
-                        <strong><i class="fas fa-check"></i> ¡Perfecto!</strong> {{mensaje}}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button [disabled]="puestoTrabajoForm.invalid" type="submit" class="float-right btn btn-sm btn-success"><i class="far fa-save"></i> Guardar</button>
-                </div>
-
-            </form> -->
             <form [formGroup]="puestoTrabajoForm" (submit)="guardar()">
                 <div class="form-group">
                     <label for="nombre">Nombre del puesto: </label>
@@ -127,7 +41,12 @@
                 </div>
                 <div class="form-group">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
-                        <strong><i class="fas fa-times"></i> ¡Error!</strong> {{mensaje}}
+                        <strong><i class="fas fa-times"></i> ¡Error!</strong> {{mensaje}}:
+                        <ul *ngIf="errors != null">
+                            <div *ngFor="let er of errors">
+                                <li>{{er}}</li>
+                            </div>
+                        </ul>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
