@@ -36,14 +36,14 @@ public class EmpleadoServicio {
     @Autowired
     PasswordEncoder passwordEncoder;
     
-    public ResponseEntity<HttpMensaje> guardar(NuevoEmpleadoDto nuevoEmpleado){
+    public String guardar(NuevoEmpleadoDto nuevoEmpleado){
         Empleado empleadoGuardado = repositorioEmpleado.save(nuevoEmpleado.getEmpleado());
         Usuario usuario = nuevoEmpleado.getUsuario();
         usuario.setHabilitado(true);
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         usuario.setEmpleado(empleadoGuardado);
         repositorioUsuario.save(usuario);
-        return ResponseEntity.ok().body(new HttpMensaje("Empleado Registrado Correctamente"));
+        return "Empleado Registrado Correctamente";
     }
     
     public ResponseEntity<EmpleadoVerDto> getEmpleadoById(Integer id){
@@ -56,5 +56,17 @@ public class EmpleadoServicio {
     
     public ResponseEntity<List<Empleado>> getEmpleadosEvaluadores(){
         return ResponseEntity.ok().body(repositorioEmpleado.getEmpleadosEvaluadores());
+    }
+    
+    public boolean existeNumeroDni(String dni){
+        return repositorioEmpleado.existeNumeroDni(dni).isEmpty();
+    }
+    
+    public boolean existeEmail(String email){
+        return repositorioEmpleado.existeEmail(email).isEmpty();
+    }
+    
+    public boolean existeLegajo(String legajo){
+        return repositorioEmpleado.existeLegajo(legajo).isEmpty();
     }
 }

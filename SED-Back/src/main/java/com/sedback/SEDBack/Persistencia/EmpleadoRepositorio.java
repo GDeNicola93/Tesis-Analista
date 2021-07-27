@@ -26,4 +26,13 @@ public interface EmpleadoRepositorio extends JpaRepository<Empleado,Integer>{
     
     @Query(value="SELECT * from empleado INNER JOIN usuario on (empleado.id=usuario.empleado_id) INNER JOIN usuario_roles ON (usuario_roles.usuario_id=usuario.id) INNER JOIN rol on (rol.id=usuario_roles.roles_id) where rol.id = 2",nativeQuery = true)
     List<Empleado> getEmpleadosEvaluadores();
+    
+    @Query("select emp from Empleado emp where emp.dni = ?1")
+    List<Empleado> existeNumeroDni(String dni);
+    
+    @Query("select emp from Empleado emp where emp.email = ?1")
+    List<Empleado> existeEmail(String email);
+    
+    @Query("select emp from Empleado emp where emp.legajo = ?1")
+    List<Empleado> existeLegajo(String legajo);
 }

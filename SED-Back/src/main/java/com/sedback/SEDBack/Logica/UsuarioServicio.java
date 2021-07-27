@@ -122,5 +122,9 @@ public class UsuarioServicio {
         return ResponseEntity.ok().body(repositorio.findById(jwtProvider.getIdUserFromToken(token)).get());
     }
     
+    public boolean existeNombreUsuario(String nombreUsuario){
+        return repositorio.existeNombreUsuario(nombreUsuario).isEmpty();
+    }
+    
     
 }

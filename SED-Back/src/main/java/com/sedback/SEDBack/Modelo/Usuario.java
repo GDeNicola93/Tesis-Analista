@@ -25,14 +25,10 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotNull
-    @Column(unique = true)
     private String nombreUsuario;
     
-    @NotNull
     private String password;
     
-    @NotNull
     private boolean habilitado;
     
     @ManyToMany

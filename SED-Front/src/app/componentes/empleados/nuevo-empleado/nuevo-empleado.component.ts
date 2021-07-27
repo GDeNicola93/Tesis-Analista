@@ -28,10 +28,10 @@ export class NuevoEmpleadoComponent implements OnInit {
   emptyPuestosAsignados : boolean = true;
   emptyRolesAsignados : boolean = true;
   mensaje = '';
+  errors : string[];
   guardado = false;
   error = false;
   nuevoEmpleadoForm : FormGroup;
-  //usuarioForm : FormGroup;
 
   constructor(private sucursalServicio : SucursalService,private rolServicio : RolService,private empleadoServicio : EmpleadoService,private fb : FormBuilder) { }
 
@@ -71,9 +71,11 @@ export class NuevoEmpleadoComponent implements OnInit {
         this.mensaje = data.mensaje;
         this.guardado = true;
         this.error = false;
+        this.nuevoEmpleadoForm.reset();
       },
         (err:any)=>{
-          this.mensaje = err.error.mensaje;
+          this.mensaje = err.error.message;
+          this.errors = err.error.errors;
           this.guardado = false;
           this.error = true;
         }
