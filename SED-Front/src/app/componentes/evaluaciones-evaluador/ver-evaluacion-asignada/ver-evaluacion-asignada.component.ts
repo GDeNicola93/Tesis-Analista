@@ -10,6 +10,9 @@ import { EvaluacionService } from 'src/app/servicios/evaluacion.service';
 })
 export class VerEvaluacionAsignadaComponent implements OnInit {
   evaluacion : EvaluacionVerDto;
+  mensaje = '';
+  error = false;
+
 
   constructor(private rutaActiva: ActivatedRoute,private evaluacionServicio : EvaluacionService) { }
 
@@ -18,9 +21,15 @@ export class VerEvaluacionAsignadaComponent implements OnInit {
   }
 
   getEvaluacionById() : void{
+    this.error = false;
     this.evaluacionServicio.getEvaluacionById(this.rutaActiva.snapshot.params.id).subscribe(data =>{
       this.evaluacion = data;
-    });
+    },
+      (err : any)=>{
+        this.error = true;
+        this.mensaje = err.error.message;
+      }
+    );
   }
 
 }

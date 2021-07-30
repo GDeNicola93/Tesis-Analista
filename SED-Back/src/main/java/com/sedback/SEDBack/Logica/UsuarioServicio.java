@@ -118,8 +118,8 @@ public class UsuarioServicio {
         }
     }
     
-    public ResponseEntity<Usuario> getDatosUsuarioLogeadoToken(String token){
-        return ResponseEntity.ok().body(repositorio.findById(jwtProvider.getIdUserFromToken(token)).get());
+    public ResponseEntity<Usuario> getDatosUsuarioLogeado(Long idUser){
+        return ResponseEntity.ok().body(repositorio.findById(idUser).get());
     }
     
     public boolean existeNombreUsuario(String nombreUsuario){

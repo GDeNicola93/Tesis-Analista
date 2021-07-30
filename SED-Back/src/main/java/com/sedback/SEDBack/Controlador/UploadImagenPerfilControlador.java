@@ -2,6 +2,7 @@ package com.sedback.SEDBack.Controlador;
 
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Logica.UsuarioServicio;
+import com.sedback.SEDBack.Seguridad.UsuarioPrincipal;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -31,7 +33,7 @@ public class UploadImagenPerfilControlador {
     private UsuarioServicio usuarioServicio;
     
     @RequestMapping(value = "/imagen_perfil/upload",method = RequestMethod.POST)
-    public ResponseEntity<HttpMensaje> guardar_imagen(@RequestParam(value = "file") MultipartFile file,@RequestHeader("authorization") String language) {
+    public ResponseEntity<HttpMensaje> guardar_imagen(@RequestParam(value = "file") MultipartFile file) {
         try{
             String fileExtension = getFileExtension(file);
             String filename = getRandomString();
@@ -41,8 +43,8 @@ public class UploadImagenPerfilControlador {
             byte[] bytes = file.getBytes();
             file.transferTo(targetFile);
             
-            String token = language.replace("Bearer ", "");
-            if(usuarioServicio.setImagenPerfil(usuarioServicio.getDatosUsuarioLogeadoToken(token).getBody(), filename).getStatusCode().isError()){
+            UsuarioPrincipal userLogeado = (UsuarioPrincipal)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if(usuarioServicio.setImagenPerfil(usuarioServicio.getDatosUsuarioLogeado(userLogeado.getId()).getBody(), filename).getStatusCode().isError()){
                 return ResponseEntity.badRequest().body(new HttpMensaje("No fue posible subir la imagen. Intente nuevamente!"));
             }
             

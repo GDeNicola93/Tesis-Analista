@@ -10,7 +10,13 @@
         </div>
     </div>
 
-    <div class="card shadow">
+    <div *ngIf="error">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
+            <strong><i class="fas fa-times"></i> ¡Error!</strong> {{mensaje}}
+        </div>
+    </div>
+
+    <div class="card shadow" *ngIf="!error">
         <h6 class="card-header font-weight-bold">Información de evaluación {{evaluacion.id}}</h6>
         <div class="card-body">
             <div class="row">

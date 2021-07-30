@@ -53,7 +53,7 @@ public class EvaluacionControlador {
     @PreAuthorize("hasAuthority('Administrador')" + "|| hasAuthority('Evaluador')")
     public ResponseEntity<EvaluacionVerDto> getEvaluacionById(Long id,@RequestHeader("authorization") String bearer){
         String token = bearer.replace("Bearer ", "");
-        return servicio.getEvaluacionById(id,token);
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.getEvaluacionById(id,token));
     }
     
     @GetMapping("/cancelar/{id_evaluacion}")
