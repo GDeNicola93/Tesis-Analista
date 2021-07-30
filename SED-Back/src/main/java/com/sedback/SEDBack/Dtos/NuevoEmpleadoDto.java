@@ -11,6 +11,7 @@ import com.sedback.SEDBack.Validators.UsuarioUnique;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -63,6 +64,14 @@ public class NuevoEmpleadoDto {
     
     @NotEmpty(message = "Debe seleccionar como minimo un perfil de usuario para el empleado.")
     private Set<Rol> roles;
+    
+    @AssertTrue(message="Las passwords ingresadas no coinciden.")
+    public boolean isValidPassword(){
+        if(password.equals(repeatPassword)){
+            return true;
+        }
+        return false;
+    }
     
     public Empleado getEmpleado(){
         Empleado emp = new Empleado();
