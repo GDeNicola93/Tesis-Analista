@@ -6,14 +6,18 @@ import com.sedback.SEDBack.Dtos.EvaluacionIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionVerDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Dtos.NuevaEvaluacionDto;
+import com.sedback.SEDBack.Excepciones.InvalidDataException;
 import com.sedback.SEDBack.Logica.EvaluacionServicio;
 import com.sedback.SEDBack.Modelo.Evaluacion;
 import com.sedback.SEDBack.Views.Views;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,8 +36,11 @@ public class EvaluacionControlador {
     
     @PostMapping()
     @PreAuthorize("hasAuthority('Administrador')")
-    public ResponseEntity<HttpMensaje> guardar(@RequestBody NuevaEvaluacionDto evaluacion){
-        return servicio.guardar(evaluacion);
+    public ResponseEntity<HttpMensaje> guardar(@Valid @RequestBody NuevaEvaluacionDto evaluacion,BindingResult result){
+        if (result.hasErrors()) {
+            throw new InvalidDataException(result);
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(new HttpMensaje(servicio.guardar(evaluacion)));
     }
     
     @GetMapping()

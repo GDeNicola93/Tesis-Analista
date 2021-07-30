@@ -45,7 +45,7 @@ public class EvaluacionServicio {
     @Autowired
     JwtProvider jwtProvider;
     
-    public ResponseEntity<HttpMensaje> guardar(NuevaEvaluacionDto nuevaEvaluacion){
+    public String guardar(NuevaEvaluacionDto nuevaEvaluacion){
         List<Empleado> empleadosAEvaluar = especificacionPuestoRepositorio.findById(nuevaEvaluacion.getEspecificacionPuesto().getId()).get().getEmpleados();
         Estado enEspera = estadoRepositorio.findById(1).get(); //1 --> En Espera
         Evaluacion evaluacion = new Evaluacion();
@@ -58,7 +58,7 @@ public class EvaluacionServicio {
         evaluacion.setFechaHoraCreacion(LocalDateTime.now());
         detalleEvaluacionServicio.guardar(evaluacion.crearDetallesEvaluacion(empleadosAEvaluar));
         evaluacionRepositorio.save(evaluacion);
-        return ResponseEntity.ok().body(new HttpMensaje("¡Evaluación guardada existosamente!"));
+        return "¡Evaluación registrada existosamente!";
     }
     
     public ResponseEntity<Page<EvaluacionIndexDto>> getEvaluaciones(Pageable page){

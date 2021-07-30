@@ -21,6 +21,7 @@ export class NuevaEvaluacionComponent implements OnInit {
   comboPlantillaEvaluacion : PlantillaEvaluacion[];
   comboEmpleadosEvaluadores : Empleado[];
   mensaje = '';
+  errors : string[];
   guardado = false;
   error = false;
 
@@ -39,12 +40,12 @@ export class NuevaEvaluacionComponent implements OnInit {
 
   validaciones() : void{
     this.evaluacionForm = this.fb.group({
-      fechaInicioEvaluacion : ['',Validators.required],
-      fechaFinEvaluacion : ['',Validators.required],
-      sucursal : ['',Validators.required],
-      especificacionPuesto : ['',Validators.required],
-      plantillaEvaluacion : ['',Validators.required],
-      empleadoEvaluador : ['',Validators.required],
+      fechaInicioEvaluacion : [null,Validators.required],
+      fechaFinEvaluacion : [null,Validators.required],
+      sucursal : [null,Validators.required],
+      especificacionPuesto : [null,Validators.required],
+      plantillaEvaluacion : [null,Validators.required],
+      empleadoEvaluador : [null,Validators.required],
       puntajeMinAprobacion : ['',Validators.required],
     });
   }
@@ -59,7 +60,8 @@ export class NuevaEvaluacionComponent implements OnInit {
       this.evaluacionForm.reset();
     },
       (err: any) => {
-        this.mensaje = err.error.mensaje;
+        this.mensaje = err.error.message;
+        this.errors = err.error.errors;
         this.guardado = false;
         this.error = true;
       }
