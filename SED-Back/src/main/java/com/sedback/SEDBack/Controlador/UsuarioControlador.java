@@ -10,15 +10,10 @@ import com.sedback.SEDBack.Seguridad.UsuarioPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.CurrentSecurityContext;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,8 +26,8 @@ public class UsuarioControlador {
     private UsuarioServicio servicio;
      
     @GetMapping("/obtener_datos")
-    public ResponseEntity<Usuario> obtenerDatos(){
-       UsuarioPrincipal userLogeado = (UsuarioPrincipal)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public ResponseEntity<Usuario> obtenerDatos(UsernamePasswordAuthenticationToken principal){
+       UsuarioPrincipal userLogeado = (UsuarioPrincipal) principal.getPrincipal();
        return servicio.getDatosUsuarioLogeado(userLogeado.getId());  
     }
      
@@ -42,8 +37,8 @@ public class UsuarioControlador {
     }
     
     @PostMapping("/update_password")
-    public ResponseEntity<HttpMensaje> actualizarPassword(@RequestBody CambioPassword cambioPassword){
-        UsuarioPrincipal userLogeado = (UsuarioPrincipal)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public ResponseEntity<HttpMensaje> actualizarPassword(@RequestBody CambioPassword cambioPassword,UsernamePasswordAuthenticationToken principal){
+        UsuarioPrincipal userLogeado = (UsuarioPrincipal) principal.getPrincipal();
         return servicio.actualizarPassword(cambioPassword,servicio.getDatosUsuarioLogeado(userLogeado.getId()).getBody());
     }
 }
