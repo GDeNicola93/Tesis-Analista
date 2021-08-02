@@ -4,12 +4,15 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.sedback.SEDBack.Dtos.EvaluacionEvaluadorIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionVerDto;
+import com.sedback.SEDBack.Dtos.EvaluarIndexDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Dtos.NuevaEvaluacionDto;
 import com.sedback.SEDBack.Excepciones.InvalidDataException;
 import com.sedback.SEDBack.Logica.EvaluacionServicio;
 import com.sedback.SEDBack.Modelo.Evaluacion;
+import com.sedback.SEDBack.Seguridad.UsuarioPrincipal;
 import com.sedback.SEDBack.Views.Views;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,5 +73,12 @@ public class EvaluacionControlador {
     public ResponseEntity<Page<EvaluacionEvaluadorIndexDto>> getEvaluacionesEvaluadorLogeado(@RequestHeader("authorization") String bearer,Pageable page){
         String token = bearer.replace("Bearer ", "");
         return servicio.getEvaluacionesEvaluadorLogeado(token, page);
+    }
+    
+    @GetMapping("/evaluar/{id_evaluacion}")
+    @PreAuthorize("hasAuthority('Evaluador')")
+    public ResponseEntity<List<EvaluarIndexDto>> getEmpleadosAEvaluarEvaluacion(@PathVariable(value="id_evaluacion") Long id_evaluacion,UsernamePasswordAuthenticationToken principal){
+        UsuarioPrincipal userLogeado = (UsuarioPrincipal) principal.getPrincipal();
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.getEmpleadosAEvaluarEvaluacion(id_evaluacion,userLogeado.getId()));
     }
 }

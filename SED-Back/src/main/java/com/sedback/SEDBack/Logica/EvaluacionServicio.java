@@ -3,12 +3,16 @@ package com.sedback.SEDBack.Logica;
 import com.sedback.SEDBack.Dtos.EvaluacionEvaluadorIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionVerDto;
+import com.sedback.SEDBack.Dtos.EvaluarIndexDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Dtos.NuevaEvaluacionDto;
+import com.sedback.SEDBack.Excepciones.FueraDeCursoException;
 import com.sedback.SEDBack.Excepciones.PermissionException;
 import com.sedback.SEDBack.Mappers.EvaluacionEvaluadorIndexDtoMapper;
 import com.sedback.SEDBack.Mappers.EvaluacionIndexDtoMapper;
 import com.sedback.SEDBack.Mappers.EvaluacionVerDtoMapper;
+import com.sedback.SEDBack.Mappers.EvaluarIndexDtoMapper;
+import com.sedback.SEDBack.Modelo.DetalleEvaluacion;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Modelo.Estado;
 import com.sedback.SEDBack.Modelo.Evaluacion;
@@ -42,7 +46,10 @@ public class EvaluacionServicio {
     private DetalleEvaluacionServicio detalleEvaluacionServicio;
     
     @Autowired
-    private UsuarioRepositorio usuarioRepositorio;
+    private UsuarioRepositorio usuarioRepositorio; //Esta inyeccion habria que sacarla.
+    
+    @Autowired
+    private UsuarioServicio usuarioServicio;
     
     @Autowired
     JwtProvider jwtProvider;
@@ -91,8 +98,25 @@ public class EvaluacionServicio {
         }
     }
     
+    
+    //Para el evaluador
+    
     public ResponseEntity<Page<EvaluacionEvaluadorIndexDto>> getEvaluacionesEvaluadorLogeado(String token,Pageable page){
         Usuario userLogeado = usuarioRepositorio.findById(jwtProvider.getIdUserFromToken(token)).get();
         return ResponseEntity.ok().body(EvaluacionEvaluadorIndexDtoMapper.INSTANCE.toEvaluacionEvaluadorIndexDtoPage(evaluacionRepositorio.getEvaluacionesEvaluador(userLogeado.getEmpleado().getId(),page)));
+    }
+    
+    public List<EvaluarIndexDto> getEmpleadosAEvaluarEvaluacion(Long id,Long idUserLogeado){
+        Evaluacion evaluacionSeleccionada = evaluacionRepositorio.findById(id).get();
+        if(evaluacionSeleccionada.esDeEvaluador(usuarioServicio.getDatosUsuarioLogeado(idUserLogeado).getBody().getEmpleado())){
+            if(evaluacionSeleccionada.getEstaParaEvaluar()){
+                List<DetalleEvaluacion> detallesEvaluacionSeleccionada = evaluacionSeleccionada.getDetalleEvaluacion();
+                return EvaluarIndexDtoMapper.INSTANCE.toEvaluarIndexDtoList(detallesEvaluacionSeleccionada,evaluacionSeleccionada.getPuntajeMinAprobacion()); 
+            }else{
+                throw new FueraDeCursoException("La evaluación se encuentra en estado "+evaluacionSeleccionada.getEstado().getNombre()+" por lo que no es posible realizar el proceso de evaluación en este momento.");
+            }
+        }else{
+            throw new PermissionException("La evaluación que quiere evaluar no se encuentra asignada a su usuario.");
+        }
     }
 }

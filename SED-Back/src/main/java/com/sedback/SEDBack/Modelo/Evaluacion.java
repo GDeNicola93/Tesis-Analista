@@ -44,7 +44,7 @@ public class Evaluacion implements Serializable {
     private Integer puntajeMinAprobacion;
     
     @OneToMany
-    private List<DetalleEvaluacion> detalleEvaluacion = new ArrayList<DetalleEvaluacion>();
+    private List<DetalleEvaluacion> detalleEvaluacion;
     
     public boolean enCurso(LocalDate fechaActual,Estado enCurso){ //Este metodo recibe el estado EnCurso y la fecha Actual
         if(fechaActual.equals(this.getFechaInicioEvaluacion())){

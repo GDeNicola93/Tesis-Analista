@@ -30,6 +30,12 @@ public class ConfigException {
   }
   
   @ExceptionHandler
+  protected ResponseEntity<ErrorResponse> handleException(FueraDeCursoException exc){
+    HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+    return buildResponseEntity(httpStatus, new RuntimeException(exc.getMessage()),null);  
+  }
+  
+  @ExceptionHandler
   protected ResponseEntity<ErrorResponse> handleException(NoSuchElementException exc){
     HttpStatus httpStatus = HttpStatus.NOT_FOUND;
     return buildResponseEntity(httpStatus, new RuntimeException("La información solicitada no existe."),null);  

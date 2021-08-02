@@ -34,4 +34,8 @@ export class EvaluacionService {
   cancelarEvaluacion(id_evaluacion : number) : Observable<HttpMensaje>{
     return this.httpClient.get<HttpMensaje>(this.urlBaseService.obtenerURLBase() + `evaluacion/cancelar/${id_evaluacion}`,cabecera);
   }
+
+  getEmpleadosAEvaluarEvaluacion(id_evaluacion : number) : Observable<any>{
+    return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion/evaluar/${id_evaluacion}`,cabecera);
+  }
 }
