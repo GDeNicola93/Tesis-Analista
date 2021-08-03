@@ -1,5 +1,6 @@
 package com.sedback.SEDBack.Logica;
 
+import com.sedback.SEDBack.Dtos.DetalleEvaluacionDto;
 import com.sedback.SEDBack.Dtos.EvaluacionEvaluadorIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionVerDto;
@@ -7,7 +8,9 @@ import com.sedback.SEDBack.Dtos.EvaluarIndexDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Dtos.NuevaEvaluacionDto;
 import com.sedback.SEDBack.Excepciones.FueraDeCursoException;
+import com.sedback.SEDBack.Excepciones.NotFoundException;
 import com.sedback.SEDBack.Excepciones.PermissionException;
+import com.sedback.SEDBack.Mappers.DetalleEvaluacionDtoMapper;
 import com.sedback.SEDBack.Mappers.EvaluacionEvaluadorIndexDtoMapper;
 import com.sedback.SEDBack.Mappers.EvaluacionIndexDtoMapper;
 import com.sedback.SEDBack.Mappers.EvaluacionVerDtoMapper;
@@ -117,6 +120,20 @@ public class EvaluacionServicio {
             }
         }else{
             throw new PermissionException("La evaluación que quiere evaluar no se encuentra asignada a su usuario.");
+        }
+    }
+    
+    public DetalleEvaluacionDto getDetalleEvaluacionById(Long idEvaluacion,Long idDetalleEvaluacion,Long idUserLogeado){
+        Evaluacion evaluacionSeleccionada = evaluacionRepositorio.findById(idEvaluacion).get();
+        if(evaluacionSeleccionada.esDeEvaluador(usuarioServicio.getDatosUsuarioLogeado(idUserLogeado).getBody().getEmpleado()) || usuarioServicio.getDatosUsuarioLogeado(idUserLogeado).getBody().esAdministrador()){
+            DetalleEvaluacion detalleSeleccionado = evaluacionSeleccionada.getDetalleEvaluacionId(idDetalleEvaluacion);
+            if(detalleSeleccionado != null){
+                return DetalleEvaluacionDtoMapper.INSTANCE.toDetalleEvaluacionDto(detalleSeleccionado,evaluacionSeleccionada.getPuntajeMinAprobacion());
+            }else{
+                throw new NotFoundException("La evalucion no tiene ningun detalle de evaluación con el id ingresado");
+            }
+        }else{
+            throw new PermissionException("No puede ver detalles de esta evaluación ya que no esta asignada a su usuario.");
         }
     }
 }

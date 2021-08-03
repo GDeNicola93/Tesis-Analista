@@ -1,5 +1,6 @@
 package com.sedback.SEDBack.Modelo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.Data;
@@ -24,6 +26,7 @@ public class DetalleEvaluacion implements Serializable{
     @ManyToOne
     private Empleado evaluado;
     
+    @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate fechaRealizacion;
     
     @OneToMany
@@ -50,5 +53,5 @@ public class DetalleEvaluacion implements Serializable{
         }else{
             return false;
         }
-    }
+    } 
 }

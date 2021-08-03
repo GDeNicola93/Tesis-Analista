@@ -1,6 +1,7 @@
 package com.sedback.SEDBack.Controlador;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.sedback.SEDBack.Dtos.DetalleEvaluacionDto;
 import com.sedback.SEDBack.Dtos.EvaluacionEvaluadorIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionVerDto;
@@ -9,6 +10,7 @@ import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Dtos.NuevaEvaluacionDto;
 import com.sedback.SEDBack.Excepciones.InvalidDataException;
 import com.sedback.SEDBack.Logica.EvaluacionServicio;
+import com.sedback.SEDBack.Modelo.DetalleEvaluacion;
 import com.sedback.SEDBack.Modelo.Evaluacion;
 import com.sedback.SEDBack.Seguridad.UsuarioPrincipal;
 import com.sedback.SEDBack.Views.Views;
@@ -80,5 +82,12 @@ public class EvaluacionControlador {
     public ResponseEntity<List<EvaluarIndexDto>> getEmpleadosAEvaluarEvaluacion(@PathVariable(value="id_evaluacion") Long id_evaluacion,UsernamePasswordAuthenticationToken principal){
         UsuarioPrincipal userLogeado = (UsuarioPrincipal) principal.getPrincipal();
         return ResponseEntity.status(HttpStatus.OK).body(servicio.getEmpleadosAEvaluarEvaluacion(id_evaluacion,userLogeado.getId()));
+    }
+    
+    @GetMapping("/{id_vealuacion}/detalle_evaluacion/{id_detalle_evaluacion}")
+    @PreAuthorize("hasAuthority('Administrador')" + "|| hasAuthority('Evaluador')")
+    public ResponseEntity<DetalleEvaluacionDto> getDetalleEvaluacionById(@PathVariable(value="id_vealuacion") Long id_vealuacion,@PathVariable(value="id_detalle_evaluacion") Long id_detalle_evaluacion,UsernamePasswordAuthenticationToken principal){
+        UsuarioPrincipal userLogeado = (UsuarioPrincipal) principal.getPrincipal();
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.getDetalleEvaluacionById(id_vealuacion,id_detalle_evaluacion,userLogeado.getId()));
     }
 }

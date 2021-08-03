@@ -37,6 +37,7 @@ import { VerEvaluacionComponent } from './componentes/evaluaciones/ver-evaluacio
 import { EvaluacionesAsignadasComponent } from './componentes/evaluaciones-evaluador/evaluaciones-asignadas/evaluaciones-asignadas.component';
 import { VerEvaluacionAsignadaComponent } from './componentes/evaluaciones-evaluador/ver-evaluacion-asignada/ver-evaluacion-asignada.component';
 import { IndexEvaluarComponent } from './componentes/evaluar/index-evaluar/index-evaluar.component';
+import { VerDetalleEvaluacionComponent } from './componentes/evaluaciones/ver-detalle-evaluacion/ver-detalle-evaluacion.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { IndexEvaluarComponent } from './componentes/evaluar/index-evaluar/index
     VerEvaluacionComponent,
     EvaluacionesAsignadasComponent,
     VerEvaluacionAsignadaComponent,
-    IndexEvaluarComponent
+    IndexEvaluarComponent,
+    VerDetalleEvaluacionComponent
   ],
   imports: [
     BrowserModule,

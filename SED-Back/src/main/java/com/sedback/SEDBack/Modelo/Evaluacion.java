@@ -123,4 +123,13 @@ public class Evaluacion implements Serializable {
         }
         return false;
     }
+    
+    public DetalleEvaluacion getDetalleEvaluacionId(Long id){
+        for(DetalleEvaluacion de : detalleEvaluacion){
+            if(de.getId().equals(id)){
+                return de;
+            }
+        }
+        return null;
+    }
 }

@@ -38,4 +38,8 @@ export class EvaluacionService {
   getEmpleadosAEvaluarEvaluacion(id_evaluacion : number) : Observable<any>{
     return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion/evaluar/${id_evaluacion}`,cabecera);
   }
+
+  getDetalleEvaluacionById(id_evaluacion : number,id_detalle : number) : Observable<any>{
+    return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion/${id_evaluacion}/detalle_evaluacion/${id_detalle}`,cabecera);
+  }
 }

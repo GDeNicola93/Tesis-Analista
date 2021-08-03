@@ -24,4 +24,5 @@ public interface EvaluarIndexDtoMapper {
         }
         return evaluarIndexDtoList;
     }
+    
 }
