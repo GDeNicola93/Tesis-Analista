@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.Data;
@@ -32,8 +31,12 @@ public class DetalleEvaluacion implements Serializable{
     @OneToMany
     private List<Resultado> resultados;
     
+    @ManyToOne
+    @JsonIgnore
+    private Evaluacion evaluacion;
+    
     public boolean getFueEvaluado(){
-        if(this.getFechaRealizacion() == null){
+        if(fechaRealizacion == null){
             return false;
         }
         return true;
@@ -47,8 +50,8 @@ public class DetalleEvaluacion implements Serializable{
         return calificacion;
     }
     
-    public boolean getAprobado(Integer puntajeMinAprobacion){
-        if(this.getCalificacion() >= puntajeMinAprobacion){
+    public boolean getAprobado(){
+        if(this.getCalificacion() >= evaluacion.getPuntajeMinAprobacion()){
             return true;
         }else{
             return false;

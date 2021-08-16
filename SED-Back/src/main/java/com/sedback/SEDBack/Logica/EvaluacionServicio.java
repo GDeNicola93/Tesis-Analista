@@ -40,10 +40,10 @@ public class EvaluacionServicio {
     private EvaluacionRepositorio evaluacionRepositorio;
     
     @Autowired
-    private EspecificacionDePuestoRepositorio especificacionPuestoRepositorio;
+    private EstadoRepositorio estadoRepositorio;
     
     @Autowired
-    private EstadoRepositorio estadoRepositorio;
+    private EspecificacionDePuestoRepositorio especificacionPuestoRepositorio;
     
     @Autowired
     private DetalleEvaluacionServicio detalleEvaluacionServicio;
@@ -68,8 +68,8 @@ public class EvaluacionServicio {
         evaluacion.setPlantillaEvaluacion(nuevaEvaluacion.getPlantillaEvaluacion());
         evaluacion.setPuntajeMinAprobacion(nuevaEvaluacion.getPuntajeMinAprobacion());
         evaluacion.setFechaHoraCreacion(LocalDateTime.now());
-        detalleEvaluacionServicio.guardar(evaluacion.crearDetallesEvaluacion(empleadosAEvaluar));
         evaluacionRepositorio.save(evaluacion);
+        detalleEvaluacionServicio.guardar(evaluacion, empleadosAEvaluar);
         return "¡Evaluación registrada existosamente!";
     }
     
@@ -114,7 +114,7 @@ public class EvaluacionServicio {
         if(evaluacionSeleccionada.esDeEvaluador(usuarioServicio.getDatosUsuarioLogeado(idUserLogeado).getBody().getEmpleado())){
             if(evaluacionSeleccionada.getEstaParaEvaluar()){
                 List<DetalleEvaluacion> detallesEvaluacionSeleccionada = evaluacionSeleccionada.getDetalleEvaluacion();
-                return EvaluarIndexDtoMapper.INSTANCE.toEvaluarIndexDtoList(detallesEvaluacionSeleccionada,evaluacionSeleccionada.getPuntajeMinAprobacion()); 
+                return EvaluarIndexDtoMapper.INSTANCE.toEvaluarIndexDtoList(detallesEvaluacionSeleccionada); 
             }else{
                 throw new FueraDeCursoException("La evaluación se encuentra en estado "+evaluacionSeleccionada.getEstado().getNombre()+" por lo que no es posible realizar el proceso de evaluación en este momento.");
             }
@@ -123,15 +123,10 @@ public class EvaluacionServicio {
         }
     }
     
-    public DetalleEvaluacionDto getDetalleEvaluacionById(Long idEvaluacion,Long idDetalleEvaluacion,Long idUserLogeado){
-        Evaluacion evaluacionSeleccionada = evaluacionRepositorio.findById(idEvaluacion).get();
-        if(evaluacionSeleccionada.esDeEvaluador(usuarioServicio.getDatosUsuarioLogeado(idUserLogeado).getBody().getEmpleado()) || usuarioServicio.getDatosUsuarioLogeado(idUserLogeado).getBody().esAdministrador()){
-            DetalleEvaluacion detalleSeleccionado = evaluacionSeleccionada.getDetalleEvaluacionId(idDetalleEvaluacion);
-            if(detalleSeleccionado != null){
-                return DetalleEvaluacionDtoMapper.INSTANCE.toDetalleEvaluacionDto(detalleSeleccionado,evaluacionSeleccionada.getPuntajeMinAprobacion());
-            }else{
-                throw new NotFoundException("La evalucion no tiene ningun detalle de evaluación con el id ingresado");
-            }
+    public DetalleEvaluacionDto getDetalleEvaluacionById(Long idDetalleEvaluacion,Long idUserLogeado){
+        DetalleEvaluacion detalleEvaluacionSeleccionado = detalleEvaluacionServicio.findById(idDetalleEvaluacion).get();
+        if(detalleEvaluacionSeleccionado.getEvaluacion().esDeEvaluador(usuarioServicio.getDatosUsuarioLogeado(idUserLogeado).getBody().getEmpleado())){
+            return DetalleEvaluacionDtoMapper.INSTANCE.toDetalleEvaluacionDto(detalleEvaluacionSeleccionado);
         }else{
             throw new PermissionException("No puede ver detalles de esta evaluación ya que no esta asignada a su usuario.");
         }

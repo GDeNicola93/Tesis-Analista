@@ -1,7 +1,10 @@
 package com.sedback.SEDBack.Logica;
 
 import com.sedback.SEDBack.Modelo.DetalleEvaluacion;
+import com.sedback.SEDBack.Modelo.Empleado;
+import com.sedback.SEDBack.Modelo.Evaluacion;
 import com.sedback.SEDBack.Persistencia.DetalleEvaluacionRepositorio;
+import com.sedback.SEDBack.Persistencia.EspecificacionDePuestoRepositorio;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +15,8 @@ public class DetalleEvaluacionServicio {
     @Autowired
     private DetalleEvaluacionRepositorio repositorio;
     
-    public void guardar(List<DetalleEvaluacion> detalles){
+     public void guardar(Evaluacion ev,List<Empleado> empleadosAEvaluar){
+        List<DetalleEvaluacion> detalles = ev.crearDetallesEvaluacion(empleadosAEvaluar);
         for(DetalleEvaluacion de : detalles){
             repositorio.save(de);
         }

@@ -43,7 +43,7 @@ public class Evaluacion implements Serializable {
     
     private Integer puntajeMinAprobacion;
     
-    @OneToMany
+    @OneToMany(mappedBy = "evaluacion")
     private List<DetalleEvaluacion> detalleEvaluacion;
     
     public boolean enCurso(LocalDate fechaActual,Estado enCurso){ //Este metodo recibe el estado EnCurso y la fecha Actual
@@ -62,17 +62,15 @@ public class Evaluacion implements Serializable {
         return false;
     }
     
-    private void agregarDetalleEvaluacion(DetalleEvaluacion detalle){
-        this.detalleEvaluacion.add(detalle);
-    }
-    
     public List<DetalleEvaluacion> crearDetallesEvaluacion(List<Empleado> empleadosAEvaluar){
+        List<DetalleEvaluacion> detallesEvaluacion = new ArrayList<>();
         for(Empleado emp : empleadosAEvaluar){
             DetalleEvaluacion nuevoDetalle = new DetalleEvaluacion();
             nuevoDetalle.setEvaluado(emp);
-            this.agregarDetalleEvaluacion(nuevoDetalle);
+            nuevoDetalle.setEvaluacion(this);
+            detallesEvaluacion.add(nuevoDetalle);
         }
-        return this.getDetalleEvaluacion();
+        return detallesEvaluacion;
     }
     
     public Integer getCantidadEmpleadosAEvaluar(){
@@ -122,14 +120,5 @@ public class Evaluacion implements Serializable {
             return true;
         }
         return false;
-    }
-    
-    public DetalleEvaluacion getDetalleEvaluacionId(Long id){
-        for(DetalleEvaluacion de : detalleEvaluacion){
-            if(de.getId().equals(id)){
-                return de;
-            }
-        }
-        return null;
     }
 }

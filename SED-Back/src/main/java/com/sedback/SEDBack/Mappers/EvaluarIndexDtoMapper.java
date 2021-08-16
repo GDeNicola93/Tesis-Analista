@@ -14,13 +14,13 @@ public interface EvaluarIndexDtoMapper {
     
     @Mapping(expression = "java(de.getId())", target = "idDetalleEvaluacion")
     @Mapping(expression = "java(de.getEvaluado().getNombreCompleto())", target = "empleadoAEvaluar")
-    @Mapping(expression = "java(de.getAprobado(puntajeMinAprobacion))", target = "aprobado")
-    EvaluarIndexDto toEvaluarIndexDto(DetalleEvaluacion de,Integer puntajeMinAprobacion);
+    @Mapping(expression = "java(de.getAprobado())", target = "aprobado")
+    EvaluarIndexDto toEvaluarIndexDto(DetalleEvaluacion de);
     
-    default List<EvaluarIndexDto> toEvaluarIndexDtoList(List<DetalleEvaluacion> de,Integer puntajeMinAprobacion){
+    default List<EvaluarIndexDto> toEvaluarIndexDtoList(List<DetalleEvaluacion> de){
         List<EvaluarIndexDto> evaluarIndexDtoList = new ArrayList<>();
         for(DetalleEvaluacion x : de){
-            evaluarIndexDtoList.add(this.toEvaluarIndexDto(x,puntajeMinAprobacion));
+            evaluarIndexDtoList.add(this.toEvaluarIndexDto(x));
         }
         return evaluarIndexDtoList;
     }

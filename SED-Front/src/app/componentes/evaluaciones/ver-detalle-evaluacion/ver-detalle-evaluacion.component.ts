@@ -18,14 +18,14 @@ export class VerDetalleEvaluacionComponent implements OnInit {
   constructor(private rutaActiva: ActivatedRoute,private evaluacionServicio : EvaluacionService) { }
 
   ngOnInit(): void {
-    this.idEvaluacion = this.rutaActiva.snapshot.params.id_evaluacion;
     this.idDetalleEvaluacion = this.rutaActiva.snapshot.params.id_detalle;
+    this.idEvaluacion = this.rutaActiva.snapshot.params.id_evaluacion;
     this.getDetalleEvaluacion();
   }
 
   getDetalleEvaluacion() : void{
     this.error = false;
-    this.evaluacionServicio.getDetalleEvaluacionById(this.idEvaluacion,this.idDetalleEvaluacion).subscribe(data =>{
+    this.evaluacionServicio.getDetalleEvaluacionById(this.idDetalleEvaluacion).subscribe(data =>{
       this.detalleEvaluacion = data;
     },
       (err : any)=>{

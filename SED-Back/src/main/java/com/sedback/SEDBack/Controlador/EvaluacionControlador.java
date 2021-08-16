@@ -84,10 +84,10 @@ public class EvaluacionControlador {
         return ResponseEntity.status(HttpStatus.OK).body(servicio.getEmpleadosAEvaluarEvaluacion(id_evaluacion,userLogeado.getId()));
     }
     
-    @GetMapping("/{id_vealuacion}/detalle_evaluacion/{id_detalle_evaluacion}")
+    @GetMapping("/detalle_evaluacion/{id_detalle_evaluacion}")
     @PreAuthorize("hasAuthority('Administrador')" + "|| hasAuthority('Evaluador')")
-    public ResponseEntity<DetalleEvaluacionDto> getDetalleEvaluacionById(@PathVariable(value="id_vealuacion") Long id_vealuacion,@PathVariable(value="id_detalle_evaluacion") Long id_detalle_evaluacion,UsernamePasswordAuthenticationToken principal){
+    public ResponseEntity<DetalleEvaluacionDto> getDetalleEvaluacionById(@PathVariable(value="id_detalle_evaluacion") Long id_detalle_evaluacion,UsernamePasswordAuthenticationToken principal){
         UsuarioPrincipal userLogeado = (UsuarioPrincipal) principal.getPrincipal();
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.getDetalleEvaluacionById(id_vealuacion,id_detalle_evaluacion,userLogeado.getId()));
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.getDetalleEvaluacionById(id_detalle_evaluacion,userLogeado.getId()));
     }
 }
