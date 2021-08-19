@@ -56,5 +56,12 @@ public class DetalleEvaluacion implements Serializable{
         }else{
             return false;
         }
-    } 
+    }
+    
+    public boolean esDeEvaluado(Empleado emp){
+        if(this.getEvaluado().equals(emp)){
+            return true;
+        }
+        return false;
+    }
 }

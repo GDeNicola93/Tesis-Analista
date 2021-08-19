@@ -7,8 +7,10 @@ import com.sedback.SEDBack.Dtos.EvaluacionIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionVerDto;
 import com.sedback.SEDBack.Dtos.EvaluarIndexDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
+import com.sedback.SEDBack.Dtos.MisEvaluacionesDto;
 import com.sedback.SEDBack.Dtos.NuevaEvaluacionDto;
 import com.sedback.SEDBack.Excepciones.InvalidDataException;
+import com.sedback.SEDBack.Logica.DetalleEvaluacionServicio;
 import com.sedback.SEDBack.Logica.EvaluacionServicio;
 import com.sedback.SEDBack.Modelo.DetalleEvaluacion;
 import com.sedback.SEDBack.Modelo.Evaluacion;
@@ -39,6 +41,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class EvaluacionControlador {
     @Autowired
     private EvaluacionServicio servicio;
+    
+    @Autowired
+    private DetalleEvaluacionServicio detalleEvaluacionServicio;
     
     @PostMapping()
     @PreAuthorize("hasAuthority('Administrador')")
@@ -85,9 +90,19 @@ public class EvaluacionControlador {
     }
     
     @GetMapping("/detalle_evaluacion/{id_detalle_evaluacion}")
-    @PreAuthorize("hasAuthority('Administrador')" + "|| hasAuthority('Evaluador')")
+    @PreAuthorize("hasAuthority('Administrador')" + "|| hasAuthority('Evaluador')" + "|| hasAuthority('Empleado')")
     public ResponseEntity<DetalleEvaluacionDto> getDetalleEvaluacionById(@PathVariable(value="id_detalle_evaluacion") Long id_detalle_evaluacion,UsernamePasswordAuthenticationToken principal){
         UsuarioPrincipal userLogeado = (UsuarioPrincipal) principal.getPrincipal();
         return ResponseEntity.status(HttpStatus.OK).body(servicio.getDetalleEvaluacionById(id_detalle_evaluacion,userLogeado.getId()));
     }
+    
+    //Endpoints Empleado
+    
+    @GetMapping("/mis_evaluaciones")
+    public ResponseEntity<Page<MisEvaluacionesDto>> getMisEvaluaciones(UsernamePasswordAuthenticationToken principal,Pageable page){
+        UsuarioPrincipal userLogeado = (UsuarioPrincipal) principal.getPrincipal();
+        return ResponseEntity.status(HttpStatus.OK).body(detalleEvaluacionServicio.getMisEvaluaciones(userLogeado.getId(),page));
+        
+    }
+    
 }

@@ -124,11 +124,33 @@ public class EvaluacionServicio {
     }
     
     public DetalleEvaluacionDto getDetalleEvaluacionById(Long idDetalleEvaluacion,Long idUserLogeado){
+//        DetalleEvaluacion detalleEvaluacionSeleccionado = detalleEvaluacionServicio.findById(idDetalleEvaluacion).get();
+//        if(detalleEvaluacionSeleccionado.getEvaluacion().esDeEvaluador(usuarioServicio.getDatosUsuarioLogeado(idUserLogeado).getBody().getEmpleado())){
+//            return DetalleEvaluacionDtoMapper.INSTANCE.toDetalleEvaluacionDto(detalleEvaluacionSeleccionado);
+//        }else{
+//            throw new PermissionException("No puede ver detalles de esta evaluación ya que no esta asignada a su usuario.");
+//        }
         DetalleEvaluacion detalleEvaluacionSeleccionado = detalleEvaluacionServicio.findById(idDetalleEvaluacion).get();
-        if(detalleEvaluacionSeleccionado.getEvaluacion().esDeEvaluador(usuarioServicio.getDatosUsuarioLogeado(idUserLogeado).getBody().getEmpleado())){
+        Usuario usuarioLogeado = usuarioServicio.getDatosUsuarioLogeado(idUserLogeado).getBody();
+       
+        if(usuarioLogeado.esAdministrador()){
             return DetalleEvaluacionDtoMapper.INSTANCE.toDetalleEvaluacionDto(detalleEvaluacionSeleccionado);
-        }else{
-            throw new PermissionException("No puede ver detalles de esta evaluación ya que no esta asignada a su usuario.");
         }
+        
+        if(usuarioLogeado.esEvaluador()){
+            if(detalleEvaluacionSeleccionado.getEvaluacion().esDeEvaluador(usuarioLogeado.getEmpleado())){
+                return DetalleEvaluacionDtoMapper.INSTANCE.toDetalleEvaluacionDto(detalleEvaluacionSeleccionado);
+            }else{
+                throw new PermissionException("No puede ver detalles de esta evaluación ya que no esta asignada a su usuario.");
+            }
+        }
+        
+        //if(usuarioLogeado.esEmpleado()){
+            if(detalleEvaluacionSeleccionado.esDeEvaluado(usuarioLogeado.getEmpleado())){
+                return DetalleEvaluacionDtoMapper.INSTANCE.toDetalleEvaluacionDto(detalleEvaluacionSeleccionado);
+            }else{
+                throw new PermissionException("No puede ver detalles de esta evaluación ya que no esta asignada a su usuario.");
+            }
+        //}
     }
 }

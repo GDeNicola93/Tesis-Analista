@@ -47,4 +47,22 @@ public class Usuario implements Serializable {
         }
         return false;
     }
+    
+    public boolean esEvaluador(){
+        for(Rol r : this.getRoles()){
+            if(r.getRolNombre() == RolNombre.Evaluador){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean esEmpleado(){
+        for(Rol r : this.getRoles()){
+            if(r.getRolNombre() == RolNombre.Empleado){
+                return true;
+            }
+        }
+        return false;
+    }
 }

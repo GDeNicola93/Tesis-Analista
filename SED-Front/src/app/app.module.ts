@@ -38,6 +38,7 @@ import { EvaluacionesAsignadasComponent } from './componentes/evaluaciones-evalu
 import { VerEvaluacionAsignadaComponent } from './componentes/evaluaciones-evaluador/ver-evaluacion-asignada/ver-evaluacion-asignada.component';
 import { IndexEvaluarComponent } from './componentes/evaluar/index-evaluar/index-evaluar.component';
 import { VerDetalleEvaluacionComponent } from './componentes/evaluaciones/ver-detalle-evaluacion/ver-detalle-evaluacion.component';
+import { MisEvaluacionesComponent } from './componentes/evaluaciones-empleado/mis-evaluaciones/mis-evaluaciones.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { VerDetalleEvaluacionComponent } from './componentes/evaluaciones/ver-de
     EvaluacionesAsignadasComponent,
     VerEvaluacionAsignadaComponent,
     IndexEvaluarComponent,
-    VerDetalleEvaluacionComponent
+    VerDetalleEvaluacionComponent,
+    MisEvaluacionesComponent
   ],
   imports: [
     BrowserModule,
