@@ -67,7 +67,7 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
   agregarCompetencia(content : any) : void{
     this.nuevoComportamiento = [];
     this.obtenerCompetencias();
-    this.modalService.open(content,{ size: 'xl' });
+    this.modalService.open(content,{ size: 'xl',scrollable : true });
   }
 
   agregarComportamiento() : void{

@@ -92,81 +92,80 @@
         </button>
       </div>
       <div class="modal-body">
-          <div class="row">
-            <div class="col-5">
-              <h5>Creación de la competencia</h5>
-              <hr>
-              <form>
-                <div class="form-group">
-                  <label>Seleccione una competencia: </label>
-                  <select class="form-control" [(ngModel)]="form.competencia" name="competencia">
-                    <option *ngFor="let compe of comboCompetencias" [ngValue]="compe">{{compe.nombre}}</option>
-                  </select>
-                </div>
-                <div class="form-group form-check">
-                  <input type="checkbox" class="form-check-input" id="exampleCheck1" [checked]="esPreguntaObjetivo" (change)="cambiarCheck()">
-                  <label class="form-check-label" for="exampleCheck1">Esta relacionada a un objetivo</label>
-                </div>
-                <div class="form-group" *ngIf="esPreguntaObjetivo">
-                  <label>Seleccione un objetivo: </label>
-                  <select class="form-control" [(ngModel)]="form.objetivo" name="objetivo">
-                    <option *ngFor="let objetivo of form.edp.objetivos" [ngValue]="objetivo">{{objetivo.descripcion}}</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label>% Min de Aprobación: </label>
-                  <input type="number" class="form-control" name="puntajeMinAprobación" [(ngModel)]="form.puntajeMinAprobacion" autocomplete="off">
-                </div>
-              </form>
+          <h5>Creación de la competencia</h5>
+          <hr>
+          <form>
+            <div class="form-group">
+              <label>Seleccione una competencia: </label>
+              <select class="form-control" [(ngModel)]="form.competencia" name="competencia">
+                <option *ngFor="let compe of comboCompetencias" [ngValue]="compe">{{compe.nombre}}</option>
+              </select>
             </div>
-            <div class="col">
-              <div class="row">
-                <div class="col-10">
-                  <h5>Comportamiento de competencia</h5>
-                  <hr>
-                </div>
-                <div class="col-2">
-                  <button (click)="agregarComportamiento()" type="button" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Nuevo Comportamiento">+</button>
-                </div>
-              </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" [checked]="esPreguntaObjetivo" (change)="cambiarCheck()">
+              <label class="form-check-label" for="exampleCheck1">Esta relacionada a un objetivo</label>
+            </div>
+            <div class="form-group" *ngIf="esPreguntaObjetivo">
+              <label>Seleccione un objetivo: </label>
+              <select class="form-control" [(ngModel)]="form.objetivo" name="objetivo">
+                <option *ngFor="let objetivo of form.edp.objetivos" [ngValue]="objetivo">{{objetivo.descripcion}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>% Min de Aprobación: </label>
+              <input type="number" class="form-control" name="puntajeMinAprobación" [(ngModel)]="form.puntajeMinAprobacion" autocomplete="off">
+            </div>
+          </form>
 
-              <div class="row">
-                <div class="col-2">
-                  <p>Grado</p>
-                </div>
-                <div class="col">
-                  <p>Descripción Comportamiento</p>
-                </div>
-                <div class="col-2">
-                  <p>Val Num</p>
-                </div>
-                <div class="col-1">
-                  <p>Es aprobada</p>
+          <div class="row">
+            <div class="col-10">
+              <h5>Comportamiento de competencia</h5>
+              <hr>
+            </div>
+            <div class="col-2">
+              <button (click)="agregarComportamiento()" type="button" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Nuevo Comportamiento">+</button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-1"></div>
+            <div class="col-1">
+              <p>Grado</p>
+            </div>
+            <div class="col text-center">
+              <p>Descripción Comportamiento</p>
+            </div>
+            <div class="col-1">
+              <p>Val Num</p>
+            </div>
+            <div class="col-1">
+              <p>Aprobado</p>
+            </div>
+          </div>
+
+          <div *ngFor="let compo of nuevoComportamiento">
+            <div class="row" style="display: flex;align-items: center;">
+              <div class="col-1 text-center">
+                <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Eliminar este comportamiento de plantilla"><i class="fas fa-times"></i></button>
+              </div>
+              <div class="col-1">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="compo.grado" [(ngModel)]="compo.grado"  style="text-transform:uppercase;" required autocomplete="off">
                 </div>
               </div>
-              
-              <div *ngFor="let compo of nuevoComportamiento">
-                <div class="row" style="display: flex;align-items: center;">
-                  <div class="col-2">
-                    <div class="form-group">
-                      <input type="text" class="form-control" name="compo.grado" [(ngModel)]="compo.grado"  required autocomplete="off">
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="compo.descComportamiento" [(ngModel)]="compo.descComportamiento"></textarea>
-                    </div>
-                  </div>
-                  <div class="col-2">
-                    <div class="form-group">
-                      <input type="number" class="form-control" name="compo.valoracionNumerica" [(ngModel)]="compo.valoracionNumerica"  required autocomplete="off">
-                    </div>
-                  </div>
-                  <div class="col-1">
-                    <div class="form-group">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" [checked]="compo.esAprobada" [(ngModel)]="compo.esAprobada">
-                    </div>
-                  </div>
+              <div class="col">
+                <div class="form-group">
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="compo.descComportamiento" [(ngModel)]="compo.descComportamiento"></textarea>
+                </div>
+              </div>
+              <div class="col-1">
+                <div class="form-group">
+                  <input type="number" class="form-control" name="compo.valoracionNumerica" [(ngModel)]="compo.valoracionNumerica"  required autocomplete="off">
+                </div>
+              </div>
+              <div class="col-1">
+                <div class="form-group text-center">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1" [checked]="compo.esAprobada" [(ngModel)]="compo.esAprobada">
                 </div>
               </div>
             </div>
