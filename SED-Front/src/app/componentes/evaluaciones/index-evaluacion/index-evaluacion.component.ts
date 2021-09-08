@@ -18,6 +18,7 @@ export class IndexEvaluacionComponent implements OnInit {
   esPrimera : boolean = false;
   totalPages : Array<number>;
   idEvaluacionACancelar : number;
+  cargando = true;
 
 
   constructor(private evaluacionServicio : EvaluacionService,private modalService: NgbModal) { }
@@ -32,6 +33,7 @@ export class IndexEvaluacionComponent implements OnInit {
       this.esPrimera = data.first;
       this.esUltima = data.last;
       this.totalPages = new Array(data['totalPages']);
+      this.cargando = false;
     });
   }
 

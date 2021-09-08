@@ -22,6 +22,7 @@ export class IndexEmpleadosComponent implements OnInit {
   esPrimera : boolean = false;
   totalPages : Array<number>;
   filtro : string = "";
+  cargando = true;
 
   constructor(private empleadoServicio : EmpleadoService,private sucursalServicio : SucursalService) { }
 
@@ -35,6 +36,7 @@ export class IndexEmpleadosComponent implements OnInit {
       this.esPrimera = data.first;
       this.esUltima = data.last;
       this.totalPages = new Array(data['totalPages']);
+      this.cargando = false;
     });
   }
 

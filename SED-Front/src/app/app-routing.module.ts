@@ -86,7 +86,10 @@ const routes: Routes = [
 
   //Urls de Empleado
   {path: 'mis-evaluaciones',component:MisEvaluacionesComponent,canActivate:[GeneralGuard],data:{expectedRol: ['Empleado']}},
-  {path: 'evaluacion/detalle_evaluacion/:id_detalle',component:VerDetalleEvaluacionComponent,canActivate:[GeneralGuard],data:{expectedRol: ['Empleado']}}
+  {path: 'evaluacion/detalle_evaluacion/:id_detalle',component:VerDetalleEvaluacionComponent,canActivate:[GeneralGuard],data:{expectedRol: ['Empleado']}},
+
+  //No machea con ninguna de las anteriores
+  {path: '**', component:HomeComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador','Evaluador','Empleado']}}
 
 
 ];

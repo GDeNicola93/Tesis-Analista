@@ -17,6 +17,7 @@ export class IndexEspecificacionPuestoComponent implements OnInit {
   esPrimera : boolean = false;
   totalPages : Array<number>;
   especificacionesPuestoIndex : EspecificacionDePuestoIndexDto[];
+  cargando = true;
 
 
   constructor(private especificacionPuestoService : EspecificacionPuestoService) { }
@@ -31,6 +32,7 @@ export class IndexEspecificacionPuestoComponent implements OnInit {
       this.esPrimera = data.first;
       this.esUltima = data.last;
       this.totalPages = new Array(data['totalPages']);
+      this.cargando = false;
     });
   }
 

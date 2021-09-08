@@ -11,7 +11,7 @@
 	<groupId>com.sed-back</groupId>
 	<artifactId>SED-Back</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>SED-Back</name>
 	<description>Sistema de Evaluación de Desempeño Alberto De nicola</description>
 

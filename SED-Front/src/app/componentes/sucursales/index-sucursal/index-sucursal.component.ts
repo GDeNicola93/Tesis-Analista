@@ -33,7 +33,6 @@ export class IndexSucursalComponent implements OnInit {
       this.esUltima = data.last;
       this.totalPages = new Array(data['totalPages']);
       this.cargando = false;
-
     });
   }
 

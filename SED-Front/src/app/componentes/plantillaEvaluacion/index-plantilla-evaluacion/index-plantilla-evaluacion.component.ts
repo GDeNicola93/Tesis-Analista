@@ -12,6 +12,7 @@ import { PlantillaEvaluacionService } from 'src/app/servicios/plantilla-evaluaci
 export class IndexPlantillaEvaluacionComponent implements OnInit {
   plantillas : PlantillaEvaluacion[] = [];
   plantillaParaVisualizar !: PlantillaEvaluacion;
+  cargando = true;
 
   constructor(private plantillaEvaluacionServicio : PlantillaEvaluacionService,private modalService: NgbModal) { }
 
@@ -23,7 +24,7 @@ export class IndexPlantillaEvaluacionComponent implements OnInit {
   cargarPlantillas() : void{
     this.plantillaEvaluacionServicio.obtenerPlantillas().subscribe(data => {
       this.plantillas = data.content;
-      //this.cargando = false;
+      this.cargando = false;
     });
   }
 
