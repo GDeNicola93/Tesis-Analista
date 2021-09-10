@@ -31,7 +31,7 @@
                 <tbody *ngFor="let pe of plantillas">
                   <tr>
                     <th scope="row">{{pe.id}}</th>
-                    <td>{{pe.especificacionDePuesto.puesto.nombrePuesto}} ({{pe.especificacionDePuesto.sucursal.nombre}})</td>
+                    <!-- <td>{{pe.especificacionDePuesto.puesto.nombrePuesto}} ({{pe.especificacionDePuesto.sucursal.nombre}})</td> -->
                     <td *ngIf="pe.descripcion != null">{{pe.descripcion}}</td>
                     <td *ngIf="pe.descripcion == null">Sin especificar</td>
                     <td>{{pe.fechaCreaccion | date: 'dd/MM/yyyy'}}</td>
@@ -67,7 +67,7 @@
     <hr>
     <div class="row" style="text-align: center;">
       <div class="col-5">
-        <p><ins><strong>Puesto Trabajo:</strong></ins> {{plantillaParaVisualizar.especificacionDePuesto.puesto.nombrePuesto}} ({{plantillaParaVisualizar.especificacionDePuesto.sucursal.nombre}})</p>
+        <!-- <p><ins><strong>Puesto Trabajo:</strong></ins> {{plantillaParaVisualizar.especificacionDePuesto.puesto.nombrePuesto}} ({{plantillaParaVisualizar.especificacionDePuesto.sucursal.nombre}})</p> -->
       </div>
       <div class="col">
         <p><ins><strong>Fecha de Creación:</strong></ins> {{plantillaParaVisualizar.fechaCreaccion | date: 'dd/MM/yyyy'}}</p>
