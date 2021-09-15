@@ -7,6 +7,7 @@ import com.sedback.SEDBack.Dtos.EvaluacionVerDto;
 import com.sedback.SEDBack.Dtos.EvaluarIndexDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Dtos.NuevaEvaluacionDto;
+import com.sedback.SEDBack.Excepciones.FueEvaluadoException;
 import com.sedback.SEDBack.Excepciones.FueraDeCursoException;
 import com.sedback.SEDBack.Excepciones.NotFoundException;
 import com.sedback.SEDBack.Excepciones.PermissionException;
@@ -19,6 +20,7 @@ import com.sedback.SEDBack.Modelo.DetalleEvaluacion;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Modelo.Estado;
 import com.sedback.SEDBack.Modelo.Evaluacion;
+import com.sedback.SEDBack.Modelo.PlantillaEvaluacion;
 import com.sedback.SEDBack.Modelo.Usuario;
 import com.sedback.SEDBack.Persistencia.EspecificacionDePuestoRepositorio;
 import com.sedback.SEDBack.Persistencia.EstadoRepositorio;
@@ -124,12 +126,6 @@ public class EvaluacionServicio {
     }
     
     public DetalleEvaluacionDto getDetalleEvaluacionById(Long idDetalleEvaluacion,Long idUserLogeado){
-//        DetalleEvaluacion detalleEvaluacionSeleccionado = detalleEvaluacionServicio.findById(idDetalleEvaluacion).get();
-//        if(detalleEvaluacionSeleccionado.getEvaluacion().esDeEvaluador(usuarioServicio.getDatosUsuarioLogeado(idUserLogeado).getBody().getEmpleado())){
-//            return DetalleEvaluacionDtoMapper.INSTANCE.toDetalleEvaluacionDto(detalleEvaluacionSeleccionado);
-//        }else{
-//            throw new PermissionException("No puede ver detalles de esta evaluación ya que no esta asignada a su usuario.");
-//        }
         DetalleEvaluacion detalleEvaluacionSeleccionado = detalleEvaluacionServicio.findById(idDetalleEvaluacion).get();
         Usuario usuarioLogeado = usuarioServicio.getDatosUsuarioLogeado(idUserLogeado).getBody();
        
@@ -152,5 +148,18 @@ public class EvaluacionServicio {
                 throw new PermissionException("No puede ver detalles de esta evaluación ya que no esta asignada a su usuario.");
             }
         //}
+    }
+    
+    public PlantillaEvaluacion getEvaluarEmpleado(Long id_detalle_evaluacion,Long idUserLogeado){
+        DetalleEvaluacion de = detalleEvaluacionServicio.findById(id_detalle_evaluacion).get();
+        Usuario usuarioLogeado = usuarioServicio.getDatosUsuarioLogeado(idUserLogeado).getBody();
+        if(de.esDeEvaluador(usuarioLogeado.getEmpleado())){
+            if(de.getFueEvaluado()){
+                throw new FueEvaluadoException("El empleado que intenta evaluar ya ha sido evaluado.");
+            }
+            return de.getEvaluacion().getPlantillaEvaluacion();
+        }else{
+            throw new PermissionException("La evaluación que intenta realizar no esta asignada a su usuario.");
+        }
     }
 }

@@ -14,6 +14,7 @@ import com.sedback.SEDBack.Logica.DetalleEvaluacionServicio;
 import com.sedback.SEDBack.Logica.EvaluacionServicio;
 import com.sedback.SEDBack.Modelo.DetalleEvaluacion;
 import com.sedback.SEDBack.Modelo.Evaluacion;
+import com.sedback.SEDBack.Modelo.PlantillaEvaluacion;
 import com.sedback.SEDBack.Seguridad.UsuarioPrincipal;
 import com.sedback.SEDBack.Views.Views;
 import java.util.List;
@@ -82,7 +83,7 @@ public class EvaluacionControlador {
         return servicio.getEvaluacionesEvaluadorLogeado(token, page);
     }
     
-    @GetMapping("/evaluar/{id_evaluacion}")
+    @GetMapping("/empleados_a_evaluar/{id_evaluacion}")
     @PreAuthorize("hasAuthority('Evaluador')")
     public ResponseEntity<List<EvaluarIndexDto>> getEmpleadosAEvaluarEvaluacion(@PathVariable(value="id_evaluacion") Long id_evaluacion,UsernamePasswordAuthenticationToken principal){
         UsuarioPrincipal userLogeado = (UsuarioPrincipal) principal.getPrincipal();
@@ -94,6 +95,13 @@ public class EvaluacionControlador {
     public ResponseEntity<DetalleEvaluacionDto> getDetalleEvaluacionById(@PathVariable(value="id_detalle_evaluacion") Long id_detalle_evaluacion,UsernamePasswordAuthenticationToken principal){
         UsuarioPrincipal userLogeado = (UsuarioPrincipal) principal.getPrincipal();
         return ResponseEntity.status(HttpStatus.OK).body(servicio.getDetalleEvaluacionById(id_detalle_evaluacion,userLogeado.getId()));
+    }
+    
+    @GetMapping("/evaluar/{id_detalle_evaluacion}")
+    @PreAuthorize("hasAuthority('Evaluador')")
+    public ResponseEntity<PlantillaEvaluacion> getEvaluarEmpleado(@PathVariable(value="id_detalle_evaluacion") Long id_detalle_evaluacion,UsernamePasswordAuthenticationToken principal){
+        UsuarioPrincipal userLogeado = (UsuarioPrincipal) principal.getPrincipal();
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.getEvaluarEmpleado(id_detalle_evaluacion,userLogeado.getId()));
     }
     
     //Endpoints Empleado

@@ -36,7 +36,7 @@ export class EvaluacionService {
   }
 
   getEmpleadosAEvaluarEvaluacion(id_evaluacion : number) : Observable<any>{
-    return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion/evaluar/${id_evaluacion}`,cabecera);
+    return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion/empleados_a_evaluar/${id_evaluacion}`,cabecera);
   }
 
   getDetalleEvaluacionById(id_detalle : number) : Observable<any>{
@@ -45,5 +45,9 @@ export class EvaluacionService {
 
   getMisEvaluaciones(page:number,size:number,sort:string,order:string) : Observable<any>{
     return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion/mis_evaluaciones?sort=${sort},${order}&size=${size}&page=${page}`,cabecera);
+  }
+
+  getEvaluarEmpleado(id_detalle_evaluacion : number) : Observable<any>{
+    return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion/evaluar/${id_detalle_evaluacion}`,cabecera);
   }
 }

@@ -36,6 +36,12 @@ public class ConfigException {
   }
   
   @ExceptionHandler
+  protected ResponseEntity<ErrorResponse> handleException(FueEvaluadoException exc){
+    HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+    return buildResponseEntity(httpStatus, new RuntimeException(exc.getMessage()),null);  
+  }
+  
+  @ExceptionHandler
   protected ResponseEntity<ErrorResponse> handleException(NotFoundException exc){
     HttpStatus httpStatus = HttpStatus.NOT_FOUND;
     return buildResponseEntity(httpStatus, new RuntimeException(exc.getMessage()),null);  

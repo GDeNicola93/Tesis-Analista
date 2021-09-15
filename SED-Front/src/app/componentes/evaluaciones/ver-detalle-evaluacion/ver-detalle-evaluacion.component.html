@@ -6,7 +6,7 @@
             <h4>Detalle Evaluación</h4>
         </div>
         <div class="col">
-            <button *ngIf="!esEmpleado()" routerLink="/evaluar/{{idEvaluacion}}" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+            <button *ngIf="!esEmpleado()" routerLink="/empleados_a_evaluar/{{idEvaluacion}}" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
             <button *ngIf="esEmpleado()" routerLink="/mis-evaluaciones" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
         </div>
     </div>

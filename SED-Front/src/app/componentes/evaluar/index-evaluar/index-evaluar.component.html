@@ -33,7 +33,7 @@
                         <td scope="row">{{de.empleadoAEvaluar}}</td>
                         <td><span class="badge badge-warning"><i class="fas fa-question"></i> Pendiente Evaluar</span></td>
                         <td>-------------</td> 
-                        <td><button routerLink="..." style="margin-right: 5px;" class="btn btn-sm btn-success shadow-sm" data-toggle="tooltip" data-placement="top" title="Evaluar"><i class="fas fa-stream"></i></button></td>
+                        <td><button routerLink="/evaluar/{{de.idDetalleEvaluacion}}" style="margin-right: 5px;" class="btn btn-sm btn-success shadow-sm" data-toggle="tooltip" data-placement="top" title="Evaluar"><i class="fas fa-stream"></i></button></td>
                     </tr>
                     <tr *ngIf="de.fueEvaluado">
                         <td scope="row">{{de.empleadoAEvaluar}}</td>
