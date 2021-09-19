@@ -13,6 +13,7 @@ export class IndexEvaluarComponent implements OnInit {
   idEvaluacion : number;
   mensaje = '';
   error = false;
+  cargando = true;
 
   constructor(private rutaActiva: ActivatedRoute,private evaluacionServicio : EvaluacionService) { }
 
@@ -25,10 +26,12 @@ export class IndexEvaluarComponent implements OnInit {
     this.error = false;
     this.evaluacionServicio.getEmpleadosAEvaluarEvaluacion(this.idEvaluacion).subscribe(data =>{
       this.detallesEvaluaciones = data;
+      this.cargando = false;
     },
       (err : any)=>{
         this.error = true;
         this.mensaje = err.error.message;
+        this.cargando = false;
       }
     );
   }

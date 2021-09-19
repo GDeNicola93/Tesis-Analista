@@ -15,6 +15,7 @@ export class VerDetalleEvaluacionComponent implements OnInit {
   detalleEvaluacion : DetalleEvaluacionDto;
   mensaje = '';
   error = false;
+  cargando = true;
 
   constructor(private rutaActiva: ActivatedRoute,private evaluacionServicio : EvaluacionService,private tokenServicio : TokenService) { }
 
@@ -28,10 +29,12 @@ export class VerDetalleEvaluacionComponent implements OnInit {
     this.error = false;
     this.evaluacionServicio.getDetalleEvaluacionById(this.idDetalleEvaluacion).subscribe(data =>{
       this.detalleEvaluacion = data;
+      this.cargando = false;
     },
       (err : any)=>{
         this.error = true;
         this.mensaje = err.error.message;
+        this.cargando = false;
       }
     );
   }

@@ -13,6 +13,7 @@ export class EvaluarComponent implements OnInit {
   plantillaEvaluacion : PlantillaEvaluacion;
   mensaje = '';
   error = false;
+  cargando = true;
 
   constructor(private rutaActiva: ActivatedRoute,private evaluacionServicio : EvaluacionService) { }
 
@@ -25,10 +26,12 @@ export class EvaluarComponent implements OnInit {
     this.error = false;
     this.evaluacionServicio.getEvaluarEmpleado(this.idDetalleEvaluacion).subscribe(data =>{
       this.plantillaEvaluacion = data;
+      this.cargando = false;
     },
       (err : any)=>{
         this.error = true;
         this.mensaje = err.error.message;
+        this.cargando = false;
       }
     );
   }

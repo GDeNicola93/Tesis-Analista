@@ -25,6 +25,7 @@ export class IndexCompetenciaComponent implements OnInit {
   }
 
   cargarCompetencias() : void{
+    this.cargando = true;
     this.competenciaServicio.obtenerCompetencias(this.page,this.size,this.sort,this.order).subscribe(data => {
       this.competencias = data.content;
       this.esPrimera = data.first;

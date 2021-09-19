@@ -10,6 +10,7 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
   styleUrls: ['./perfil-usuario.component.css']
 })
 export class PerfilUsuarioComponent implements OnInit   {
+  cargando = true;
   usuario !: Usuario;
 
 
@@ -23,6 +24,7 @@ export class PerfilUsuarioComponent implements OnInit   {
   obtenerUsuarioLogeado() : void{
     this.usuarioServicio.obtenerDatosUsuarioLogeado().subscribe(data => {
       this.usuario = data;
+      this.cargando = false;
     });
   }
 }

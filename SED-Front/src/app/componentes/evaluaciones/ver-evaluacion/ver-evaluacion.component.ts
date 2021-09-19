@@ -9,6 +9,7 @@ import { EvaluacionService } from 'src/app/servicios/evaluacion.service';
   styleUrls: ['./ver-evaluacion.component.css']
 })
 export class VerEvaluacionComponent implements OnInit {
+  cargando = true;
   evaluacion : EvaluacionVerDto;
 
   constructor(private rutaActiva: ActivatedRoute,private evaluacionServicio : EvaluacionService) { }
@@ -20,6 +21,7 @@ export class VerEvaluacionComponent implements OnInit {
   getEvaluacionById() : void{
     this.evaluacionServicio.getEvaluacionById(this.rutaActiva.snapshot.params.id).subscribe(data =>{
       this.evaluacion = data;
+      this.cargando = false;
     });
 
   }

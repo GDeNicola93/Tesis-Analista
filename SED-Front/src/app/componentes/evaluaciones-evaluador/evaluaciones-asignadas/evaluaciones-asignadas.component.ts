@@ -16,6 +16,7 @@ export class EvaluacionesAsignadasComponent implements OnInit {
   esUltima : boolean = false;
   esPrimera : boolean = false;
   totalPages : Array<number>;
+  cargando = true;
 
   constructor(private evaluacionServicio : EvaluacionService) { }
 
@@ -29,6 +30,7 @@ export class EvaluacionesAsignadasComponent implements OnInit {
       this.esPrimera = data.first;
       this.esUltima = data.last;
       this.totalPages = new Array(data['totalPages']);
+      this.cargando = false;
     });
   }
 

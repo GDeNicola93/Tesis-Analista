@@ -12,6 +12,7 @@ export class VerEvaluacionAsignadaComponent implements OnInit {
   evaluacion : EvaluacionVerDto;
   mensaje = '';
   error = false;
+  cargando = true;
 
 
   constructor(private rutaActiva: ActivatedRoute,private evaluacionServicio : EvaluacionService) { }
@@ -24,10 +25,12 @@ export class VerEvaluacionAsignadaComponent implements OnInit {
     this.error = false;
     this.evaluacionServicio.getEvaluacionById(this.rutaActiva.snapshot.params.id).subscribe(data =>{
       this.evaluacion = data;
+      this.cargando = false;
     },
       (err : any)=>{
         this.error = true;
         this.mensaje = err.error.message;
+        this.cargando = false;
       }
     );
   }
