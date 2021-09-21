@@ -91,9 +91,9 @@
                     <div class="col-md">
                         <div class="form-group">
                             <label for="nombre">Evaluador: </label>
-                            <!-- <select class="form-control" name="empleadoEvaluador" formControlName="empleadoEvaluador" [ngClass]="(evaluacionForm.get('empleadoEvaluador').touched || evaluacionForm.get('empleadoEvaluador').dirty) && evaluacionForm.get('empleadoEvaluador').hasError('required') ? 'is-invalid':''">
+                            <select class="form-control" name="empleadoEvaluador" formControlName="empleadoEvaluador" [ngClass]="(evaluacionForm.get('empleadoEvaluador').touched || evaluacionForm.get('empleadoEvaluador').dirty) && evaluacionForm.get('empleadoEvaluador').hasError('required') ? 'is-invalid':''">
                                 <option *ngFor="let emp of comboEmpleadosEvaluadores" [ngValue]="emp">{{emp.nombreCompleto}}</option>
-                              </select> -->
+                              </select>
                               <div class="invalid-feedback">
                                   {{
                                     evaluacionForm.get('empleadoEvaluador').hasError('required') 

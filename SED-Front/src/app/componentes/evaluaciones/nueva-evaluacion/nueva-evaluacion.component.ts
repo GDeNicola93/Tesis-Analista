@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmpleadoResumido } from 'src/app/HttpMensajes/empleado-resumido-dto';
 import { Empleado } from 'src/app/modelo/empleado';
 import { EspecificacionDePuesto } from 'src/app/modelo/especificacion-puesto';
 import { PlantillaEvaluacion } from 'src/app/modelo/plantilla-evaluacion';
@@ -19,7 +20,7 @@ export class NuevaEvaluacionComponent implements OnInit {
   comboSucursales : Sucursal[];
   comboEspecificacionesPuesto : EspecificacionDePuesto[];
   comboPlantillaEvaluacion : PlantillaEvaluacion[];
-  comboEmpleadosEvaluadores : Empleado[];
+  comboEmpleadosEvaluadores : EmpleadoResumido[];
   mensaje = '';
   errors : string[];
   guardado = false;
