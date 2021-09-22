@@ -40,6 +40,7 @@ import { IndexEvaluarComponent } from './componentes/evaluar/index-evaluar/index
 import { VerDetalleEvaluacionComponent } from './componentes/evaluaciones/ver-detalle-evaluacion/ver-detalle-evaluacion.component';
 import { MisEvaluacionesComponent } from './componentes/evaluaciones-empleado/mis-evaluaciones/mis-evaluaciones.component';
 import { EvaluarComponent } from './componentes/evaluar/evaluar/evaluar.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -84,7 +85,8 @@ import { EvaluarComponent } from './componentes/evaluar/evaluar/evaluar.componen
     FormsModule,
     NgbModule,
     AngularCropperjsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [
     {
