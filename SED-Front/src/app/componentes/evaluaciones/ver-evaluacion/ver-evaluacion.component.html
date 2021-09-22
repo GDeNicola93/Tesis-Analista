@@ -43,10 +43,20 @@
                     <p><strong>Cantidad de empleados a evaluar:</strong> {{evaluacion.cantidadEmpleadosAEvaluar}}</p>
                 </div>
                 <div class="col-md">
-                    <p><strong>Cantidad de empleados evaluados:</strong> {{evaluacion.cantidadEmpleadosEvaluados}}</p>
-                </div>
-                <div class="col-md">
-                    <p><strong>Faltan Evaluar:</strong> {{evaluacion.restantesAEvaluar}}</p>
+                    <div>
+                        <div style="display: block;">
+                          <div class="chart">
+                            <canvas baseChart
+                              [data]="pieChartData"
+                              [labels]="pieChartLabels"
+                              [chartType]="pieChartType"
+                              [options]="pieChartOptions"
+                              [colors]="pieChartColors"
+                              [legend]="pieChartLegend">
+                            </canvas>
+                          </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <p><strong>Empleados a evaluar:</strong></p>
