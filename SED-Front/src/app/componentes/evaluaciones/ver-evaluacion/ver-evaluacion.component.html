@@ -11,7 +11,8 @@
             <h4>Información de Evaluación</h4>
         </div>
         <div class="col">
-            <button routerLink="/evaluacion" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+            <button *ngIf="esAdministrador" routerLink="/evaluacion" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+            <button *ngIf="!esAdministrador" routerLink="/evaluador/evaluaciones_asiganadas" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
         </div>
     </div>
     <div class="card shadow">
@@ -30,10 +31,15 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <p><strong>Estado:</strong> {{evaluacion.estado.nombre}}</p>
+                    <p *ngIf="evaluacion.estado.nombre == 'Cancelada'"><strong>Estado: </strong><span class="badge badge-danger"><i class="fas fa-times"></i> {{evaluacion.estado.nombre}}</span></p>
+                    <p *ngIf="evaluacion.estado.nombre == 'En Curso'"><strong>Estado: </strong><span class="badge badge-primary"><i class="fas fa-tasks"></i> {{evaluacion.estado.nombre}}</span></p>
+                    <p *ngIf="evaluacion.estado.nombre == 'En Espera'"><strong>Estado: </strong><span class="badge badge-warning"><i class="far fa-clock"></i> {{evaluacion.estado.nombre}}</span></p>
+                    <p *ngIf="evaluacion.estado.nombre == 'Finalizada'"><strong>Estado: </strong><span class="badge badge-success"><i class="fas fa-check"></i> {{evaluacion.estado.nombre}}</span></p>
+                    
                 </div>
                 <div class="col-md-3">
-                    <p><strong>Evaluador:</strong><a routerLink="/empleados/ver/{{evaluacion.idEvaluador}}" target="_blank"> {{evaluacion.nombreEvaluador}}</a></p>
+                    <p *ngIf="esAdministrador"><strong>Evaluador:</strong><a routerLink="/empleados/ver/{{evaluacion.idEvaluador}}" target="_blank"> {{evaluacion.nombreEvaluador}}</a></p>
+                    <p *ngIf="!esAdministrador"><strong>Evaluador:</strong> {{evaluacion.nombreEvaluador}}</p>
                 </div>
             </div>
             <p><strong>Puntaje Minimo de aprobación:</strong> {{evaluacion.puntajeMinAprobacion}} ptos</p>

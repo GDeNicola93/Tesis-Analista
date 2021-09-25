@@ -4,6 +4,7 @@ import { ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { EvaluacionVerDto } from 'src/app/HttpMensajes/evaluacion-ver-dto';
 import { EvaluacionService } from 'src/app/servicios/evaluacion.service';
+import { TokenService } from 'src/app/servicios/token.service';
 
 @Component({
   selector: 'app-ver-evaluacion',
@@ -11,6 +12,7 @@ import { EvaluacionService } from 'src/app/servicios/evaluacion.service';
   styleUrls: ['./ver-evaluacion.component.css']
 })
 export class VerEvaluacionComponent implements OnInit {
+  esAdministrador : boolean;
   cargando = true;
   evaluacion : EvaluacionVerDto;
   pieChartOptions: ChartOptions = {
@@ -38,10 +40,11 @@ export class VerEvaluacionComponent implements OnInit {
     },
   ];
 
-  constructor(private rutaActiva: ActivatedRoute,private evaluacionServicio : EvaluacionService) { }
+  constructor(private rutaActiva: ActivatedRoute,private evaluacionServicio : EvaluacionService,private tokenServicio : TokenService) { }
 
   ngOnInit(): void {
     this.getEvaluacionById();
+    this.getIsAdministrador();
   }
 
   getEvaluacionById() : void{
@@ -54,6 +57,10 @@ export class VerEvaluacionComponent implements OnInit {
 
   generarDeGrafico() : void{
     this.pieChartData = [this.evaluacion.cantidadEmpleadosEvaluados,this.evaluacion.restantesAEvaluar];
+  }
+
+  getIsAdministrador() : void {
+    this.esAdministrador=this.tokenServicio.isAdmin();
   }
 
 }

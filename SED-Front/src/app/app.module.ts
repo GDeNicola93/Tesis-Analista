@@ -35,7 +35,6 @@ import { IndexEvaluacionComponent } from './componentes/evaluaciones/index-evalu
 import { NuevaEvaluacionComponent } from './componentes/evaluaciones/nueva-evaluacion/nueva-evaluacion.component';
 import { VerEvaluacionComponent } from './componentes/evaluaciones/ver-evaluacion/ver-evaluacion.component';
 import { EvaluacionesAsignadasComponent } from './componentes/evaluaciones-evaluador/evaluaciones-asignadas/evaluaciones-asignadas.component';
-import { VerEvaluacionAsignadaComponent } from './componentes/evaluaciones-evaluador/ver-evaluacion-asignada/ver-evaluacion-asignada.component';
 import { IndexEvaluarComponent } from './componentes/evaluar/index-evaluar/index-evaluar.component';
 import { VerDetalleEvaluacionComponent } from './componentes/evaluaciones/ver-detalle-evaluacion/ver-detalle-evaluacion.component';
 import { MisEvaluacionesComponent } from './componentes/evaluaciones-empleado/mis-evaluaciones/mis-evaluaciones.component';
@@ -72,7 +71,6 @@ import { ChartsModule } from 'ng2-charts';
     NuevaEvaluacionComponent,
     VerEvaluacionComponent,
     EvaluacionesAsignadasComponent,
-    VerEvaluacionAsignadaComponent,
     IndexEvaluarComponent,
     VerDetalleEvaluacionComponent,
     MisEvaluacionesComponent,

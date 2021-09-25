@@ -12,7 +12,6 @@ import { NuevaEspecificacionPuestoComponent } from './componentes/especificacion
 import { VerEspecificacionPuestoComponent } from './componentes/especificacionPuesto/ver-especificacion-puesto/ver-especificacion-puesto.component';
 import { MisEvaluacionesComponent } from './componentes/evaluaciones-empleado/mis-evaluaciones/mis-evaluaciones.component';
 import { EvaluacionesAsignadasComponent } from './componentes/evaluaciones-evaluador/evaluaciones-asignadas/evaluaciones-asignadas.component';
-import { VerEvaluacionAsignadaComponent } from './componentes/evaluaciones-evaluador/ver-evaluacion-asignada/ver-evaluacion-asignada.component';
 import { IndexEvaluacionComponent } from './componentes/evaluaciones/index-evaluacion/index-evaluacion.component';
 import { NuevaEvaluacionComponent } from './componentes/evaluaciones/nueva-evaluacion/nueva-evaluacion.component';
 import { VerDetalleEvaluacionComponent } from './componentes/evaluaciones/ver-detalle-evaluacion/ver-detalle-evaluacion.component';
@@ -80,7 +79,7 @@ const routes: Routes = [
 
   //Urls de Evaluador
   {path: 'evaluador/evaluaciones_asiganadas',component:EvaluacionesAsignadasComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Evaluador']}},
-  {path: 'evaluador/evaluaciones_asiganadas/ver/:id',component:VerEvaluacionAsignadaComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Evaluador']}},
+  {path: 'evaluador/evaluaciones_asiganadas/ver/:id',component:VerEvaluacionComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Evaluador']}},
 
   //Evaluar
   {path: 'empleados_a_evaluar/:id',component:IndexEvaluarComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Evaluador']}},
