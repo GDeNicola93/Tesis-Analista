@@ -9,6 +9,7 @@ import com.sedback.SEDBack.Dtos.EvaluarIndexDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Dtos.MisEvaluacionesDto;
 import com.sedback.SEDBack.Dtos.NuevaEvaluacionDto;
+import com.sedback.SEDBack.Dtos.ResultadoDto;
 import com.sedback.SEDBack.Excepciones.InvalidDataException;
 import com.sedback.SEDBack.Logica.DetalleEvaluacionServicio;
 import com.sedback.SEDBack.Logica.EvaluacionServicio;
@@ -102,6 +103,12 @@ public class EvaluacionControlador {
     public ResponseEntity<PlantillaEvaluacion> getEvaluarEmpleado(@PathVariable(value="id_detalle_evaluacion") Long id_detalle_evaluacion,UsernamePasswordAuthenticationToken principal){
         UsuarioPrincipal userLogeado = (UsuarioPrincipal) principal.getPrincipal();
         return ResponseEntity.status(HttpStatus.OK).body(servicio.getEvaluarEmpleado(id_detalle_evaluacion,userLogeado.getId()));
+    }
+    
+    @PostMapping("/evaluar/resultados")
+    @PreAuthorize("hasAuthority('Evaluador')")
+    public ResponseEntity<HttpMensaje> guardarResultados(@RequestBody List<ResultadoDto> resultadosDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(new HttpMensaje(servicio.guardarResultados(resultadosDto)));
     }
     
     //Endpoints Empleado

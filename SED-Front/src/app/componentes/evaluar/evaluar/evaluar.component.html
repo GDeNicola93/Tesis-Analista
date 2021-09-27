@@ -14,13 +14,13 @@
         </div>
     </div>
 
-    <div *ngIf="error">
-        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
+    <div *ngIf="errorSuperior">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errorSuperior">
             <strong><i class="fas fa-times"></i> ¡Error!</strong> {{mensaje}}
         </div>
     </div>
 
-    <div *ngIf="!error" class="card shadow mb-5">
+    <div *ngIf="!errorSuperior && !guardado" class="card shadow mb-5">
         <h6 class="card-header font-weight-bold">Evaluación de empleado</h6>
         <div class="card-body">
             <div *ngFor="let dp of plantillaEvaluacion.detallePlantilla">
@@ -30,7 +30,7 @@
                 <div class="row" *ngFor="let cp of dp.comportamiento" style="text-align: center;">
                     <div class="col">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="{{dp.competencia.nombre}}" id="{{dp.competencia.nombre}}">
+                            <input class="form-check-input" type="radio" (click)="tomarOpcionSeleccionada(dp,cp)" name="{{dp.competencia.nombre}}" id="{{dp.competencia.nombre}}">
                         </div>
                     </div>
                     <div class="col-1">
@@ -44,6 +44,20 @@
                     </div>
                 </div>
             </div>
+            <div *ngIf="errorInferior">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errorInferior">
+                    <strong><i class="fas fa-times"></i> ¡Error!</strong> {{mensaje}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <button (click)="guardarResultado()" class="float-right btn btn-sm btn-success"><i class="far fa-save"></i> Guardar</button>
+        </div>
+    </div>
+    <div *ngIf="guardado">
+        <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="guardado">
+            <strong><i class="fas fa-check"></i> ¡Perfecto!</strong> {{mensaje}}
         </div>
     </div>
 </div>

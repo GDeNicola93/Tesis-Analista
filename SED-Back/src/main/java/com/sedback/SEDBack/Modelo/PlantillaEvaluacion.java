@@ -37,4 +37,8 @@ public class PlantillaEvaluacion implements Serializable{
     
     @OneToMany
     private List<DetallePlantilla> detallePlantilla;
+    
+    public int contarCompetenciasAEvaluar(){
+        return this.detallePlantilla.size();
+    }
 }

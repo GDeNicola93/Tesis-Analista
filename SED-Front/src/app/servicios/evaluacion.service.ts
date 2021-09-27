@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { EvaluacionVerDto } from '../HttpMensajes/evaluacion-ver-dto';
 import { HttpMensaje } from '../HttpMensajes/http-mensaje';
+import { ResultadoDto } from '../HttpMensajes/resultado-dto';
 import { UrlBaseService } from './url-base.service';
 
 const cabecera = {headers: new HttpHeaders({'Content-TYpe': 'application/json'})};
@@ -49,5 +50,9 @@ export class EvaluacionService {
 
   getEvaluarEmpleado(id_detalle_evaluacion : number) : Observable<any>{
     return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion/evaluar/${id_detalle_evaluacion}`,cabecera);
+  }
+
+  guardarResultados(resultadosDto : ResultadoDto[]) : Observable<any>{
+    return this.httpClient.post<any>(this.urlBaseService.obtenerURLBase() + 'evaluacion/evaluar/resultados',resultadosDto,cabecera);
   }
 }

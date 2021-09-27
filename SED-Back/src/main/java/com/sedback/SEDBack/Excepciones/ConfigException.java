@@ -53,6 +53,12 @@ public class ConfigException {
     return buildResponseEntity(httpStatus, new RuntimeException("La información solicitada no existe."),null);  
   }
   
+  @ExceptionHandler
+  protected ResponseEntity<ErrorResponse> handleException(BadRequestException exc){
+      HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+      return buildResponseEntity(httpStatus, new RuntimeException(exc.getMessage()),null);
+  }
+  
   private ResponseEntity<ErrorResponse> buildResponseEntity(HttpStatus httpStatus, Exception exc) {
     return buildResponseEntity(httpStatus, exc, null);
   }

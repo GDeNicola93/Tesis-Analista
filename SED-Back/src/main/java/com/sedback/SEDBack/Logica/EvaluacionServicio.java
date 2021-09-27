@@ -7,6 +7,8 @@ import com.sedback.SEDBack.Dtos.EvaluacionVerDto;
 import com.sedback.SEDBack.Dtos.EvaluarIndexDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Dtos.NuevaEvaluacionDto;
+import com.sedback.SEDBack.Dtos.ResultadoDto;
+import com.sedback.SEDBack.Excepciones.BadRequestException;
 import com.sedback.SEDBack.Excepciones.FueEvaluadoException;
 import com.sedback.SEDBack.Excepciones.FueraDeCursoException;
 import com.sedback.SEDBack.Excepciones.NotFoundException;
@@ -27,6 +29,7 @@ import com.sedback.SEDBack.Persistencia.EstadoRepositorio;
 import com.sedback.SEDBack.Persistencia.EvaluacionRepositorio;
 import com.sedback.SEDBack.Persistencia.UsuarioRepositorio;
 import com.sedback.SEDBack.Seguridad.JWT.JwtProvider;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -55,6 +58,9 @@ public class EvaluacionServicio {
     
     @Autowired
     private UsuarioServicio usuarioServicio;
+    
+    @Autowired
+    private ResultadoServicio resultadoServicio;
     
     @Autowired
     JwtProvider jwtProvider;
@@ -160,6 +166,36 @@ public class EvaluacionServicio {
             return de.getEvaluacion().getPlantillaEvaluacion();
         }else{
             throw new PermissionException("La evaluación que intenta realizar no esta asignada a su usuario.");
+        }
+    }
+    
+    public String guardarResultados(List<ResultadoDto> resultadosDto){
+        if(resultadosDto.isEmpty()){
+            throw new BadRequestException("Faltan competencias por evaluar.");
+        }
+        DetalleEvaluacion detalleEvaluacionAEvaluar = detalleEvaluacionServicio.findById(resultadosDto.get(0).getIdDetalleEvaluacion()).get();
+        if(detalleEvaluacionAEvaluar.getEvaluacion().getPlantillaEvaluacion().contarCompetenciasAEvaluar() != resultadosDto.size()){
+            throw new BadRequestException("Faltan competencias por evaluar.");
+        }
+        
+        //Creo los resultados para el detalleEvaluacionAEvaluar
+        for(ResultadoDto x : resultadosDto){
+            detalleEvaluacionAEvaluar.crearResultado(x);
+        }
+        
+//        No hace falta guardar los resultados antes de guardar
+//        el detalle de evaluacion ya que en este el atributo resultados
+//        esta configurado como cascade = { CascadeType.ALL }
+        
+        detalleEvaluacionAEvaluar.setFechaRealizacion(LocalDate.now());
+        
+        this.detalleEvaluacionServicio.guardar(detalleEvaluacionAEvaluar);
+        
+        if(detalleEvaluacionAEvaluar.getAprobado()){
+            return "El resultado ha sido registrado exitosamente.\n Calificación Obtenida: "+detalleEvaluacionAEvaluar.getCalificacion()+" puntos (APROBADA).";
+    
+        }else{
+            return "El resultado ha sido registrado exitosamente.\n Calificación Obtenida: "+detalleEvaluacionAEvaluar.getCalificacion()+" puntos (DESAPROBADA).";
         }
     }
 }

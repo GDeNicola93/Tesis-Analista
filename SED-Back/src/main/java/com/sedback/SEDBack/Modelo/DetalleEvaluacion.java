@@ -2,9 +2,11 @@ package com.sedback.SEDBack.Modelo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sedback.SEDBack.Dtos.ResultadoDto;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +30,7 @@ public class DetalleEvaluacion implements Serializable{
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate fechaRealizacion;
     
-    @OneToMany
+    @OneToMany(cascade = { CascadeType.ALL }) //Al agregar este CascadeType.ALL al momento de crear un nuevo detalle no hace falta gurdar antes las intancias de Resultado.Por lo que al guardar un DetalleEvaluacion se estarian guardando tambien los Resultados.
     private List<Resultado> resultados;
     
     @ManyToOne
@@ -72,4 +74,9 @@ public class DetalleEvaluacion implements Serializable{
             return false;
         }
     }
+    
+    public void crearResultado(ResultadoDto resultadoDto){
+        Resultado nuevoResultado = new Resultado(resultadoDto.getDetallePlantilla(),resultadoDto.getComportamientoPlantillaSeleccionado());
+        this.getResultados().add(nuevoResultado);
+    }            
 }

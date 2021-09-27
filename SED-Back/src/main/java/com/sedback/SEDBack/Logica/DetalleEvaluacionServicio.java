@@ -28,6 +28,10 @@ public class DetalleEvaluacionServicio {
             repositorio.save(de);
         }
     }
+     
+    public void guardar(DetalleEvaluacion detalleEvaluacion){
+        repositorio.save(detalleEvaluacion);
+    }
     
     public Optional<DetalleEvaluacion> findById(Long id){
         return repositorio.findById(id);
