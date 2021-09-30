@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,9 +55,17 @@ public class Evaluacion implements Serializable {
         return false;
     }
     
-    public boolean finalizar(LocalDate fechaActual,Estado finalizar){ //Este metodo recibe el estado EnCurso y la fecha Actual
+    public boolean finalizar(LocalDate fechaActual,Estado finalizar){ //Este metodo recibe el estado Finalizar y la fecha Actual
         if(fechaActual.equals(this.getFechaFinEvaluacion())){
             this.setEstado(finalizar);
+            return true;
+        }
+        return false;
+    }
+    
+    //Si ya fueron evaluados todos los empleados se finaliza automaticamente sin esperar a la fecha de finalización.
+    public boolean terminoDeEvaluar(){
+        if(this.getEstaParaEvaluar() && (this.getCantidadEmpleadosAEvaluar() - this.getCantidadEmpleadosEvaluados()) == 0){
             return true;
         }
         return false;

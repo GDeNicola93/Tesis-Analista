@@ -18,6 +18,6 @@ public interface EvaluacionRepositorio extends JpaRepository<Evaluacion,Long> {
     @Query(value = "SELECT ev FROM Evaluacion ev where ev.estado.id = 2")
     List<Evaluacion> getEvaluacionesEnCurso();
     
-    @Query(value = "SELECT ev FROM Evaluacion ev where ev.evaluador.id = ?1")
+    @Query(value = "SELECT ev FROM Evaluacion ev where ev.evaluador.id = ?1 AND ev.estado.id != 3")
     Page<Evaluacion> getEvaluacionesEvaluador(Integer id_empleado,Pageable pagina);
 }
