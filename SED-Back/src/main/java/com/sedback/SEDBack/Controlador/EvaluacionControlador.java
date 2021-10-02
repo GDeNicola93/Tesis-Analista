@@ -75,6 +75,13 @@ public class EvaluacionControlador {
         return servicio.cancelarEvaluacion(id_evaluacion);
     }
     
+    @GetMapping("/detalles_evaluacion/{id_evaluacion}")
+    @PreAuthorize("hasAuthority('Administrador')" + "|| hasAuthority('Evaluador')")
+    public ResponseEntity<Page<EvaluarIndexDto>> getDetallesEvaluacionByIdEvaluacion(@PathVariable(value="id_evaluacion") Long id_evaluacion,Pageable page,UsernamePasswordAuthenticationToken principal){
+        UsuarioPrincipal userLogeado = (UsuarioPrincipal) principal.getPrincipal();
+        return ResponseEntity.status(HttpStatus.OK).body(detalleEvaluacionServicio.getDetallesEvaluacionByIdEvaluacion(id_evaluacion, userLogeado.getId(),page));
+    }
+    
     //Endpoints Evaluador
     
     @GetMapping("/evaluador/logeado")

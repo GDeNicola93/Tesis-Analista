@@ -12,6 +12,7 @@ import { NuevaEspecificacionPuestoComponent } from './componentes/especificacion
 import { VerEspecificacionPuestoComponent } from './componentes/especificacionPuesto/ver-especificacion-puesto/ver-especificacion-puesto.component';
 import { MisEvaluacionesComponent } from './componentes/evaluaciones-empleado/mis-evaluaciones/mis-evaluaciones.component';
 import { EvaluacionesAsignadasComponent } from './componentes/evaluaciones-evaluador/evaluaciones-asignadas/evaluaciones-asignadas.component';
+import { IndexDetallesEvaluacionComponent } from './componentes/evaluaciones/index-detalles-evaluacion/index-detalles-evaluacion.component';
 import { IndexEvaluacionComponent } from './componentes/evaluaciones/index-evaluacion/index-evaluacion.component';
 import { NuevaEvaluacionComponent } from './componentes/evaluaciones/nueva-evaluacion/nueva-evaluacion.component';
 import { VerDetalleEvaluacionComponent } from './componentes/evaluaciones/ver-detalle-evaluacion/ver-detalle-evaluacion.component';
@@ -73,6 +74,9 @@ const routes: Routes = [
   {path: 'evaluacion/ver/:id',component:VerEvaluacionComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},
   {path: 'evaluacion/:id_evaluacion/detalle_evaluacion/:id_detalle',component:VerDetalleEvaluacionComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador','Evaluador']}},
 
+  //Detalles Evaluacion
+  {path: 'detalles_evaluacion/ver/:id_evaluacion',component:IndexDetallesEvaluacionComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador','Evaluador']}},
+
   //Competencias
   {path: 'competencia',component:IndexCompetenciaComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},
   {path: 'competencia/nueva',component:NuevaCompetenciaComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},
@@ -87,7 +91,7 @@ const routes: Routes = [
 
   //Urls de Empleado
   {path: 'mis-evaluaciones',component:MisEvaluacionesComponent,canActivate:[GeneralGuard],data:{expectedRol: ['Empleado']}},
-  {path: 'evaluacion/detalle_evaluacion/:id_detalle',component:VerDetalleEvaluacionComponent,canActivate:[GeneralGuard],data:{expectedRol: ['Empleado']}},
+  {path: 'evaluacion/detalle_evaluacion/:id_detalle',component:VerDetalleEvaluacionComponent,canActivate:[GeneralGuard],data:{expectedRol: ['Empleado','Administrador','Evaluador']}},
 
   //No machea con ninguna de las anteriores
   {path: '**', component:HomeComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador','Evaluador','Empleado']}}

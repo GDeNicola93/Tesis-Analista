@@ -13,6 +13,7 @@
         <div class="col">
             <button *ngIf="esAdministrador" routerLink="/evaluacion" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
             <button *ngIf="!esAdministrador" routerLink="/evaluador/evaluaciones_asiganadas" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+            <button style="margin-right: 2px;" routerLink="/detalles_evaluacion/ver/{{evaluacion.id}}" class="float-right btn btn-sm btn-primary shadow-sm"><i class="far fa-eye"></i> Ver Detalles</button>
         </div>
     </div>
     <div class="card shadow">

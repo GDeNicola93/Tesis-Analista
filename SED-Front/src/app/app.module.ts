@@ -40,6 +40,7 @@ import { VerDetalleEvaluacionComponent } from './componentes/evaluaciones/ver-de
 import { MisEvaluacionesComponent } from './componentes/evaluaciones-empleado/mis-evaluaciones/mis-evaluaciones.component';
 import { EvaluarComponent } from './componentes/evaluar/evaluar/evaluar.component';
 import { ChartsModule } from 'ng2-charts';
+import { IndexDetallesEvaluacionComponent } from './componentes/evaluaciones/index-detalles-evaluacion/index-detalles-evaluacion.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { ChartsModule } from 'ng2-charts';
     IndexEvaluarComponent,
     VerDetalleEvaluacionComponent,
     MisEvaluacionesComponent,
-    EvaluarComponent
+    EvaluarComponent,
+    IndexDetallesEvaluacionComponent
   ],
   imports: [
     BrowserModule,

@@ -145,15 +145,16 @@ public class EvaluacionServicio {
             }else{
                 throw new PermissionException("No puede ver detalles de esta evaluación ya que no esta asignada a su usuario.");
             }
-        }
+        } 
         
-        //if(usuarioLogeado.esEmpleado()){
-            if(detalleEvaluacionSeleccionado.esDeEvaluado(usuarioLogeado.getEmpleado())){
-                return DetalleEvaluacionDtoMapper.INSTANCE.toDetalleEvaluacionDto(detalleEvaluacionSeleccionado);
-            }else{
-                throw new PermissionException("No puede ver detalles de esta evaluación ya que no esta asignada a su usuario.");
+        if(detalleEvaluacionSeleccionado.esDeEvaluado(usuarioLogeado.getEmpleado())){
+            if(detalleEvaluacionSeleccionado.getEvaluacion().getEstado().getId() == 3){
+                throw new PermissionException("La evaluación esta Cancelada por lo que no se puede ver el este detalle.");
             }
-        //}
+            return DetalleEvaluacionDtoMapper.INSTANCE.toDetalleEvaluacionDto(detalleEvaluacionSeleccionado);
+        }else{
+            throw new PermissionException("No puede ver detalles de esta evaluación ya que no esta asignada a su usuario.");
+        } 
     }
     
     public PlantillaEvaluacion getEvaluarEmpleado(Long id_detalle_evaluacion,Long idUserLogeado){

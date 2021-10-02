@@ -44,6 +44,10 @@ export class EvaluacionService {
     return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion/detalle_evaluacion/${id_detalle}`,cabecera);
   }
 
+  getDetallesEvaluacionByIdEvaluacion(id_evaluacion : number) : Observable<any>{
+    return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion/detalles_evaluacion/${id_evaluacion}`,cabecera);
+  }
+
   getMisEvaluaciones(page:number,size:number,sort:string,order:string) : Observable<any>{
     return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion/mis_evaluaciones?sort=${sort},${order}&size=${size}&page=${page}`,cabecera);
   }

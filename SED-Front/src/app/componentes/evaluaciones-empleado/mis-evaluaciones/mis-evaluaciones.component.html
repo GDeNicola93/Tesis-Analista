@@ -28,7 +28,6 @@
                         <td>-------------</td> 
                         <td><span class="badge badge-warning"><i class="fas fa-question"></i> Pendiente Evaluar</span></td>
                         <td>-------------</td> 
-                        <td><button routerLink="..." style="margin-right: 5px;" class="btn btn-sm btn-success shadow-sm" data-toggle="tooltip" data-placement="top" title="Evaluar"><i class="fas fa-stream"></i></button></td>
                     </tr>
                     <tr *ngIf="de.fueEvaluado">
                         <th></th>
@@ -37,7 +36,7 @@
                         <td *ngIf="de.aprobado"><span class="badge badge-success"><i class="far fa-thumbs-up"></i> Aprobado</span></td>
                         <td *ngIf="!de.aprobado"><span class="badge badge-danger"><i class="far fa-thumbs-down"></i> Desaprobado</span></td>
                         <td>{{de.calificacion}} ptos</td>
-                        <!-- <td><button routerLink="/evaluacion/{{idEvaluacion}}/detalle_evaluacion/{{de.idDetalleEvaluacion}}" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Mas información de la evaluación"><i class="far fa-eye"></i></button></td> -->
+                        <td><button routerLink="/evaluacion/detalle_evaluacion/{{de.idDetalleEvaluacion}}" style="margin-right: 5px;" class="btn btn-sm btn-outline-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver detalle de la evaluación"><i class="far fa-eye"></i></button></td>
                     </tr>
                 </tbody>
             </table>

@@ -11,8 +11,7 @@
             <h4>Detalle Evaluación</h4>
         </div>
         <div class="col">
-            <button *ngIf="!esEmpleado()" routerLink="/empleados_a_evaluar/{{idEvaluacion}}" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
-            <button *ngIf="esEmpleado()" routerLink="/mis-evaluaciones" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+            <button (click)="volver()" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
         </div>
     </div>
 
@@ -26,7 +25,7 @@
         <h6 class="card-header font-weight-bold">Resultados obtenidos para {{detalleEvaluacion.evaluado}}</h6>
         <div class="card-body">
             <p><strong>Fecha Realización:</strong> {{detalleEvaluacion.fechaRealizacion}}</p>
-            <p *ngIf="esEmpleado()"><strong>Evaluador:</strong> {{detalleEvaluacion.evaluador}}</p>
+            <p><strong>Evaluador:</strong> {{detalleEvaluacion.evaluador}}</p>
             <p *ngIf="detalleEvaluacion.aprobado"><strong>Calificación obtenida:</strong> {{detalleEvaluacion.calificacion}} ptos - <span class="badge badge-success"><i class="far fa-thumbs-up"></i> Aprobado</span></p>
             <p *ngIf="!detalleEvaluacion.aprobado"><strong>Calificación obtenida:</strong> {{detalleEvaluacion.calificacion}} ptos - <span class="badge badge-danger"><i class="far fa-thumbs-down"></i> Desaprobado</span></p>
             <hr>
@@ -45,7 +44,7 @@
                         {{resul.comportamientoPlantillaSeleccionado.descComportamiento}}
                     </div>
                     <div class="col">
-                        {{resul.comportamientoPlantillaSeleccionado.valoracionNumerica}} ptos
+                        <!-- {{resul.comportamientoPlantillaSeleccionado.valoracionNumerica}} ptos -->
                     </div>
                 </div>
             </div>

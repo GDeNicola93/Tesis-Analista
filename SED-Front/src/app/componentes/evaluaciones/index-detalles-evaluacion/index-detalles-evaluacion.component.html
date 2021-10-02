@@ -1,0 +1,51 @@
+<app-menu></app-menu>
+<div class="container" style="text-align: center;" *ngIf="cargando">
+    <img src="../../../../assets/animate/svg-loaders/grid.svg" alt="Cargando...">
+    <h6 style="color: blue;margin-top: 10px;">Cargando...</h6>
+</div>
+
+<div class="container" *ngIf="!cargando">
+    <div class="row">
+        <div class="col">
+            <h4>Empleados evaluados</h4>
+        </div>
+        <div class="col">
+            <button (click)="volver()" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+        </div>
+    </div>
+    <div *ngIf="error">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
+            <strong><i class="fas fa-times"></i> ¡Error!</strong> {{mensaje}}
+        </div>
+    </div>
+
+    <div class="card shadow" *ngIf="!error">
+        <h6 class="card-header font-weight-bold">Listado de empleados evaluados</h6>
+        <div class="card-body">
+            <table class="table table-sm table-hover">
+                <thead>
+                    <tr class="table-primary">
+                        <th scope="col">Nombre Apellido</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Calificación</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let de of detallesEvaluaciones">
+                    <tr *ngIf="!de.fueEvaluado">
+                        <td scope="row">{{de.empleadoAEvaluar}}</td>
+                        <td><span class="badge badge-warning"><i class="fas fa-question"></i> No Evaluado</span></td>
+                        <td>-------------</td> 
+                    </tr>
+                    <tr *ngIf="de.fueEvaluado">
+                        <td scope="row">{{de.empleadoAEvaluar}}</td>
+                        <td *ngIf="de.aprobado"><span class="badge badge-success"><i class="far fa-thumbs-up"></i> Aprobado</span></td>
+                        <td *ngIf="!de.aprobado"><span class="badge badge-danger"><i class="far fa-thumbs-down"></i> Desaprobado</span></td>
+                        <td>{{de.calificacion}} ptos</td>
+                        <td><button routerLink="/evaluacion/detalle_evaluacion/{{de.idDetalleEvaluacion}}" style="margin-right: 5px;" class="btn btn-sm btn-outline-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver resultados"><i class="far fa-eye"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DetalleEvaluacionDto } from 'src/app/HttpMensajes/detalle-evaluacion-dto';
 import { EvaluacionService } from 'src/app/servicios/evaluacion.service';
 import { TokenService } from 'src/app/servicios/token.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-ver-detalle-evaluacion',
@@ -17,7 +18,7 @@ export class VerDetalleEvaluacionComponent implements OnInit {
   error = false;
   cargando = true;
 
-  constructor(private rutaActiva: ActivatedRoute,private evaluacionServicio : EvaluacionService,private tokenServicio : TokenService) { }
+  constructor(private rutaActiva: ActivatedRoute,private evaluacionServicio : EvaluacionService,private tokenServicio : TokenService,private location: Location) { }
 
   ngOnInit(): void {
     this.idDetalleEvaluacion = this.rutaActiva.snapshot.params.id_detalle;
@@ -39,8 +40,8 @@ export class VerDetalleEvaluacionComponent implements OnInit {
     );
   }
 
-  esEmpleado() : boolean{
-    return this.tokenServicio.isEmpleado();
-  } 
+  volver() {
+    this.location.back();
+  }
 
 }
