@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EvaluacionRepositorio extends JpaRepository<Evaluacion,Long> {
+    @Query(value = "SELECT ev FROM Evaluacion ev WHERE ev.estado.nombre LIKE %?1%")
+    Page<Evaluacion> getEvaluaciones(Pageable pagina,String estado);
     
     @Query(value = "SELECT ev FROM Evaluacion ev where ev.estado.id = 1")
     List<Evaluacion> getEvaluacionesEnEspera();

@@ -17,6 +17,33 @@
     <div class="card shadow">
         <h6 class="card-header font-weight-bold">Listado de evaluaciones</h6>
         <div class="card-body">
+          <form>
+            <div class="row">
+                <div class="col-md-3 text">
+                    <div class="form-group">
+                        <label style="font-size: 13px;">Mostrar:</label>
+                        <select (change)="setFiltroEstado($event)" class="form-control form-control-sm">
+                            <option value="">Todas</option>
+                            <option value="En Curso">En curso</option>
+                            <option value="Finalizada">Finalizadas</option>
+                            <option value="En Espera">En Espera</option>
+                            <option value="Cancelada">Canceladas</option>
+                        </select>
+                    </div>
+                  </div>
+                  <div class="col-5"></div>
+                  <div class="col-md">
+                    <div class="input-group" style="margin-top: 20px;margin-bottom: 10px;">
+                      <input (keydown.enter)="buscarEvaluaciones()" type="text" class="form-control" name="search" placeholder="Buscar..." [(ngModel)]="filtro" name="filtro" autocomplete="off">
+                      <span class="input-group-append">
+                          <button class="btn btn-secondary" type="button" (click)="buscarEvaluaciones()">
+                              <i class="fas fa-search fa-sm"></i>
+                          </button>
+                      </span>
+                    </div>
+                  </div>
+            </div>
+          </form>
             <table class="table table-sm table-hover">
                 <thead>
                     <tr class="table-primary">
@@ -52,6 +79,7 @@
                     </tr>
                 </tbody>
             </table>
+            <p *ngIf="evaluaciones.length == 0" style="text-align: center;"><i class="fas fa-exclamation-circle"></i> No se encontraron resultados.</p>
             <nav aria-label="Page navigation example">
                 <ul class="pagination pagination-sm justify-content-center">
                   <li class="page-item" [ngClass]="{'disabled': esPrimera === true}">

@@ -22,6 +22,20 @@
     <div class="card shadow" *ngIf="!error">
         <h6 class="card-header font-weight-bold">Listado de empleados evaluados</h6>
         <div class="card-body">
+            <form>
+                <div class="row">
+                    <div class="col-md-3 text">
+                        <div class="form-group">
+                            <select class="form-control form-control-sm">
+                                <option value=" ">Sin filtro</option>
+                                <option value="true">Aprobados</option>
+                                <option value="false">Desaprobados</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                </div>
+            </form>
             <table class="table table-sm table-hover">
                 <thead>
                     <tr class="table-primary">

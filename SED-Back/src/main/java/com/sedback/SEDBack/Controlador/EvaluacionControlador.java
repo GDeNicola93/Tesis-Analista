@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*") //Para poder acceder desde cualquier lado a mi backend
@@ -58,8 +59,8 @@ public class EvaluacionControlador {
     
     @GetMapping()
     @PreAuthorize("hasAuthority('Administrador')")
-    public ResponseEntity<Page<EvaluacionIndexDto>> getEvaluaciones(Pageable page){
-        return servicio.getEvaluaciones(page);
+    public ResponseEntity<Page<EvaluacionIndexDto>> getEvaluaciones(Pageable page,@RequestParam String estado){
+        return servicio.getEvaluaciones(page,estado);
     }
     
     @GetMapping(params = {"id"})

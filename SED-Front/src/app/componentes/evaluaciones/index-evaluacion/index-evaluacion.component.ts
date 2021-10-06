@@ -19,6 +19,8 @@ export class IndexEvaluacionComponent implements OnInit {
   totalPages : Array<number>;
   idEvaluacionACancelar : number;
   cargando = true;
+  filtroEstado : string = "";
+  filtro : string = "";
 
 
   constructor(private evaluacionServicio : EvaluacionService,private modalService: NgbModal) { }
@@ -28,13 +30,22 @@ export class IndexEvaluacionComponent implements OnInit {
   }
 
   cargarEvaluaciones() : void{
-    this.evaluacionServicio.getEvaluaciones(this.page,this.size,this.sort,this.order).subscribe(data =>{
+    this.evaluacionServicio.getEvaluaciones(this.page,this.size,this.sort,this.order,this.filtroEstado).subscribe(data =>{
       this.evaluaciones = data.content;
       this.esPrimera = data.first;
       this.esUltima = data.last;
       this.totalPages = new Array(data['totalPages']);
       this.cargando = false;
     });
+  }
+
+  setFiltroEstado(event : any) {
+    this.filtroEstado = event.target.value;
+    this.cargarEvaluaciones();
+  }
+
+  buscarEvaluaciones() {
+
   }
 
   anterior() : void{
