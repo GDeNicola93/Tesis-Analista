@@ -11,11 +11,9 @@ import com.sedback.SEDBack.Dtos.ResultadoDto;
 import com.sedback.SEDBack.Excepciones.BadRequestException;
 import com.sedback.SEDBack.Excepciones.FueEvaluadoException;
 import com.sedback.SEDBack.Excepciones.FueraDeCursoException;
-import com.sedback.SEDBack.Excepciones.NotFoundException;
 import com.sedback.SEDBack.Excepciones.PermissionException;
 import com.sedback.SEDBack.Mappers.DetalleEvaluacionDtoMapper;
 import com.sedback.SEDBack.Mappers.EvaluacionEvaluadorIndexDtoMapper;
-import com.sedback.SEDBack.Mappers.EvaluacionIndexDtoMapper;
 import com.sedback.SEDBack.Mappers.EvaluacionVerDtoMapper;
 import com.sedback.SEDBack.Mappers.EvaluarIndexDtoMapper;
 import com.sedback.SEDBack.Modelo.DetalleEvaluacion;
@@ -32,7 +30,6 @@ import com.sedback.SEDBack.Seguridad.JWT.JwtProvider;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -82,7 +79,7 @@ public class EvaluacionServicio {
     }
     
     public ResponseEntity<Page<EvaluacionIndexDto>> getEvaluaciones(Pageable page,String estado,String filtro){
-        return ResponseEntity.ok().body(EvaluacionIndexDtoMapper.INSTANCE.toEmpleadoIndexDtoPage(evaluacionRepositorio.getEvaluaciones(page, estado,filtro)));
+        return ResponseEntity.ok().body(evaluacionRepositorio.getEvaluaciones(page, estado,filtro));
     }
     
     public EvaluacionVerDto getEvaluacionById(Long id,String token){

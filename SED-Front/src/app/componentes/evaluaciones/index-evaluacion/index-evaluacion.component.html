@@ -62,7 +62,7 @@
                         <th scope="row">{{ev.id}}</th>
                         <td>{{ev.fechaInicioEvaluacion}}</td>
                         <td>{{ev.fechaFinEvaluacion}}</td>
-                        <td>{{ev.evaluador}}</td>
+                        <td>{{ev.nombreCompletoEvaluador}}</td>
                         <td *ngIf="ev.estado.nombre == 'Cancelada'"><span class="badge badge-danger"><i class="fas fa-times"></i> {{ev.estado.nombre}}</span></td>
                         <td *ngIf="ev.estado.nombre == 'En Curso'"><span class="badge badge-primary"><i class="fas fa-tasks"></i> {{ev.estado.nombre}}</span></td>
                         <td *ngIf="ev.estado.nombre == 'En Espera'"><span class="badge badge-warning"><i class="far fa-clock"></i> {{ev.estado.nombre}}</span></td>

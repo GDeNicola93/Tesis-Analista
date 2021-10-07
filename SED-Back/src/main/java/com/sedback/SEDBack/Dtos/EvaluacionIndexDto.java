@@ -3,21 +3,21 @@ package com.sedback.SEDBack.Dtos;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sedback.SEDBack.Modelo.Estado;
 import java.time.LocalDate;
-import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 
-@Data
-public class EvaluacionIndexDto {
-    private Long id;
+public interface EvaluacionIndexDto {
+    Long getId();
     
     @JsonFormat(pattern="dd-MM-yyyy")
-    private LocalDate fechaInicioEvaluacion;
+    LocalDate getFechaInicioEvaluacion();
     
     @JsonFormat(pattern="dd-MM-yyyy")
-    private LocalDate fechaFinEvaluacion;
+    LocalDate getFechaFinEvaluacion();
     
-    private String evaluador;
+    @Value("#{target.evaluador.nombre + ' ' + target.evaluador.apellido}")
+    String getNombreCompletoEvaluador();
     
-    private Estado estado;
+    Estado getEstado();
     
-    private boolean esCancelable;
+    boolean getEsCancelable();
 }

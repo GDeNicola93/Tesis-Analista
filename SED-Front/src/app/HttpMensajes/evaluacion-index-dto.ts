@@ -4,7 +4,7 @@ export class EvaluacionIndexDto{
     id : number;
     fechaInicioEvaluacion : any;
     fechaFinEvaluacion : any;
-    evaluador :  string;
+    nombreCompletoEvaluador :  string;
     estado : Estado;
     esCancelable : boolean;
 }
