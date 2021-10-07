@@ -81,8 +81,8 @@ public class EvaluacionServicio {
         return "¡Evaluación registrada existosamente!";
     }
     
-    public ResponseEntity<Page<EvaluacionIndexDto>> getEvaluaciones(Pageable page,String estado){
-        return ResponseEntity.ok().body(EvaluacionIndexDtoMapper.INSTANCE.toEmpleadoIndexDtoPage(evaluacionRepositorio.getEvaluaciones(page, estado)));
+    public ResponseEntity<Page<EvaluacionIndexDto>> getEvaluaciones(Pageable page,String estado,String filtro){
+        return ResponseEntity.ok().body(EvaluacionIndexDtoMapper.INSTANCE.toEmpleadoIndexDtoPage(evaluacionRepositorio.getEvaluaciones(page, estado,filtro)));
     }
     
     public EvaluacionVerDto getEvaluacionById(Long id,String token){

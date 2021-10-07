@@ -30,7 +30,7 @@ export class IndexEvaluacionComponent implements OnInit {
   }
 
   cargarEvaluaciones() : void{
-    this.evaluacionServicio.getEvaluaciones(this.page,this.size,this.sort,this.order,this.filtroEstado).subscribe(data =>{
+    this.evaluacionServicio.getEvaluaciones(this.page,this.size,this.sort,this.order,this.filtroEstado,this.filtro).subscribe(data =>{
       this.evaluaciones = data.content;
       this.esPrimera = data.first;
       this.esUltima = data.last;
@@ -45,7 +45,7 @@ export class IndexEvaluacionComponent implements OnInit {
   }
 
   buscarEvaluaciones() {
-
+    this.cargarEvaluaciones();
   }
 
   anterior() : void{

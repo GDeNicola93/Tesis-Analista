@@ -59,8 +59,8 @@ public class EvaluacionControlador {
     
     @GetMapping()
     @PreAuthorize("hasAuthority('Administrador')")
-    public ResponseEntity<Page<EvaluacionIndexDto>> getEvaluaciones(Pageable page,@RequestParam String estado){
-        return servicio.getEvaluaciones(page,estado);
+    public ResponseEntity<Page<EvaluacionIndexDto>> getEvaluaciones(Pageable page,@RequestParam String estado,@RequestParam String filtro){
+        return servicio.getEvaluaciones(page,estado,filtro);
     }
     
     @GetMapping(params = {"id"})
