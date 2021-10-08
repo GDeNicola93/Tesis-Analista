@@ -13,7 +13,6 @@ import com.sedback.SEDBack.Excepciones.FueEvaluadoException;
 import com.sedback.SEDBack.Excepciones.FueraDeCursoException;
 import com.sedback.SEDBack.Excepciones.PermissionException;
 import com.sedback.SEDBack.Mappers.DetalleEvaluacionDtoMapper;
-import com.sedback.SEDBack.Mappers.EvaluacionEvaluadorIndexDtoMapper;
 import com.sedback.SEDBack.Mappers.EvaluacionVerDtoMapper;
 import com.sedback.SEDBack.Mappers.EvaluarIndexDtoMapper;
 import com.sedback.SEDBack.Modelo.DetalleEvaluacion;
@@ -111,7 +110,7 @@ public class EvaluacionServicio {
     
     public ResponseEntity<Page<EvaluacionEvaluadorIndexDto>> getEvaluacionesEvaluadorLogeado(String token,Pageable page){
         Usuario userLogeado = usuarioRepositorio.findById(jwtProvider.getIdUserFromToken(token)).get();
-        return ResponseEntity.ok().body(EvaluacionEvaluadorIndexDtoMapper.INSTANCE.toEvaluacionEvaluadorIndexDtoPage(evaluacionRepositorio.getEvaluacionesEvaluador(userLogeado.getEmpleado().getId(),page)));
+        return ResponseEntity.ok().body(evaluacionRepositorio.getEvaluacionesEvaluador(userLogeado.getEmpleado().getId(),page));
     }
     
     public List<EvaluarIndexDto> getEmpleadosAEvaluarEvaluacion(Long id,Long idUserLogeado){

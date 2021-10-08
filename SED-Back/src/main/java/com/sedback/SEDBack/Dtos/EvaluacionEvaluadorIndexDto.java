@@ -4,22 +4,21 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sedback.SEDBack.Modelo.Estado;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import lombok.Data;
 
-@Data
-public class EvaluacionEvaluadorIndexDto {
-    private Long id;
+
+public interface EvaluacionEvaluadorIndexDto {
+    Long getId();
     
     @JsonFormat(pattern="dd-MM-yyyy")
-    private LocalDate fechaInicioEvaluacion;
+    LocalDate getFechaInicioEvaluacion();
     
     @JsonFormat(pattern="dd-MM-yyyy")
-    private LocalDate fechaFinEvaluacion;
+    LocalDate getFechaFinEvaluacion();
     
     @JsonFormat(pattern="dd-MM-yyyy HH:mm")
-    private LocalDateTime fechaHoraCreacion;
+    LocalDateTime getFechaHoraCreacion(); 
     
-    private Estado estado;
+    Estado getEstado();
     
-    private boolean estaParaEvaluar;
+    boolean getEstaParaEvaluar();
 }

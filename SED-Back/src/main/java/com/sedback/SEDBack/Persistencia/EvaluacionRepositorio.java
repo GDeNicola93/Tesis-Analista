@@ -1,5 +1,6 @@
 package com.sedback.SEDBack.Persistencia;
 
+import com.sedback.SEDBack.Dtos.EvaluacionEvaluadorIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionIndexDto;
 import com.sedback.SEDBack.Modelo.Evaluacion;
 import java.util.List;
@@ -22,5 +23,5 @@ public interface EvaluacionRepositorio extends JpaRepository<Evaluacion,Long> {
     List<Evaluacion> getEvaluacionesEnCurso();
     
     @Query(value = "SELECT ev FROM Evaluacion ev where ev.evaluador.id = ?1 AND ev.estado.id != 3")
-    Page<Evaluacion> getEvaluacionesEvaluador(Integer id_empleado,Pageable pagina);
+    Page<EvaluacionEvaluadorIndexDto> getEvaluacionesEvaluador(Integer id_empleado,Pageable pagina);
 }
