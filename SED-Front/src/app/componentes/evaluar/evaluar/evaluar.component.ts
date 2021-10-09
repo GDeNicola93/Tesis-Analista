@@ -33,6 +33,11 @@ export class EvaluarComponent implements OnInit {
     this.evaluacionServicio.getEvaluarEmpleado(this.idDetalleEvaluacion).subscribe(data =>{
       this.plantillaEvaluacion = data;
       this.cargando = false;
+
+      //ordeno los comportamientos
+      for(let dp of this.plantillaEvaluacion.detallePlantilla){
+        dp.comportamiento.sort((a,b)=> a.valoracionNumerica < b.valoracionNumerica ? 1:-1);
+      }
     },
       (err : any)=>{
         this.errorSuperior = true;
