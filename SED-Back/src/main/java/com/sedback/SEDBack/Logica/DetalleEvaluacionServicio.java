@@ -4,13 +4,11 @@ import com.sedback.SEDBack.Dtos.EvaluarIndexDto;
 import com.sedback.SEDBack.Dtos.MisEvaluacionesDto;
 import com.sedback.SEDBack.Excepciones.PermissionException;
 import com.sedback.SEDBack.Mappers.EvaluarIndexDtoMapper;
-import com.sedback.SEDBack.Mappers.MisEvaluacionDtoMapper;
 import com.sedback.SEDBack.Modelo.DetalleEvaluacion;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Modelo.Evaluacion;
 import com.sedback.SEDBack.Modelo.Usuario;
 import com.sedback.SEDBack.Persistencia.DetalleEvaluacionRepositorio;
-import com.sedback.SEDBack.Persistencia.EspecificacionDePuestoRepositorio;
 import com.sedback.SEDBack.Persistencia.EvaluacionRepositorio;
 import java.util.List;
 import java.util.Optional;
@@ -47,7 +45,7 @@ public class DetalleEvaluacionServicio {
     
     public Page<MisEvaluacionesDto> getMisEvaluaciones(Long idUserLogeado,Pageable page){
         Empleado empLogeado = usuarioServicio.getDatosUsuarioLogeado(idUserLogeado).getBody().getEmpleado();
-        return MisEvaluacionDtoMapper.INSTANCE.toMisEvaluacionesDtoPage(repositorio.getDetalleEvaluacionByEvaluado(empLogeado.getId(),page));
+        return repositorio.getDetalleEvaluacionByEvaluado(empLogeado.getId(),page);
     }
     
     public Page<EvaluarIndexDto> getDetallesEvaluacionByIdEvaluacion(Long id_evaluacion,Long idUserLogeado,Pageable page){

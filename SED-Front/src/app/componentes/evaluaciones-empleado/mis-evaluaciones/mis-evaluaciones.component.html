@@ -22,14 +22,7 @@
                     </tr>
                 </thead>
                 <tbody *ngFor="let de of misEvaluaciones">
-                    <tr *ngIf="!de.fueEvaluado">
-                        <th></th>
-                        <td scope="row">{{de.idDetalleEvaluacion}}</td>
-                        <td>-------------</td> 
-                        <td><span class="badge badge-warning"><i class="fas fa-question"></i> Pendiente Evaluar</span></td>
-                        <td>-------------</td> 
-                    </tr>
-                    <tr *ngIf="de.fueEvaluado">
+                    <tr>
                         <th></th>
                         <td scope="row">{{de.idDetalleEvaluacion}}</td>
                         <td>{{de.fechaRealizacion}}</td>

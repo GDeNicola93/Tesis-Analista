@@ -2,18 +2,17 @@ package com.sedback.SEDBack.Dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
-import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 
-@Data
-public class MisEvaluacionesDto {
-    private Long idDetalleEvaluacion;
+
+public interface MisEvaluacionesDto {
+    @Value("#{target.id}")
+    Long getIdDetalleEvaluacion();
     
     @JsonFormat(pattern="dd-MM-yyyy")
-    private LocalDate fechaRealizacion;
+    LocalDate getFechaRealizacion();
     
-    private boolean fueEvaluado;
+    Integer getCalificacion();
     
-    private Integer calificacion;
-    
-    private boolean aprobado;
+    boolean getAprobado();
 }
