@@ -186,6 +186,12 @@ public class EvaluacionServicio {
         
         detalleEvaluacionAEvaluar.setFechaRealizacion(LocalDate.now());
         
+        //Si ya fue el ultimo resultado a cargar Finalizo la evaluación.
+        if(detalleEvaluacionAEvaluar.getEvaluacion().terminoDeEvaluar()){
+            Estado estadoFinalziada = estadoRepositorio.findById(4).get(); //4 --> Finalizada
+            detalleEvaluacionAEvaluar.getEvaluacion().setEstado(estadoFinalziada);
+        }
+        
         this.detalleEvaluacionServicio.guardar(detalleEvaluacionAEvaluar);
         
         if(detalleEvaluacionAEvaluar.getAprobado()){
