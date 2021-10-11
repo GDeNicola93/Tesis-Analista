@@ -1,14 +1,14 @@
 package com.sedback.SEDBack.Dtos;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
-@Data
-@NoArgsConstructor
-public class EspecificacionDePuestoIndexDto {
-    private Integer idEspecificacionDePuesto;
+
+public interface EspecificacionDePuestoIndexDto {
+    Integer getId();
     
-    private String nombrePuesto;
+    @Value("#{target.getPuesto().getNombrePuesto()}")
+    String getNombrePuesto();
     
-    private String sucursalNombre;
+    @Value("#{target.getSucursal().getNombre()}")
+    String getSucursalNombre();
 }

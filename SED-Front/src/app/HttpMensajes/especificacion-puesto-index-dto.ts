@@ -1,5 +1,5 @@
 export class EspecificacionDePuestoIndexDto{
-    idEspecificacionDePuesto : number;
+    id : number;
     nombrePuesto : string;
     sucursalNombre : string
 }

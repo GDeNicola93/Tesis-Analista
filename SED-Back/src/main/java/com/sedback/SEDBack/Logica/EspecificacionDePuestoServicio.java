@@ -3,7 +3,6 @@ package com.sedback.SEDBack.Logica;
 import com.sedback.SEDBack.Dtos.EspecificacionDePuestoIndexDto;
 import com.sedback.SEDBack.Dtos.EspecificacionDePuestoVerDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
-import com.sedback.SEDBack.Mappers.EspecificacionDePuestoDtosMapper;
 import com.sedback.SEDBack.Modelo.EspecificacionDePuesto;
 import com.sedback.SEDBack.Modelo.PlantillaEvaluacion;
 import com.sedback.SEDBack.Persistencia.EspecificacionDePuestoRepositorio;
@@ -45,7 +44,7 @@ public class EspecificacionDePuestoServicio {
     }
     
     public ResponseEntity<Page<EspecificacionDePuestoIndexDto>> obtenerEspecificacionesDePuestosIndex(Pageable page){
-        return ResponseEntity.ok().body(EspecificacionDePuestoDtosMapper.INSTANCE.toEspecificacionDePuestoIndexDtoPage(repositorio.findAll(page)));
+        return ResponseEntity.ok().body(repositorio.obtenerEspecificacionesDePuestosIndex(page));
     }
     
     public ResponseEntity<List<EspecificacionDePuesto>> getEspecificacionesDePuestosParaSelect(){
@@ -53,7 +52,7 @@ public class EspecificacionDePuestoServicio {
     }
     
     public ResponseEntity<EspecificacionDePuestoVerDto> getEspecificacionesDePuestosById(Integer id){
-        return ResponseEntity.ok().body(EspecificacionDePuestoDtosMapper.INSTANCE.toEspecificacionDePuestoVerDto(repositorio.getEspecificacionDePuestById(id)));
+        return ResponseEntity.ok().body(repositorio.getEspecificacionDePuestById(id));
     }
     
     public ResponseEntity<List<PlantillaEvaluacion>> getPlantillasEvaluacionDeEspecificacionPuesto(Integer idEspecificacionDePuesto){

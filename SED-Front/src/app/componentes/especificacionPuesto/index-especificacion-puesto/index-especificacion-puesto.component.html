@@ -31,15 +31,15 @@
                   <tbody *ngFor="let edp of especificacionesPuestoIndex">
                     <tr>
                       <th></th>
-                      <th scope="row">{{edp.idEspecificacionDePuesto}}</th>
+                      <th scope="row">{{edp.id}}</th>
                       <td>{{edp.nombrePuesto}}</td>
                       <td>{{edp.sucursalNombre}}</td>
                       <td>
                         <div class="row">
                           <div class="col">
-                            <button routerLink="/especificacion-puestos-trabajo/ver/{{edp.idEspecificacionDePuesto}}" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Mas Información"><i class="far fa-eye"></i></button>
-                            <button style="margin-right: 5px;" class="btn btn-sm btn-warning shadow-sm" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></button>
-                            <button class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fas fa-trash-alt"></i></button>
+                            <button routerLink="/especificacion-puestos-trabajo/ver/{{edp.id}}" style="margin-right: 5px;" class="btn btn-sm btn-outline-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Mas Información"><i class="far fa-eye"></i></button>
+                            <button style="margin-right: 5px;" class="btn btn-sm btn-outline-warning shadow-sm" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></button>
+                            <button class="btn btn-sm btn-outline-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Dar de baja"><i class="fas fa-trash-alt"></i></button>
                           </div>
                         </div>
                       </td>

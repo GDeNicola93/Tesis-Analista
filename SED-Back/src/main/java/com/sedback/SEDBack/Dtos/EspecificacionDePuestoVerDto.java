@@ -2,21 +2,22 @@ package com.sedback.SEDBack.Dtos;
 
 import com.sedback.SEDBack.Modelo.Objetivo;
 import java.util.List;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
-@Data
-@NoArgsConstructor
-public class EspecificacionDePuestoVerDto {
-    private Integer idEspecificacionDePuesto;
+
+public interface EspecificacionDePuestoVerDto {
+    Integer getId();
     
-    private String nombrePuesto;
+    @Value("#{target.getPuesto().getNombrePuesto()}")
+    String getNombrePuesto();
     
-    private String descripcion;
+    String getDescripcion();
     
-    private String sucursalNombre;
+    @Value("#{target.getSucursal().getNombre()}")
+    String getSucursalNombre();
     
-    private String areaNombre;
+    @Value("#{target.getPuesto().getArea().getNombre()}")
+    String getAreaNombre();
     
-    private List<Objetivo> objetivosActivos;
+    List<Objetivo> getObjetivosActivos();
 }
