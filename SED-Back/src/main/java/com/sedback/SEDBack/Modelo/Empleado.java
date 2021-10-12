@@ -8,7 +8,9 @@ import com.sun.istack.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,13 +45,21 @@ public class Empleado implements Serializable {
     @ManyToMany
     private List<EspecificacionDePuesto> puestosTrabajo;
     
+    @JsonView(Views.Resumida.class)
+    public String getNombreCompleto(){
+        return this.getNombre() + " " + this.getApellido();
+    }
+    
     public String getFechaDeNacimientoFormateada(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return this.getFechaDeNacimiento().format(formatter);
     }
     
-    @JsonView(Views.Resumida.class)
-    public String getNombreCompleto(){
-        return this.getNombre() + " " + this.getApellido();
+    public Set<String> getNombreSucursalesDondeTrabaja(){
+        Set<String> nombreSucursalesTrabajo = new HashSet<>();
+        for (EspecificacionDePuesto p : this.puestosTrabajo) {
+            nombreSucursalesTrabajo.add(p.getSucursal().getNombre());
+        }
+        return nombreSucursalesTrabajo;
     }
 }

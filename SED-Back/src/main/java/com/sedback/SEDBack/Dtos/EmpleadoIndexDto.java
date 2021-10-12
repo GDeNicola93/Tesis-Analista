@@ -1,21 +1,23 @@
 package com.sedback.SEDBack.Dtos;
 
-import java.util.HashSet;
 import java.util.Set;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
-@Data
-@NoArgsConstructor
-public class EmpleadoIndexDto {
-    private Integer idEmpleado;
-    
-    private String legajo;
-    
-    private String nombreApellido;
-    
-    private boolean habilitado;
-    
-    private Set<String> sucursalesTrabajo = new HashSet<>();
 
+public interface EmpleadoIndexDto {
+    
+    @Value("#{target.getEmpleado().getId()}")
+    Integer getIdEmpleado();
+    
+    @Value("#{target.getEmpleado().getLegajo()}")
+    String getLegajo();
+    
+    @Value("#{target.getEmpleado().getNombre() + ' ' + target.getEmpleado().getApellido()}")
+    String getNombreApellido();
+    
+    @Value("#{target.isHabilitado()}")
+    boolean getHabilitado();
+    
+    @Value("#{target.getEmpleado().getNombreSucursalesDondeTrabaja()}")
+    Set<String> getSucursalesTrabajo();
 }

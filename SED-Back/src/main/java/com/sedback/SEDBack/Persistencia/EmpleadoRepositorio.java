@@ -1,5 +1,6 @@
 package com.sedback.SEDBack.Persistencia;
 
+import com.sedback.SEDBack.Dtos.EmpleadoIndexDto;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Modelo.Usuario;
 import java.util.List;
@@ -22,7 +23,7 @@ public interface EmpleadoRepositorio extends JpaRepository<Empleado,Integer>{
     Usuario getEmpleadoById(Integer id);
     
     @Query(value="SELECT user from Usuario user join user.empleado emp WHERE CONCAT(emp.nombre,' ',emp.apellido) LIKE %?1% OR emp.legajo LIKE %?1% OR emp.dni LIKE %?1%")
-    Page<Usuario> getEmpleados(String search,Pageable page);
+    Page<EmpleadoIndexDto> getEmpleados(String search,Pageable page);
     
     @Query(value="SELECT * from empleado INNER JOIN usuario on (empleado.id=usuario.empleado_id) INNER JOIN usuario_roles ON (usuario_roles.usuario_id=usuario.id) INNER JOIN rol on (rol.id=usuario_roles.roles_id) where rol.id = 2",nativeQuery = true)
     List<Empleado> getEmpleadosEvaluadores();
