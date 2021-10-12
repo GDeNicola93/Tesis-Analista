@@ -4,7 +4,6 @@ import com.sedback.SEDBack.Dtos.EmpleadoIndexDto;
 import com.sedback.SEDBack.Dtos.EmpleadoVerDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Dtos.NuevoEmpleadoDto;
-import com.sedback.SEDBack.Mappers.EmpleadoVerDtoMapper;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Modelo.Usuario;
 import com.sedback.SEDBack.Persistencia.EmpleadoRepositorio;
@@ -46,7 +45,7 @@ public class EmpleadoServicio {
     }
     
     public ResponseEntity<EmpleadoVerDto> getEmpleadoById(Integer id){
-        return ResponseEntity.ok().body(EmpleadoVerDtoMapper.INSTANCE.empleadotoEmpleadoVerDto(repositorioEmpleado.getEmpleadoById(id)));
+        return ResponseEntity.ok().body(repositorioEmpleado.getEmpleadoById(id));
     }
     
     public ResponseEntity<Page<EmpleadoIndexDto>> getEmpleados(String filtro,Pageable page){

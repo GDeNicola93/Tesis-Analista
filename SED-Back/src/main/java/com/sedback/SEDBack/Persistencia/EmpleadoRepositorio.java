@@ -1,8 +1,8 @@
 package com.sedback.SEDBack.Persistencia;
 
 import com.sedback.SEDBack.Dtos.EmpleadoIndexDto;
+import com.sedback.SEDBack.Dtos.EmpleadoVerDto;
 import com.sedback.SEDBack.Modelo.Empleado;
-import com.sedback.SEDBack.Modelo.Usuario;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -20,7 +20,7 @@ public interface EmpleadoRepositorio extends JpaRepository<Empleado,Integer>{
     Optional<Empleado> findByEmail(String email);
       
     @Query(value="select user from Usuario user join user.empleado emp where emp.id = ?1")
-    Usuario getEmpleadoById(Integer id);
+    EmpleadoVerDto getEmpleadoById(Integer id);
     
     @Query(value="SELECT user from Usuario user join user.empleado emp WHERE CONCAT(emp.nombre,' ',emp.apellido) LIKE %?1% OR emp.legajo LIKE %?1% OR emp.dni LIKE %?1%")
     Page<EmpleadoIndexDto> getEmpleados(String search,Pageable page);

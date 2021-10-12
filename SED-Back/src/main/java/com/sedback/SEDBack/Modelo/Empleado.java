@@ -45,21 +45,24 @@ public class Empleado implements Serializable {
     @ManyToMany
     private List<EspecificacionDePuesto> puestosTrabajo;
     
-    @JsonView(Views.Resumida.class)
-    public String getNombreCompleto(){
-        return this.getNombre() + " " + this.getApellido();
-    }
-    
-    public String getFechaDeNacimientoFormateada(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return this.getFechaDeNacimiento().format(formatter);
-    }
-    
     public Set<String> getNombreSucursalesDondeTrabaja(){
         Set<String> nombreSucursalesTrabajo = new HashSet<>();
         for (EspecificacionDePuesto p : this.puestosTrabajo) {
             nombreSucursalesTrabajo.add(p.getSucursal().getNombre());
         }
         return nombreSucursalesTrabajo;
+    }
+    
+    public Set<String> getNombrePuestosTrabajoConNombreSucursal(){
+        Set<String> puestosTrabajoToString = new HashSet<>();
+        for (EspecificacionDePuesto p : this.puestosTrabajo) {
+            puestosTrabajoToString.add(p.getPuesto().getNombrePuesto() + "(" + p.getSucursal().getNombre() + ")");
+        }
+        return puestosTrabajoToString;
+    }
+    
+    @JsonView(Views.Resumida.class)
+    public String getNombreCompleto(){
+        return this.getNombre() + " " + this.getApellido();
     }
 }

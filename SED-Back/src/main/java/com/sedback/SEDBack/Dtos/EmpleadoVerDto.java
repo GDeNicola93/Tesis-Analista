@@ -1,30 +1,38 @@
 package com.sedback.SEDBack.Dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sedback.SEDBack.Modelo.Rol;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
-import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 
-@Data
-public class EmpleadoVerDto {
-    private String legajo;
+
+public interface EmpleadoVerDto {
+    @Value("#{target.getEmpleado().getLegajo()}")
+    String getLegajo();
     
-    private String nombreApellido;
+    @Value("#{target.getEmpleado().getNombre() + ' ' + target.getEmpleado().getApellido()}")
+    String getNombreApellido();
     
-    private String dni;
+    @Value("#{target.getEmpleado().getDni()}")
+    String getDni();
     
-    private String fechaDeNacimiento;
+    @Value("#{target.getEmpleado().getFechaDeNacimiento()}")
+    @JsonFormat(pattern="dd-MM-yyyy")        
+    LocalDate getFechaDeNacimiento();
     
-    private String nombreUsuario;
+    String getNombreUsuario();
     
-    private String nombreFotoPerfil;
+    String getNombreFotoPerfil();
     
-    private String email;
+    @Value("#{target.getEmpleado().getEmail()}")
+    String getEmail();
     
-    private Set<Rol> roles = new HashSet<>();
+    Set<Rol> getRoles();
     
-    private boolean habilitado;
+    @Value("#{target.isHabilitado()}")
+    boolean getHabilitado();
     
-    private Set<String> puestos = new HashSet<>();
+    @Value("#{target.getEmpleado().getNombrePuestosTrabajoConNombreSucursal()}")
+    Set<String> getPuestos();
 }
