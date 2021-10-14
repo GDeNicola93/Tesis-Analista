@@ -35,11 +35,13 @@ public class EvaluacionVerDto {
     
     private Integer cantidadEmpleadosEvaluados;
     
+    private Integer porcentajeEvaluados;
+    
+    private Integer porcentajeNoEvaluados;
+    
     private Integer restantesAEvaluar;
     
     private String especificacionPuesto;
     
     private String sucursal;
-    
-    private List<String> empleadosAEvaluar;
 }

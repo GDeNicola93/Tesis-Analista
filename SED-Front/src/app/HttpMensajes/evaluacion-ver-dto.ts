@@ -11,8 +11,9 @@ export class EvaluacionVerDto{
     puntajeMinAprobacion : number;
     cantidadEmpleadosAEvaluar : number;
     cantidadEmpleadosEvaluados : number;
+    porcentajeEvaluados : number;
+    porcentajeNoEvaluados : number
     restantesAEvaluar : number;
     especificacionPuesto : string;
     sucursal : string;
-    empleadosAEvaluar : string[];
 }

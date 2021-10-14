@@ -17,7 +17,6 @@ public interface EvaluacionVerDtoMapper {
     @Mapping(expression = "java(evaluacion.getEvaluador().getNombreCompleto())", target = "nombreEvaluador")
     @Mapping(expression = "java(evaluacion.getPlantillaEvaluacion().getEspecificacionDePuesto().getPuesto().getNombrePuesto())", target = "especificacionPuesto")
     @Mapping(expression = "java(evaluacion.getPlantillaEvaluacion().getEspecificacionDePuesto().getSucursal().getNombre())", target = "sucursal")
-    @Mapping(expression = "java(this.detalleEvaluacionToEmpleadosAEvaluar(evaluacion.getDetalleEvaluacion()))", target = "empleadosAEvaluar")
     EvaluacionVerDto evaluacionToEvaluacionVerDto(Evaluacion evaluacion);
     
     

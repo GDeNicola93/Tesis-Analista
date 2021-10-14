@@ -30,7 +30,8 @@ export class VerEvaluacionComponent implements OnInit {
       },
     }
   };
-  public pieChartLabels: Label[] = ['Evaluados','No Evaluados'];
+  // public pieChartLabels: Label[] = ['Evaluados '+(this.evaluacion.porcentajeEvaluados),'No Evaluados (70%)'];
+  public pieChartLabels: Label[]
   public pieChartData: number[];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
@@ -56,6 +57,7 @@ export class VerEvaluacionComponent implements OnInit {
   }
 
   generarDeGrafico() : void{
+    this.pieChartLabels = ['Evaluados ('+this.evaluacion.porcentajeEvaluados+'%)','No Evaluados ('+this.evaluacion.porcentajeNoEvaluados+'%)'];
     this.pieChartData = [this.evaluacion.cantidadEmpleadosEvaluados,this.evaluacion.restantesAEvaluar];
   }
 

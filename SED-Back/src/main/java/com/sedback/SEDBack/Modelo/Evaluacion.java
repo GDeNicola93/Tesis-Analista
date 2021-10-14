@@ -100,6 +100,14 @@ public class Evaluacion implements Serializable {
         return this.getCantidadEmpleadosAEvaluar() - this.getCantidadEmpleadosEvaluados();
     }
     
+    public Integer getPorcentajeEvaluados(){
+        return (this.getCantidadEmpleadosEvaluados() * 100) / this.getCantidadEmpleadosAEvaluar();
+    }
+    
+    public Integer getPorcentajeNoEvaluados(){
+        return (this.getRestantesAEvaluar() * 100) / this.getCantidadEmpleadosAEvaluar();
+    }
+    
     public boolean cancelar(Estado cancelado){
         if(this.getEstado().getId() == 1){
             this.setEstado(cancelado);
