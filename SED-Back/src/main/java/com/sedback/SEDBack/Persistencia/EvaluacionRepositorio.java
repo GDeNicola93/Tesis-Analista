@@ -3,6 +3,7 @@ package com.sedback.SEDBack.Persistencia;
 import com.sedback.SEDBack.Dtos.EvaluacionEvaluadorIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionIndexDto;
 import com.sedback.SEDBack.Modelo.Evaluacion;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,11 @@ public interface EvaluacionRepositorio extends JpaRepository<Evaluacion,Long> {
     @Query(value = "SELECT ev FROM Evaluacion ev WHERE ev.estado.nombre LIKE %?1% AND "
             + "(CONCAT(ev.evaluador.nombre,' ',ev.evaluador.apellido) LIKE %?2% OR ev.id LIKE %?2%)")
     Page<EvaluacionIndexDto> getEvaluaciones(Pageable pagina,String estado,String filtro);
+    
+    @Query(value = "SELECT ev FROM Evaluacion ev WHERE ev.estado.nombre LIKE %?1% AND "
+            + "(CONCAT(ev.evaluador.nombre,' ',ev.evaluador.apellido) LIKE %?2% OR ev.id LIKE %?2%)"
+            + "AND ( ?3 >= ev.fechaInicioEvaluacion AND ?3 < ev.fechaFinEvaluacion)")
+    Page<EvaluacionIndexDto> getEvaluacionesConFiltroFecha(Pageable pagina,String estado,String filtro,LocalDate filtroFecha);
     
     @Query(value = "SELECT ev FROM Evaluacion ev where ev.estado.id = 1")
     List<Evaluacion> getEvaluacionesEnEspera();

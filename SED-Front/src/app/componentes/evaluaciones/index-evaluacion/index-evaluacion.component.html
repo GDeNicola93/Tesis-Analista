@@ -19,7 +19,7 @@
         <div class="card-body">
           <form>
             <div class="row">
-                <div class="col-md-3 text">
+                <div class="col-md text">
                     <div class="form-group">
                         <label style="font-size: 13px;">Mostrar:</label>
                         <select (change)="setFiltroEstado($event)" class="form-control form-control-sm">
@@ -31,14 +31,24 @@
                         </select>
                     </div>
                   </div>
-                  <div class="col-5"></div>
+                  <div class="col-md"></div>
                   <div class="col-md">
                     <div class="input-group" style="margin-top: 20px;margin-bottom: 10px;">
-                      <input (keydown.enter)="buscarEvaluaciones()" type="text" class="form-control" name="search" placeholder="Buscar..." [(ngModel)]="filtro" name="filtro" autocomplete="off">
+                      <input (keydown.enter)="buscarEvaluaciones()" type="text" class="form-control-sm" name="search" placeholder="Buscar..." [(ngModel)]="filtro" name="filtro" autocomplete="off">
                       <span class="input-group-append">
-                          <button class="btn btn-secondary" type="button" (click)="buscarEvaluaciones()">
+                          <button class="btn btn-secondary btn-sm" type="button" (click)="buscarEvaluaciones()">
                               <i class="fas fa-search fa-sm"></i>
                           </button>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md" style="margin-top: 20px;margin-bottom: 10px;">
+                    <div class="input-group">
+                      <input (keydown.enter)="buscarEvaluaciones()" type="date" class="form-control-sm" [(ngModel)]="filtroFecha" name="filtroFecha">
+                      <span class="input-group-append">
+                        <button class="btn btn-secondary btn-sm" type="button" (click)="buscarEvaluaciones()">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
                       </span>
                     </div>
                   </div>

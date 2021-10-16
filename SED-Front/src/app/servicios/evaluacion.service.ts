@@ -20,7 +20,10 @@ export class EvaluacionService {
     return this.httpClient.post<HttpMensaje>(this.urlBaseService.obtenerURLBase() + 'evaluacion',evaluacion,cabecera);
   }
 
-  getEvaluaciones(page:number,size:number,sort:string,order:string,estado:string,filtro:string) : Observable<any>{
+  getEvaluaciones(page:number,size:number,sort:string,order:string,estado:string,filtro:string,filtroFecha:string) : Observable<any>{
+    if(filtroFecha != "undefined" && filtroFecha != ""){
+      return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion?estado=${estado}&filtro=${filtro}&filtroFecha=${filtroFecha}&sort=${sort},${order}&size=${size}&page=${page}`,cabecera);
+    }
     return this.httpClient.get<any>(this.urlBaseService.obtenerURLBase() + `evaluacion?estado=${estado}&filtro=${filtro}&sort=${sort},${order}&size=${size}&page=${page}`,cabecera);
   }
 

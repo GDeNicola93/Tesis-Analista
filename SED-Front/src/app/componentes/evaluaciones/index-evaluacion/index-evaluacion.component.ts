@@ -21,7 +21,7 @@ export class IndexEvaluacionComponent implements OnInit {
   cargando = true;
   filtroEstado : string = "";
   filtro : string = "";
-
+  filtroFecha : string = "undefined";
 
   constructor(private evaluacionServicio : EvaluacionService,private modalService: NgbModal) { }
 
@@ -30,7 +30,7 @@ export class IndexEvaluacionComponent implements OnInit {
   }
 
   cargarEvaluaciones() : void{
-    this.evaluacionServicio.getEvaluaciones(this.page,this.size,this.sort,this.order,this.filtroEstado,this.filtro).subscribe(data =>{
+    this.evaluacionServicio.getEvaluaciones(this.page,this.size,this.sort,this.order,this.filtroEstado,this.filtro,this.filtroFecha).subscribe(data =>{
       this.evaluaciones = data.content;
       this.esPrimera = data.first;
       this.esUltima = data.last;

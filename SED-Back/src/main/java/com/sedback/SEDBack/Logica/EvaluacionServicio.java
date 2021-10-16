@@ -77,8 +77,16 @@ public class EvaluacionServicio {
         return "¡Evaluación registrada existosamente!";
     }
     
-    public ResponseEntity<Page<EvaluacionIndexDto>> getEvaluaciones(Pageable page,String estado,String filtro){
-        return ResponseEntity.ok().body(evaluacionRepositorio.getEvaluaciones(page, estado,filtro));
+    public ResponseEntity<Page<EvaluacionIndexDto>> getEvaluaciones(Pageable page,String estado,String filtro,String filtroFecha){
+        try{
+            if(filtroFecha != null && filtroFecha != "undefined"){
+                LocalDate fechaDate = LocalDate.parse(filtroFecha);
+                return ResponseEntity.ok().body(evaluacionRepositorio.getEvaluacionesConFiltroFecha(page, estado,filtro,fechaDate));
+            }
+            return ResponseEntity.ok().body(evaluacionRepositorio.getEvaluaciones(page, estado,filtro));
+        }catch(Exception e){
+            throw new BadRequestException("Error de formateo de fecha. Descripción: "+e.getMessage());
+        }
     }
     
     public EvaluacionVerDto getEvaluacionById(Long id,String token){
