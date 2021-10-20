@@ -124,6 +124,14 @@ public class Evaluacion implements Serializable {
         }
     }
     
+    public boolean getEsEditable(){
+        if(this.getEstado().getId() == 1 || this.getEstado().getId() == 2){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     public boolean getEstaParaEvaluar(){
         if(this.getEstado().getId() == 2){
             return true;

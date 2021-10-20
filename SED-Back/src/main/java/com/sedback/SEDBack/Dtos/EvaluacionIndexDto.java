@@ -20,4 +20,6 @@ public interface EvaluacionIndexDto {
     Estado getEstado();
     
     boolean getEsCancelable();
+    
+    boolean getEsEditable();
 }

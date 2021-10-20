@@ -7,4 +7,5 @@ export class EvaluacionIndexDto{
     nombreCompletoEvaluador :  string;
     estado : Estado;
     esCancelable : boolean;
+    esEditable : boolean;
 }

@@ -62,6 +62,9 @@ public class EvaluacionServicio {
     JwtProvider jwtProvider;
     
     public String guardar(NuevaEvaluacionDto nuevaEvaluacion){
+        if(!(evaluacionRepositorio.getEvaluacionesDeMesYDePuesto(nuevaEvaluacion.getEspecificacionPuesto().getId()).isEmpty())){
+            throw new BadRequestException("Ya existe una evaluacion En Espera o En Curso para el puesto de trabajo seleccionado.");
+        }
         List<Empleado> empleadosAEvaluar = especificacionPuestoRepositorio.findById(nuevaEvaluacion.getEspecificacionPuesto().getId()).get().getEmpleados();
         Estado enEspera = estadoRepositorio.findById(1).get(); //1 --> En Espera
         Evaluacion evaluacion = new Evaluacion();
