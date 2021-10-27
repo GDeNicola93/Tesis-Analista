@@ -52,6 +52,7 @@
                   </tr>
                 </tbody>
               </table>
+              <p *ngIf="sucursales.length == 0" style="text-align: center;"><i class="fas fa-exclamation-circle"></i> No se encontraron resultados.</p>
               <nav aria-label="Page navigation example">
                 <ul class="pagination pagination-sm justify-content-center">
                   <li class="page-item" [ngClass]="{'disabled': esPrimera === true}">
