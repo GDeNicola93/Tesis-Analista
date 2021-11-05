@@ -44,22 +44,6 @@ public class DetalleEvaluacion implements Serializable{
         return true;
     }
     
-    public Integer getCalificacion(){
-        Integer calificacion = 0;
-        for(Resultado r : resultados){
-            calificacion = calificacion + r.getResultadoObtenidoCompetencia();
-        }
-        return calificacion;
-    }
-    
-    public boolean getAprobado(){
-        if(this.getCalificacion() >= evaluacion.getPuntajeMinAprobacion()){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
     public boolean esDeEvaluado(Empleado emp){
         if(this.getEvaluado().equals(emp)){
             return true;

@@ -47,7 +47,6 @@ export class NuevaEvaluacionComponent implements OnInit {
       especificacionPuesto : [null,Validators.required],
       plantillaEvaluacion : [null,Validators.required],
       empleadoEvaluador : [null,Validators.required],
-      puntajeMinAprobacion : ['',Validators.required],
     });
   }
 

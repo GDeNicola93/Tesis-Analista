@@ -10,5 +10,4 @@ export class NuevaEvaluacionDto{
     especificacionPuesto : EspecificacionDePuesto;
     plantillaEvaluacion : PlantillaEvaluacion;
     empleadoEvaluador : Empleado;
-    puntajeMinAprobacion : number;
 }

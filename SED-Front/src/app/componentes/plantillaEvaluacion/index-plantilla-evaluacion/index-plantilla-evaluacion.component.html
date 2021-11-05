@@ -31,7 +31,7 @@
                 <tbody *ngFor="let pe of plantillas">
                   <tr>
                     <th scope="row">{{pe.id}}</th>
-                    <!-- <td>{{pe.especificacionDePuesto.puesto.nombrePuesto}} ({{pe.especificacionDePuesto.sucursal.nombre}})</td> -->
+                    <td>{{pe.especificacionDePuesto.puesto.nombrePuesto}} ({{pe.especificacionDePuesto.sucursal.nombre}})</td>
                     <td *ngIf="pe.descripcion != null">{{pe.descripcion}}</td>
                     <td *ngIf="pe.descripcion == null">Sin especificar</td>
                     <td>{{pe.fechaCreaccion | date: 'dd/MM/yyyy'}}</td>
@@ -66,45 +66,37 @@
   <div class="modal-body">
     <h5 style="text-align: center;">Datos de la evaluación</h5>
     <hr>
-    <div class="row" style="text-align: center;">
+    <div class="row">
       <div class="col-5">
-        <!-- <p><ins><strong>Puesto Trabajo:</strong></ins> {{plantillaParaVisualizar.especificacionDePuesto.puesto.nombrePuesto}} ({{plantillaParaVisualizar.especificacionDePuesto.sucursal.nombre}})</p> -->
+        <p><ins><strong>Puesto Trabajo:</strong></ins> {{plantillaParaVisualizar.especificacionDePuesto.puesto.nombrePuesto}} ({{plantillaParaVisualizar.especificacionDePuesto.sucursal.nombre}})</p>
       </div>
       <div class="col">
         <p><ins><strong>Fecha de Creación:</strong></ins> {{plantillaParaVisualizar.fechaCreaccion | date: 'dd/MM/yyyy'}}</p>
       </div>
       <div class="col">
-        <p *ngIf="plantillaParaVisualizar.estaEnCurso == true"><ins><strong>Esta en curso:</strong></ins> <span class="badge badge-success"> Si</span></p>
-        <p *ngIf="plantillaParaVisualizar.estaEnCurso == false"><ins><strong>Esta en curso:</strong></ins> <span class="badge badge-danger"> No</span></p>
+        <p *ngIf="plantillaParaVisualizar.estaEnCurso == true"><ins><strong>Esta en curso: </strong></ins> <span class="badge badge-success"> Si</span></p>
+        <p *ngIf="plantillaParaVisualizar.estaEnCurso == false"><ins><strong>Esta en curso: </strong></ins> <span class="badge badge-danger"> No</span></p>
       </div>
     </div>
    
     <p style="text-align: center;"><ins><strong>Descripción de la plantilla:</strong></ins> {{plantillaParaVisualizar.descripcion}}</p>
     <p style="text-align: center;"><ins><strong>Cantidad de competencias a evaluar:</strong></ins> {{plantillaParaVisualizar.detallePlantilla.length}}</p>
     <hr>
-    <h5 style="text-align: center;">Evaluación</h5>
+    <h5 style="text-align: center;">Detalles de plantilla de evaluación</h5>
     <div *ngFor="let dp of plantillaParaVisualizar.detallePlantilla">
-      <h6>{{dp.competencia.nombre}} ({{dp.puntajeMinAprobacion}} puntos)</h6>
+      <h6><u>Competencia:</u> {{dp.competencia.nombre}}</h6>
+      <h6><u>Minimo Requerido:</u> Grado {{dp.gradoMinimoRequerido}}</h6>
       <p *ngIf="dp.esPreguntaObjetivo">Es pregunta objetivo: Si - Objetivo: {{dp.obj.descripcion}}</p>
       <p *ngIf="!dp.esPreguntaObjetivo">Es pregunta objetivo: No</p>
       <div class="row" *ngFor="let cp of dp.comportamiento" style="text-align: center;">
-        <div class="col text-success text-right" *ngIf="cp.esAprobada">
+        <div class="col text-right">
           <p>{{cp.grado}}</p>
         </div>
-        <div class="col text-danger text-right" *ngIf="!cp.esAprobada">
-          <p>{{cp.grado}}</p>
-        </div>
-        <div class="col text-success" *ngIf="cp.esAprobada">
+        <div class="col">
           <p>{{cp.descComportamiento}}</p>
         </div>
-        <div class="col text-danger" *ngIf="!cp.esAprobada">
-          <p>{{cp.descComportamiento}}</p>
-        </div>
-        <div class="col text-success text-left" *ngIf="cp.esAprobada">
-          <p>{{cp.valoracionNumerica}}</p>
-        </div>
-        <div class="col text-danger text-left" *ngIf="!cp.esAprobada">
-          <p>{{cp.valoracionNumerica}}</p>
+        <div class="col text-left">
+          <p>{{cp.valoracionNumerica}} %</p>
         </div>
       </div>
     </div>

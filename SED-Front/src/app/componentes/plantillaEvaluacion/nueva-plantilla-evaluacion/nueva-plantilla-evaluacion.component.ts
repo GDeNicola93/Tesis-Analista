@@ -71,11 +71,11 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
   }
 
   agregarComportamiento() : void{
-    this.nuevoComportamiento.push(new ComportamientoPlantilla("","",0,false));
+    this.nuevoComportamiento.push(new ComportamientoPlantilla("","",0));
   }
 
   guardarCompetencia() : void{
-    this.detallePlantilla.push(new DetallePlantilla(this.form.competencia,this.esPreguntaObjetivo,this.form.objetivo,this.form.puntajeMinAprobacion,this.nuevoComportamiento));
+    this.detallePlantilla.push(new DetallePlantilla(this.form.competencia,this.esPreguntaObjetivo,this.form.objetivo,this.form.gradoMinimoRequerido,this.nuevoComportamiento));
     this.esPreguntaObjetivo = false;
     this.form.objetivo = null;
     this.modalService.dismissAll();

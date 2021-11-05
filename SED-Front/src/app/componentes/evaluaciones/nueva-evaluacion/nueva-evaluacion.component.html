@@ -88,7 +88,7 @@
                       </div>
                 </div>
                 <div class="row">
-                    <div class="col-md">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="nombre">Evaluador: </label>
                             <select class="form-control" name="empleadoEvaluador" formControlName="empleadoEvaluador" [ngClass]="(evaluacionForm.get('empleadoEvaluador').touched || evaluacionForm.get('empleadoEvaluador').dirty) && evaluacionForm.get('empleadoEvaluador').hasError('required') ? 'is-invalid':''">
@@ -101,19 +101,6 @@
                                       : ""
                                   }}
                               </div>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="form-group">
-                            <label for="puntajeMinAprobacion">Puntaje Minimo de Aprobación: </label>
-                            <input class="form-control" min="10" type="number" name="puntajeMinAprobacion" formControlName="puntajeMinAprobacion" [ngClass]="(evaluacionForm.get('puntajeMinAprobacion').touched || evaluacionForm.get('puntajeMinAprobacion').dirty) && evaluacionForm.get('puntajeMinAprobacion').hasError('required') ? 'is-invalid':''">
-                            <div class="invalid-feedback">
-                                {{
-                                  evaluacionForm.get('puntajeMinAprobacion').hasError('required') 
-                                    ? "Ingrese un puntaje minimo de aprobación valido." 
-                                    : ""
-                                }}
-                            </div>
                         </div>
                     </div>
                 </div>

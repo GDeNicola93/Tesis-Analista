@@ -26,13 +26,11 @@
         <div class="card-body">
             <p><strong>Fecha Realización:</strong> {{detalleEvaluacion.fechaRealizacion}}</p>
             <p><strong>Evaluador:</strong> {{detalleEvaluacion.evaluador}}</p>
-            <p *ngIf="detalleEvaluacion.aprobado"><strong>Calificación obtenida:</strong> {{detalleEvaluacion.calificacion}} ptos - <span class="badge badge-success"><i class="far fa-thumbs-up"></i> Aprobado</span></p>
-            <p *ngIf="!detalleEvaluacion.aprobado"><strong>Calificación obtenida:</strong> {{detalleEvaluacion.calificacion}} ptos - <span class="badge badge-danger"><i class="far fa-thumbs-down"></i> Desaprobado</span></p>
             <hr>
             <h5 style="text-align: center;">Evaluación</h5>
             <div *ngFor="let resul of detalleEvaluacion.resultados">
-                <h6 *ngIf="resul.comportamientoPlantillaSeleccionado.esAprobada">{{resul.detallePlantilla.competencia.nombre}} ({{resul.resultadoObtenidoCompetencia}}/{{resul.detallePlantilla.puntajeMinAprobacion}} puntos) - <span class="badge badge-outline-success"><i class="far fa-thumbs-up"></i> Aprobado</span></h6>
-                <h6 *ngIf="!resul.comportamientoPlantillaSeleccionado.esAprobada">{{resul.detallePlantilla.competencia.nombre}} ({{resul.resultadoObtenidoCompetencia}}/{{resul.detallePlantilla.puntajeMinAprobacion}} puntos) - <span class="badge badge-outline-danger"><i class="far fa-thumbs-down"></i> Desaprobado</span></h6>
+                <h6 *ngIf="resul.esMinimoRequerido">{{resul.detallePlantilla.competencia.nombre}} - <span class="badge badge-pill badge-success">Satisfactorio</span></h6>
+                <h6 *ngIf="!resul.esMinimoRequerido">{{resul.detallePlantilla.competencia.nombre}} - <span class="badge badge-pill badge-warning">Necesita Mejorar</span></h6>
                 <p *ngIf="resul.detallePlantilla.esPreguntaObjetivo">Es pregunta objetivo: Si - Objetivo: {{resul.detallePlantilla.obj.descripcion}}</p>
                 <p *ngIf="!resul.detallePlantilla.esPreguntaObjetivo">Es pregunta objetivo: No</p>
                 <p>Opción seleccionada:</p>

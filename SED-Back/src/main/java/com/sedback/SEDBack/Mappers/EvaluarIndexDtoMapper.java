@@ -15,7 +15,6 @@ public interface EvaluarIndexDtoMapper {
     
     @Mapping(expression = "java(de.getId())", target = "idDetalleEvaluacion")
     @Mapping(expression = "java(de.getEvaluado().getNombreCompleto())", target = "empleadoAEvaluar")
-    @Mapping(expression = "java(de.getAprobado())", target = "aprobado")
     EvaluarIndexDto toEvaluarIndexDto(DetalleEvaluacion de);
     
     default List<EvaluarIndexDto> toEvaluarIndexDtoList(List<DetalleEvaluacion> de){

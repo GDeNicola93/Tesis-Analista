@@ -25,11 +25,18 @@ public class Resultado implements Serializable{
     
     private String planAccion;
     
-    private Integer resultadoObtenidoCompetencia;
-    
     public Resultado(DetallePlantilla detallePlantilla,ComportamientoPlantilla comportamientoPlantillaSeleccionado){
         this.detallePlantilla = detallePlantilla;
         this.comportamientoPlantillaSeleccionado = comportamientoPlantillaSeleccionado;
-        this.resultadoObtenidoCompetencia = ((this.comportamientoPlantillaSeleccionado.getValoracionNumerica()) * this.detallePlantilla.getPuntajeMinAprobacion()) / 100;
+    }
+    
+    public boolean getEsMinimoRequerido(){
+        int valNumSeleccionada = this.comportamientoPlantillaSeleccionado.getValoracionNumerica();
+        int minValNum = this.detallePlantilla.getMinimaValoracionNumerica();
+        if(valNumSeleccionada >= minValNum){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

@@ -7,14 +7,14 @@ export class DetallePlantilla {
     competencia : Competencia;
     esPreguntaObjetivo : boolean;
     obj !: Objetivo;
-    puntajeMinAprobacion : number;
+    gradoMinimoRequerido : string;
     comportamiento : ComportamientoPlantilla[] = [];
 
-    constructor(competencia:Competencia,esPreguntaObjetivo : boolean,obj:any,puntajeMinAprobacion : number,comportamiento:ComportamientoPlantilla[]){
+    constructor(competencia:Competencia,esPreguntaObjetivo : boolean,obj:any,gradoMinimoRequerido : string,comportamiento:ComportamientoPlantilla[]){
         this.competencia = competencia;
         this.esPreguntaObjetivo = esPreguntaObjetivo;
         this.obj = obj;
-        this.puntajeMinAprobacion = puntajeMinAprobacion;
+        this.gradoMinimoRequerido = gradoMinimoRequerido;
         this.comportamiento = comportamiento;
     }
 }

@@ -73,7 +73,6 @@ public class EvaluacionServicio {
         evaluacion.setEstado(enEspera);
         evaluacion.setEvaluador(nuevaEvaluacion.getEmpleadoEvaluador());
         evaluacion.setPlantillaEvaluacion(nuevaEvaluacion.getPlantillaEvaluacion());
-        evaluacion.setPuntajeMinAprobacion(nuevaEvaluacion.getPuntajeMinAprobacion());
         evaluacion.setFechaHoraCreacion(LocalDateTime.now());
         evaluacionRepositorio.save(evaluacion);
         detalleEvaluacionServicio.guardar(evaluacion, empleadosAEvaluar);
@@ -204,12 +203,6 @@ public class EvaluacionServicio {
         }
         
         this.detalleEvaluacionServicio.guardar(detalleEvaluacionAEvaluar);
-        
-        if(detalleEvaluacionAEvaluar.getAprobado()){
-            return "El resultado ha sido registrado exitosamente.\n Calificación Obtenida: "+detalleEvaluacionAEvaluar.getCalificacion()+" puntos (APROBADA).";
-    
-        }else{
-            return "El resultado ha sido registrado exitosamente.\n Calificación Obtenida: "+detalleEvaluacionAEvaluar.getCalificacion()+" puntos (DESAPROBADA).";
-        }
+        return "Resultado de evaluación registrado exitosamente!";
     }
 }

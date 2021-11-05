@@ -29,9 +29,18 @@ public class DetallePlantilla implements Serializable{
     @OneToOne
     private Objetivo obj;
     
-    private int puntajeMinAprobacion;
+    private String gradoMinimoRequerido;
     
     @OneToMany
     private List<ComportamientoPlantilla> comportamiento;
+    
+    public int getMinimaValoracionNumerica(){
+        for(ComportamientoPlantilla c : this.comportamiento){
+            if(c.getGrado().equals(this.gradoMinimoRequerido)){
+                return c.getValoracionNumerica();
+            }
+        }
+        return 0;
+    }
     
 }

@@ -6,7 +6,5 @@ import lombok.Data;
 public class EvaluarIndexDto {
     private Long idDetalleEvaluacion;
     private String empleadoAEvaluar;
-    private Integer calificacion;
     private boolean fueEvaluado;
-    private boolean aprobado;
 }

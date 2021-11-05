@@ -3,12 +3,10 @@ export class ComportamientoPlantilla {
     descComportamiento : string;
     grado : string;
     valoracionNumerica : number;
-    esAprobada : boolean;
 
-    constructor(descComportamiento:string,grado:string,valoracionNumerica:number,esAprobada:boolean) {
+    constructor(descComportamiento:string,grado:string,valoracionNumerica:number) {
         this.descComportamiento = descComportamiento;
         this.grado = grado;
         this.valoracionNumerica = valoracionNumerica;
-        this.esAprobada = esAprobada;
     }
 }

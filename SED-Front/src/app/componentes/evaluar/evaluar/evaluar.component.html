@@ -24,7 +24,7 @@
         <h6 class="card-header font-weight-bold">Evaluación de empleado</h6>
         <div class="card-body">
             <div *ngFor="let dp of plantillaEvaluacion.detallePlantilla">
-                <h6>{{dp.competencia.nombre}} ({{dp.puntajeMinAprobacion}} puntos)</h6>
+                <h6>{{dp.competencia.nombre}}</h6>
                 <p *ngIf="dp.esPreguntaObjetivo">Es pregunta objetivo: Si - Objetivo: {{dp.obj.descripcion}}</p>
                 <p *ngIf="!dp.esPreguntaObjetivo">Es pregunta objetivo: No</p>
                 <div class="row" *ngFor="let cp of dp.comportamiento" style="text-align: center;">
@@ -40,7 +40,7 @@
                         <p>{{cp.descComportamiento}}</p>
                     </div>
                     <div class="col text-left">
-                        <p>{{cp.valoracionNumerica}}</p>
+                        <p>{{cp.valoracionNumerica}} %</p>
                     </div>
                 </div>
             </div>

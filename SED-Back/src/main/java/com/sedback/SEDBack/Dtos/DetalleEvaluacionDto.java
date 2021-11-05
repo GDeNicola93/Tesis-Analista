@@ -18,8 +18,4 @@ public class DetalleEvaluacionDto {
     private LocalDate fechaRealizacion;
     
     private List<Resultado> resultados;
-    
-    private Integer calificacion;
-    
-    private boolean aprobado;
 }

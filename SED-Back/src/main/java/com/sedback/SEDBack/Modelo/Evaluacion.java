@@ -42,8 +42,6 @@ public class Evaluacion implements Serializable {
     @ManyToOne
     private PlantillaEvaluacion plantillaEvaluacion;
     
-    private Integer puntajeMinAprobacion;
-    
     @OneToMany(mappedBy = "evaluacion")
     private List<DetalleEvaluacion> detalleEvaluacion;
     

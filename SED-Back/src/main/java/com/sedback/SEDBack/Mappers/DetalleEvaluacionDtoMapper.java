@@ -12,6 +12,5 @@ public interface DetalleEvaluacionDtoMapper {
     
     @Mapping(expression = "java(detalle.getEvaluado().getNombreCompleto())", target = "evaluado")
     @Mapping(expression = "java(detalle.getEvaluacion().getEvaluador().getNombreCompleto())", target = "evaluador")
-    @Mapping(expression = "java(detalle.getAprobado())", target = "aprobado")
     DetalleEvaluacionDto toDetalleEvaluacionDto(DetalleEvaluacion detalle);
 }
