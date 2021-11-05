@@ -1,3 +1,4 @@
+import { componentFactoryName } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Competencia } from 'src/app/modelo/competencia';
@@ -23,7 +24,8 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
   comboCompetencias : Competencia[] = [];
 
   nuevoComportamiento : ComportamientoPlantilla[] = [];
-
+  grados : string[] = ["A","B","C","D","E","F","G","H"];
+  cantidadComportamientosAgregados : number = -1;
 
   mensaje = '';
   guardado = false;
@@ -66,12 +68,33 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
 
   agregarCompetencia(content : any) : void{
     this.nuevoComportamiento = [];
+    this.cantidadComportamientosAgregados = -1;
     this.obtenerCompetencias();
     this.modalService.open(content,{ size: 'xl',scrollable : true });
   }
 
   agregarComportamiento() : void{
-    this.nuevoComportamiento.push(new ComportamientoPlantilla("","",0));
+    this.cantidadComportamientosAgregados += 1;
+    this.nuevoComportamiento.push(new ComportamientoPlantilla("",this.grados[this.cantidadComportamientosAgregados],0));
+  }
+
+  quitarComportamiento(compo:ComportamientoPlantilla) : void{
+    var i = this.nuevoComportamiento.indexOf(compo);
+    if(i !== -1){
+      this.nuevoComportamiento.splice(i,1);
+      this.cantidadComportamientosAgregados -= 1;
+      this.actualizarGradosComportamientos();
+    }
+  }
+
+  //Con este metodo a medida que se borran comportamientos se actualizan automaticamente
+  //los grados de cada comportamiento.
+  actualizarGradosComportamientos() : void{
+    let i = 0;
+    for(let comp of this.nuevoComportamiento){
+      comp.grado = this.grados[i];
+      i += 1;
+    }
   }
 
   guardarCompetencia() : void{

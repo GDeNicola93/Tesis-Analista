@@ -141,11 +141,11 @@
           <div *ngFor="let compo of nuevoComportamiento">
             <div class="row" style="display: flex;align-items: center;">
               <div class="col-1 text-center">
-                <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Eliminar este comportamiento de plantilla"><i class="fas fa-times"></i></button>
+                <button (click)="quitarComportamiento(compo)" type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Eliminar este comportamiento de plantilla"><i class="fas fa-times"></i></button>
               </div>
               <div class="col-1">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="compo.grado" [(ngModel)]="compo.grado"  style="text-transform:uppercase;" required autocomplete="off">
+                  <input type="text" class="form-control" name="compo.grado" [(ngModel)]="compo.grado"  style="text-transform:uppercase;" disabled>
                 </div>
               </div>
               <div class="col">
