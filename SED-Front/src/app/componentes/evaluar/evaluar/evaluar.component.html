@@ -24,24 +24,33 @@
         <h6 class="card-header font-weight-bold">Evaluación de empleado</h6>
         <div class="card-body">
             <div *ngFor="let dp of plantillaEvaluacion.detallePlantilla">
-                <h6>{{dp.competencia.nombre}}</h6>
+                <h5><u>Competencia:</u> {{dp.competencia.nombre}}</h5>
+                <p *ngIf="dp.competencia.descripcion != null" style="font-size: 15px;">({{dp.competencia.descripcion}})</p>
                 <p *ngIf="dp.esPreguntaObjetivo">Es pregunta objetivo: Si - Objetivo: {{dp.obj.descripcion}}</p>
                 <p *ngIf="!dp.esPreguntaObjetivo">Es pregunta objetivo: No</p>
-                <div class="row" *ngFor="let cp of dp.comportamiento" style="text-align: center;">
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" (click)="tomarOpcionSeleccionada(dp,cp)" name="{{dp.competencia.nombre}}" id="{{dp.competencia.nombre}}">
-                        </div>
-                    </div>
-                    <div class="col-1">
-                        <p>{{cp.grado}}</p>
-                    </div>
-                    <div class="col">
-                        <p>{{cp.descComportamiento}}</p>
-                    </div>
-                    <div class="col text-left">
-                        <p>{{cp.valoracionNumerica}} %</p>
-                    </div>
+                <div class="table-responsive-md" style="margin-right: 5%;margin-left: 5%;">
+                    <table class="table table-sm">
+                      <thead style="text-align: center;">
+                        <tr>
+                          <th scope="col">Selección</th>  
+                          <th scope="col">Grado</th>
+                          <th scope="col">Descripción Comportamiento</th>
+                          <th scope="col">Valoración Numerica</th>
+                        </tr>
+                      </thead>
+                      <tbody *ngFor="let cp of dp.comportamiento" style="text-align: center;">
+                        <tr>
+                          <th>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" (click)="tomarOpcionSeleccionada(dp,cp)" name="{{dp.competencia.nombre}}" id="{{dp.competencia.nombre}}">
+                            </div>
+                          </th>  
+                          <th scope="row">{{cp.grado}}</th>
+                          <td style="text-align: justify;">{{cp.descComportamiento}}</td>
+                          <td>{{cp.valoracionNumerica}} %</td>
+                        </tr>
+                      </tbody>
+                    </table>
                 </div>
             </div>
             <div *ngIf="errorInferior">
