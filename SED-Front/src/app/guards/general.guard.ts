@@ -8,23 +8,30 @@ import { TokenService } from '../servicios/token.service';
 })
 export class GeneralGuard implements CanActivate {
 
-  realRol: string = "";
+  realRol: string[] = [];
   
   constructor(private tokenServicio : TokenService,private router : Router){}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const expectedRol = route.data.expectedRol;
+    let esRol : Boolean;
 
     if(this.tokenServicio.isAdmin()){
-      this.realRol = 'Administrador';
+      this.realRol.push('Administrador');
     }
     if(this.tokenServicio.isEvaluador()){
-      this.realRol = 'Evaluador';
+      this.realRol.push('Evaluador');
     }
     if(this.tokenServicio.isEmpleado()){
-      this.realRol = 'Empleado';
+      this.realRol.push('Empleado');
     }
-    if (!this.tokenServicio.isLogged() || expectedRol.indexOf(this.realRol) < 0) {
+    for (let rol of this.realRol) {
+      if(expectedRol.indexOf(this.realRol) !== -1){
+        esRol = true;
+      }
+    }
+    
+    if (!this.tokenServicio.isLogged() || esRol == false) {
       this.router.navigate(['/']);
       return false;
     }
