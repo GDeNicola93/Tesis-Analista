@@ -1,5 +1,6 @@
 package com.sedback.SEDBack.Logica;
 
+import com.sedback.SEDBack.Dtos.DetalleEvaluacionVersusReporteDto;
 import com.sedback.SEDBack.Dtos.EvaluarIndexDto;
 import com.sedback.SEDBack.Dtos.MisEvaluacionesDto;
 import com.sedback.SEDBack.Excepciones.PermissionException;
@@ -65,5 +66,10 @@ public class DetalleEvaluacionServicio {
             }
         }
         throw new PermissionException("No puede ver detalles de esta evaluación ya que no esta asignada a su usuario.");
+    }
+    
+    public DetalleEvaluacionVersusReporteDto getDetalleEvaluacionByIdParaVersusReporte(Long id_detalle_evaluacion){
+        DetalleEvaluacionVersusReporteDto detalle = repositorio.getDetalleEvaluacionByIdParaVersusReporte(id_detalle_evaluacion).get();
+        return detalle;
     }
 }

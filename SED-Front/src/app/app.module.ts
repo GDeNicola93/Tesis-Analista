@@ -41,6 +41,7 @@ import { MisEvaluacionesComponent } from './componentes/evaluaciones-empleado/mi
 import { EvaluarComponent } from './componentes/evaluar/evaluar/evaluar.component';
 import { ChartsModule } from 'ng2-charts';
 import { IndexDetallesEvaluacionComponent } from './componentes/evaluaciones/index-detalles-evaluacion/index-detalles-evaluacion.component';
+import { VersusGradoMinimoComponent } from './componentes/reportes/versus-grado-minimo/versus-grado-minimo.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { IndexDetallesEvaluacionComponent } from './componentes/evaluaciones/ind
     VerDetalleEvaluacionComponent,
     MisEvaluacionesComponent,
     EvaluarComponent,
-    IndexDetallesEvaluacionComponent
+    IndexDetallesEvaluacionComponent,
+    VersusGradoMinimoComponent
   ],
   imports: [
     BrowserModule,

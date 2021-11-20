@@ -1,0 +1,42 @@
+<app-menu></app-menu>
+
+<div class="container" style="text-align: center;" *ngIf="cargando">
+    <img src="../../../../assets/animate/svg-loaders/grid.svg" alt="Cargando...">
+    <h6 style="color: blue;margin-top: 10px;">Cargando...</h6>
+</div>
+
+
+<div class="container" *ngIf="!cargando">
+    <div class="row">
+        <!-- <div class="col">
+            <button (click)="volver()" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+        </div> -->
+    </div>
+    <div *ngIf="error">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
+            <strong><i class="fas fa-times"></i> ¡Error!</strong> {{mensaje}}
+        </div>
+    </div>
+
+    <div class="card shadow" *ngIf="!error">
+        <div class="card-body">
+            <h4 style="text-align: center;"><u>{{detalleEvaluacion.nombreApellidoEvaluado}} versus grado minimo requerido</u></h4>
+            <p><strong>Fecha Realización de la evaluación:</strong> {{detalleEvaluacion.fechaRealizacion}}</p>
+            <p><strong>Evaluador:</strong> {{detalleEvaluacion.nombreApellidoEvaluador}}</p>
+            <hr>
+            <div>
+                <div>
+                  <div style="display: block;">
+                    <canvas baseChart
+                      [datasets]="barChartData"
+                      [labels]="barChartLabels"
+                      [options]="barChartOptions"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType">
+                    </canvas>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
