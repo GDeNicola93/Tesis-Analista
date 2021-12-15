@@ -11,6 +11,7 @@
         </div>
         <div class="col">
             <button (click)="volver()" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+            <button style="margin-right: 4px;" routerLink="/reportes/comparar_resultados_por_competencia/evaluacion/{{idEvaluacion}}" class="float-right btn btn-sm btn-info shadow-sm" data-toggle="tooltip" data-placement="top" title="Comparar resultados de evaluaciones por competencia."><i class="fas fa-balance-scale-right"></i> Comparar</button>
         </div>
     </div>
     <div *ngIf="error">

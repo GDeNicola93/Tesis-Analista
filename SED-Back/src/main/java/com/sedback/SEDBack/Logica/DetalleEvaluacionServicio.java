@@ -1,10 +1,13 @@
 package com.sedback.SEDBack.Logica;
 
+import com.sedback.SEDBack.Dtos.DetalleEvaluacionComparacionCompetenciasDto;
 import com.sedback.SEDBack.Dtos.DetalleEvaluacionVersusReporteDto;
 import com.sedback.SEDBack.Dtos.EvaluarIndexDto;
 import com.sedback.SEDBack.Dtos.MisEvaluacionesDto;
 import com.sedback.SEDBack.Excepciones.PermissionException;
+import com.sedback.SEDBack.Mappers.DetalleEvaluacionComparacionCompetenciasDtoMapper;
 import com.sedback.SEDBack.Mappers.EvaluarIndexDtoMapper;
+import com.sedback.SEDBack.Modelo.Competencia;
 import com.sedback.SEDBack.Modelo.DetalleEvaluacion;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Modelo.Evaluacion;
@@ -71,5 +74,9 @@ public class DetalleEvaluacionServicio {
     public DetalleEvaluacionVersusReporteDto getDetalleEvaluacionByIdParaVersusReporte(Long id_detalle_evaluacion){
         DetalleEvaluacionVersusReporteDto detalle = repositorio.getDetalleEvaluacionByIdParaVersusReporte(id_detalle_evaluacion).get();
         return detalle;
+    }
+    
+    public List<DetalleEvaluacionComparacionCompetenciasDto> getDetalleEvaluacionByIdEvaluacionParaComparacionReporte(Long idEvaluacion,Competencia comp){
+        return DetalleEvaluacionComparacionCompetenciasDtoMapper.INSTANCE.toDetalleEvaluacionComparacionCompetenciasDtoList(repositorio.getDetalleEvaluacionByIdEvaluacionParaComparacionReporte(idEvaluacion),comp);
     }
 }

@@ -39,7 +39,7 @@ public class Evaluacion implements Serializable {
     @ManyToOne
     private Empleado evaluador;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private PlantillaEvaluacion plantillaEvaluacion;
     
     @OneToMany(mappedBy = "evaluacion")
@@ -143,5 +143,13 @@ public class Evaluacion implements Serializable {
             return true;
         }
         return false;
+    }
+    
+    public List<Competencia> getCompetenciasEvaluadas(){
+        List<Competencia> competencias = new ArrayList<>();
+        for (DetallePlantilla dp : this.getPlantillaEvaluacion().getDetallePlantilla()){
+            competencias.add(dp.getCompetencia());
+        }
+        return competencias;
     }
 }

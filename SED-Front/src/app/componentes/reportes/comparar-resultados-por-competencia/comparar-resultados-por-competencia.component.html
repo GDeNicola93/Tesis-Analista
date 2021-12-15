@@ -1,0 +1,38 @@
+<app-menu></app-menu>
+
+<div class="container">
+    <div class="card shadow">
+        <h6 class="card-header font-weight-bold">Comparar resultados e evaluaciones por competencia</h6>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Seleccione la competencia que desea comparar: </label>
+                        <select class="form-control" [(ngModel)]="competenciaSeleccionada">
+                            <option *ngFor="let comp of competencias" [ngValue]="comp">{{comp.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">    
+                    <button (click)="getResultadosCompetencia()" style="margin-top: 35px;" type="button" class="btn btn-sm btn-outline-success form-control"><i class="fas fa-sync"></i> Generar</button>                  
+                </div>
+            </div>
+            <div *ngIf="!(detallesEvaluacion.length == 0)">
+                <p>Comparación de resultados para competencia: <strong>{{detallesEvaluacion[0].nombreCompetencia}}</strong></p>
+                <div>
+                    <div>
+                    <div style="display: block;">
+                        <canvas baseChart
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        [options]="barChartOptions"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType">
+                        </canvas>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,6 +15,7 @@ import com.sedback.SEDBack.Excepciones.PermissionException;
 import com.sedback.SEDBack.Mappers.DetalleEvaluacionDtoMapper;
 import com.sedback.SEDBack.Mappers.EvaluacionVerDtoMapper;
 import com.sedback.SEDBack.Mappers.EvaluarIndexDtoMapper;
+import com.sedback.SEDBack.Modelo.Competencia;
 import com.sedback.SEDBack.Modelo.DetalleEvaluacion;
 import com.sedback.SEDBack.Modelo.Empleado;
 import com.sedback.SEDBack.Modelo.Estado;
@@ -102,6 +103,10 @@ public class EvaluacionServicio {
         }else{
             throw new PermissionException("La evaluación que intenta visualizar no se encuentra asignada a su usuario.");
         }
+    }
+    
+    public List<Competencia> getCompetenciasEvaluadasEnEvaluaicion(Long idEvaluacion){
+        return evaluacionRepositorio.findById(idEvaluacion).get().getCompetenciasEvaluadas();
     }
     
     public ResponseEntity<HttpMensaje> cancelarEvaluacion(Long id_evaluacion){

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { EvaluacionVerDto } from '../HttpMensajes/evaluacion-ver-dto';
 import { HttpMensaje } from '../HttpMensajes/http-mensaje';
 import { ResultadoDto } from '../HttpMensajes/resultado-dto';
+import { Competencia } from '../modelo/competencia';
 import { UrlBaseService } from './url-base.service';
 
 const cabecera = {headers: new HttpHeaders({'Content-TYpe': 'application/json'})};
@@ -29,6 +30,10 @@ export class EvaluacionService {
 
   getEvaluacionById(id_evaluacion : number) : Observable<EvaluacionVerDto>{
     return this.httpClient.get<EvaluacionVerDto>(this.urlBaseService.obtenerURLBase() + `evaluacion?id=${id_evaluacion}`,cabecera);
+  }
+
+  getCompetenciasEvaluadasEnEvaluaicion(id_evaluacion : number) : Observable<Competencia[]>{
+    return this.httpClient.get<Competencia[]>(this.urlBaseService.obtenerURLBase() + `evaluacion/${id_evaluacion}/competencias`,cabecera);
   }
 
   getEvaluacionesEvaluadorLogeado(page:number,size:number,sort:string,order:string) : Observable<any>{

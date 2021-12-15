@@ -62,5 +62,16 @@ public class DetalleEvaluacion implements Serializable{
     public void crearResultado(ResultadoDto resultadoDto){
         Resultado nuevoResultado = new Resultado(resultadoDto.getDetallePlantilla(),resultadoDto.getComportamientoPlantillaSeleccionado());
         this.getResultados().add(nuevoResultado);
-    }            
+    }     
+    
+    public Integer getResultadoDeCompetencia(Competencia comp){
+        if(this.getResultados() != null){
+            for (Resultado r : this.getResultados()){
+                if(r.getDetallePlantilla().getCompetencia().getId() == comp.getId()){
+                    return r.getComportamientoPlantillaSeleccionado().getValoracionNumerica();
+                }
+            }
+        }
+        return 0; //Significa que la evaluacion no fue realizada para el empleado por lo que el resultado es 0.
+    }
 }

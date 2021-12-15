@@ -13,6 +13,7 @@ import com.sedback.SEDBack.Dtos.ResultadoDto;
 import com.sedback.SEDBack.Excepciones.InvalidDataException;
 import com.sedback.SEDBack.Logica.DetalleEvaluacionServicio;
 import com.sedback.SEDBack.Logica.EvaluacionServicio;
+import com.sedback.SEDBack.Modelo.Competencia;
 import com.sedback.SEDBack.Modelo.DetalleEvaluacion;
 import com.sedback.SEDBack.Modelo.Evaluacion;
 import com.sedback.SEDBack.Modelo.PlantillaEvaluacion;
@@ -83,6 +84,13 @@ public class EvaluacionControlador {
         UsuarioPrincipal userLogeado = (UsuarioPrincipal) principal.getPrincipal();
         return ResponseEntity.status(HttpStatus.OK).body(detalleEvaluacionServicio.getDetallesEvaluacionByIdEvaluacion(id_evaluacion, userLogeado.getId(),page));
     }
+    
+    @GetMapping("/{id_evaluacion}/competencias")
+    @PreAuthorize("hasAuthority('Administrador')")
+    public ResponseEntity<List<Competencia>> getCompetenciasEvaluadasEnEvaluaicion(@PathVariable(value="id_evaluacion") Long id_evaluacion){
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.getCompetenciasEvaluadasEnEvaluaicion(id_evaluacion));
+    }
+    
     
     //Endpoints Evaluador
     
