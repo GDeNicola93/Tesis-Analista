@@ -1,6 +1,7 @@
-import { componentFactoryName } from '@angular/compiler';
+import { CompileShallowModuleMetadata, componentFactoryName } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup } from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Competencia } from 'src/app/modelo/competencia';
 import { ComportamientoPlantilla } from 'src/app/modelo/comportamiento-plantilla';
 import { DetallePlantilla } from 'src/app/modelo/detalle-plantilla';
@@ -9,6 +10,7 @@ import { CompetenciaService } from 'src/app/servicios/competencia.service';
 import { EspecificacionPuestoService } from 'src/app/servicios/especificacion-puesto.service';
 import { PlantillaEvaluacionService } from 'src/app/servicios/plantilla-evaluacion.service';
 import { PuestoTrabajoService } from 'src/app/servicios/puesto-trabajo.service';
+import { DetallePlantillaEvaluacionComponent } from '../detalle-plantilla-evaluacion/detalle-plantilla-evaluacion.component';
 
 @Component({
   selector: 'app-nueva-plantilla-evaluacion',
@@ -20,30 +22,19 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
   comboEspecificacionesPuestosTrabajo : EspecificacionDePuesto[] = [];
   pasoActivo : number = 1;
   detallePlantilla : DetallePlantilla[] = [];
-  esPreguntaObjetivo : boolean = false;
   comboCompetencias : Competencia[] = [];
-
-  nuevoComportamiento : ComportamientoPlantilla[] = [];
-  grados : string[] = ["A","B","C","D","E","F","G","H"];
-  cantidadComportamientosAgregados : number = -1;
 
   mensaje = '';
   guardado = false;
   error = false;
 
-  constructor(private especificacionDePuestosTrabajoService : EspecificacionPuestoService,private modalService: NgbModal,private plantillaEvaluacionService:PlantillaEvaluacionService,private competenciaService : CompetenciaService) { }
+  modalRef : BsModalRef;
+
+  constructor(private especificacionDePuestosTrabajoService : EspecificacionPuestoService,private modalService: BsModalService,private plantillaEvaluacionService:PlantillaEvaluacionService,private competenciaService : CompetenciaService) { }
 
   ngOnInit(): void {
     this.obtenerPuestosTrabajo();
-  }
-
-  cambiarCheck() {
-    if(this.esPreguntaObjetivo == false){
-      this.esPreguntaObjetivo = true;
-    }else{
-      this.esPreguntaObjetivo = false;
-      this.form.objetivo = null;
-    }
+    this.obtenerCompetencias();
   }
 
   obtenerPuestosTrabajo() : void{
@@ -66,59 +57,34 @@ export class NuevaPlantillaEvaluacionComponent implements OnInit {
     this.pasoActivo = 1;
   }
 
-  agregarCompetencia(content : any) : void{
-    this.nuevoComportamiento = [];
-    this.cantidadComportamientosAgregados = -1;
-    this.obtenerCompetencias();
-    this.modalService.open(content,{ size: 'xl',scrollable : true });
+  agregarCompetencia() : void{
+    this.abrirModalDetallePlantilla();
+    this.modalRef.content.detallePlantilla.subscribe((result: any) => {
+      this.detallePlantilla.push(result);
+      this.modalRef.hide();
+    });
   }
 
-  agregarComportamiento() : void{
-    this.cantidadComportamientosAgregados += 1;
-    this.nuevoComportamiento.push(new ComportamientoPlantilla("",this.grados[this.cantidadComportamientosAgregados],0));
-  }
-
-  quitarComportamiento(compo:ComportamientoPlantilla) : void{
-    var i = this.nuevoComportamiento.indexOf(compo);
-    if(i !== -1){
-      this.nuevoComportamiento.splice(i,1);
-      this.cantidadComportamientosAgregados -= 1;
-      this.actualizarGradosComportamientos();
-    }
-  }
-
-  //Con este metodo a medida que se borran comportamientos se actualizan automaticamente
-  //los grados de cada comportamiento.
-  actualizarGradosComportamientos() : void{
-    let i = 0;
-    for(let comp of this.nuevoComportamiento){
-      comp.grado = this.grados[i];
-      i += 1;
-    }
-  }
-
-  guardarCompetencia() : void{
-    this.detallePlantilla.push(new DetallePlantilla(this.form.competencia,this.esPreguntaObjetivo,this.form.objetivo,this.form.gradoMinimoRequerido,this.nuevoComportamiento));
-    this.esPreguntaObjetivo = false;
-    this.form.objetivo = null;
-    this.modalService.dismissAll();
+  public abrirModalDetallePlantilla() {
+    this.modalRef = this.modalService.show(DetallePlantillaEvaluacionComponent,{ class: 'modal-xl' });
+    this.modalRef.content.padre = this;
+    this.modalRef.content.comboCompetencias = this.comboCompetencias;
+    this.modalRef.content.objetivos = this.form.especificacionDePuesto.objetivosActivos;
   }
 
   guardarPlantillaEvaluacion() : void{
     this.form.detallePlantilla = this.detallePlantilla;
-    this.plantillaEvaluacionService.guardar(this.form).subscribe(data => {
-      this.mensaje = data.mensaje;
-      this.guardado = true;
-      this.error = false;
-    },
-      (err: any) => {
-        this.mensaje = err.error.mensaje;
-        this.guardado = false;
-        this.error = true;
-      }
-    );
+    console.log(this.form);
+    // this.plantillaEvaluacionService.guardar(this.form).subscribe(data => {
+    //   this.mensaje = data.mensaje;
+    //   this.guardado = true;
+    //   this.error = false;
+    // },
+    //   (err: any) => {
+    //     this.mensaje = err.error.mensaje;
+    //     this.guardado = false;
+    //     this.error = true;
+    //   }
+    // );
   }
-
-
-
 }

@@ -3,6 +3,7 @@ package com.sedback.SEDBack.Persistencia;
 import com.sedback.SEDBack.Dtos.EvaluacionEvaluadorIndexDto;
 import com.sedback.SEDBack.Dtos.EvaluacionIndexDto;
 import com.sedback.SEDBack.Modelo.Evaluacion;
+import com.sedback.SEDBack.Modelo.PlantillaEvaluacion;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.domain.Page;
@@ -34,4 +35,6 @@ public interface EvaluacionRepositorio extends JpaRepository<Evaluacion,Long> {
     @Query(value = "SELECT ev FROM Evaluacion ev where (ev.estado.id = 1 OR ev.estado.id = 2) "
             + "AND ev.plantillaEvaluacion.especificacionDePuesto.id = ?1")
     List<EvaluacionIndexDto> getEvaluacionesDeMesYDePuesto(Integer idEspecificacionPuesto);
+    
+    List<EvaluacionIndexDto> findByPlantillaEvaluacion(PlantillaEvaluacion plantillaEvaluacion);
 }

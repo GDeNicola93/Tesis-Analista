@@ -43,6 +43,8 @@ import { ChartsModule } from 'ng2-charts';
 import { IndexDetallesEvaluacionComponent } from './componentes/evaluaciones/index-detalles-evaluacion/index-detalles-evaluacion.component';
 import { VersusGradoMinimoComponent } from './componentes/reportes/versus-grado-minimo/versus-grado-minimo.component';
 import { CompararResultadosPorCompetenciaComponent } from './componentes/reportes/comparar-resultados-por-competencia/comparar-resultados-por-competencia.component';
+import { DetallePlantillaEvaluacionComponent } from './componentes/plantillaEvaluacion/detalle-plantilla-evaluacion/detalle-plantilla-evaluacion.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -80,7 +82,8 @@ import { CompararResultadosPorCompetenciaComponent } from './componentes/reporte
     EvaluarComponent,
     IndexDetallesEvaluacionComponent,
     VersusGradoMinimoComponent,
-    CompararResultadosPorCompetenciaComponent
+    CompararResultadosPorCompetenciaComponent,
+    DetallePlantillaEvaluacionComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +93,8 @@ import { CompararResultadosPorCompetenciaComponent } from './componentes/reporte
     NgbModule,
     AngularCropperjsModule,
     ReactiveFormsModule,
-    ChartsModule
+    ChartsModule,
+    ModalModule.forRoot()
   ],
   providers: [
     {

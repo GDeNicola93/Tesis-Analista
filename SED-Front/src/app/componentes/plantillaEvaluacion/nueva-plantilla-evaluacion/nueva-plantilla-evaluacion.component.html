@@ -33,18 +33,20 @@
             </div>
             <div *ngIf="pasoActivo == 2">
                 <h4 style="text-align: center;">Paso 2 de 2</h4>
-                <button (click)="agregarCompetencia(content)" class="float-right btn btn-sm btn-primary mb-3">Nueva Competencia</button>
+                <button (click)="agregarCompetencia()" class="float-right btn btn-sm btn-primary mb-3">Nueva Competencia</button>
                 <form name="paso2">
                             <table class="table table-sm table-hover">
                                 <thead>
                                   <tr class="table-primary">
                                     <th scope="col">Competencia</th>
+                                    <th scope="col">Grado Mínimo</th>
                                     <th scope="col">Opciones</th>
                                   </tr>
                                 </thead>
                                 <tbody *ngFor="let detalleP of detallePlantilla">
                                   <tr>
-                                    <th scope="row">{{detalleP.competencia.nombre}}</th>
+                                    <td>{{detalleP.competencia.nombre}}</td>
+                                    <td>Grado {{detalleP.gradoMinimoRequerido}}</td>
                                     <td>
                                       <div class="row">
                                         <div class="col">
@@ -80,107 +82,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal para agregar nueva competencia -->
-    <ng-template #content let-modal>
-      <div class="modal-header">
-        <h5 class="modal-title">Nueva Competencia</h5>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <h5>Creación de la competencia</h5>
-          <hr>
-          <form>
-            <div class="form-group">
-              <label>Seleccione una competencia: </label>
-              <div class="row">
-                <div class="col-4">
-                  <select class="form-control" [(ngModel)]="form.competencia" name="competencia">
-                    <option *ngFor="let compe of comboCompetencias" [ngValue]="compe">{{compe.nombre}}</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1" [checked]="esPreguntaObjetivo" (change)="cambiarCheck()">
-              <label class="form-check-label" for="exampleCheck1">Esta relacionada a un objetivo</label>
-            </div>
-            <div class="form-group" *ngIf="esPreguntaObjetivo">
-              <label>Seleccione un objetivo: </label>
-              <select class="form-control" [(ngModel)]="form.objetivo" name="objetivo">
-                <option *ngFor="let objetivo of form.edp.objetivos" [ngValue]="objetivo">{{objetivo.descripcion}}</option>
-              </select>
-            </div>
-          </form>
-
-          <div class="row">
-            <div class="col-10">
-              <h5>Comportamiento de competencia</h5>
-              <hr>
-            </div>
-            <div class="col-2">
-              <button (click)="agregarComportamiento()" type="button" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Nuevo Comportamiento">+</button>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-1"></div>
-            <div class="col-1">
-              <p>Grado</p>
-            </div>
-            <div class="col text-center">
-              <p>Descripción Comportamiento</p>
-            </div>
-            <div class="col-1">
-              <p>Val Num</p>
-            </div>
-          </div>
-
-          <div *ngFor="let compo of nuevoComportamiento">
-            <div class="row" style="display: flex;align-items: center;">
-              <div class="col-1 text-center">
-                <button (click)="quitarComportamiento(compo)" type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Eliminar este comportamiento de plantilla"><i class="fas fa-times"></i></button>
-              </div>
-              <div class="col-1">
-                <div class="form-group">
-                  <input type="text" class="form-control" name="compo.grado" [(ngModel)]="compo.grado"  style="text-transform:uppercase;" disabled>
-                </div>
-              </div>
-              <div class="col">
-                <div class="form-group">
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="compo.descComportamiento" [(ngModel)]="compo.descComportamiento"></textarea>
-                </div>
-              </div>
-              <div class="col-1">
-                <div class="form-group">
-                  <input type="number" class="form-control" name="compo.valoracionNumerica" [(ngModel)]="compo.valoracionNumerica"  required autocomplete="off">
-                </div>
-              </div>
-            </div>
-          </div>
-          <h5>Grado Minimo Requerido</h5>
-          <hr>
-          <form>
-            <div class="form-group">
-              <label>Seleccione grado minimo requerido: </label>
-              <div class="row">
-                <div class="col-2">
-                  <select class="form-control" [(ngModel)]="form.gradoMinimoRequerido" name="gradoMinimoRequerido">
-                    <option *ngFor="let comportamiento of nuevoComportamiento" [ngValue]="comportamiento.grado">{{comportamiento.grado}}</option>
-                  </select>
-                </div>  
-              </div>
-            </div>
-          </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Close click')"><i class="bi bi-x-circle"></i> Cerrar</button>
-        <button (click)="guardarCompetencia()" type="button" class="btn btn-outline-success"><i class="far fa-save"></i> Guardar</button>
-      </div>  
-  </ng-template>
-
 </div>
 
 

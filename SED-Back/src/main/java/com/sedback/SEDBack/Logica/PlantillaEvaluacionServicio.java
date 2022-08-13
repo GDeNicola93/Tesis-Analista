@@ -1,6 +1,7 @@
 package com.sedback.SEDBack.Logica;
 
 import com.sedback.SEDBack.Dtos.HttpMensaje;
+import com.sedback.SEDBack.Excepciones.NoEditableException;
 import com.sedback.SEDBack.Modelo.PlantillaEvaluacion;
 import com.sedback.SEDBack.Persistencia.PlantillaEvaluacionRepositorio;
 import java.util.Calendar;
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Service;
 public class PlantillaEvaluacionServicio {
     @Autowired
     private PlantillaEvaluacionRepositorio repositorio;
+    
+    @Autowired
+    private EvaluacionServicio evaluacionServicio;
     
     @Autowired
     private CompetenciaServicio competenciaServicio;
@@ -54,6 +58,18 @@ public class PlantillaEvaluacionServicio {
     
     public ResponseEntity<Page<PlantillaEvaluacion>> obtenerPlantillas(Pageable pagina){
         return ResponseEntity.ok().body(repositorio.findAll(pagina));
+    }
+    
+    public ResponseEntity<PlantillaEvaluacion> editar(PlantillaEvaluacion plantilla){
+        if(this.esPlantillaUsadaEnEvaluacion(plantilla)){
+            return ResponseEntity.ok().body(plantilla);
+        }else{
+            throw new NoEditableException("La plantilla de evaluacion no puede ser editada ya que fue o esta siendo usada en una evaluación.");
+        }
+    }
+    
+    private boolean esPlantillaUsadaEnEvaluacion(PlantillaEvaluacion plantilla){
+        return this.evaluacionServicio.getEvaluacionesByPlantillaEvaluacion(plantilla).isEmpty();
     }
     
 }

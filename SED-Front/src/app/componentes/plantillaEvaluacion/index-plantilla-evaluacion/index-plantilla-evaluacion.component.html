@@ -41,6 +41,7 @@
                       <div class="row">
                         <div class="col">
                           <button (click)="verPlantillaDeEvaluacion(content,pe)" style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver plantilla"><i class="far fa-eye"></i></button>
+                          <a style="margin-right: 5px;" class="btn btn-sm btn-warning shadow-sm" data-toggle="tooltip" data-placement="top" title="Editar plantilla"><i class="fas fa-pencil-alt"></i></a>
                           <button *ngIf="pe.estaEnCurso == true" class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Sacar de curso"><i class="fas fa-toggle-off"></i></button>
                           <button *ngIf="pe.estaEnCurso == false" class="btn btn-sm btn-success shadow-sm" data-toggle="tooltip" data-placement="top" title="Poner en curso"><i class="fas fa-toggle-on"></i></button>
                         </div>

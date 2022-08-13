@@ -1,0 +1,110 @@
+<div class="modal-header">
+    <h5 class="modal-title">Nueva Competencia</h5>
+    <button type="button" class="close" aria-label="Close" (click)="cerrar()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <h6>Creación de la competencia</h6>
+    <hr>
+    <form [formGroup]="detallePlantillaForm" (submit)="guardar()">
+        <div class="form-group">
+            <label>Seleccione una competencia: </label>
+            <select class="form-control" formControlName="competencia" name="competencia" [ngClass]="(detallePlantillaForm.get('competencia').touched || detallePlantillaForm.get('competencia').dirty) && detallePlantillaForm.get('competencia').hasError('required') ? 'is-invalid':''">
+                <option *ngFor="let compe of comboCompetencias" [ngValue]="compe">{{compe.nombre}}</option>
+            </select>
+            <div class="invalid-feedback">
+                {{
+                    detallePlantillaForm.get('competencia').hasError('required') 
+                    ? "* Seleccione una competencia" 
+                    : ""
+                }}
+            </div>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="esPreguntaObjetivo" (change)="changeCheckEsPreguntaObjetivo()">
+            <label class="form-check-label" for="exampleCheck1">Esta relacionada a un objetivo</label>
+        </div>
+        <div class="form-group" *ngIf="detallePlantillaForm.get('esPreguntaObjetivo').value">
+            <label>Seleccione un objetivo: </label>
+            <select class="form-control" formControlName="obj" name="obj" [ngClass]="(detallePlantillaForm.get('obj').touched || detallePlantillaForm.get('obj').dirty) && detallePlantillaForm.get('obj').hasError('required') ? 'is-invalid':''">
+              <option *ngFor="let objetivo of objetivos" [ngValue]="objetivo">{{objetivo.descripcion}}</option>
+            </select>
+            <div class="invalid-feedback">
+                {{
+                    detallePlantillaForm.get('obj').hasError('required') 
+                    ? "* Seleccione un objetivo" 
+                    : ""
+                }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10">
+              <h6>Comportamiento de competencia</h6>
+              <hr>
+            </div>
+            <div class="col-2">
+              <button (click)="agregarComportamiento()" type="button" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Nuevo Comportamiento">+</button>
+            </div>
+        </div>
+        <table class="table table-sm">
+            <thead>
+              <tr class="table-primary text-center">
+                <th scope="col">Grado</th>
+                <th scope="col">Descripción Comportamiento</th>
+                <th scope="col">Valoración Numerica</th>
+                <th scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <tbody formArrayName="comportamiento">
+              <tr *ngFor="let compo of comportamiento.controls; let i=index" [formGroupName]="i">
+                <td style="width: 10%">
+                    <div class="form-group" style="display: flex;align-items: center;">
+                        <input type="text" class="form-control form-control-sm" style="text-transform:uppercase;" formControlName="grado" readonly>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <textarea class="form-control form-control-sm" rows="5" formControlName="descComportamiento" [ngClass]="{'is-invalid':
+                        comportamientoToFormGroup(i).controls['descComportamiento'].errors &&
+                        (comportamientoToFormGroup(i).controls['descComportamiento'].dirty || comportamientoToFormGroup(i).controls['descComportamiento'].touched)}"></textarea>
+                    </div>
+                </td>
+                <td style="width: 10%">
+                    <div class="form-group">
+                        <input type="number" class="form-control form-control-sm" formControlName="valoracionNumerica" [ngClass]="{'is-invalid':
+                        comportamientoToFormGroup(i).controls['valoracionNumerica'].errors &&
+                        (comportamientoToFormGroup(i).controls['valoracionNumerica'].dirty || comportamientoToFormGroup(i).controls['valoracionNumerica'].touched)}" autocomplete="off">
+                    </div>
+                </td>
+                <td class="text-center" style="width: 8%">
+                    <button (click)="quitarComportamiento(i)" type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Eliminar este comportamiento de plantilla"><i class="fas fa-times"></i></button>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+        <h6>Grado Minimo Requerido</h6>
+        <hr>
+        <div class="form-group">
+            <label>Seleccione grado minimo requerido: </label>
+            <div class="row">
+                <div class="col-3">
+                    <select class="form-control" formControlName="gradoMinimoRequerido" name="gradoMinimoRequerido" [ngClass]="(detallePlantillaForm.get('gradoMinimoRequerido').touched || detallePlantillaForm.get('gradoMinimoRequerido').dirty) && detallePlantillaForm.get('gradoMinimoRequerido').hasError('required') ? 'is-invalid':''">
+                        <option *ngFor="let c of comportamiento.value" [ngValue]="c.grado">{{c.grado}}</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        {{
+                            detallePlantillaForm.get('gradoMinimoRequerido').hasError('required') 
+                            ? "* Seleccione el grado minimo requerido" 
+                            : ""
+                        }}
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <div class="text-right">
+            <button type="button" class="btn btn-outline-secondary" (click)="cerrar()"><i class="bi bi-x-circle"></i> Cerrar</button>
+            <button [disabled]="detallePlantillaForm.invalid" type="submit" class="btn btn-outline-success ml-2"><i class="far fa-save"></i> Guardar</button>
+        </div>  
+    </form>
+</div>

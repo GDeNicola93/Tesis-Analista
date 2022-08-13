@@ -1,6 +1,4 @@
 package com.sedback.SEDBack.Excepciones;
-
-import io.jsonwebtoken.ExpiredJwtException;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -55,6 +53,12 @@ public class ConfigException {
   
   @ExceptionHandler
   protected ResponseEntity<ErrorResponse> handleException(BadRequestException exc){
+      HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+      return buildResponseEntity(httpStatus, new RuntimeException(exc.getMessage()),null);
+  }
+  
+  @ExceptionHandler
+  protected ResponseEntity<ErrorResponse> handleException(NoEditableException exc){
       HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
       return buildResponseEntity(httpStatus, new RuntimeException(exc.getMessage()),null);
   }

@@ -120,6 +120,10 @@ public class EvaluacionServicio {
         }
     }
     
+    public List<EvaluacionIndexDto> getEvaluacionesByPlantillaEvaluacion(PlantillaEvaluacion plantilla){
+        return this.evaluacionRepositorio.findByPlantillaEvaluacion(plantilla);
+    }
+    
     
     //Para el evaluador
     
