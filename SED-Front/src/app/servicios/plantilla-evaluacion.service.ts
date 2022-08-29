@@ -21,4 +21,8 @@ export class PlantillaEvaluacionService {
   public obtenerPlantillas() : Observable<any>{
     return this.httpClient.get<PlantillaEvaluacion[]>(this.urlBaseService.obtenerURLBase() + 'plantilla-evaluacion?sort=fechaCreaccion,desc',cabecera);
   }
+
+  public editarGet(idPlantilla : number) : Observable<PlantillaEvaluacion>{
+    return this.httpClient.get<PlantillaEvaluacion>(this.urlBaseService.obtenerURLBase() + `plantilla-evaluacion/${idPlantilla}/editar`,cabecera);
+  }
 }

@@ -69,6 +69,7 @@ const routes: Routes = [
   //Plantillas de Evaluación
   {path: 'plantilla-evaluacion',component:IndexPlantillaEvaluacionComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},
   {path: 'plantilla-evaluacion/nueva',component:NuevaPlantillaEvaluacionComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},
+  {path: 'plantilla-evaluacion/editar/:idPlantilla',component:NuevaPlantillaEvaluacionComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},
 
   //Evaluaciones
   {path: 'evaluacion',component:IndexEvaluacionComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador']}},

@@ -50,7 +50,7 @@ public class PlantillaEvaluacionServicio {
             pe.setEstaEnCurso(true);
             pe.setFechaCreaccion(Calendar.getInstance());
             repositorio.save(pe);
-            return ResponseEntity.ok().body(new HttpMensaje("Plantilla registrada exitosamente."));
+            return ResponseEntity.ok().body(new HttpMensaje("Plantilla guardada exitosamente."));
         }catch(Exception e){
             return ResponseEntity.badRequest().body(new HttpMensaje("No fue posible registrar la plantilla de evaluación. Intente nuevamente."));
         }

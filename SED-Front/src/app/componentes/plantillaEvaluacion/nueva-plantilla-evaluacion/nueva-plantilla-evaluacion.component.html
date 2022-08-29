@@ -5,7 +5,8 @@
             <h4>Nueva Plantilla de Evaluación</h4>
         </div>
         <div class="col">
-            <button routerLink="/plantilla-evaluacion" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
+            <button routerLink="/plantilla-evaluacion" class="float-right btn btn-sm btn-warning shadow-sm"><i
+                    class="fas fa-arrow-left"></i> Volver</button>
         </div>
 
     </div>
@@ -13,75 +14,95 @@
     <div class="card shadow">
         <h6 class="card-header font-weight-bold">Formulario de registro de nueva plantilla de evaluación</h6>
         <div class="card-body">
-            <div *ngIf="pasoActivo == 1">
-                <h4 style="text-align: center;">Paso 1 de 2</h4>
-                <form name="paso1">
+            <form [formGroup]="plantillaEvaluacion">
+                <div *ngIf="pasoActivo == 1">
+                    <h4 style="text-align: center;">Paso 1 de 2</h4>
                     <div class="form-group">
                         <label>Puesto de Trabajo: </label>
-                        <select class="form-control" [(ngModel)]="form.especificacionDePuesto" name="edp">
-                          <option *ngFor="let edp of comboEspecificacionesPuestosTrabajo" [ngValue]="edp">{{edp.puesto.nombrePuesto}}  ({{edp.sucursal.nombre}}) ({{edp.puesto.area.nombre}})</option>
+                        <select class="form-control" (change)="onChangePuestoTrabajo()" formControlName="especificacionDePuesto" name="especificacionDePuesto"
+                            [ngClass]="(plantillaEvaluacion.get('especificacionDePuesto').touched || plantillaEvaluacion.get('especificacionDePuesto').dirty) && plantillaEvaluacion.get('especificacionDePuesto').hasError('required') ? 'is-invalid':''">
+                            <option *ngFor="let edp of comboEspecificacionesPuestosTrabajo" [ngValue]="edp">
+                                {{edp.puesto.nombrePuesto}} ({{edp.sucursal.nombre}}) ({{edp.puesto.area.nombre}})</option>
                         </select>
+                        <div class="invalid-feedback">
+                            {{
+                                plantillaEvaluacion.get('especificacionDePuesto').hasError('required')
+                                ? "* Seleccione una especificación de puesto"
+                                : ""
+                            }}
+                        </div>
+                        <p *ngIf="getCantidadDeDetalles() > 0" style="font-size: 14px;color: red;">* Si cambia el puesto de trabajo, se borrará el detalle de la plantilla.</p>
                     </div>
                     <div class="form-group">
                         <label for="descripcion">Descripción (opcional): </label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" [(ngModel)]="form.descripcion"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion"
+                            formControlName="descripcion"></textarea>
                     </div>
                     <div class="form-group">
-                        <button (click)="siguientePaso()" class="float-right btn btn-sm btn-success">Siguiente Paso</button>
+                        <button [disabled]="plantillaEvaluacion.controls['especificacionDePuesto'].invalid" (click)="siguientePaso()" class="float-right btn btn-sm btn-success">Siguiente Paso <i
+                                class="fas fa-angle-right"></i></button>
                     </div>
-                </form>
-            </div>
-            <div *ngIf="pasoActivo == 2">
-                <h4 style="text-align: center;">Paso 2 de 2</h4>
-                <button (click)="agregarCompetencia()" class="float-right btn btn-sm btn-primary mb-3">Nueva Competencia</button>
-                <form name="paso2">
-                            <table class="table table-sm table-hover">
-                                <thead>
-                                  <tr class="table-primary">
-                                    <th scope="col">Competencia</th>
-                                    <th scope="col">Grado Mínimo</th>
-                                    <th scope="col">Opciones</th>
-                                  </tr>
-                                </thead>
-                                <tbody *ngFor="let detalleP of detallePlantilla">
-                                  <tr>
-                                    <td>{{detalleP.competencia.nombre}}</td>
-                                    <td>Grado {{detalleP.gradoMinimoRequerido}}</td>
-                                    <td>
-                                      <div class="row">
+                </div>
+                <div *ngIf="pasoActivo == 2">
+                    <h4 style="text-align: center;">Paso 2 de 2</h4>
+                    <button (click)="agregarCompetencia()" class="float-right btn btn-sm btn-primary mb-3"><i class="fas fa-plus"></i> Nueva
+                        Competencia</button>
+
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr class="table-primary">
+                                <th scope="col">Competencia</th>
+                                <th scope="col">Grado Mínimo</th>
+                                <th scope="col">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let detalleP of plantillaEvaluacion.get('detallePlantilla').value">
+                            <tr>
+                                <td>{{detalleP.competencia.nombre}}</td>
+                                <td>Grado {{detalleP.gradoMinimoRequerido}}</td>
+                                <td>
+                                    <div class="row">
                                         <div class="col">
-                                          <button style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver y editar competencia"><i class="far fa-eye"></i></button>
-                                          <button class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip" data-placement="top" title="Quitar"><i class="fas fa-trash-alt"></i></button>
+                                            <button style="margin-right: 5px;" class="btn btn-sm btn-primary shadow-sm"
+                                                data-toggle="tooltip" data-placement="top"
+                                                title="Ver" (click)="verDetallePlantilla(detalleP)"><i class="far fa-eye"></i></button>
+                                            <button style="margin-right: 5px;" class="btn btn-sm btn-warning shadow-sm"
+                                                data-toggle="tooltip" data-placement="top"
+                                                title="Editar" (click)="editarDetallePlantilla(detalleP)"><i class="fas fa-pen"></i></button>
+                                            <button class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip"
+                                                data-placement="top" title="Quitar" (click)="eliminarDetallePlantilla(detalleP)"><i
+                                                    class="fas fa-trash-alt"></i></button>
                                         </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                              <div class="form-group">
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
-                                    <strong><i class="fas fa-times"></i> ¡Error!</strong> {{mensaje}}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="guardado">
-                                    <strong><i class="fas fa-check"></i> ¡Perfecto!</strong> {{mensaje}}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <div class="form-group">
-                        <button (click)="anteriorPaso()" class="float-left btn btn-sm btn-primary">Paso Anterior</button>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
+                            <strong><i class="fas fa-times"></i> ¡Error!</strong> {{mensaje}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="guardado">
+                            <strong><i class="fas fa-check"></i> ¡Perfecto!</strong> {{mensaje}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <button (click)="guardarPlantillaEvaluacion()" class="float-right btn btn-sm btn-success">Guardar</button>
+                        <button (click)="anteriorPaso()" class="float-left btn btn-sm btn-primary"><i
+                                class="fas fa-angle-left"></i> Paso Anterior</button>
                     </div>
-                </form>
-            </div>
+                    <div class="form-group">
+                        <button (click)="guardarPlantillaEvaluacion()"
+                            [disabled]="plantillaEvaluacion.invalid"
+                            class="float-right btn btn-sm btn-success">Guardar</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-
-

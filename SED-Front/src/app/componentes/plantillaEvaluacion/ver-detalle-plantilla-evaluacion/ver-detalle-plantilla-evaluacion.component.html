@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h5 class="modal-title">Ver detalle de plantilla de evaluación</h5>
+    <button type="button" class="close" aria-label="Close" (click)="cerrar()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <h6><u>Competencia:</u> {{dp?.competencia.nombre}}</h6>
+    <h6><u>Minimo Requerido:</u> Grado {{dp?.gradoMinimoRequerido}}</h6>
+    <p *ngIf="dp?.esPreguntaObjetivo">Es pregunta objetivo: Si - Objetivo: {{dp?.obj.descripcion}}</p>
+    <p *ngIf="!dp?.esPreguntaObjetivo">Es pregunta objetivo: No</p>
+    <div class="table-responsive-md" style="margin-right: 5%;margin-left: 5%;">
+        <table class="table table-sm">
+        <thead style="text-align: center;">
+            <tr>
+            <th scope="col">Grado</th>
+            <th scope="col">Descripción Comportamiento</th>
+            <th scope="col">Valoración Numerica</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let cp of dp?.comportamiento" style="text-align: center;">
+            <tr>
+            <th scope="row">{{cp?.grado}}</th>
+            <td style="text-align: justify;">{{cp?.descComportamiento}}</td>
+            <td>{{cp?.valoracionNumerica}} %</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="text-right">
+        <button type="button" class="btn btn-outline-secondary" (click)="cerrar()"><i class="bi bi-x-circle"></i> Cerrar</button>
+    </div>  
+</div>

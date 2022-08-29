@@ -45,6 +45,7 @@ import { VersusGradoMinimoComponent } from './componentes/reportes/versus-grado-
 import { CompararResultadosPorCompetenciaComponent } from './componentes/reportes/comparar-resultados-por-competencia/comparar-resultados-por-competencia.component';
 import { DetallePlantillaEvaluacionComponent } from './componentes/plantillaEvaluacion/detalle-plantilla-evaluacion/detalle-plantilla-evaluacion.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { VerDetallePlantillaEvaluacionComponent } from './componentes/plantillaEvaluacion/ver-detalle-plantilla-evaluacion/ver-detalle-plantilla-evaluacion.component';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     IndexDetallesEvaluacionComponent,
     VersusGradoMinimoComponent,
     CompararResultadosPorCompetenciaComponent,
-    DetallePlantillaEvaluacionComponent
+    DetallePlantillaEvaluacionComponent,
+    VerDetallePlantillaEvaluacionComponent
   ],
   imports: [
     BrowserModule,
