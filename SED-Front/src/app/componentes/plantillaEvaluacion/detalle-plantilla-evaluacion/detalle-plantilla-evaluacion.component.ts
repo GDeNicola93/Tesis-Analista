@@ -50,7 +50,7 @@ export class DetallePlantillaEvaluacionComponent implements OnInit {
     return this.fb.group({
       descComportamiento: ['', Validators.required],
       grado: [this.grados[this.cantidadComportamientosAgregados], Validators.required],
-      valoracionNumerica : [0,[Validators.required,Validators.min(1),Validators.max(100)]]
+      valoracionNumerica : [0,[Validators.required,Validators.min(0),Validators.max(100)]]
     });
   }
 
@@ -117,7 +117,7 @@ export class DetallePlantillaEvaluacionComponent implements OnInit {
           id : comportamiento.id,
           descComportamiento : [comportamiento.descComportamiento,Validators.required],
           grado : [comportamiento.grado,Validators.required],
-          valoracionNumerica : [comportamiento.valoracionNumerica,[Validators.required,Validators.min(1),Validators.max(100)]]
+          valoracionNumerica : [comportamiento.valoracionNumerica,[Validators.required,Validators.min(0),Validators.max(100)]]
         });
         this.cantidadComportamientosAgregados += 1;
         this.comportamiento.push(compForm);

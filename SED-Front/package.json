@@ -27,6 +27,7 @@
     "cropperjs": "^1.5.11",
     "ng2-charts": "^2.2.3",
     "ngx-bootstrap": "^7.1.2",
+    "ngx-print": "^1.2.1",
     "rxjs": "~6.6.0",
     "sweetalert2": "^11.4.26",
     "tslib": "^2.0.0",

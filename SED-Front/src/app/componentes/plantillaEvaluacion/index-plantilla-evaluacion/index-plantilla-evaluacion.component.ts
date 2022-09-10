@@ -38,5 +38,4 @@ export class IndexPlantillaEvaluacionComponent implements OnInit {
 
     this.modalService.open(content, { size: 'xl',scrollable: true });
   }
-
 }

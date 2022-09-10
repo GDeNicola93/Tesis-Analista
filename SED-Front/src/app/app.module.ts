@@ -46,6 +46,7 @@ import { CompararResultadosPorCompetenciaComponent } from './componentes/reporte
 import { DetallePlantillaEvaluacionComponent } from './componentes/plantillaEvaluacion/detalle-plantilla-evaluacion/detalle-plantilla-evaluacion.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { VerDetallePlantillaEvaluacionComponent } from './componentes/plantillaEvaluacion/ver-detalle-plantilla-evaluacion/ver-detalle-plantilla-evaluacion.component';
+import { NgxPrintModule } from 'ngx-print';
 
 
 @NgModule({
@@ -96,6 +97,7 @@ import { VerDetallePlantillaEvaluacionComponent } from './componentes/plantillaE
     AngularCropperjsModule,
     ReactiveFormsModule,
     ChartsModule,
+    NgxPrintModule,
     ModalModule.forRoot()
   ],
   providers: [
