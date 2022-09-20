@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sedback.SEDBack.Dtos.ResultadoDto;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -28,7 +29,7 @@ public class DetalleEvaluacion implements Serializable{
     private Empleado evaluado;
     
     @JsonFormat(pattern="dd-MM-yyyy")
-    private LocalDate fechaRealizacion;
+    private LocalDateTime fechaHoraRealizacion;
     
     @OneToMany(cascade = { CascadeType.ALL }) //Al agregar este CascadeType.ALL al momento de crear un nuevo detalle no hace falta gurdar antes las intancias de Resultado.Por lo que al guardar un DetalleEvaluacion se estarian guardando tambien los Resultados.
     private List<Resultado> resultados;
@@ -38,7 +39,7 @@ public class DetalleEvaluacion implements Serializable{
     private Evaluacion evaluacion;
     
     public boolean getFueEvaluado(){
-        if(fechaRealizacion == null){
+        if(fechaHoraRealizacion == null){
             return false;
         }
         return true;

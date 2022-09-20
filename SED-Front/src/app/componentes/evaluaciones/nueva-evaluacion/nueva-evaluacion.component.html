@@ -13,7 +13,7 @@
     <div class="card shadow">
         <h6 class="card-header font-weight-bold">Formulario de registro de nueva evaluación</h6>
         <div class="card-body">
-            <form [formGroup]="evaluacionForm" (submit)="guardar()">
+            <form [formGroup]="evaluacionForm" (submit)="guardar()" autocomplete="off">
                 <div class="row">
                     <div class="col-md">
                         <div class="form-group">
@@ -42,6 +42,37 @@
                         </div>
                     </div>
                 </div>
+                <h6>Periodo a evaluar</h6>
+                <hr>
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="nombre">Inicio: </label>
+                            <input type="text" placeholder="MM-YYYY" class="form-control" name="periodoInicio" formControlName="periodoInicio" bsDatepicker [bsConfig]="configPeriodoInicio" [ngClass]="(evaluacionForm.get('periodoInicio').touched || evaluacionForm.get('periodoInicio').dirty) && evaluacionForm.get('periodoInicio').hasError('required') ? 'is-invalid':''">
+                            <div class="invalid-feedback">
+                                {{
+                                    evaluacionForm.get('periodoInicio').hasError('required') 
+                                    ? "¡Campo requerido!" 
+                                    : ""
+                                }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="nombre">Fin: </label>
+                            <input type="text" placeholder="MM-YYYY" class="form-control" name="periodoFin" formControlName="periodoFin" bsDatepicker [bsConfig]="configPeriodoInicio" [ngClass]="(evaluacionForm.get('periodoFin').touched || evaluacionForm.get('periodoFin').dirty) && evaluacionForm.get('periodoFin').hasError('required') ? 'is-invalid':''">
+                            <div class="invalid-feedback">
+                                {{
+                                    evaluacionForm.get('periodoFin').hasError('required') 
+                                    ? "¡Campo requerido!" 
+                                    : ""
+                                }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
                 <div class="row">
                     <div class="col-md">
                         <div class="form-group">

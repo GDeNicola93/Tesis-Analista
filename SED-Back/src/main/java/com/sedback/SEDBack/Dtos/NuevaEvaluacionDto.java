@@ -21,6 +21,12 @@ public class NuevaEvaluacionDto {
     @NotNull(message = "La fecha de fin de evaluación es requerida.")
     private LocalDate fechaFinEvaluacion;
     
+    @NotNull(message = "El periodo de inicio a evaluar es requerido.")
+    private LocalDate periodoInicio;
+    
+    @NotNull(message = "El periodo de fin a evaluar es requerido.")
+    private LocalDate periodoFin;
+    
     @NotNull(message = "Debe seleccionar una sucursal.")
     private Sucursal sucursal;
     

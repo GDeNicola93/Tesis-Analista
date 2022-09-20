@@ -30,6 +30,12 @@ public class Evaluacion implements Serializable {
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate fechaFinEvaluacion;
     
+    @JsonFormat(pattern="MM-yyyy")
+    private LocalDate periodoInicio;
+    
+    @JsonFormat(pattern="MM-yyyy")
+    private LocalDate periodoFin;
+    
     @JsonFormat(pattern="dd-MM-yyyy HH:mm")
     private LocalDateTime fechaHoraCreacion;
     

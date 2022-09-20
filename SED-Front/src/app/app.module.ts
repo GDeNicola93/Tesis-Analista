@@ -47,6 +47,12 @@ import { DetallePlantillaEvaluacionComponent } from './componentes/plantillaEval
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { VerDetallePlantillaEvaluacionComponent } from './componentes/plantillaEvaluacion/ver-detalle-plantilla-evaluacion/ver-detalle-plantilla-evaluacion.component';
 import { NgxPrintModule } from 'ngx-print';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule, BsLocaleService } from 'ngx-bootstrap/datepicker';
+
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { esLocale } from 'ngx-bootstrap/locale';
+defineLocale('es', esLocale);
 
 
 @NgModule({
@@ -98,7 +104,9 @@ import { NgxPrintModule } from 'ngx-print';
     ReactiveFormsModule,
     ChartsModule,
     NgxPrintModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [
     {
@@ -113,4 +121,8 @@ import { NgxPrintModule } from 'ngx-print';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor( private bsLocaleService: BsLocaleService){
+    this.bsLocaleService.use('es');//fecha en español, datepicker
+  }
+}

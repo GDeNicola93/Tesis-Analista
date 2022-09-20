@@ -29,6 +29,7 @@ import com.sedback.SEDBack.Persistencia.UsuarioRepositorio;
 import com.sedback.SEDBack.Seguridad.JWT.JwtProvider;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -63,14 +64,16 @@ public class EvaluacionServicio {
     JwtProvider jwtProvider;
     
     public String guardar(NuevaEvaluacionDto nuevaEvaluacion){
-        if(!(evaluacionRepositorio.getEvaluacionesDeMesYDePuesto(nuevaEvaluacion.getEspecificacionPuesto().getId()).isEmpty())){
-            throw new BadRequestException("Ya existe una evaluacion En Espera o En Curso para el puesto de trabajo seleccionado.");
+        if(!(evaluacionRepositorio.getEvaluacionesDePeriodoYDePuesto(nuevaEvaluacion.getEspecificacionPuesto().getId(),nuevaEvaluacion.getPeriodoInicio(),nuevaEvaluacion.getPeriodoFin()).isEmpty())){
+            throw new BadRequestException("Ya existe una evaluacion En Espera o En Curso para el puesto de trabajo seleccionado en el periodo a evaluar ingresado.");
         }
         List<Empleado> empleadosAEvaluar = especificacionPuestoRepositorio.findById(nuevaEvaluacion.getEspecificacionPuesto().getId()).get().getEmpleados();
         Estado enEspera = estadoRepositorio.findById(1).get(); //1 --> En Espera
         Evaluacion evaluacion = new Evaluacion();
         evaluacion.setFechaInicioEvaluacion(nuevaEvaluacion.getFechaInicioEvaluacion());
         evaluacion.setFechaFinEvaluacion(nuevaEvaluacion.getFechaFinEvaluacion());
+        evaluacion.setPeriodoInicio(nuevaEvaluacion.getPeriodoInicio());
+        evaluacion.setPeriodoFin(nuevaEvaluacion.getPeriodoFin());
         evaluacion.setEstado(enEspera);
         evaluacion.setEvaluador(nuevaEvaluacion.getEmpleadoEvaluador());
         evaluacion.setPlantillaEvaluacion(nuevaEvaluacion.getPlantillaEvaluacion());
@@ -203,7 +206,7 @@ public class EvaluacionServicio {
 //        el detalle de evaluacion ya que en este el atributo resultados
 //        esta configurado como cascade = { CascadeType.ALL }
         
-        detalleEvaluacionAEvaluar.setFechaRealizacion(LocalDate.now());
+        detalleEvaluacionAEvaluar.setFechaHoraRealizacion(LocalDateTime.now());
         
         //Si ya fue el ultimo resultado a cargar Finalizo la evaluación.
         if(detalleEvaluacionAEvaluar.getEvaluacion().terminoDeEvaluar()){

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { EmpleadoResumido } from 'src/app/HttpMensajes/empleado-resumido-dto';
 import { Empleado } from 'src/app/modelo/empleado';
 import { EspecificacionDePuesto } from 'src/app/modelo/especificacion-puesto';
@@ -26,6 +27,8 @@ export class NuevaEvaluacionComponent implements OnInit {
   guardado = false;
   error = false;
 
+  configPeriodoInicio : any = { dateInputFormat: 'MMMM YYYY',minMode:'month',containerClass:'theme-blue',}
+
   constructor(private fb : FormBuilder,
     private sucursalService : SucursalService,
     private especificacionService : EspecificacionPuestoService,
@@ -43,6 +46,8 @@ export class NuevaEvaluacionComponent implements OnInit {
     this.evaluacionForm = this.fb.group({
       fechaInicioEvaluacion : [null,Validators.required],
       fechaFinEvaluacion : [null,Validators.required],
+      periodoInicio : [null,Validators.required],
+      periodoFin : [null,Validators.required],
       sucursal : [null,Validators.required],
       especificacionPuesto : [null,Validators.required],
       plantillaEvaluacion : [null,Validators.required],
