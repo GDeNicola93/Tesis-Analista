@@ -1,5 +1,6 @@
 package com.sedback.SEDBack.Modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.sedback.SEDBack.Views.Views;
 import java.io.Serializable;
@@ -18,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data //Agrega las caracteristicas seters y geters, ToString,etc
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PlantillaEvaluacion implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
