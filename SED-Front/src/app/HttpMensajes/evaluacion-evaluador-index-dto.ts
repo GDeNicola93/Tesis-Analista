@@ -6,6 +6,7 @@ export class EvaluacionEvaluadorIndexDto{
     fechaFinEvaluacion : any;
     periodoInicio : any;
     periodoFin : any;
+    puestoTrabajo : string;
     estado : Estado;
     estaParaEvaluar : boolean;
 }

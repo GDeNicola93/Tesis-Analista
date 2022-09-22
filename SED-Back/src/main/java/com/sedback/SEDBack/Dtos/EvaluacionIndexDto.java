@@ -14,6 +14,15 @@ public interface EvaluacionIndexDto {
     @JsonFormat(pattern="dd-MM-yyyy")
     LocalDate getFechaFinEvaluacion();
     
+    @JsonFormat(pattern="MMMM YYYY")
+    LocalDate getPeriodoInicio();
+    
+    @JsonFormat(pattern="MMMM YYYY")
+    LocalDate getPeriodoFin();
+    
+    @Value("#{target.plantillaEvaluacion.especificacionDePuesto.puesto.nombrePuesto + ' (' + target.plantillaEvaluacion.especificacionDePuesto.sucursal.nombre + ')'}")
+    String getPuestoTrabajo();
+    
     @Value("#{target.evaluador.nombre + ' ' + target.evaluador.apellido}")
     String getNombreCompletoEvaluador();
     
