@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -52,8 +52,8 @@ import { BsDatepickerModule, BsLocaleService } from 'ngx-bootstrap/datepicker';
 
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { esLocale } from 'ngx-bootstrap/locale';
-defineLocale('es', esLocale);
-
+import { registerLocaleData } from '@angular/common';
+defineLocale('es', esLocale); //Este lo uso para los combos de BsDatepickerModule
 
 @NgModule({
   declarations: [

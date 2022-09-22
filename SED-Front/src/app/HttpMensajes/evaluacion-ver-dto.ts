@@ -5,6 +5,8 @@ export class EvaluacionVerDto{
     fechaInicioEvaluacion : any;
     fechaFinEvaluacion : any;
     fechaHoraCreacion : any;
+    periodoInicio : any;
+    periodoFin : any;
     estado : Estado;
     idEvaluador : number;
     nombreEvaluador : string;

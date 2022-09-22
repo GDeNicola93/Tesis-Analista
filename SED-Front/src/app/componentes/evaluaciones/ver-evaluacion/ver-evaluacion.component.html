@@ -31,6 +31,11 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-md">
+                    <p><strong>Periodo Evaluado:</strong> {{evaluacion.periodoInicio}} - {{evaluacion.periodoFin}}</p>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-3">
                     <p *ngIf="evaluacion.estado.nombre == 'Cancelada'"><strong>Estado: </strong><span class="badge badge-danger"><i class="fas fa-times"></i> {{evaluacion.estado.nombre}}</span></p>
                     <p *ngIf="evaluacion.estado.nombre == 'En Curso'"><strong>Estado: </strong><span class="badge badge-primary"><i class="fas fa-tasks"></i> {{evaluacion.estado.nombre}}</span></p>

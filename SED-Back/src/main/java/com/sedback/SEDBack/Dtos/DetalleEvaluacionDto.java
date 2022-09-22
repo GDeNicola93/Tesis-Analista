@@ -2,7 +2,7 @@ package com.sedback.SEDBack.Dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sedback.SEDBack.Modelo.Resultado;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Data;
 
@@ -14,8 +14,8 @@ public class DetalleEvaluacionDto {
     
     private String evaluador;
     
-    @JsonFormat(pattern="dd-MM-yyyy")
-    private LocalDate fechaRealizacion;
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm")
+    private LocalDateTime fechaHoraRealizacion;
     
     private List<Resultado> resultados;
 }

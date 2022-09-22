@@ -4,7 +4,9 @@ export class DetalleEvaluacionVersusReporteDto{
     id : number;
     nombreApellidoEvaluado : string;
     nombreApellidoEvaluador : string;
-    fechaRealizacion : any;
+    fechaHoraRealizacion : any;
+    periodoInicio : any;
+    periodoFin : any;
     fueEvaluado : boolean;
     resultados : ResultadoVersusReporteDto[];
 }

@@ -23,6 +23,12 @@ public class EvaluacionVerDto {
     @JsonFormat(pattern="dd-MM-yyyy HH:mm")
     private LocalDateTime fechaHoraCreacion;
     
+    @JsonFormat(pattern="MMMM YYYY")
+    private LocalDate periodoInicio;
+    
+    @JsonFormat(pattern="MMMM YYYY")
+    private LocalDate periodoFin;
+    
     private Estado estado;
     
     private Integer idEvaluador;

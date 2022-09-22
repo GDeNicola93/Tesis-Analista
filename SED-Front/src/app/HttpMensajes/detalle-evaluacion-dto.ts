@@ -4,7 +4,7 @@ export class DetalleEvaluacionDto{
     id : number;
     evaluado : string;
     evaluador : string;
-    fechaRealizacion : any;
+    fechaHoraRealizacion : any;
     resultados : Resultado[];
     calificacion : number;
     aprobado : boolean;

@@ -7,7 +7,7 @@
 
 
 <div class="container" *ngIf="!cargando">
-    <div class="row">
+    <div class="row mb-1">
         <!-- <div class="col">
             <button (click)="volver()" class="float-right btn btn-sm btn-warning shadow-sm"><i class="fas fa-arrow-left"></i> Volver</button>
         </div> -->
@@ -18,10 +18,11 @@
         </div>
     </div>
 
-    <div class="card shadow" *ngIf="!error">
+    <div class="card shadow mb-4" *ngIf="!error">
         <div class="card-body">
             <h4 style="text-align: center;"><u>{{detalleEvaluacion.nombreApellidoEvaluado}} versus grado minimo requerido</u></h4>
-            <p><strong>Fecha Realización de la evaluación:</strong> {{detalleEvaluacion.fechaRealizacion}}</p>
+            <p><strong>Fecha Realización de la evaluación:</strong> {{detalleEvaluacion.fechaHoraRealizacion}}</p>
+            <p><strong>Periodo Evaluado:</strong> {{detalleEvaluacion.periodoInicio}} - {{detalleEvaluacion.periodoFin}}</p>
             <p><strong>Evaluador:</strong> {{detalleEvaluacion.nombreApellidoEvaluador}}</p>
             <hr>
             <div>
