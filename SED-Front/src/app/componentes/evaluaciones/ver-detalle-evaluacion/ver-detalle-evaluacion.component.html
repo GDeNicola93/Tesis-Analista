@@ -29,8 +29,8 @@
             <hr>
             <h5 style="text-align: center;">Evaluación</h5>
             <div *ngFor="let resul of detalleEvaluacion.resultados">
-                <h6 *ngIf="resul.esMinimoRequerido">{{resul.detallePlantilla.competencia.nombre}} - <span class="badge badge-pill badge-success">Satisfactorio</span></h6>
-                <h6 *ngIf="!resul.esMinimoRequerido">{{resul.detallePlantilla.competencia.nombre}} - <span class="badge badge-pill badge-warning">Necesita Mejorar</span></h6>
+                <h6 *ngIf="resul.esMinimoRequeridoOSupero">{{resul.detallePlantilla.competencia.nombre}} - <span class="badge badge-pill badge-success">Satisfactorio</span></h6>
+                <h6 *ngIf="!resul.esMinimoRequeridoOSupero">{{resul.detallePlantilla.competencia.nombre}} - <span class="badge badge-pill badge-warning">Necesita Mejorar</span></h6>
                 <p *ngIf="resul.detallePlantilla.esPreguntaObjetivo">Es pregunta objetivo: Si - Objetivo: {{resul.detallePlantilla.obj.descripcion}}</p>
                 <p *ngIf="!resul.detallePlantilla.esPreguntaObjetivo">Es pregunta objetivo: No</p>
                 <p>Opción seleccionada:</p>

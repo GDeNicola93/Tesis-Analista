@@ -158,4 +158,43 @@ public class Evaluacion implements Serializable {
         }
         return competencias;
     }
+    
+    public boolean seEvaluaCompetencia(Competencia competencia){
+        for (DetallePlantilla dp : this.getPlantillaEvaluacion().getDetallePlantilla()){
+            if(dp.getCompetencia().getId() == competencia.getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public int cantidadSuperaronMinimoRequerido(Competencia competencia){
+        int cant = 0;
+        for(DetalleEvaluacion de : this.detalleEvaluacion){
+            if(de.esMinimoRequerido(competencia) && de.getFueEvaluado()){
+                cant = cant + 1;
+            }
+        }
+        return cant;
+    }
+    
+    public int cantidadNoAlcanzaronMinimoRequerido(Competencia competencia){
+        int cant = 0;
+        for(DetalleEvaluacion de : this.detalleEvaluacion){
+            if(!de.esMinimoRequerido(competencia) && de.getFueEvaluado()){
+                cant = cant + 1;
+            }
+        }
+        return cant;
+    }
+    
+    public int cantidadNoEvaluados(){
+        int cant = 0;
+        for(DetalleEvaluacion de : this.detalleEvaluacion){
+            if(!de.getFueEvaluado()){
+                cant = cant + 1;
+            }
+        }
+        return cant;
+    }
 }

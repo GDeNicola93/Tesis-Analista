@@ -7,7 +7,10 @@ import com.sedback.SEDBack.Dtos.EvaluacionVerDto;
 import com.sedback.SEDBack.Dtos.EvaluarIndexDto;
 import com.sedback.SEDBack.Dtos.HttpMensaje;
 import com.sedback.SEDBack.Dtos.NuevaEvaluacionDto;
+import com.sedback.SEDBack.Dtos.PuestoTrabajoSituacionCompetenciaDTO;
+import com.sedback.SEDBack.Dtos.RespuestaSituacionCompetenciaDTO;
 import com.sedback.SEDBack.Dtos.ResultadoDto;
+import com.sedback.SEDBack.Dtos.SituacionCompetenciaEnPeriodoDTO;
 import com.sedback.SEDBack.Excepciones.BadRequestException;
 import com.sedback.SEDBack.Excepciones.FueEvaluadoException;
 import com.sedback.SEDBack.Excepciones.FueraDeCursoException;
@@ -216,5 +219,40 @@ public class EvaluacionServicio {
         
         this.detalleEvaluacionServicio.guardar(detalleEvaluacionAEvaluar);
         return "Resultado de evaluación registrado exitosamente!";
+    }
+    
+    public RespuestaSituacionCompetenciaDTO situacionCompetenciaEnPeriodo(SituacionCompetenciaEnPeriodoDTO scp){
+//        Busco las evaluaciones que estan en periodo ingresado por el user
+        List<Evaluacion> evaluaciones = this.evaluacionRepositorio.getEvaluacionesParaSituacionCompetenciaEnPeriodo(scp.getPeriodo());
+        
+//        Valido que existan resultados caso contrario lanzo excepcion
+        if(evaluaciones.isEmpty()){
+           throw new BadRequestException("No se encontrarón evaluaciones que coincidan con los parametros seleccionados."); 
+        }
+        RespuestaSituacionCompetenciaDTO rta = new RespuestaSituacionCompetenciaDTO();
+        
+//        int cantSuperaronOalcanzaronMin = 0;
+//        int cantidadNoAlcanzaronMinimoRequerido = 0;
+//        int cantNoEvaluados = 0;
+        
+        for(Evaluacion ev : evaluaciones){
+            if(ev.seEvaluaCompetencia(scp.getCompetencia())){
+//                cantSuperaronOalcanzaronMin = cantSuperaronOalcanzaronMin + ev.cantidadSuperaronMinimoRequerido(scp.getCompetencia());
+//                cantidadNoAlcanzaronMinimoRequerido = cantidadNoAlcanzaronMinimoRequerido + ev.cantidadNoAlcanzaronMinimoRequerido(scp.getCompetencia());
+//                cantNoEvaluados = cantNoEvaluados + ev.cantidadNoEvaluados();
+                PuestoTrabajoSituacionCompetenciaDTO puesto = new PuestoTrabajoSituacionCompetenciaDTO();
+                puesto.setNombrePuesto(ev.getPlantillaEvaluacion().getEspecificacionDePuesto().getPuesto().getNombrePuesto());
+                puesto.setSucursal(ev.getPlantillaEvaluacion().getEspecificacionDePuesto().getSucursal().getNombre());
+                puesto.setCantSuperaronOalcanzaronMin(ev.cantidadSuperaronMinimoRequerido(scp.getCompetencia()));
+                puesto.setCantidadNoAlcanzaronMinimoRequerido(ev.cantidadNoAlcanzaronMinimoRequerido(scp.getCompetencia()));
+                puesto.setCantNoEvaluados(ev.cantidadNoEvaluados());
+                rta.addPuestoTrabajo(puesto);
+            }
+        }
+//        RespuestaSituacionCompetenciaDTO rta = new RespuestaSituacionCompetenciaDTO();
+//        rta.setCantSuperaronOalcanzaronMin(cantSuperaronOalcanzaronMin);
+//        rta.setCantidadNoAlcanzaronMinimoRequerido(cantidadNoAlcanzaronMinimoRequerido);
+//        rta.setCantNoEvaluados(cantNoEvaluados);
+        return rta;
     }
 }

@@ -2,7 +2,10 @@ package com.sedback.SEDBack.Controlador;
 
 import com.sedback.SEDBack.Dtos.DetalleEvaluacionComparacionCompetenciasDto;
 import com.sedback.SEDBack.Dtos.DetalleEvaluacionVersusReporteDto;
+import com.sedback.SEDBack.Dtos.RespuestaSituacionCompetenciaDTO;
+import com.sedback.SEDBack.Dtos.SituacionCompetenciaEnPeriodoDTO;
 import com.sedback.SEDBack.Logica.DetalleEvaluacionServicio;
+import com.sedback.SEDBack.Logica.EvaluacionServicio;
 import com.sedback.SEDBack.Modelo.Competencia;
 import com.sedback.SEDBack.Modelo.DetalleEvaluacion;
 import java.util.List;
@@ -22,6 +25,9 @@ public class ReportesControlador {
     @Autowired
     private DetalleEvaluacionServicio detalleEvaluacionServicio;
     
+    @Autowired
+    private EvaluacionServicio evaluacionServicio;
+    
     @GetMapping("/versus_grado_minimo/detalle_evaluacion/{id_detalle_evaluacion}")
     public DetalleEvaluacionVersusReporteDto getDetalleEvaluacionByIdParaVersusReporte(@PathVariable(value="id_detalle_evaluacion") Long id_detalle_evaluacion){
         return detalleEvaluacionServicio.getDetalleEvaluacionByIdParaVersusReporte(id_detalle_evaluacion);
@@ -30,5 +36,10 @@ public class ReportesControlador {
     @PostMapping("/comparacion_de_evaluaciones_por_competencia/{id_evaluacion}")
     public List<DetalleEvaluacionComparacionCompetenciasDto> getDetalleEvaluacionByIdEvaluacionParaComparacionReporte(@PathVariable(value="id_evaluacion") Long id_evaluacion,@RequestBody Competencia comp){
         return detalleEvaluacionServicio.getDetalleEvaluacionByIdEvaluacionParaComparacionReporte(id_evaluacion, comp);
+    }
+    
+    @PostMapping("/situacion_competencia_en_periodo")
+    public RespuestaSituacionCompetenciaDTO situacionCompetenciaEnPeriodo(@RequestBody SituacionCompetenciaEnPeriodoDTO scp){
+        return evaluacionServicio.situacionCompetenciaEnPeriodo(scp);
     }
 }

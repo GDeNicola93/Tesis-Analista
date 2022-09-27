@@ -40,4 +40,10 @@ public interface EvaluacionRepositorio extends JpaRepository<Evaluacion,Long> {
     List<EvaluacionIndexDto> getEvaluacionesDePeriodoYDePuesto(Integer idEspecificacionPuesto,LocalDate pInicio,LocalDate pFin);
     
     List<EvaluacionIndexDto> findByPlantillaEvaluacion(PlantillaEvaluacion plantillaEvaluacion);
+    
+    //Las siguientes lineas se usan para los reportes
+    
+     @Query(value = "SELECT ev FROM Evaluacion ev where ev.estado.id = 4 "
+        + "AND (?1 BETWEEN ev.periodoInicio AND ev.periodoFin)")
+    List<Evaluacion> getEvaluacionesParaSituacionCompetenciaEnPeriodo(LocalDate periodo);
 }

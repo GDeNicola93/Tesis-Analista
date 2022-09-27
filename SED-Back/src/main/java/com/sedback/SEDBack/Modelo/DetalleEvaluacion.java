@@ -74,4 +74,17 @@ public class DetalleEvaluacion implements Serializable{
         }
         return 0; //Significa que la evaluacion no fue realizada para el empleado por lo que el resultado es 0.
     }
+    
+    public boolean esMinimoRequerido(Competencia comp){
+        if(this.getResultados() != null){
+            for (Resultado r : this.getResultados()){
+               if(r.getDetallePlantilla().getCompetencia().getId() == comp.getId()){
+                   if(r.getEsMinimoRequeridoOSupero()){
+                       return true;
+                   }
+               } 
+            }
+        }
+        return false;
+    }
 }

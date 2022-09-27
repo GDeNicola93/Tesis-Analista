@@ -30,7 +30,7 @@ public class Resultado implements Serializable{
         this.comportamientoPlantillaSeleccionado = comportamientoPlantillaSeleccionado;
     }
     
-    public boolean getEsMinimoRequerido(){
+    public boolean getEsMinimoRequeridoOSupero(){
         int valNumSeleccionada = this.comportamientoPlantillaSeleccionado.getValoracionNumerica();
         int minValNum = this.detallePlantilla.getMinimaValoracionNumerica();
         if(valNumSeleccionada >= minValNum){

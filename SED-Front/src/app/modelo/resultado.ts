@@ -6,5 +6,5 @@ export class Resultado{
     detallePlantilla : DetallePlantilla;
     comportamientoPlantillaSeleccionado : ComportamientoPlantilla;
     planAccion : string;
-    esMinimoRequerido : boolean;
+    esMinimoRequeridoOSupero : boolean;
 }
