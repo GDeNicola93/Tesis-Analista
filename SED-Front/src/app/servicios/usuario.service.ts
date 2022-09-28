@@ -32,4 +32,8 @@ export class UsuarioService {
   public actualizarPassword(cambioPassword : CambioPassword) : Observable<any>{
     return this.httpClient.post<HttpMensaje>(this.urlBaseService.obtenerURLBase() + 'usuario/update_password',cambioPassword,cabecera);
   }
+
+  public refreshToken(jwt : Jwt) : Observable<Jwt>{
+    return this.httpClient.post<Jwt>(this.urlBaseService.obtenerURLBase() + 'usuario/refresh',jwt);
+  }
 }

@@ -89,6 +89,12 @@
 	  <artifactId>jjwt</artifactId>
 	  <version>0.9.0</version>
 	 </dependency>
+         <!-- https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt -->
+        <dependency>
+            <groupId>com.nimbusds</groupId> <!-- Se Usa para el refresh token -->
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>9.25.4</version>
+        </dependency>
 	 <dependency>
 	  <groupId>javax.validation</groupId>
 	  <artifactId>validation-api</artifactId>

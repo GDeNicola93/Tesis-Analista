@@ -25,7 +25,6 @@ import { VerEmpleadoComponent } from './componentes/empleados/ver-empleado/ver-e
 import { AngularCropperjsModule } from 'angular-cropperjs';
 import { SubirFotoPerfilComponent } from './componentes/usuario/subir-foto-perfil/subir-foto-perfil.component';
 import { UpdatePasswordComponent } from './componentes/usuario/update-password/update-password.component';
-import { UnAuthorizedInterceptor } from './servicios/no-authorized-interceptor.service';
 import { IndexCompetenciaComponent } from './componentes/competencias/index-competencia/index-competencia.component';
 import { NuevaCompetenciaComponent } from './componentes/competencias/nueva-competencia/nueva-competencia.component';
 import { IndexEspecificacionPuestoComponent } from './componentes/especificacionPuesto/index-especificacion-puesto/index-especificacion-puesto.component';
@@ -112,10 +111,6 @@ defineLocale('es', esLocale); //Este lo uso para los combos de BsDatepickerModul
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
-      multi: true
-    },
-    { provide: HTTP_INTERCEPTORS, 
-      useClass: UnAuthorizedInterceptor, 
       multi: true
     }
   ],

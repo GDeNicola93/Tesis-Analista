@@ -1,4 +1,5 @@
 package com.sedback.SEDBack.Excepciones;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -49,6 +50,12 @@ public class ConfigException {
   protected ResponseEntity<ErrorResponse> handleException(NoSuchElementException exc){
     HttpStatus httpStatus = HttpStatus.NOT_FOUND;
     return buildResponseEntity(httpStatus, new RuntimeException("La información solicitada no existe."),null);  
+  }
+  
+  @ExceptionHandler
+  protected ResponseEntity<ErrorResponse> handleException(ParseException exc){
+    HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+    return buildResponseEntity(httpStatus, new RuntimeException("No fue posible refrescar el token vencido"),null);  
   }
   
   @ExceptionHandler

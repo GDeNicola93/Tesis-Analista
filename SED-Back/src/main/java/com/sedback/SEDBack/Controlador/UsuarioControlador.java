@@ -6,8 +6,11 @@ import com.sedback.SEDBack.Dtos.JwtDTO;
 import com.sedback.SEDBack.Dtos.LoginUsuario;
 import com.sedback.SEDBack.Logica.UsuarioServicio;
 import com.sedback.SEDBack.Modelo.Usuario;
+import com.sedback.SEDBack.Seguridad.JWT.JwtProvider;
 import com.sedback.SEDBack.Seguridad.UsuarioPrincipal;
+import java.text.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,6 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioControlador {
     @Autowired
     private UsuarioServicio servicio;
+    
+    @Autowired
+    private JwtProvider jwtProvider;
      
     @GetMapping("/obtener_datos")
     public ResponseEntity<Usuario> obtenerDatos(UsernamePasswordAuthenticationToken principal){
@@ -40,5 +46,12 @@ public class UsuarioControlador {
     public ResponseEntity<HttpMensaje> actualizarPassword(@RequestBody CambioPassword cambioPassword,UsernamePasswordAuthenticationToken principal){
         UsuarioPrincipal userLogeado = (UsuarioPrincipal) principal.getPrincipal();
         return servicio.actualizarPassword(cambioPassword,servicio.getDatosUsuarioLogeado(userLogeado.getId()).getBody());
+    }
+    
+    @PostMapping("/refresh")
+    public ResponseEntity<JwtDTO> refreshToken(@RequestBody JwtDTO jwtDto) throws ParseException{
+        String token = jwtProvider.refreshToken(jwtDto);
+        JwtDTO jwt = new JwtDTO(token);
+        return new ResponseEntity(jwt,HttpStatus.OK);
     }
 }

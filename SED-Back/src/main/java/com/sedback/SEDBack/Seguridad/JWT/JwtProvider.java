@@ -5,6 +5,10 @@
  */
 package com.sedback.SEDBack.Seguridad.JWT;
 
+import com.nimbusds.jwt.JWT;
+import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.JWTParser;
+import com.sedback.SEDBack.Dtos.JwtDTO;
 import com.sedback.SEDBack.Seguridad.UsuarioPrincipal;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -12,6 +16,7 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -74,6 +79,22 @@ public class JwtProvider { //esta clase es el corazón de JWT, donde se crea el 
             logger.error("error en la firma " +e.getMessage());
         }
         return false;
+    }
+    
+    public String refreshToken(JwtDTO jwtDto) throws ParseException{
+        JWT jwt = JWTParser.parse(jwtDto.getToken());
+        JWTClaimsSet claims = jwt.getJWTClaimsSet();
+        String nombreUsuario = claims.getSubject();
+        Long id_user = (Long) claims.getClaim("id_user");
+        List<String> perfiles = (List<String>) claims.getClaim("perfiles");
+        return Jwts.builder()
+            .setSubject(nombreUsuario)
+            .claim("perfiles",perfiles)
+            .claim("id_user", id_user)
+            .setIssuedAt(new Date())
+            .setExpiration(new Date(new Date().getTime() + expiration))
+            .signWith(SignatureAlgorithm.HS512, secret.getBytes())
+            .compact();  
     }
     
     
