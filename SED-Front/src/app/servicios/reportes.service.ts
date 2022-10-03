@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DetalleEvaluacionVersusReporteDto } from '../HttpMensajes/DetalleEvaluacionVersusReporteDto';
+import { RespuestaSituacionCompetenciaDTO, SituacionCompetenciaEnPeriodoDTO } from '../HttpMensajes/SituacionCompetenciaEnPeriodo';
 import { Competencia } from '../modelo/competencia';
 import { UrlBaseService } from './url-base.service';
 
@@ -20,5 +21,9 @@ export class ReportesService {
 
   getDetalleEvaluacionByIdEvaluacionParaComparacionReporte(id_evaluacion : number,comp : Competencia) : Observable<any>{
     return this.httpClient.post<any>(this.urlBaseService.obtenerURLBase() + `reportes/comparacion_de_evaluaciones_por_competencia/${id_evaluacion}`,comp,cabecera);
+  }
+
+  situacionCompetenciaEnPeriodo(situacion : SituacionCompetenciaEnPeriodoDTO) : Observable<RespuestaSituacionCompetenciaDTO>{
+    return this.httpClient.post<RespuestaSituacionCompetenciaDTO>(this.urlBaseService.obtenerURLBase() + `reportes/situacion_competencia_en_periodo`,situacion,cabecera);
   }
 }

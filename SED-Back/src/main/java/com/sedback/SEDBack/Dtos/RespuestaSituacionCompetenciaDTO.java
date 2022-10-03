@@ -1,6 +1,8 @@
 
 package com.sedback.SEDBack.Dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
@@ -8,6 +10,10 @@ import lombok.Data;
 @Data
 public class RespuestaSituacionCompetenciaDTO {
     private List<PuestoTrabajoSituacionCompetenciaDTO> puestosTrabajo = new ArrayList<>();
+    private String competencia;
+    
+    @JsonFormat(pattern="MMMM YYYY")
+    private LocalDate periodo;
     
     public int getTotalEvaluados(){
         int cant = 0;

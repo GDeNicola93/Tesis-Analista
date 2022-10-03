@@ -52,6 +52,7 @@ import { BsDatepickerModule, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { esLocale } from 'ngx-bootstrap/locale';
 import { registerLocaleData } from '@angular/common';
+import { SituacionCompetenciaComponent } from './componentes/reportes/situacion-competencia/situacion-competencia.component';
 defineLocale('es', esLocale); //Este lo uso para los combos de BsDatepickerModule
 
 @NgModule({
@@ -91,7 +92,8 @@ defineLocale('es', esLocale); //Este lo uso para los combos de BsDatepickerModul
     VersusGradoMinimoComponent,
     CompararResultadosPorCompetenciaComponent,
     DetallePlantillaEvaluacionComponent,
-    VerDetallePlantillaEvaluacionComponent
+    VerDetallePlantillaEvaluacionComponent,
+    SituacionCompetenciaComponent
   ],
   imports: [
     BrowserModule,

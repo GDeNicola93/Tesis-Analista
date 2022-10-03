@@ -230,16 +230,11 @@ public class EvaluacionServicio {
            throw new BadRequestException("No se encontrarón evaluaciones que coincidan con los parametros seleccionados."); 
         }
         RespuestaSituacionCompetenciaDTO rta = new RespuestaSituacionCompetenciaDTO();
-        
-//        int cantSuperaronOalcanzaronMin = 0;
-//        int cantidadNoAlcanzaronMinimoRequerido = 0;
-//        int cantNoEvaluados = 0;
+        rta.setCompetencia(scp.getCompetencia().getNombre());
+        rta.setPeriodo(scp.getPeriodo());
         
         for(Evaluacion ev : evaluaciones){
             if(ev.seEvaluaCompetencia(scp.getCompetencia())){
-//                cantSuperaronOalcanzaronMin = cantSuperaronOalcanzaronMin + ev.cantidadSuperaronMinimoRequerido(scp.getCompetencia());
-//                cantidadNoAlcanzaronMinimoRequerido = cantidadNoAlcanzaronMinimoRequerido + ev.cantidadNoAlcanzaronMinimoRequerido(scp.getCompetencia());
-//                cantNoEvaluados = cantNoEvaluados + ev.cantidadNoEvaluados();
                 PuestoTrabajoSituacionCompetenciaDTO puesto = new PuestoTrabajoSituacionCompetenciaDTO();
                 puesto.setNombrePuesto(ev.getPlantillaEvaluacion().getEspecificacionDePuesto().getPuesto().getNombrePuesto());
                 puesto.setSucursal(ev.getPlantillaEvaluacion().getEspecificacionDePuesto().getSucursal().getNombre());
@@ -249,10 +244,6 @@ public class EvaluacionServicio {
                 rta.addPuestoTrabajo(puesto);
             }
         }
-//        RespuestaSituacionCompetenciaDTO rta = new RespuestaSituacionCompetenciaDTO();
-//        rta.setCantSuperaronOalcanzaronMin(cantSuperaronOalcanzaronMin);
-//        rta.setCantidadNoAlcanzaronMinimoRequerido(cantidadNoAlcanzaronMinimoRequerido);
-//        rta.setCantNoEvaluados(cantNoEvaluados);
         return rta;
     }
 }

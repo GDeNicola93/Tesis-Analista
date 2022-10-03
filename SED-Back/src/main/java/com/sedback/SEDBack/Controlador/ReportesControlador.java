@@ -10,6 +10,7 @@ import com.sedback.SEDBack.Modelo.Competencia;
 import com.sedback.SEDBack.Modelo.DetalleEvaluacion;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,7 @@ public class ReportesControlador {
     }
     
     @PostMapping("/situacion_competencia_en_periodo")
+    @PreAuthorize("hasAuthority('Administrador')")
     public RespuestaSituacionCompetenciaDTO situacionCompetenciaEnPeriodo(@RequestBody SituacionCompetenciaEnPeriodoDTO scp){
         return evaluacionServicio.situacionCompetenciaEnPeriodo(scp);
     }

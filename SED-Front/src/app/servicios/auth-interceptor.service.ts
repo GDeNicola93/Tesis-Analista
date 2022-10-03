@@ -41,7 +41,7 @@ export class AuthInterceptorService implements HttpInterceptor {
           return next.handle(request);
         }));
       } else {
-        this.tokenServicio.logOut();
+        // this.tokenServicio.logOut();
         return throwError(err);
       }
     }));

@@ -26,6 +26,7 @@ import { NuevaPlantillaEvaluacionComponent } from './componentes/plantillaEvalua
 import { IndexPuestosTrabajoComponent } from './componentes/puestosTrabajo/index-puestos-trabajo/index-puestos-trabajo.component';
 import { NuevoPuestosTrabajoComponent } from './componentes/puestosTrabajo/nuevo-puestos-trabajo/nuevo-puestos-trabajo.component';
 import { CompararResultadosPorCompetenciaComponent } from './componentes/reportes/comparar-resultados-por-competencia/comparar-resultados-por-competencia.component';
+import { SituacionCompetenciaComponent } from './componentes/reportes/situacion-competencia/situacion-competencia.component';
 import { VersusGradoMinimoComponent } from './componentes/reportes/versus-grado-minimo/versus-grado-minimo.component';
 import { IndexSucursalComponent } from './componentes/sucursales/index-sucursal/index-sucursal.component';
 import { NuevaSucursalComponent } from './componentes/sucursales/nueva-sucursal/nueva-sucursal.component';
@@ -99,6 +100,7 @@ const routes: Routes = [
   //Reportes
   {path : 'reportes/versus_grado_minimo/detalle_evaluacion/:id_detalle',component:VersusGradoMinimoComponent,canActivate:[GeneralGuard],data:{expectedRol: ['Administrador','Evaluador']}},
   {path : 'reportes/comparar_resultados_por_competencia/evaluacion/:id_evaluacion',component:CompararResultadosPorCompetenciaComponent,canActivate:[GeneralGuard],data:{expectedRol: ['Administrador']}},
+  {path : 'reportes/situacion_competencia',component:SituacionCompetenciaComponent,canActivate:[GeneralGuard],data:{expectedRol: ['Administrador']}},
 
   //No machea con ninguna de las anteriores
   {path: '**', component:HomeComponent,canActivate:[GeneralGuard],data: { expectedRol: ['Administrador','Evaluador','Empleado']}}

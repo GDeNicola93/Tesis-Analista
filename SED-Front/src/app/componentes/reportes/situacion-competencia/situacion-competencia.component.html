@@ -1,0 +1,100 @@
+<app-menu></app-menu>
+
+<div class="container">
+    <div class="card shadow mb-4">
+        <h6 class="card-header font-weight-bold">Situación de Competencia</h6>
+        <div class="card-body">
+            <form [formGroup]="info" (submit)="generarInforme()" autocomplete="off">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Competencia: </label>
+                            <select class="form-control form-control-sm" formControlName="competencia" name="competencia"
+                                [ngClass]="(info.get('competencia').touched || info.get('competencia').dirty) && info.get('competencia').hasError('required') ? 'is-invalid':''">
+                                <option *ngFor="let competencia of comboCompetencias" [ngValue]="competencia">
+                                    {{competencia.nombre}}</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                {{
+                                    info.get('competencia').hasError('required')
+                                    ? "* Seleccione una competencia."
+                                    : ""
+                                }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="nombre">Periodo: </label>
+                            <input type="text" placeholder="MM-YYYY" class="form-control form-control-sm" name="periodo" formControlName="periodo" bsDatepicker [bsConfig]="configPeriodo" [ngClass]="(info.get('periodo').touched || info.get('periodo').dirty) && info.get('periodo').hasError('required') ? 'is-invalid':''">
+                            <div class="invalid-feedback">
+                                {{
+                                    info.get('periodo').hasError('required') 
+                                    ? "¡Campo requerido!" 
+                                    : ""
+                                }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">  
+                        <button type="submit" [disabled]="info.invalid" style="margin-top: 30px;" class="btn btn-sm btn-outline-primary"><i class="fas fa-sync-alt"></i> Generar</button>
+                    </div>
+                </div>
+            </form>
+            <hr>
+            <div class="alert alert-danger text-center" role="alert" *ngIf="error">
+                <i class="fas fa-exclamation-triangle"></i> {{mensajeError}}
+            </div>
+            <div *ngIf="result">
+                <h5 class="text-center">Situación de competencia: {{result?.competencia}} - {{result?.periodo}}</h5>
+                <div class="row">
+                    <div class="col">
+                        <p>La competencia se evaluo en los siguientes puestos:</p>
+                        <ul class="list-group list-group-sm" *ngFor="let puesto of result?.puestosTrabajo">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{puesto.nombrePuesto}} ({{puesto.sucursal}})
+                            <span class="badge badge-primary badge-pill">{{puesto.totalEvaluados}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <div style="display: block;">
+                            <div class="chart">
+                                <canvas baseChart
+                                [data]="pieChartData"
+                                [labels]="pieChartLabels"
+                                [chartType]="pieChartType"
+                                [options]="pieChartOptions"
+                                [colors]="pieChartColors"
+                                [legend]="pieChartLegend">
+                                </canvas>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <b class="mt-2">Situación en cada puesto:</b>
+                <div *ngFor="let item of result?.puestosTrabajo" class="mt-2">
+                    <p>{{item.nombrePuesto}} ({{item.sucursal}})</p>
+                    <div>
+                        <div style="display: block;">
+                        <div class="chart">
+                            <canvas baseChart
+                            [data]="[item.cantSuperaronOalcanzaronMin,item.cantidadNoAlcanzaronMinimoRequerido,item.cantNoEvaluados]"
+                            [labels]="['Superarón o alcanzarón el minimo ('+item.porcentajeSuperaronOalcanzaronMin+'%)','No Alncanzarón el minimo requerido ('+item.porcentajeNoAlcanzaronMinimoRequerido+'%)','No Evaluados ('+item.porcentajeNoEvaluados+'%)']"
+                            [chartType]="pieChartType"
+                            [options]="pieChartOptions"
+                            [colors]="pieChartColors"
+                            [legend]="pieChartLegend">
+                            </canvas>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>

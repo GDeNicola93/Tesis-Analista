@@ -46,7 +46,7 @@ public class CompetenciaControlador {
     }
     
     @GetMapping("/for-select")
-    @PreAuthorize("hasAuthority('Administrador')")
+//    @PreAuthorize("hasAuthority('Administrador')")
     public ResponseEntity<List<Competencia>> obtenerCompetenciasParaSelect(){
         return servicio.obtenerCompetenciasParaSelect();
     }
