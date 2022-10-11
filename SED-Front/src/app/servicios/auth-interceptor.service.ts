@@ -10,10 +10,9 @@ import { catchError, concatMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthInterceptorService implements HttpInterceptor {
-
-  constructor(private tokenServicio: TokenService, private usuarioService: UsuarioService) { }
-
-
+  constructor(private tokenServicio : TokenService) { }
+  
+  
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token: string = this.tokenServicio.getToken();
 
@@ -22,28 +21,11 @@ export class AuthInterceptorService implements HttpInterceptor {
     if (token) {
       request = req.clone({
         setHeaders: {
-          authorization: `Bearer ${token}`
+          authorization: `Bearer ${ token }`
         }
       });
     }
 
-    return next.handle(request).pipe(catchError((err: HttpErrorResponse) => {
-      if (err.status === 401) {
-        const jwtDTO = new Jwt(this.tokenServicio.getToken());
-        return this.usuarioService.refreshToken(jwtDTO).pipe(concatMap((data: any) => {
-          console.log("Refrescando token...");
-          this.tokenServicio.setToken(data.token);
-          request = req.clone({
-            setHeaders: {
-              authorization: `Bearer ${data.token}`
-            }
-          });
-          return next.handle(request);
-        }));
-      } else {
-        // this.tokenServicio.logOut();
-        return throwError(err);
-      }
-    }));
+    return next.handle(request);
   }
 }

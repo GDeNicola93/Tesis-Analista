@@ -53,6 +53,7 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { esLocale } from 'ngx-bootstrap/locale';
 import { registerLocaleData } from '@angular/common';
 import { SituacionCompetenciaComponent } from './componentes/reportes/situacion-competencia/situacion-competencia.component';
+import { UnAuthorizedInterceptor } from './servicios/no-authorized-interceptor.service';
 defineLocale('es', esLocale); //Este lo uso para los combos de BsDatepickerModule
 
 @NgModule({
@@ -113,6 +114,10 @@ defineLocale('es', esLocale); //Este lo uso para los combos de BsDatepickerModul
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
+      multi: true
+    },
+    { provide: HTTP_INTERCEPTORS, 
+      useClass: UnAuthorizedInterceptor, 
       multi: true
     }
   ],
