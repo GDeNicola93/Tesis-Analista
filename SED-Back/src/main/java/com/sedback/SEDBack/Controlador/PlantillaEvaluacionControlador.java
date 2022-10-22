@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*") //Para poder acceder desde cualquier lado a mi backend
@@ -41,4 +43,9 @@ public class PlantillaEvaluacionControlador {
         return servicio.obtenerPlantillas(pagina);
     }
     
+    @PutMapping("/{idPlantillaEvaluacion}/sacar_de_curso")
+    @PreAuthorize("hasAuthority('Administrador')")
+    public ResponseEntity<HttpMensaje> sacarDeCurso(@PathVariable Integer idPlantillaEvaluacion,@RequestParam(value = "estaEnCurso", required = true) boolean estaEnCurso){
+        return servicio.sacarDeCurso(idPlantillaEvaluacion, estaEnCurso);
+    }
 }

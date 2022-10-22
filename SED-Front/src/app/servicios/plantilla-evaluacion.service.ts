@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { HttpMensaje } from '../HttpMensajes/http-mensaje';
 import { PlantillaEvaluacion } from '../modelo/plantilla-evaluacion';
 import { UrlBaseService } from './url-base.service';
 
@@ -24,5 +25,9 @@ export class PlantillaEvaluacionService {
 
   public editarGet(idPlantilla : number) : Observable<PlantillaEvaluacion>{
     return this.httpClient.get<PlantillaEvaluacion>(this.urlBaseService.obtenerURLBase() + `plantilla-evaluacion/${idPlantilla}/editar`,cabecera);
+  }
+
+  public sacarDeCurso(idPlantilla : number,estaEnCurso : boolean) : Observable<HttpMensaje>{
+    return this.httpClient.put<HttpMensaje>(this.urlBaseService.obtenerURLBase() + `plantilla-evaluacion/${idPlantilla}/sacar_de_curso?estaEnCurso=${estaEnCurso}`,cabecera);
   }
 }

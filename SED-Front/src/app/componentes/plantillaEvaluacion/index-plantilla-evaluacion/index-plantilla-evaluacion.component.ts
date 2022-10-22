@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpMensaje } from 'src/app/HttpMensajes/http-mensaje';
 import { ComportamientoPlantilla } from 'src/app/modelo/comportamiento-plantilla';
 import { PlantillaEvaluacion } from 'src/app/modelo/plantilla-evaluacion';
 import { PlantillaEvaluacionService } from 'src/app/servicios/plantilla-evaluacion.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-index-plantilla-evaluacion',
@@ -37,5 +39,27 @@ export class IndexPlantillaEvaluacionComponent implements OnInit {
     }
 
     this.modalService.open(content, { size: 'xl',scrollable: true });
+  }
+
+  sacarDeCurso(idPlantilla : number,estaEnCurso : boolean) : void{
+    let mensaje = '';
+    if(estaEnCurso){
+      mensaje = '¿Estás seguro de poner en curso la plantilla ' + idPlantilla + '?';
+    }else{
+      mensaje = '¿Estás seguro de sacar de curso la plantilla ' + idPlantilla + '?';
+    }
+    Swal.fire({
+      title: mensaje,
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Si',
+      denyButtonText: `No`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.plantillaEvaluacionServicio.sacarDeCurso(idPlantilla,estaEnCurso).subscribe(data =>{
+          location.reload();
+        });
+      }
+    })
   }
 }

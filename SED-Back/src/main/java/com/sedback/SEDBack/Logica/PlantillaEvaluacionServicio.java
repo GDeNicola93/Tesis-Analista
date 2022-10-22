@@ -68,8 +68,22 @@ public class PlantillaEvaluacionServicio {
         }
     }
     
+    public ResponseEntity<HttpMensaje> sacarDeCurso(Integer idPlantila,boolean estaEnCurso){
+        PlantillaEvaluacion plantilla = repositorio.findById(idPlantila).get();
+        
+        plantilla.setEstaEnCurso(estaEnCurso);
+        
+        repositorio.save(plantilla);
+        
+        if(estaEnCurso){
+            return ResponseEntity.ok().body(new HttpMensaje("La plantilla se puso en curso exitosamente."));
+        }    
+        return ResponseEntity.ok().body(new HttpMensaje("La plantilla se saco de curso exitosamente."));
+    }
+    
     private boolean esPlantillaUsadaEnEvaluacion(PlantillaEvaluacion plantilla){
         return this.evaluacionServicio.getEvaluacionesByPlantillaEvaluacion(plantilla).isEmpty();
     }
+    
     
 }
