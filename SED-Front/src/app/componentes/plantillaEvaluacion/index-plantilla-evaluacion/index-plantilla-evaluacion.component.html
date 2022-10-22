@@ -35,8 +35,8 @@
                     <td *ngIf="pe.descripcion != null">{{pe.descripcion}}</td>
                     <td *ngIf="pe.descripcion == null">Sin especificar</td>
                     <td>{{pe.fechaCreaccion | date: 'dd/MM/yyyy'}}</td>
-                    <td *ngIf="pe.estaEnCurso == true"><span class="badge badge-success">Si</span></td>
-                    <td *ngIf="pe.estaEnCurso == false"><span class="badge badge-danger">No</span></td>
+                    <td class="text-center" *ngIf="pe.estaEnCurso == true"><span class="badge badge-success">Si</span></td>
+                    <td class="text-center" *ngIf="pe.estaEnCurso == false"><span class="badge badge-danger">No</span></td>
                     <td>
                       <div class="row">
                         <div class="col">
@@ -100,7 +100,7 @@
           <tbody *ngFor="let cp of dp.comportamiento" style="text-align: center;">
             <tr>
               <th scope="row">{{cp.grado}}</th>
-              <td style="text-align: justify;">{{cp.descComportamiento}}</td>
+              <td class="text-center" style="text-align: justify;">{{cp.descComportamiento}}</td>
               <td>{{cp.valoracionNumerica}} %</td>
             </tr>
           </tbody>

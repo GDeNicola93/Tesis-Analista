@@ -28,22 +28,29 @@
             <p><strong>Evaluador:</strong> {{detalleEvaluacion.evaluador}}</p>
             <hr>
             <h5 style="text-align: center;">Evaluación</h5>
-            <div *ngFor="let resul of detalleEvaluacion.resultados">
-                <h6 *ngIf="resul.esMinimoRequeridoOSupero">{{resul.detallePlantilla.competencia.nombre}} - <span class="badge badge-pill badge-success">Satisfactorio</span></h6>
-                <h6 *ngIf="!resul.esMinimoRequeridoOSupero">{{resul.detallePlantilla.competencia.nombre}} - <span class="badge badge-pill badge-warning">Necesita Mejorar</span></h6>
+            <div *ngFor="let resul of detalleEvaluacion.resultados" style="margin-bottom: 5%;">
+                <h6 *ngIf="resul.esMinimoRequeridoOSupero">{{resul.detallePlantilla.competencia.nombre}} - <span class="badge badge-pill badge-success"><i class="far fa-thumbs-up"></i> Satisfactorio</span></h6>
+                <h6 *ngIf="!resul.esMinimoRequeridoOSupero">{{resul.detallePlantilla.competencia.nombre}} - <span class="badge badge-pill badge-warning"><i class="fas fa-arrow-up"></i> Necesita Mejorar</span></h6>
                 <p *ngIf="resul.detallePlantilla.esPreguntaObjetivo">Es pregunta objetivo: Si - Objetivo: {{resul.detallePlantilla.obj.descripcion}}</p>
                 <p *ngIf="!resul.detallePlantilla.esPreguntaObjetivo">Es pregunta objetivo: No</p>
                 <p>Opción seleccionada:</p>
-                <div class="row" style="margin-bottom: 20px;">
-                    <div class="col text-right">
-                        <p>{{resul.comportamientoPlantillaSeleccionado.grado}}</p>
-                    </div>
-                    <div class="col-5">
-                        {{resul.comportamientoPlantillaSeleccionado.descComportamiento}}
-                    </div>
-                    <div class="col">
-                        <!-- {{resul.comportamientoPlantillaSeleccionado.valoracionNumerica}} ptos -->
-                    </div>
+                <div class="table-responsive-md" style="margin-right: 5%;margin-left: 5%;">
+                    <table class="table table-sm">
+                      <thead style="text-align: center;">
+                        <tr>
+                          <th scope="col">Grado</th>
+                          <th scope="col">Descripción Comportamiento</th>
+                          <th scope="col">Valoración Numerica</th>
+                        </tr>
+                      </thead>
+                      <tbody style="text-align: center;">
+                        <tr>
+                          <th scope="row">{{resul.comportamientoPlantillaSeleccionado.grado}}</th>
+                          <td class="text-center" style="text-align: justify;">{{resul.comportamientoPlantillaSeleccionado.descComportamiento}}</td>
+                          <td>{{resul.comportamientoPlantillaSeleccionado.valoracionNumerica}} %</td>
+                        </tr>
+                      </tbody>
+                    </table>
                 </div>
             </div>
         </div>

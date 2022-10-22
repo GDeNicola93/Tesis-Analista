@@ -15,9 +15,9 @@
                     <tr class="table-primary">
                         <th role="button" (click)="setOrder()" scope="col"><i [ngClass]="order === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'"></i></th>
                         <th role="button" (click)="setSort('id')" scope="col">Cód</th>
-                        <th role="button" (click)="setSort('fechaInicioEvaluacion')" scope="col">Fecha Realización</th>
+                        <th role="button" (click)="setSort('fechaInicioEvaluacion')" scope="col">Periodo evaluado</th>
                         <th role="button" (click)="setSort('estado.nombre')" scope="col">Estado</th>
-                        <th role="button" (click)="setSort('estado.nombre')" scope="col">Calificación</th>
+                        <th role="button" (click)="setSort('estado.nombre')" scope="col">Evaluador</th>
                         <th scope="col">Opciones</th>
                     </tr>
                 </thead>
@@ -25,10 +25,12 @@
                     <tr>
                         <th></th>
                         <td scope="row">{{de.idDetalleEvaluacion}}</td>
-                        <td>{{de.fechaRealizacion}}</td>
-                        <td *ngIf="de.aprobado"><span class="badge badge-success"><i class="far fa-thumbs-up"></i> Aprobado</span></td>
-                        <td *ngIf="!de.aprobado"><span class="badge badge-danger"><i class="far fa-thumbs-down"></i> Desaprobado</span></td>
-                        <td>{{de.calificacion}} ptos</td>
+                        <td>{{de.periodoInicio}} - {{de.periodoFin}}</td>
+                        <td *ngIf="de.estado == 'Cancelada'"><span class="badge badge-danger"><i class="fas fa-times"></i> {{de.estado}}</span></td>
+                        <td *ngIf="de.estado == 'En Curso'"><span class="badge badge-primary"><i class="fas fa-tasks"></i> {{de.estado}}</span></td>
+                        <td *ngIf="de.estado == 'En Espera'"><span class="badge badge-warning"><i class="far fa-clock"></i> {{de.estado}}</span></td>
+                        <td *ngIf="de.estado == 'Finalizada'"><span class="badge badge-success"><i class="fas fa-check"></i> {{de.estado}}</span></td>
+                        <td>{{de.evaluador}}</td>
                         <td><button routerLink="/evaluacion/detalle_evaluacion/{{de.idDetalleEvaluacion}}" style="margin-right: 5px;" class="btn btn-sm btn-outline-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Ver detalle de la evaluación"><i class="far fa-eye"></i></button></td>
                     </tr>
                 </tbody>

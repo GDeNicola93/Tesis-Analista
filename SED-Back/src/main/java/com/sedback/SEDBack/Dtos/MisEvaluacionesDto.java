@@ -9,10 +9,17 @@ public interface MisEvaluacionesDto {
     @Value("#{target.id}")
     Long getIdDetalleEvaluacion();
     
-    @JsonFormat(pattern="dd-MM-yyyy")
-    LocalDate getFechaRealizacion();
+    @Value("#{target.evaluacion.periodoInicio}")
+    @JsonFormat(pattern="MMMM YYYY")
+    LocalDate getPeriodoInicio();
     
-    Integer getCalificacion();
+    @Value("#{target.evaluacion.periodoFin}")
+    @JsonFormat(pattern="MMMM YYYY")
+    LocalDate getPeriodoFin();
     
-    boolean getAprobado();
+    @Value("#{target.evaluacion.estado.nombre}")
+    String getEstado();
+    
+    @Value("#{target.evaluacion.evaluador.getNombreCompleto()}")
+    String getEvaluador();
 }

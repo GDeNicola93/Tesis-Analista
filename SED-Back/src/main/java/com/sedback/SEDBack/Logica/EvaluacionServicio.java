@@ -155,27 +155,20 @@ public class EvaluacionServicio {
     public DetalleEvaluacionDto getDetalleEvaluacionById(Long idDetalleEvaluacion,Long idUserLogeado){
         DetalleEvaluacion detalleEvaluacionSeleccionado = detalleEvaluacionServicio.findById(idDetalleEvaluacion).get();
         Usuario usuarioLogeado = usuarioServicio.getDatosUsuarioLogeado(idUserLogeado).getBody();
-       
+        
         if(usuarioLogeado.esAdministrador()){
             return DetalleEvaluacionDtoMapper.INSTANCE.toDetalleEvaluacionDto(detalleEvaluacionSeleccionado);
         }
         
-        if(usuarioLogeado.esEvaluador()){
-            if(detalleEvaluacionSeleccionado.getEvaluacion().esDeEvaluador(usuarioLogeado.getEmpleado())){
-                return DetalleEvaluacionDtoMapper.INSTANCE.toDetalleEvaluacionDto(detalleEvaluacionSeleccionado);
-            }else{
-                throw new PermissionException("No puede ver detalles de esta evaluación ya que no esta asignada a su usuario.");
-            }
-        } 
-        
         if(detalleEvaluacionSeleccionado.esDeEvaluado(usuarioLogeado.getEmpleado())){
-            if(detalleEvaluacionSeleccionado.getEvaluacion().getEstado().getId() == 3){
-                throw new PermissionException("La evaluación esta Cancelada por lo que no se puede ver el este detalle.");
-            }
             return DetalleEvaluacionDtoMapper.INSTANCE.toDetalleEvaluacionDto(detalleEvaluacionSeleccionado);
-        }else{
-            throw new PermissionException("No puede ver detalles de esta evaluación ya que no esta asignada a su usuario.");
-        } 
+        }
+        
+        if(detalleEvaluacionSeleccionado.esDeEvaluador(usuarioLogeado.getEmpleado())){
+            return DetalleEvaluacionDtoMapper.INSTANCE.toDetalleEvaluacionDto(detalleEvaluacionSeleccionado);
+        }
+        
+        throw new PermissionException("No puede ver detalles de esta evaluación ya que no esta asignada a su usuario.");
     }
     
     public PlantillaEvaluacion getEvaluarEmpleado(Long id_detalle_evaluacion,Long idUserLogeado){
