@@ -25,7 +25,7 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="nombre">Periodo: </label>
+                            <label for="nombre">Período: </label>
                             <input type="text" placeholder="MM-YYYY" class="form-control form-control-sm" name="periodo" formControlName="periodo" bsDatepicker [bsConfig]="configPeriodo" [ngClass]="(info.get('periodo').touched || info.get('periodo').dirty) && info.get('periodo').hasError('required') ? 'is-invalid':''">
                             <div class="invalid-feedback">
                                 {{

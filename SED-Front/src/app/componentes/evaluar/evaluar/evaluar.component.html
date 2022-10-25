@@ -25,7 +25,7 @@
         <div class="card-body">
             <div *ngFor="let dp of plantillaEvaluacion.detallePlantilla">
                 <h5><u>Competencia:</u> {{dp.competencia.nombre}}</h5>
-                <p *ngIf="dp.competencia.descripcion != null" style="font-size: 15px;">({{dp.competencia.descripcion}})</p>
+                <p *ngIf="dp.competencia.descripcion != null" style="font-size: 15px;">{{dp.competencia.descripcion}}</p>
                 <p *ngIf="dp.esPreguntaObjetivo">Es pregunta objetivo: Si - Objetivo: {{dp.obj.descripcion}}</p>
                 <p *ngIf="!dp.esPreguntaObjetivo">Es pregunta objetivo: No</p>
                 <div class="table-responsive-md" style="margin-right: 5%;margin-left: 5%;">
@@ -35,7 +35,7 @@
                           <th scope="col">Selección</th>  
                           <th scope="col">Grado</th>
                           <th scope="col">Descripción Comportamiento</th>
-                          <th scope="col">Valoración Numerica</th>
+                          <th scope="col">Valoración Numérica</th>
                         </tr>
                       </thead>
                       <tbody *ngFor="let cp of dp.comportamiento" style="text-align: center;">

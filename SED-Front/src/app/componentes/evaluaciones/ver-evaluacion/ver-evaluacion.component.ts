@@ -57,7 +57,7 @@ export class VerEvaluacionComponent implements OnInit {
   }
 
   generarDeGrafico() : void{
-    this.pieChartLabels = ['Evaluados ('+this.evaluacion.porcentajeEvaluados+'%)','No Evaluados ('+this.evaluacion.porcentajeNoEvaluados+'%)'];
+    this.pieChartLabels = ['Evaluados ('+this.evaluacion.porcentajeEvaluados+'%)','No evaluados ('+this.evaluacion.porcentajeNoEvaluados+'%)'];
     this.pieChartData = [this.evaluacion.cantidadEmpleadosEvaluados,this.evaluacion.restantesAEvaluar];
   }
 

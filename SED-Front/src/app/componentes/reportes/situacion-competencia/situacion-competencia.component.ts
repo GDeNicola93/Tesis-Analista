@@ -72,7 +72,7 @@ export class SituacionCompetenciaComponent implements OnInit {
       this.error = false;
       this.result = data;
       
-      this.pieChartLabels = ['Superarón o alcanzarón el minimo ('+data.porcentajeSuperaronOalcanzaronMin+'%)','No Alncanzarón el minimo requerido ('+data.porcentajeNoAlcanzaronMinimoRequerido+'%)','No Evaluados ('+data.porcentajeNoEvaluados+'%)'];
+      this.pieChartLabels = ['Superaron o alcanzaron el mínimo ('+data.porcentajeSuperaronOalcanzaronMin+'%)','No alcanzaron el mínimo requerido ('+data.porcentajeNoAlcanzaronMinimoRequerido+'%)','No evaluados ('+data.porcentajeNoEvaluados+'%)'];
       this.pieChartData = [data.cantSuperaronOalcanzaronMin,data.cantidadNoAlcanzaronMinimoRequerido,data.cantNoEvaluados];
     },err =>{
       this.error = true;

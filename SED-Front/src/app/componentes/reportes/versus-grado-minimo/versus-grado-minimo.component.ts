@@ -35,8 +35,8 @@ export class VersusGradoMinimoComponent implements OnInit {
   public barChartLegend = true;
 
   public barChartData: ChartDataSets[] = [
-    { data: this.gradosObtenidosEnEvaluacion, label: 'Obtenido en Evaluación' },
-    { data: this.gradosMinimosRequeridos, label: 'Minimo Grado Requerido' }
+    { data: this.gradosObtenidosEnEvaluacion, label: 'Obtenido en evaluación' },
+    { data: this.gradosMinimosRequeridos, label: 'Mínimo grado requerido' }
   ];
 
   constructor(private rutaActiva: ActivatedRoute,private reporteServicio : ReportesService) { }
