@@ -56,6 +56,6 @@ public class EspecificacionDePuestoServicio {
     }
     
     public ResponseEntity<List<PlantillaEvaluacion>> getPlantillasEvaluacionDeEspecificacionPuesto(Integer idEspecificacionDePuesto){
-        return ResponseEntity.ok().body(repositorio.findById(idEspecificacionDePuesto).get().getPlantillasEvaluacion());
+        return ResponseEntity.ok().body(repositorio.findById(idEspecificacionDePuesto).get().getPlantillasEvaluacionEnCurso());
     }
 }

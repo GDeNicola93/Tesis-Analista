@@ -55,4 +55,14 @@ public class EspecificacionDePuesto implements Serializable{
         }
         return objetivosEnCurso;
     }
+    
+    public List<PlantillaEvaluacion> getPlantillasEvaluacionEnCurso(){
+        List<PlantillaEvaluacion> enCurso = new ArrayList<>();
+        for(PlantillaEvaluacion pe : this.plantillasEvaluacion){
+            if(pe.isEstaEnCurso()){
+                enCurso.add(pe);
+            }
+        }
+        return enCurso;
+    }
 }
