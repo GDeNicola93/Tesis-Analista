@@ -2,6 +2,8 @@ package com.sedback.SEDBack.Modelo;
 
 import com.sun.istack.Nullable;
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,6 +43,23 @@ public class DetallePlantilla implements Serializable{
             }
         }
         return 0;
+    }
+    
+    //Se sobreescribe al de lombook para devolver los comportamientos ordenados por grado
+    public List<ComportamientoPlantilla> getComportamiento(){
+        List<ComportamientoPlantilla> comportamientos = this.comportamiento;
+    	
+    	Comparator<ComportamientoPlantilla> comparator = new Comparator<ComportamientoPlantilla>() {
+            public int compare( ComportamientoPlantilla com1, ComportamientoPlantilla com2 ) {
+                int resultado = com1.getGrado().compareTo(com2.getGrado());
+                if ( resultado != 0 ) {
+                    return resultado;
+                }
+                return resultado;
+            }
+        };
+        Collections.sort( comportamientos, comparator );
+        return comportamientos;
     }
     
 }

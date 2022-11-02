@@ -137,9 +137,11 @@ export class DetallePlantillaEvaluacionComponent implements OnInit {
 
   setObjetivo(o : Objetivo) : Objetivo{
     let retorno : Objetivo = null;
-    for(let item of this.objetivos){
-      if(item.id == o.id){
-        retorno = item;
+    if(o != null){
+      for(let item of this.objetivos){
+        if(item.id == o.id){
+          retorno = item;
+        }
       }
     }
     return retorno;
