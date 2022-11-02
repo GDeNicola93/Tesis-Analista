@@ -1,6 +1,7 @@
 package com.sedback.SEDBack.Modelo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.sedback.SEDBack.Views.Views;
 import java.io.Serializable;
@@ -19,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
+@JsonIgnoreProperties({"plantillasEvaluacionEnCurso"})
 public class EspecificacionDePuesto implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
